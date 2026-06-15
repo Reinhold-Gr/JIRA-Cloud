@@ -1,0 +1,1141 @@
+<h1 class="TOC-Heading" id="inhalt">Inhalt</h1>
+<p><a href="#üblicherweise-erwarteter-aufwand">Üblicherweise erwarteter
+Aufwand <span>2</span></a></p>
+<p><a href="#scriptrunner-groovy-jira-serverdc">ScriptRunner (Groovy,
+Jira Server/DC) <span>3</span></a></p>
+<p><a href="#nachher-jira-cloud-automation-rule">Nachher: Jira Cloud
+Automation Rule <span>4</span></a></p>
+<p><a
+href="#konfiguriere-ich-bedingungen-in-jira-cloud-automation-rules">konfiguriere
+ich Bedingungen in Jira Cloud Automation Rules <span>5</span></a></p>
+<p><a href="#architektur-zuerst-dann-der-code">Architektur zuerst, dann
+der Code <span>6</span></a></p>
+<p><a href="#jira-cloud-automation-rule-webhook-aktion">1. Jira Cloud
+Automation Rule — Webhook-Aktion <span>7</span></a></p>
+<p><a href="#forge-function-typescript-ersatz-für-den-groovy-code">2.
+Forge Function (TypeScript) — Ersatz für den Groovy-Code
+<span>7</span></a></p>
+<p><a href="#wann-lohnt-sich-forge-vs.-reine-cloud-automation">Wann
+lohnt sich Forge vs. reine Cloud-Automation? <span>9</span></a></p>
+<p><a href="#better-pdf-exporter-for-jira">Better PDF (Exporter for
+Jira) <span>10</span></a></p>
+<p><a
+href="#reine-velocity-syntax-läuft-in-der-cloud-version-identisch">Reine
+Velocity-Syntax läuft in der Cloud-Version identisch:
+<span>10</span></a></p>
+<p><a href="#kritischer-teil">kritischer Teil <span>10</span></a></p>
+<p><a href="#direkte-java-klassen-nicht-verfügbar">Direkte Java-Klassen
+— nicht verfügbar: <span>10</span></a></p>
+<p><a href="#konkrete-fallstricke">Konkrete Fallstricke
+<span>12</span></a></p>
+<p><a href="#empfohlenes-vorgehen"><strong>Empfohlenes Vorgehen</strong>
+<span>13</span></a></p>
+<p><a href="#überblick-cloud-kompatibel">Überblick Cloud-kompatibel
+<span>13</span></a></p>
+<h1 id="üblicherweise-erwarteter-aufwand">Üblicherweise erwarteter
+Aufwand</h1>
+<p><img src="media/image1.png"
+style="width:6.3in;height:8.04653in" /></p>
+<p>Die DC-spezifischen Aufgaben sind jeweils mit einem farbigen Balken
+links markiert. Die wichtigsten Ergänzungen im Überblick:</p>
+<p><strong>Phase 2</strong> wurde um eine Woche verlängert, weil die
+LDAP/AD-Anbindung und die Atlassian Access-Konfiguration eigene
+Testzyklen braucht — vor allem wenn Crowd im Spiel ist.</p>
+<p><strong>Phase 4 (Cut-over)</strong> ist die kritischste Änderung: der
+koordinierte Cluster-Shutdown und das Einfrieren des Shared Home auf NFS
+müssen in der richtigen Reihenfolge passieren, sonst riskiert man
+inkonsistente Daten beim Import.</p>
+<h2 id="scriptrunner-groovy-jira-serverdc">ScriptRunner (Groovy, Jira
+Server/DC)</h2>
+<p>import com.atlassian.jira.component.ComponentAccessor</p>
+<p>import com.atlassian.mail.Email</p>
+<p>import com.atlassian.mail.MailFactory</p>
+<p>def issue = event.issue</p>
+<p>def reporter = issue.reporter</p>
+<p>def mailServer = MailFactory.serverManager.defaultSMTPMailServer</p>
+<p>if (mailServer) {</p>
+<p>def email = new Email(reporter.emailAddress)</p>
+<p>email.setSubject("Issue ${issue.key} ist jetzt In Review")</p>
+<p>email.setBody("""</p>
+<p>Hallo ${reporter.displayName},</p>
+<p>das Issue ${issue.key} – ${issue.summary}</p>
+<p>wurde in den Status 'In Review' verschoben.</p>
+<p>Link:
+${ComponentAccessor.applicationProperties.getString('jira.baseurl')}/browse/${issue.key}</p>
+<p>""")</p>
+<p>mailServer.send(email)</p>
+<p>}</p>
+<h2 id="nachher-jira-cloud-automation-rule">Nachher: Jira Cloud
+Automation Rule</h2>
+<p><img src="media/image2.png"
+style="width:6.3in;height:4.80208in" /></p>
+<p>Die wichtigsten Unterschiede zwischen Groovy und Cloud Automation im
+Überblick:</p>
+<p><strong>Groovy issue.reporter.emailAddress</strong> → Cloud Smart
+Value {{issue.reporter.emailAddress}} — die Syntax ist ähnlich, aber mit
+doppelten geschweiften Klammern.</p>
+<p><strong>ComponentAccessor.applicationProperties.getString('jira.baseurl')
++ '/browse/' + issue.key</strong> entfällt komplett — in Cloud gibt es
+einfach {{issue.url}}.</p>
+<p><strong>Feste Empfängeradressen</strong> (z. B. Teamleiter) werden
+direkt im "An"-Feld eingetragen, kein Groovy-Lookup mehr nötig. Wenn der
+Teamleiter dynamisch aus einem Custom Field kommen soll, geht das mit
+{{issue.customfield_XXXXX.emailAddress}}.</p>
+<p><strong>Einschränkung:</strong> Komplexe Logik wie Schleifen,
+HTTP-Calls oder bedingte Empfängerlisten aus einer Datenbank sind in
+Cloud Automation nicht möglich — dafür braucht man dann einen Webhook
+auf einen externen Dienst (z. B. eine Forge-Function oder ein
+Automation-for-Jira-Premium-Feature).</p>
+<h2
+id="konfiguriere-ich-bedingungen-in-jira-cloud-automation-rules">konfiguriere
+ich Bedingungen in Jira Cloud Automation Rules</h2>
+<p>Im Rule Builder klickst du nach dem Trigger auf <strong>"+ Neue
+Komponente hinzufügen"</strong> → <strong>"Bedingung"</strong>.
+Bedingungen können auch zwischen zwei Aktionen gesetzt werden, um den
+weiteren Ablauf zu steuern.</p>
+<hr />
+<p><strong>Die wichtigsten Bedingungstypen</strong></p>
+<p><strong>Issue-Felder-Bedingung</strong> — der häufigste Typ. Du
+wählst ein Feld und prüfst seinen Wert:</p>
+<ul>
+<li><p>Feld: Priorität, Operator: ist gleich, Wert: Hoch</p></li>
+<li><p>Feld: Assignee, Operator: ist nicht leer</p></li>
+<li><p>Feld: Custom Field XY, Operator: enthält, Wert: Review</p></li>
+</ul>
+<p>Funktioniert mit Standard- und Custom Fields.</p>
+<p><strong>Erweiterte Bedingung (Smart Values / JQL-ähnlich)</strong> —
+für komplexere Logik:</p>
+<p>{{issue.priority.name == "High"}}</p>
+<p>{{issue.assignee != null}}</p>
+<p>{{issue.customfield_10050.value == "Genehmigt"}}</p>
+<p>Diese Option heißt im UI "Erweiterte Vergleichsbedingung" und ist der
+mächtigste Typ.</p>
+<p><strong>Benutzer-Bedingung</strong> — prüft, wer die Aktion ausgelöst
+hat:</p>
+<ul>
+<li><p>"Auslöser ist Mitglied der Gruppe: jira-software-users"</p></li>
+<li><p>"Auslöser ist nicht der Assignee" (verhindert
+Selbst-Benachrichtigungen)</p></li>
+</ul>
+<p><strong>Unteraufgaben-/Verknüpfungs-Bedingung</strong> — prüft den
+Zustand verknüpfter Issues:</p>
+<ul>
+<li><p>"Alle Unteraufgaben haben Status: Done"</p></li>
+<li><p>Typisch für: übergeordnetes Issue automatisch schließen</p></li>
+</ul>
+<p><strong>Schichtbedingung (Branch-Condition)</strong> — wenn du mit
+"Für zugehörige Issues" arbeitest, kannst du innerhalb des Branches
+filtern.</p>
+<hr />
+<p><strong>Mehrere Bedingungen kombinieren</strong></p>
+<p>Du kannst Bedingungen mit <strong>UND / ODER</strong> verknüpfen:</p>
+<ul>
+<li><p>Standardmäßig gilt UND (alle müssen zutreffen)</p></li>
+<li><p>Mit dem Block <strong>"Bedingungsgruppe"</strong> kannst du
+ODER-Logik bauen:</p></li>
+</ul>
+<p>Gruppe A (ODER):</p>
+<p>- Priorität = Hoch</p>
+<p>- Priorität = Kritisch</p>
+<p>UND</p>
+<p>- Assignee ist nicht leer</p>
+<hr />
+<p><strong>Häufige Fallstricke</strong></p>
+<p>Wenn keine Bedingung zutrifft, wird die Rule nicht abgebrochen — sie
+läuft einfach weiter zur nächsten Komponente. Willst du bei
+Nicht-Erfüllung stoppen, brauchst du explizit die Bedingung als
+"Abbruchbedingung" — das ist in Cloud Automation der Standard, sobald
+eine Bedingung <strong>nicht</strong> erfüllt ist, werden alle
+nachfolgenden Aktionen übersprungen.</p>
+<p>Außerdem: Custom Fields werden im UI mit ihrem Namen angezeigt,
+intern aber als customfield_XXXXX referenziert — relevant wenn du Smart
+Values in der erweiterten Bedingung nutzt. Die ID findest du über
+<strong>Jira-Einstellungen → Felder → Custom Fields → Feld
+anklicken</strong>, die ID steht dann in der URL.</p>
+<h2 id="architektur-zuerst-dann-der-code">Architektur zuerst, dann der
+Code</h2>
+<p><img src="media/image3.png"
+style="width:6.3in;height:3.59514in" /></p>
+<p>Und hier der konkrete Code, der die Groovy-Logik ersetzt:</p>
+<h3 id="jira-cloud-automation-rule-webhook-aktion">1. Jira Cloud
+Automation Rule — Webhook-Aktion</h3>
+<p>Im Rule Builder nach dem Trigger einfach:</p>
+<p>Aktion → <strong>Webhook senden</strong> → URL:
+https://your-app.atlassian.net/x/invoke/... (Forge gibt dir die URL nach
+dem Deploy)</p>
+<p>Payload (JSON):</p>
+<p>{</p>
+<p>"issueKey": "{{issue.key}}",</p>
+<p>"summary": "{{issue.summary}}",</p>
+<p>"reporterEmail": "{{issue.reporter.emailAddress}}",</p>
+<p>"reporterName": "{{issue.reporter.displayName}}",</p>
+<p>"projectKey": "{{issue.project.key}}"</p>
+<p>}</p>
+<h3 id="forge-function-typescript-ersatz-für-den-groovy-code">2. Forge
+Function (TypeScript) — Ersatz für den Groovy-Code</h3>
+<p>import Resolver from '@forge/resolver';</p>
+<p>import api, { route } from '@forge/api';</p>
+<p>const resolver = new Resolver();</p>
+<p>resolver.define('handleStatusChange', async ({ payload }) =&gt; {</p>
+<p>const { issueKey, reporterEmail, reporterName, projectKey } =
+payload;</p>
+<p>// Jira REST API: Custom Field "Teamleiter" nachladen</p>
+<p>const response = await api.asApp().requestJira(</p>
+<p>route`/rest/api/3/issue/${issueKey}?fields=customfield_10050,summary`</p>
+<p>);</p>
+<p>const issueData = await response.json();</p>
+<p>const teamleiterEmail =
+issueData.fields.customfield_10050?.emailAddress;</p>
+<p>// Empfänger dynamisch zusammenstellen</p>
+<p>const recipients = [reporterEmail];</p>
+<p>if (teamleiterEmail) recipients.push(teamleiterEmail);</p>
+<p>// Bedingte Logik: Priorität prüfen</p>
+<p>const priority = issueData.fields.priority?.name;</p>
+<p>if (priority === 'Kritisch') {</p>
+<p>recipients.push('notfall-team@firma.de');</p>
+<p>}</p>
+<p>// E-Mail via SendGrid senden (fetch ist in Forge erlaubt)</p>
+<p>await fetch('https://api.sendgrid.com/v3/mail/send', {</p>
+<p>method: 'POST',</p>
+<p>headers: {</p>
+<p>'Authorization': `Bearer ${process.env.SENDGRID_API_KEY}`,</p>
+<p>'Content-Type': 'application/json'</p>
+<p>},</p>
+<p>body: JSON.stringify({</p>
+<p>personalizations: [{ to: recipients.map(e =&gt; ({ email: e }))
+}],</p>
+<p>from: { email: 'jira-noreply@firma.de' },</p>
+<p>subject: `${issueKey} ist jetzt In Review`,</p>
+<p>content: [{</p>
+<p>type: 'text/html',</p>
+<p>value: `&lt;p&gt;Hallo ${reporterName},&lt;/p&gt;</p>
+<p>&lt;p&gt;das Issue &lt;strong&gt;${issueKey}&lt;/strong&gt; wurde in
+&lt;em&gt;In Review&lt;/em&gt; verschoben.&lt;/p&gt;</p>
+<p>&lt;p&gt;&lt;a
+href="https://firma.atlassian.net/browse/${issueKey}"&gt;Issue
+öffnen&lt;/a&gt;&lt;/p&gt;`</p>
+<p>}]</p>
+<p>})</p>
+<p>});</p>
+<p>});</p>
+<p>export const handler = resolver.getDefinitions();</p>
+<h2 id="wann-lohnt-sich-forge-vs.-reine-cloud-automation">Wann lohnt
+sich Forge vs. reine Cloud-Automation?</h2>
+<table style="width:82%;">
+<colgroup>
+<col style="width: 53%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th><strong>Situation</strong></th>
+<th><strong>Lösung</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Feste oder Smart-Value-Empfänger</td>
+<td>Cloud Automation (kein Code)</td>
+</tr>
+<tr>
+<td>Empfänger aus Custom Field</td>
+<td>Cloud Automation reicht meist</td>
+</tr>
+<tr>
+<td>Empfänger aus Gruppe / LDAP-Lookup</td>
+<td>Forge Function nötig</td>
+</tr>
+<tr>
+<td>HTML-Template mit Tabellen / Logos</td>
+<td>Forge + SendGrid</td>
+</tr>
+<tr>
+<td>Bedingte Logik (if/else, Schleifen)</td>
+<td>Forge Function</td>
+</tr>
+<tr>
+<td>Externe Systeme ansprechen (CRM, HR)</td>
+<td>Forge Function + fetch</td>
+</tr>
+</tbody>
+</table>
+<h2 id="better-pdf-exporter-for-jira">Better PDF (Exporter for
+Jira)</h2>
+<p>Das ist eine Marketplace-App von Marten Gajda. Die Templates findest
+du nach Installation unter:</p>
+<p><strong>Jira-Einstellungen</strong> (Zahnrad oben rechts) →
+<strong>Apps</strong> → <strong>Better PDF Exporter</strong> →
+<strong>Templates</strong></p>
+<p>Dort kannst du Velocity-basierte Templates verwalten, neue hochladen
+oder bestehende bearbeiten. Auf Projektebene gibt es keinen eigenen
+Einstiegspunkt — alles läuft über die globale App-Verwaltung.</p>
+<h2
+id="reine-velocity-syntax-läuft-in-der-cloud-version-identisch">Reine
+Velocity-Syntax läuft in der Cloud-Version identisch: </h2>
+<p>#foreach($item in $issues)</p>
+<p>$item.summary</p>
+<p>$item.key</p>
+<p>#end</p>
+<p>#if($issue.priority.name == "High")</p>
+<p>Dringend!</p>
+<p>#end</p>
+<p>Auch Standard-Velocity-Direktiven wie #set, #macro, #include, #parse
+werden unterstützt.</p>
+<h2 id="kritischer-teil">kritischer Teil</h2>
+<p>In der Server/DC-Version hattest du direkten Zugriff auf Jira-interne
+Java-Objekte. Die sind in Cloud <strong>komplett weg</strong>.</p>
+<p><em>ComponentAccessor — nicht verfügbar</em>:</p>
+<p>## Server/DC — funktioniert NICHT in Cloud</p>
+<p>#set($userManager = $componentAccessor.getUserManager())</p>
+<p>#set($user = $userManager.getUserByName("admin"))</p>
+<h3 id="direkte-java-klassen-nicht-verfügbar">Direkte Java-Klassen —
+nicht verfügbar:</h3>
+<p>## Server/DC — funktioniert NICHT in Cloud</p>
+<p>#set($dateFormat = $dateTool.format("dd.MM.yyyy", $date))</p>
+<p><strong><u>Existieren nichtmehr:</u></strong></p>
+<p><strong>$workflowManager,</strong></p>
+<p><strong>$permissionManager, $</strong></p>
+<p><strong>projectManager</strong></p>
+<p><strong><u>Stattdessen verfügbar</u></strong></p>
+<p>Better PDF Cloud stellt eigene, vereinfachte Kontextvariablen
+bereit:</p>
+<p><strong>## Funktioniert in Cloud</strong></p>
+<p>$issue.key</p>
+<p>$issue.summary</p>
+<p>$issue.status.name</p>
+<p>$issue.priority.name</p>
+<p>$issue.assignee.displayName</p>
+<p>$issue.reporter.emailAddress</p>
+<p>$issue.created ## als String, nicht Java-Date-Objekt</p>
+<p>$issue.customFields.get("Mein Feld")</p>
+<p><strong>## Für Datum-Formatierung: eigene Helper</strong></p>
+<p>$dateFormatter.format($issue.created, "dd.MM.yyyy")</p>
+<h3 id="konkrete-fallstricke"><br />
+Konkrete Fallstricke</h3>
+<p><strong>Datum-Objekte</strong> sind in Cloud Strings, keine
+Java-Date-Objekte mehr:</p>
+<p>velocity</p>
+<p>## Server: $date.format("dd.MM.yyyy", $issue.created) ← Java-Date</p>
+<p>## Cloud: $dateFormatter.format($issue.created, "dd.MM.yyyy") ←
+Cloud-Helper</p>
+<p><strong>Custom Fields</strong> werden anders angesprochen:</p>
+<p>velocity</p>
+<p>## Server/DC</p>
+<p>$issue.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10050"))</p>
+<p>## Cloud</p>
+<p>$issue.customFields.get("Name des Feldes")</p>
+<p>## oder</p>
+<p>$issue.fields.customfield_10050</p>
+<p><strong>Sub-Tasks / verknüpfte Issues:</strong></p>
+<p>velocity</p>
+<p>## Cloud — vereinfacht</p>
+<p>#foreach($subtask in $issue.subtasks)</p>
+<p>$subtask.key — $subtask.summary</p>
+<p>#end</p>
+<h3 id="empfohlenes-vorgehen"><strong>Empfohlenes Vorgehen</strong></h3>
+<ol type="1">
+<li><p>Templates in einer <strong>Cloud-Sandbox</strong> testen, bevor
+ihr auf Produktion geht.</p></li>
+<li><p>Alle Stellen mit $componentAccessor, $customFieldManager,
+$workflowManager suchen — das sind die Kandidaten zum
+Umschreiben.</p></li>
+<li><p>Die offizielle Variablenliste von Better PDF Cloud als Referenz
+nutzen: https://marketplace.atlassian.com/apps/5167 → Dokumentation
+→<br />
+"Template variables".</p></li>
+</ol>
+<h3 id="überblick-cloud-kompatibel">Überblick Cloud-kompatibel</h3>
+<table style="width:88%;">
+<colgroup>
+<col style="width: 54%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr>
+<th></th>
+<th><strong>Cloud-kompatibel</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Velocity-Syntax (#foreach, #if, #set)</td>
+<td>✓ ja</td>
+</tr>
+<tr>
+<td>Standard-Felder ($issue.summary etc.)</td>
+<td>✓ ja</td>
+</tr>
+<tr>
+<td>Custom Fields (neue Syntax)</td>
+<td>✓ mit Anpassung</td>
+</tr>
+<tr>
+<td>$componentAccessor / Java-Klassen</td>
+<td>✗ nein</td>
+</tr>
+<tr>
+<td>Datum-Formatierung</td>
+<td>✓ mit neuem Helper</td>
+</tr>
+<tr>
+<td>Direkte Java-API-Aufrufe</td>
+<td>✗ nein</td>
+</tr>
+</tbody>
+</table>
+<p><strong><br />
+</strong></p>
+<h3 id="zusammenfassung-der-umstellungsaufwände">Zusammenfassung der
+Umstellungsaufwände</h3>
+<h4 id="common-teil-aller-pdf-templates">Common-Teil aller PDF
+Templates<br />
+</h4>
+<table style="width:83%;">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 18%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr>
+<th><strong>Stelle</strong></th>
+<th><strong>Aufwand</strong></th>
+<th><strong>Risiko</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$ComponentAccessor entfernen</td>
+<td>gering</td>
+<td>niedrig</td>
+</tr>
+<tr>
+<td>$baseUrl-Erkennung reaktivieren</td>
+<td>minimal</td>
+<td>niedrig</td>
+</tr>
+<tr>
+<td>customfield_12602 Syntax</td>
+<td>gering</td>
+<td>niedrig</td>
+</tr>
+<tr>
+<td>Issue-Link-Traversierung umschreiben</td>
+<td><strong>mittel</strong></td>
+<td>mittel</td>
+</tr>
+<tr>
+<td>$pdfContent.linkCollectionByIssue()</td>
+<td><strong>unbekannt</strong></td>
+<td><strong>hoch</strong></td>
+</tr>
+<tr>
+<td>$remoteIssueLinkManager</td>
+<td><strong>hoch</strong></td>
+<td>hoch</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Empfehlung:</strong><br />
+Zuerst klären, ob $pdfContent.linkCollectionByIssue() in Better PDF
+Cloud existiert — das ist der Dreh- und Angelpunkt des Templates.</p>
+<p>Falls nicht, muss die gesamte Link-Logik neu aufgebaut werden. Am
+schnellsten geht das mit einer Testinstanz und einem Issue das alle
+Verlinkungstypen (Klienten, Region, Abschlussbericht, Rechnungen)
+enthält.</p>
+<h4 id="beispiel-initial-confirmation-fo.vm">Beispiel
+initial-confirmation-fo.vm</h4>
+<p>Das ist ein sehr umfangreiches Template. Ich analysiere es
+systematisch nach Problemkategorien.</p>
+<hr />
+<p><strong>Kritische Stellen (❌ nicht Cloud-kompatibel)</strong></p>
+<p><strong>1. $scripting.execute() — nicht verfügbar</strong></p>
+<p>## ❌ Server/DC</p>
+<p>$scripting.execute("articles-tool.groovy")</p>
+<p>Das ist ein ScriptRunner-Aufruf aus dem Template heraus. In Cloud
+gibt es $scripting nicht. Was macht articles-tool.groovy? Das ist
+entscheidend — wenn es Custom-Field-Werte vorberechnet oder Variablen
+setzt, muss das in Cloud anders gelöst werden (Forge Function oder
+direkt im Template).</p>
+<hr />
+<p><strong>2. $customFieldManager.getCustomFieldObject() — durchgängig
+verwendet (❌)</strong></p>
+<p>Das ist der größte Aufwand. Das Muster zieht sich durch das gesamte
+Template:</p>
+<p>## ❌ überall — ca. 30+ Stellen</p>
+<p>$klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10207"))</p>
+<p>$region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10303"))</p>
+<p><strong>Cloud-Ersatz:</strong></p>
+<p>## ✓ Cloud</p>
+<p>$klient.fields.customfield_10207</p>
+<p>$region.fields.customfield_10303</p>
+<p>Aber: $klient und $region kommen aus der Link-Traversierung im
+Common-Elements-File — das muss wie besprochen zuerst repariert
+sein.</p>
+<hr />
+<p><strong>3. $issues.get(0).getCustomFieldValue("customfield_XXXXX") —
+alle Stellen</strong></p>
+<p>## ❌ mehrfach im Template</p>
+<p>$issues.get(0).getCustomFieldValue("customfield_10230") ##
+Auftrags-Nr</p>
+<p>$issues.get(0).getCustomFieldValue("customfield_11301") ##
+Beratungsfall (Multi-Select)</p>
+<p>$issues.get(0).getCustomFieldValue("customfield_10605") ##
+Fachthemen</p>
+<p>$issues.get(0).getCustomFieldValue("customfield_10604") ## Art des
+Unternehmens</p>
+<p>$issues.get(0).getCustomFieldValue("customfield_10606") ##
+Erstkontakt</p>
+<p>$issues.get(0).getCustomFieldValue("customfield_10602") ## Details
+Branche</p>
+<p>$issues.get(0).getCustomFieldValue("customfield_10603") ##
+Wünsche</p>
+<p>$issues.get(0).getCustomFieldValue("customfield_11456") ##
+Rahmenauftrag</p>
+<p><strong>Cloud-Ersatz:</strong></p>
+<p>## ✓ Textfelder</p>
+<p>$issues.get(0).fields.customfield_10230</p>
+<p>$issues.get(0).fields.customfield_10602</p>
+<p>## ✓ Select-Feld (mit .value)</p>
+<p>$issues.get(0).fields.customfield_11456.value</p>
+<p>## ✓ Multi-Select (Iteration bleibt gleich, aber Zugriff anders)</p>
+<p>#foreach($v in $issues.get(0).fields.customfield_11301)</p>
+<p>$v.value</p>
+<p>#end</p>
+<hr />
+<p><strong>4. $cf12602.value — Select-Feld-Zugriff</strong></p>
+<p>## ❌</p>
+<p>#set($cf12602 =
+$issues.get(0).getCustomFieldValue("customfield_12602"))</p>
+<p>#set($info = $cf12602.value)</p>
+<p><strong>Cloud-Ersatz:</strong></p>
+<p>## ✓</p>
+<p>#set($cf12602 = $issues.get(0).fields.customfield_12602)</p>
+<p>#set($info = $cf12602.value) ## .value bleibt gleich bei
+Select-Feldern</p>
+<p><strong>5. $userDateTimeFormatter / $dateTimeStyle —
+prüfen</strong></p>
+<p>## ⚠️ Prüfen ob in Cloud verfügbar</p>
+<p>$userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($currentDate)</p>
+<p>Diese Objekte kommen von Better PDF selbst. In der Cloud-Version sind
+sie möglicherweise verfügbar, aber die API könnte sich geändert haben.
+Ersatz-Option:</p>
+<p>## Alternative falls nicht verfügbar</p>
+<p>$dateFormatter.format($currentDate, "dd.MM.yyyy")</p>
+<hr />
+<p><strong>6. $filename Setzen</strong></p>
+<p>## ❌</p>
+<p>#set($filename =
+"$issues.get(0).getCustomFieldValue('customfield_10230')_Auftrag.pdf")</p>
+<p><strong>Cloud-Ersatz:</strong></p>
+<p>## ✓</p>
+<p>#set($auftragsnr = $issues.get(0).fields.customfield_10230)</p>
+<p>#set($filename = "${auftragsnr}_Auftrag.pdf")</p>
+<hr />
+<p><strong>Was problemlos funktioniert ✓</strong></p>
+<ul>
+<li><p>Gesamte FO-Struktur (fo:root, fo:table, fo:block etc.) —
+vollständig kompatibel</p></li>
+<li><p>$xmlutils.escape() — verfügbar in Cloud</p></li>
+<li><p>#foreach, #if, #set, #end — Velocity-Syntax unverändert</p></li>
+<li><p>$include.parse() — verfügbar, aber das eingebundene
+Common-Elements-File muss separat angepasst werden</p></li>
+<li><p>$baseUrl — verfügbar</p></li>
+<li><p>Logo-URLs (externe PNGs) — funktionieren</p></li>
+<li><p>Debug-Blöcke — Velocity-Syntax bleibt gleich</p></li>
+<li><p>Der $col-Zähler für zweispaltige Checkbox-Listen — funktioniert
+identisch</p></li>
+<li><p>#if($klient.fields.customfield_11305.value != "Deutschland") —
+funktioniert mit neuer Syntax</p></li>
+</ul>
+<p><strong>Zusammenfassung Umstellungsaufwand</strong></p>
+<table>
+<colgroup>
+<col style="width: 58%" />
+<col style="width: 12%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr>
+<th><strong>Problem</strong></th>
+<th><strong>Anzahl Stellen</strong></th>
+<th><strong>Aufwand</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$customFieldManager.getCustomFieldObject() entfernen</td>
+<td>~30</td>
+<td>mittel — Suchen &amp; Ersetzen</td>
+</tr>
+<tr>
+<td>.getCustomFieldValue() → .fields.</td>
+<td>~20</td>
+<td>mittel — Suchen &amp; Ersetzen</td>
+</tr>
+<tr>
+<td>$scripting.execute() klären</td>
+<td>1</td>
+<td><strong>hoch — abhängig vom Groovy-Skript</strong></td>
+</tr>
+<tr>
+<td>$userDateTimeFormatter testen</td>
+<td>2</td>
+<td>gering</td>
+</tr>
+<tr>
+<td>$filename Syntax</td>
+<td>1</td>
+<td>gering</td>
+</tr>
+<tr>
+<td>Common-Elements-File (Link-Traversierung)</td>
+<td>zentral</td>
+<td><strong>hoch — Voraussetzung für alles</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>Empfohlene Vorgehensweise</strong></p>
+<ol type="1">
+<li><p>Zuerst articles-tool.groovy analysieren — was macht es, wird es
+überhaupt noch gebraucht?</p></li>
+<li><p>Common-Elements-File reparieren (Link-Traversierung für $klient
+und $region)</p></li>
+<li><p>Dann dieses Template: alle getCustomFieldValue /
+getCustomFieldObject per Suchen &amp; Ersetzen umschreiben</p></li>
+<li><p>In Sandbox mit einem echten Auftrag testen, Debug-Mode
+einschalten</p></li>
+</ol>
+<p>Soll ich eine vollständig umgeschriebene Cloud-Version dieses
+Templates erstellen?</p>
+<h4 id="erste-aufwandsschätzung">Erste Aufwandsschätzung<br />
+</h4>
+<p><strong>Voraussetzungen die den Aufwand stark beeinflussen, sind noch
+zu klären:</strong></p>
+<p>Es gibt 8 Templates<a href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a>.</p>
+<p> <strong>articles-tool.groovy genau?</strong> <a href="#fn2"
+class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p> <strong>Ist Better PDF Cloud bereits lizenziert und in Sandbox
+vorhanden?</strong></p>
+<p><strong>Grundannahmen</strong></p>
+<ul>
+<li><p><strong>2 Templates bereits analysiert (Common-Elements +
+Empfangsbestätigung)</strong></p></li>
+<li><p><strong>6 weitere Templates, vermutlich ähnlich aufgebaut
+(FO-Struktur, $customFieldManager, verlinkte Issues)</strong></p></li>
+<li><p><strong>articles-tool.groovy noch unbekannt</strong></p></li>
+<li><p><strong>$pdfContent.linkCollectionByIssue() noch
+ungeklärt</strong></p></li>
+</ul>
+<p><strong>Aufwand nach Phase</strong></p>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 61%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th><strong>Phase</strong></th>
+<th><strong>Inhalt</strong></th>
+<th><strong>Aufwand</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Analyse</strong></td>
+<td><strong>Alle 8 Templates + Groovy-Skript sichten, Abhängigkeiten
+kartieren, Better PDF Cloud Doku prüfen</strong></td>
+<td><strong>3–4 Tage</strong></td>
+</tr>
+<tr>
+<td><strong>Common-Elements-File</strong></td>
+<td><strong>Zentrale Basis für alle Templates — Link-Traversierung,
+$klient, $region reparieren</strong></td>
+<td><strong>2–4 Tage</strong></td>
+</tr>
+<tr>
+<td><strong>Template 1–2</strong></td>
+<td><strong>Bereits analysiert, Umsetzung</strong></td>
+<td><strong>2–3 Tage</strong></td>
+</tr>
+<tr>
+<td><strong>Template 3–8</strong></td>
+<td><strong>6 weitere Templates umschreiben (Lernkurve hilft ab Template
+3)</strong></td>
+<td><strong>6–10 Tage</strong></td>
+</tr>
+<tr>
+<td><strong>articles-tool.groovy</strong></td>
+<td><strong>Analysieren + ersetzen (Schätzung ohne Kenntnis des
+Inhalts)</strong></td>
+<td><strong>1–3 Tage</strong></td>
+</tr>
+<tr>
+<td><strong>Testen</strong></td>
+<td><strong>Sandbox, je Template mind. 1 echter Testlauf mit allen
+Verlinkungstypen</strong></td>
+<td><strong>4–6 Tage</strong></td>
+</tr>
+<tr>
+<td><strong>Fehlerbehebung &amp; Layout</strong></td>
+<td><strong>FO-Rendering-Abweichungen, Feldwerte die anders kommen als
+erwartet</strong></td>
+<td><strong>3–5 Tage</strong></td>
+</tr>
+<tr>
+<td><strong>Abnahme &amp; Dokumentation</strong></td>
+<td><strong>Fachliche Prüfung durch euch, Änderungen
+einarbeiten</strong></td>
+<td><strong>2–3 Tage</strong></td>
+</tr>
+<tr>
+<td><strong>Gesamt</strong></td>
+<td></td>
+<td><strong>23–38 Tage</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Verdichtet auf drei Szenarien</strong></p>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 8%" />
+<col style="width: 71%" />
+</colgroup>
+<thead>
+<tr>
+<th><strong>Szenario</strong></th>
+<th><strong>Tage</strong></th>
+<th><strong>Voraussetzung</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Best Case</strong></td>
+<td><strong>~20 Tage</strong></td>
+<td><strong>$pdfContent funktioniert in Cloud, Groovy-Skript trivial,
+keine Layout-Überraschungen</strong></td>
+</tr>
+<tr>
+<td><strong>Wahrscheinlich</strong></td>
+<td><strong>~28 Tage</strong></td>
+<td><strong>Normaler Verlauf mit 2–3 Iterationen pro
+Template</strong></td>
+</tr>
+<tr>
+<td><strong>Worst Case</strong></td>
+<td><strong>~40 Tage</strong></td>
+<td><strong>$pdfContent nicht verfügbar → komplette Link-Logik neu,
+komplexes Groovy-Skript</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Wichtigste Hebel zur Aufwandsreduktion</strong></p>
+<p><strong>$pdfContent.linkCollectionByIssue() zuerst klären — das ist
+die einzige Frage die den Aufwand um 30–40% verschieben kann. Ein
+einzelner Test in der Sandbox mit einem verlinkten Issue beantwortet das
+in einer Stunde.</strong></p>
+<p><strong>Common-Elements-File hat höchste Priorität — es ist die Basis
+für alle 8 Templates. Wenn es läuft, fallen die Einzeltemplates deutlich
+leichter.</strong></p>
+<p><strong>Parallelisierung — Template-Umschreibung und Sandbox-Setup
+können parallel laufen wenn zwei Personen verfügbar sind.</strong></p>
+<p><strong>Empfehlung für die Projektplanung</strong></p>
+<p><strong>30 Tage als Planungsgröße — mit einem Puffer von 10 Tagen für
+den Worst Case. Entspricht ca. 6–8 Wochen bei 50% Auslastung neben dem
+Tagesgeschäft</strong></p>
+<p><strong><br />
+</strong></p>
+<h4 id="was-das-skript-articles-tool.groovy-macht">Was das Skript
+articles-tool.groovy macht</h4>
+<p><strong>Es ist ein Berechnungs- und Formatierungs-Helfer für Preise
+in drei Kontexten:</strong></p>
+<p><strong>1. Artikel-Parser (parse())<br />
+Liest einen Jira-Textfeld-Inhalt im Wiki-Tabellenformat (||art||koste||
+| first|100| |second|200|) und zerlegt ihn in eine Liste von Artikeln
+mit Name und Preis. Berechnet dabei den Gesamtpreis.</strong></p>
+<p><strong>2. Auftrags-Kalkulation (getTaxesAuftrag,
+getTotalPriceAuftrag)<br />
+Berechnet MwSt. und Gesamtpreis für ein einzelnes
+Auftragsfeld.</strong></p>
+<p><strong>3. Rechnungs-Kalkulation (calculateTotalPriceRechnung,
+getTaxesRechnung, getFinalPriceRechnung)<br />
+Summiert bis zu 6 Einzelpreise, berechnet MwSt. und
+Endbetrag.</strong></p>
+<p><strong>Zahlenformatierung durchgängig deutsch: Komma als
+Dezimaltrennzeichen, Punkt als Tausender (1.234,56). Inklusive
+Workaround für non-breaking spaces (ASCII 160) die Jira in
+Tabellenfeldern einfügt.</strong></p>
+<p><strong>Die gute Nachricht</strong></p>
+<p><strong>Das Skript enthält keine Jira-API-Aufrufe — es arbeitet nur
+mit Strings und Zahlen. Es ist reine Berechnungslogik ohne
+ComponentAccessor, ohne Issue-Zugriff, ohne
+Manager-Objekte.</strong></p>
+<p><strong>Das Problem in Cloud</strong></p>
+<p><strong>$scripting.execute("articles-tool.groovy") ist ein
+ScriptRunner-Feature — in Cloud nicht verfügbar. Das Skript kann nicht
+mehr so eingebunden werden.</strong></p>
+<p><strong>Lösungsoptionen</strong></p>
+<p><strong>Option A — Velocity-Makros (empfohlen, kein Code
+nötig)</strong></p>
+<p><strong>Die Berechnungslogik ist in Velocity gut nachbaubar. Der
+Parser ist der komplexeste Teil, aber da der Jira-Wiki-Tabelleninhalt in
+Cloud als strukturiertes Objekt verfügbar ist, braucht man den
+String-Parser möglicherweise gar nicht mehr:</strong></p>
+<p><strong>velocity</strong></p>
+<p><strong>## Preise direkt aus strukturierten Feldern
+summieren</strong></p>
+<p><strong>#set($total = 0)</strong></p>
+<p><strong>#foreach($artikel in
+$issues.get(0).fields.customfield_XXXXX)</strong></p>
+<p><strong>#set($total = $total + $artikel.price)</strong></p>
+<p><strong>#end</strong></p>
+<p><strong>Zahlenformatierung in Velocity ist eingeschränkt — Better PDF
+Cloud stellt aber $numberFormatter bereit:</strong></p>
+<p><strong>velocity</strong></p>
+<p><strong>$numberFormatter.format($total, "#0.00",
+"de_DE")</strong></p>
+<p><strong>Option B — JavaScript in Forge Function
+vorberechnen</strong></p>
+<p><strong>Preise in einer Forge Function berechnen und als
+aufbereiteten String per Webhook ins Template übergeben. Aufwändiger,
+aber sauberste Trennung.</strong></p>
+<p><strong>Option C — Velocity-Makro als direkter Ersatz</strong></p>
+<p><strong>velocity</strong></p>
+<p><strong>## Makro für deutsche Zahlenformatierung</strong></p>
+<p><strong>#macro(formatDE $zahl)</strong></p>
+<p><strong>## Vorzeichen-Logik + Komma/Punkt tauschen</strong></p>
+<p><strong>#set($formatted = $numberFormatter.format($zahl, "#,##0.00",
+"de_DE"))</strong></p>
+<p><strong>$formatted</strong></p>
+<p><strong>#end</strong></p>
+<p><strong>## MwSt-Berechnung</strong></p>
+<p><strong>#macro(calcMwSt $netto $satz)</strong></p>
+<p><strong>#set($mwst = $netto * $satz / 100)</strong></p>
+<p><strong>#set($brutto = $netto + $mwst)</strong></p>
+<p><strong>#end</strong></p>
+<p><strong>Auswirkung auf die Zeitschätzung</strong></p>
+<p><strong>Das Skript ist kein Showstopper — aber es braucht
+Aufmerksamkeit:</strong></p>
+<table style="width:71%;">
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr>
+<th><strong>Aspekt</strong></th>
+<th><strong>Bewertung</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Komplexität der Logik</strong></td>
+<td><strong>mittel</strong></td>
+</tr>
+<tr>
+<td><strong>Jira-API-Abhängigkeit</strong></td>
+<td><strong>keine — erleichtert Migration</strong></td>
+</tr>
+<tr>
+<td><strong>Ersatz durch Velocity-Makros</strong></td>
+<td><strong>gut machbar</strong></td>
+</tr>
+<tr>
+<td><strong>Aufwand für Ersatz</strong></td>
+<td><strong>2–3 Tage</strong></td>
+</tr>
+<tr>
+<td><strong>Risiko</strong></td>
+<td><strong>niedrig bis mittel</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Die Gesamtschätzung von 28–30 Tagen bleibt damit realistisch.
+Das Skript ist kein Grund zur Sorge — der kritischere Punkt bleibt
+$pdfContent.linkCollectionByIssue().</strong></p>
+<h4 id="aktion-umschreiben-articles-tool.groovy">Aktion Umschreiben
+articles-tool.groovy </h4>
+<p>von Velocity-Makro-Version 🡺 als Cloud-Ersatz.</p>
+<h2
+id="acceptation-confirmation-fo.vm">acceptation-confirmation-fo.vm</h2>
+<p>Das ist ein <strong>Velocity/XSL-FO-Template</strong> für das Jira
+PDF View Plugin (DC). Bei einem Wechsel auf Jira Cloud gibt es
+erhebliche Einschränkungen – hier die wichtigsten Punkte:</p>
+<p><strong>1. PDF View Plugin – nicht verfügbar in Cloud</strong></p>
+<p>Das <strong>Jira PDF View Plugin</strong> (von Appfire/Bob Swift)
+existiert <strong>nicht für Jira Cloud</strong>. Du brauchst ein
+alternatives App, z. B.:</p>
+<ul>
+<li><p><strong>PDF Export for Jira Cloud</strong> (verschiedene Anbieter
+im Atlassian Marketplace prüfen)</p></li>
+<li><p>Oder die PDF-Generierung extern (z. B. via Automation + Webhook +
+externes System)</p></li>
+</ul>
+<p>Das gesamte Template müsste für das neue Tool <strong>komplett neu
+geschrieben</strong> werden.</p>
+<p><strong>2. Velocity-Templating entfällt</strong></p>
+<p>Cloud-Apps unterstützen kein Velocity (.vm). Die gesamte
+Template-Logik (#set, #if, #elseif, Schleifen etc.) müsste in der
+Templatesprache des Ersatz-Tools neu implementiert werden.</p>
+<p><strong>3. Custom Field-Zugriff anders</strong></p>
+<p>In DC wird direkt über
+$customFieldManager.getCustomFieldObject("customfield_XXXXX")
+zugegriffen. In Cloud:</p>
+<ul>
+<li><p>Custom Field IDs können sich beim Migration
+<strong>ändern</strong></p></li>
+<li><p>Der Zugriff erfolgt je nach App über andere Mechanismen (z. B.
+REST API, eigene Template-Variablen)</p></li>
+<li><p>Alle customfield_XXXXX-Referenzen müssen <strong>geprüft und neu
+gemappt</strong> werden</p></li>
+</ul>
+<p><strong>4. $scripting.execute(...) entfällt</strong></p>
+<p>$scripting.execute("articles-tool.groovy")</p>
+<p>ScriptRunner-Groovy-Skripte laufen zwar auch in Cloud, aber der
+Aufruf aus einem PDF-Template heraus ist so <strong>nicht
+möglich</strong>. Die Logik aus articles-tool.groovy
+(Zahlenformatierung, Steuerberechnung, Gesamtpreis) müsste anderweitig
+eingebunden werden.</p>
+<p><strong>5. XSL-FO entfällt</strong></p>
+<p>Das Layout ist komplett in <strong>XSL-FO</strong> geschrieben
+(fo:block, fo:table, fo:region-body etc.). Cloud-PDF-Tools arbeiten
+typischerweise mit <strong>HTML/CSS</strong> oder proprietären
+Template-Formaten. Das gesamte Layout (Tabellen, Abstände,
+Schriftgrößen, Kopf-/Fußzeilen) muss neu gebaut werden.</p>
+<p><strong>6. Bilder/Logos</strong></p>
+<p>$logoImageUrl_Banner</p>
+<p>$FZ_ImageUrl</p>
+<p>Diese Variablen werden in DC aus dem Plugin-Kontext befüllt. In Cloud
+muss geprüft werden, wie das Ersatz-Tool auf Anhänge oder externe
+Bild-URLs zugreift.</p>
+<p><strong>7. $pdfRenderer.asRendered(...) entfällt</strong></p>
+<p>Die Methode rendert Rich-Text-Felder (z. B. customfield_10426,
+customfield_10427). In Cloud ist das Textformat <strong>Atlassian
+Document Format (ADF)</strong> statt Wiki-Markup – das muss das neue
+Tool entsprechend unterstützen.</p>
+<p><strong>Fazit</strong></p>
+<table style="width:78%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 28%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Komponente</strong></th>
+<th style="text-align: center;"><strong>DC</strong></th>
+<th style="text-align: center;"><strong>Cloud</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PDF-Plugin</td>
+<td>Jira PDF View Plugin</td>
+<td>Ersatz-App nötig</td>
+</tr>
+<tr>
+<td>Template-Sprache</td>
+<td>Velocity + XSL-FO</td>
+<td>HTML/CSS o. ä.</td>
+</tr>
+<tr>
+<td>Groovy-Skripte</td>
+<td>direkt einbindbar</td>
+<td>separate Lösung nötig</td>
+</tr>
+<tr>
+<td>Custom Fields</td>
+<td>direkt per ID</td>
+<td>IDs neu mappen</td>
+</tr>
+<tr>
+<td>Rich-Text</td>
+<td>Wiki-Markup</td>
+<td>ADF</td>
+</tr>
+</tbody>
+</table>
+<p>Ein <strong>1:1-Wechsel ist nicht möglich</strong> – das Template
+muss für Cloud von Grund auf neu entwickelt werden. Die fachliche Logik
+(Steuerberechnung, Rahmenauftrag-Unterscheidung, Regionalleiter-Daten)
+kann aber als Vorlage dienen.</p>
+<h2 id="better-pdf-exporter-for-jira-von-appfire">Better PDF Exporter
+for Jira von Appfire </h2>
+<p>Gibt es auch für Jira Cloud. Das ändert einiges:</p>
+<hr />
+<p><strong>Was bleibt erhalten</strong></p>
+<ul>
+<li><p><strong>Velocity-Templating</strong> wird von Better PDF auch in
+Cloud unterstützt</p></li>
+<li><p>Die grundsätzliche <strong>Template-Struktur</strong> bleibt
+ähnlich</p></li>
+<li><p><strong>XSL-FO</strong> wird ebenfalls weiterhin
+verwendet</p></li>
+</ul>
+<hr />
+<p><strong>Was sich trotzdem ändert</strong></p>
+<p><strong>1. Custom Field IDs</strong></p>
+<p>Die customfield_XXXXX-IDs können sich bei der Migration ändern – alle
+Felder müssen nach der Migration <strong>geprüft und ggf.
+angepasst</strong> werden.</p>
+<p><strong>2. $scripting.execute("articles-tool.groovy")</strong></p>
+<p>Das ist ein ScriptRunner-Aufruf – dieser funktioniert in Better PDF
+Cloud <strong>nicht</strong> so. Die Logik aus articles-tool.groovy
+(Formatierung, Steuerberechnung) müsste entweder:</p>
+<ul>
+<li><p>als <strong>Velocity-Makro</strong> direkt ins Template
+integriert werden, oder</p></li>
+<li><p>über einen anderen Mechanismus bereitgestellt werden</p></li>
+</ul>
+<p><strong>3. $pdfRenderer.asRendered(...)</strong></p>
+<p>Diese DC-spezifische Methode existiert in Better PDF Cloud
+möglicherweise <strong>nicht oder unter anderem Namen</strong> – hier
+unbedingt die Cloud-Dokumentation von Better PDF prüfen.</p>
+<p><strong>4. Rich-Text / ADF</strong></p>
+<p>In Cloud ist das Textformat <strong>ADF</strong> statt Wiki-Markup.
+Better PDF Cloud bietet dafür eigene Render-Methoden an, die aber anders
+heißen können als in DC.</p>
+<hr />
+<h3 id="empfehlung">Empfehlung</h3>
+<p>Den größten Aufwand verursachen die
+<strong>Groovy-Integration</strong> und der
+<strong>Rich-Text-Renderer</strong> – das würde ich als erstes in der
+Appfire-Dokumentation für die Cloud-Version prüfen, bevor man mit der
+Migration des Templates beginnt.</p>
+<h2
+id="aufwandsschätzung-acceptation-confirmation-fo.vm"><strong>Aufwandsschätzung
+(</strong>acceptation-confirmation-fo.vm)</h2>
+<p><strong>Szenario 1: Better PDF Cloud funktioniert</strong></p>
+<table style="width:64%;">
+<colgroup>
+<col style="width: 51%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Aufgabe</strong></th>
+<th style="text-align: center;"><strong>Aufwand</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Custom Field IDs prüfen &amp; anpassen</td>
+<td>2–4 Std.</td>
+</tr>
+<tr>
+<td>$scripting.execute / articles-tool ersetzen</td>
+<td>4–8 Std.</td>
+</tr>
+<tr>
+<td>$pdfRenderer.asRendered prüfen &amp; anpassen</td>
+<td>2–4 Std.</td>
+</tr>
+<tr>
+<td>Layout-Tests &amp; Feintuning</td>
+<td>4–8 Std.</td>
+</tr>
+<tr>
+<td><strong>Gesamt</strong></td>
+<td><strong>12–24 Std.</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Das ist überschaubar – das bestehende Template ist die Basis, es geht
+hauptsächlich um <strong>Anpassung und Testen</strong>.</p>
+<p><strong>Szenario 2: Komplette Neuentwicklung</strong></p>
+<table style="width:85%;">
+<colgroup>
+<col style="width: 71%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Aufgabe</strong></th>
+<th style="text-align: center;"><strong>Aufwand</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ersatz-Tool evaluieren &amp; einrichten</td>
+<td>4–8 Std.</td>
+</tr>
+<tr>
+<td>Template-Sprache einarbeiten (HTML/CSS o. ä.)</td>
+<td>8–16 Std.</td>
+</tr>
+<tr>
+<td>Layout neu aufbauen (Logo, Kopf, Adresse, Tabellen, Fußzeile)</td>
+<td>16–24 Std.</td>
+</tr>
+<tr>
+<td>Fachlogik neu implementieren (Steuer, Rahmenauftrag, RL-Daten)</td>
+<td>8–16 Std.</td>
+</tr>
+<tr>
+<td>Custom Fields neu mappen</td>
+<td>2–4 Std.</td>
+</tr>
+<tr>
+<td>Rich-Text-Rendering lösen</td>
+<td>4–8 Std.</td>
+</tr>
+<tr>
+<td>Tests &amp; Feintuning</td>
+<td>8–16 Std.</td>
+</tr>
+<tr>
+<td><strong>Gesamt</strong></td>
+<td><strong>50–92 Std.</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fazit</strong></p>
+<table style="width:72%;">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 20%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><strong>Better PDF Cloud</strong></th>
+<th style="text-align: center;"><strong>Neuentwicklung</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Aufwand</td>
+<td style="text-align: center;">~2–3 Tage</td>
+<td style="text-align: center;">~2–3 Wochen</td>
+</tr>
+<tr>
+<td style="text-align: center;">Risiko</td>
+<td style="text-align: center;">gering</td>
+<td style="text-align: center;">mittel–hoch</td>
+</tr>
+<tr>
+<td style="text-align: center;">Empfehlung</td>
+<td style="text-align: center;"><strong>zuerst prüfen</strong></td>
+<td style="text-align: center;">nur als Fallback</td>
+</tr>
+</tbody>
+</table>
+<p>Der erste Schritt sollte daher sein, eine <strong>Testinstanz mit
+Better PDF Cloud</strong> aufzusetzen und das bestehende Template
+probeweise einzuspielen – das zeigt schnell, was funktioniert und was
+nicht.</p>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Die ich kenne!<a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Bis nur genutzt. Nie analysiert.<a href="#fnref2"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
