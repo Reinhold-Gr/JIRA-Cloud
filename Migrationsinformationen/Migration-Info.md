@@ -40,7 +40,96 @@
 
 # Üblicherweise erwarteter Aufwand
 
-<img src="media/image1.png" style="width:6.3in;height:8.04653in" />
+🧭 Migration Atlassian Data Center → Cloud
+Zeitraum: ca. 13 Wochen (12 Wochen bei Server)  
+Farbiger Balken links = Data‑Center‑spezifische Aufgaben
+
+Phase 1 — Analyse & Bestandsaufnahme
+Woche 1–2
+
+Jira‑Version, Plugins (ScriptRunner, Apps) inventarisieren
+
+Cloud‑Kompatibilitätsprüfung mit Atlassian Cloud Migration Assistant
+
+DC‑Cluster dokumentieren:
+
+Anzahl Nodes
+
+Shared Home (NFS/SMB)
+
+Load Balancer
+
+Phase 2 — Planung & Vorbereitung
+Woche 3–6
+
+Atlassian Cloud‑Instanz bereitstellen (Sandbox)
+
+Groovy‑Automationen auf Cloud Automation / Forge migrieren
+
+App‑Alternativen evaluieren:
+
+ScriptRunner for Cloud
+
+Forge‑Apps
+
+User Directory vorbereiten:
+
+LDAP/AD → Atlassian Access / SAML SSO
+
+Crowd‑Migration prüfen (falls genutzt)
+
+Alle Nutzer benötigen Atlassian‑Accounts vor Start
+
+Phase 3 — Test‑Migration (Dry Run)
+Woche 7–9
+
+Testlauf mit Cloud Migration Assistant (Sandbox)
+
+Datenintegrität prüfen:
+
+Issues
+
+Workflows
+
+Verlauf
+
+E‑Mail‑Benachrichtigungen & Automationen testen
+
+Shared Home / Attachments:
+
+NFS‑Pfad korrekt setzen
+
+Vollständigkeit der Anhänge prüfen (häufige Fehlerquelle)
+
+Phase 4 — Produktionsmigration (Cut‑over)
+Woche 10–11
+
+Wartungsfenster ankündigen (Wochenende empfohlen)
+
+Finale Migration mit Cloud Migration Assistant
+
+DNS / SAML SSO auf Cloud umstellen
+
+Cluster‑Shutdown:
+
+Alle Nodes koordiniert stoppen
+
+Load Balancer deaktivieren
+
+Shared Home einfrieren:
+
+NFS read‑only setzen vor Migration
+
+Phase 5 — Go‑Live & Stabilisierung
+Woche 12–13
+
+User‑Kommunikation: Schulung, Dokumentation, Support‑Kanal
+
+Monitoring: Automationen, Benachrichtigungen, Berechtigungen
+
+DC‑Cluster & NFS abschalten (nach Einfrierperiode)
+
+DC‑Lizenz kündigen → Doppelkosten vermeiden
 
 Die DC-spezifischen Aufgaben sind jeweils mit einem farbigen Balken
 links markiert. Die wichtigsten Ergänzungen im Überblick:
