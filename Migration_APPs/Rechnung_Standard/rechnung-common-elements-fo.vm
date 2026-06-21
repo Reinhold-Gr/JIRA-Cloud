@@ -1,0 +1,169 @@
+## =========================================================================
+## Gemeinsame_Rechnungs_Elemente-V3.0-CLOUD: rechnung-common-elements-fo.vm
+## =========================================================================
+##
+## MIGRATIONSHINWEIS (DC -> Cloud):
+##
+## 1. $ComponentAccessor.customFieldManager  --> ENTFERNT
+##    In Cloud existiert kein ComponentAccessor. Im Template wird daher
+##    NICHT MEHR $customFieldManager.getCustomFieldObject("customfield_X")
+##    benutzt, sondern direkt der String-Key:
+##        $issue.getCustomFieldValue("customfield_X")
+##    Das ist exakt das Pattern, das im Rechnungstemplate (rechnung-in-issue-fo.vm)
+##    für die Felder von $issues.get(0) bereits verwendet wurde -- das war
+##    schon Cloud-kompatibel. Es muss nur konsequent auch für
+##    $auftrag, $region, $rechnung, $klient, $abschlussbericht angewendet werden.
+##
+## 2. $remoteIssueLinkManager  --> ENTFERNT
+##    DC-interne Java-API, in Cloud nicht verfügbar. Falls ihr KEINE
+##    Remote-Issue-Links (Web-Links zu externen Systemen) im PDF anzeigen
+##    müsst -- nur "klassische" Jira-Issue-Links (Auftrag<->Rechnung<->Region
+##    etc.) -- kann dieser Block ersatzlos entfallen. Das ist hier der Fall,
+##    da $remoteIssueLinks im Original nur zur Bedingungsprüfung diente,
+##    nicht zur Anzeige.
+##
+## 3. $pdfContent.linkCollectionByIssue($issue)  --> ZU VALIDIEREN
+##    Dies ist Better PDF Exporter's eigenes Velocity-Tool (kein DC-Java-API-
+##    Zugriff), das laut Midori-Doku auch in der Cloud existiert
+##    (siehe z.B. $pdfContent.commentsByIssue() in den offiziellen Cloud-
+##    Recipes). Ob linkCollectionByIssue() in der Cloud exakt dieselbe
+##    Methodensignatur (.linkTypes, .getInwardIssues(), .getOutwardIssues())
+##    hat, ist NICHT öffentlich dokumentiert und muss in der Sandbox
+##    getestet werden. Daher unten ZWEI VARIANTEN:
+##
+##      VARIANTE A: $pdfContent.linkCollectionByIssue() -- so übernommen,
+##                  wie aus DC bekannt. Im PDF-Template-Editor der Cloud-App
+##                  einfach ausprobieren ("Test render"). Wenn es läuft,
+##                  ist dies die einfachste und schnellste Lösung.
+##
+##      VARIANTE B: Fallback über das native Velocity-Issue-Objekt
+##                  $issue.issueLinks (falls von Better PDF Cloud bereit-
+##                  gestellt) bzw. als letzte Eskalationsstufe ein Groovy-
+##                  Helper-Script, das die Jira Cloud REST API
+##                  (/rest/api/3/issue/{key}?fields=issuelinks) aufruft.
+##                  Diese Variante ist als auskommentierter Code-Block
+##                  weiter unten vorbereitet, falls Variante A nicht
+##                  funktioniert.
+##
+## 4. Logo-/Footer-Bild-URLs -- UNVERÄNDERT
+##    Reine HTTP(S)-URLs zu externem Server (vampir.as-by.de). Das ist
+##    weder DC- noch Cloud-spezifisch und funktioniert unverändert,
+##    sofern der Cloud-Renderer (FOP) ausgehende HTTP-Calls erlaubt
+##    (in Better PDF Cloud Standard-Verhalten, ggf. mit Midori Support
+##    klären, falls es eine Allowlist für externe Domains gibt).
+##
+## =========================================================================
+
+#set($project = $issues.get(0).projectObject)
+
+## ///////////////////////////////////////////////////////////////////////////////
+## RUN-Time Umgebung !!!!! muss derzeit manuell angepasst werden !!!!!!!!!!!!!!
+## #set($env = "PROD")
+#set($env = "TEST")
+## ///////////////////////////////////////////////////////////////////////////////
+
+#if($env == "TEST")
+   ## Kopfzeilen für Seite 1 und 2
+   #set($logoImageUrl_Banner = "https://vampir.aktivsenioren-bayern.de/7qukupxeUC399rraqxKK/Header_S1_Auftr.png")
+   #set($logoImageUrl_Banner_Abschl = "https://vampir.aktivsenioren-bayern.de/7qukupxeUC399rraqxKK/Header_S1_Abschlussbericht.png")
+   #set($logoImageUrl_Banner_S2 = "https://vampir.aktivsenioren-bayern.de/7qukupxeUC399rraqxKK/Header_S2_Auftr.png")
+   ## Fußzeile
+   #set($FZ_ImageUrl = "https://vampir.aktivsenioren-bayern.de/7qukupxeUC399rraqxKK/AS_Fusszeile.png")
+#end
+
+## Produktionsumgebung
+#if($env == "PROD" || $env == "Prod")
+   #set($logoImageUrl_Banner = "https://vampir.as-by.de/7qukupxeUC399rraqxKK/Header_S1_Auftr.png")
+   #set($logoImageUrl_Banner_Abschl = "https://vampir.as-by.de/7qukupxeUC399rraqxKK/Header_S1_Abschlussbericht.png")
+   #set($logoImageUrl_Banner_S2 = "https://vampir.as-by.de/7qukupxeUC399rraqxKK/Header_S2_Auftr.png")
+   #set($FZ_ImageUrl = "https://vampir.as-by.de/7qukupxeUC399rraqxKK/AS_Fusszeile.png")
+#end
+
+
+## =========================================================================
+## VARIANTE A (zuerst testen): $pdfContent.linkCollectionByIssue()
+## =========================================================================
+## ENTFÄLLT in Cloud: $customFieldManager = $ComponentAccessor.customFieldManager
+## ENTFÄLLT in Cloud: $remoteIssueLinks-Abfrage (nicht benötigt, da nur zur
+##                    Existenzprüfung verwendet, nicht zur Anzeige)
+
+#set($linkCollection = $pdfContent.linkCollectionByIssue($issues.get(0)))
+
+#if($linkCollection.linkTypes && !$linkCollection.linkTypes.empty)
+	#foreach ($issueLinkType in $linkCollection.linkTypes)
+		#foreach ($linkedIssue in $linkCollection.getInwardIssues($issueLinkType.name))
+			#if($linkedIssue.projectObject.name == "Auftrag")
+				#set($auftrag = $linkedIssue)
+			#end
+		#end
+		#foreach ($linkedIssue in $linkCollection.getOutwardIssues($issueLinkType.name))
+			#if($linkedIssue.projectObject.name == "Auftrag")
+				#set($auftrag = $linkedIssue)
+			#end
+		#end
+	#end
+#end
+
+#if($auftrag)
+	#set($linkCollection = $pdfContent.linkCollectionByIssue($auftrag))
+
+	#if($linkCollection.linkTypes && !$linkCollection.linkTypes.empty)
+		#foreach ($issueLinkType in $linkCollection.linkTypes)
+			#foreach ($linkedIssue in $linkCollection.getInwardIssues($issueLinkType.name))
+				#if($linkedIssue.projectObject.name == "Klienten")
+					#set($klient = $linkedIssue)
+				#end
+				#if($linkedIssue.projectObject.name == "Region")
+					#set($region = $linkedIssue)
+				#end
+				#if($linkedIssue.projectObject.name == "Abschlussbericht")
+					#set($abschlussbericht = $linkedIssue)
+				#end
+				#if($linkedIssue.projectObject.name == "Rechnungen")
+					#set($rechnung = $linkedIssue)
+				#end
+			#end
+			#foreach ($linkedIssue in $linkCollection.getOutwardIssues($issueLinkType.name))
+				#if($linkedIssue.projectObject.name == "Klienten")
+					#set($klient = $linkedIssue)
+				#end
+				#if($linkedIssue.projectObject.name == "Region")
+					#set($region = $linkedIssue)
+				#end
+				#if($linkedIssue.projectObject.name == "Abschlussbericht")
+					#set($abschlussbericht = $linkedIssue)
+				#end
+				#if($linkedIssue.projectObject.name == "Rechnungen")
+					#set($rechnung = $linkedIssue)
+				#end
+			#end
+		#end
+	#end
+#end
+
+
+## =========================================================================
+## VARIANTE B (NUR aktivieren, falls Variante A in der Sandbox NICHT
+## funktioniert -- z.B. weil $pdfContent.linkCollectionByIssue() in Cloud
+## eine andere Signatur hat oder fehlt). Auskommentiert lassen, bis
+## Variante A in der Test-Render-Vorschau der App fehlschlägt.
+## =========================================================================
+##
+## Diese Variante würde ein separates Groovy-Helper-Script
+## "issue-links-rest-tool.groovy" voraussetzen, das über die Jira Cloud
+## REST API (GET /rest/api/3/issue/{issueKey}?fields=issuelinks) die
+## Links auflöst, da Better PDF Cloud i.d.R. einen mitgelieferten
+## authentifizierten REST-Client (z.B. $httpClient o.ä., je nach
+## App-Version) im Scripting-Kontext bereitstellt. Vor Einsatz unbedingt
+## die aktuelle Midori "Scripting"-Dokumentation für die exakt verfügbaren
+## Objekte im Cloud-Scripting-Kontext konsultieren, da sich dies je
+## App-Version ändern kann.
+##
+## #set($linkedIssuesRaw = $issueLinksTool.getLinkedIssues($issues.get(0).key))
+## #foreach($linkedIssue in $linkedIssuesRaw)
+##     #if($linkedIssue.projectKey == "AUF")
+##         #set($auftrag = $linkedIssue)
+##     #end
+## #end
+##
+## =========================================================================
