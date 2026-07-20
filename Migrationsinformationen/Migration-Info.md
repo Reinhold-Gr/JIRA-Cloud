@@ -1158,3 +1158,90 @@ Cloud** aufzusetzen und das bestehende Template probeweise einzuspielen
 [^1]: Die ich kenne!
 
 [^2]: Bis nur genutzt. Nie analysiert.
+
+Die Antwort ist jetzt eindeutig und aus der offiziellen Midori-Doku belegbar. Das ist eine sehr gute Nachricht.
+
+## `$scripting.execute()` in der Jira Cloud — vollständig unterstützt
+
+Laut der offiziellen Cloud-Dokumentation von Midori ist `$scripting` explizit als Velocity-Tool in Better PDF Exporter Cloud gelistet: es führt Groovy-Scripts aus, um erweiterte Logik und Visualisierungen in Templates zu implementieren — mit genau demselben Aufruf wie in DC:
+
+```vm
+$scripting.execute("articles-tool.groovy")
+```
+
+**Das funktioniert in der Cloud unverändert.** Kein Migrationsaufwand für diesen Teil.
+
+---
+
+## Und was ist mit `$customFieldManager`?
+
+Noch wichtiger: Die Doku listet `$customFieldManager` ebenfalls als **Cloud-verfügbares Velocity-Tool**:
+
+> `$customFieldManager` — `CustomFieldManager` supports working with custom fields. Velocity example: `#set($customFields = $customFieldManager.getCustomFieldObjects($issue))`
+
+Das bedeutet, dass meine gestrige Migration **zu konservativ** war. Der Aufruf `$customFieldManager.getCustomFieldObject("customfield_NNNNN")` könnte in Cloud ebenfalls funktionieren — der Blocker ist nicht `$customFieldManager` selbst, sondern **`$ComponentAccessor`**, der in DC als Einstiegspunkt diente:
+
+```vm
+## DC — problematisch:
+#set($customFieldManager = $ComponentAccessor.customFieldManager)
+
+## Cloud — laut Doku direkt verfügbar, kein ComponentAccessor nötig:
+## $customFieldManager ist bereits im Kontext vorhanden!
+```
+
+Das ist ein relevanter Unterschied. `$ComponentAccessor` ist der DC-Java-Zugriffspunkt, aber `$customFieldManager` wird von Better PDF Cloud direkt als eigenes Velocity-Tool injiziert.
+
+---
+
+## Aktualisierte Migrationslage
+
+| DC-Element | Cloud-Status | Aktion |
+|---|---|---|
+| `$scripting.execute("articles-tool.groovy")` | ✅ identisch | **nichts ändern** |
+| `$ComponentAccessor.customFieldManager` | ❌ DC-only | **Zeile entfernen** (`$customFieldManager` ist direkt verfügbar) |
+| `$customFieldManager.getCustomFieldObject("customfield_N")` | ✅ Cloud verfügbar | **kann bleiben** |
+| `$remoteIssueLinkManager` | ✅ Cloud verfügbar laut Doku | kann bleiben (war in rechnung-common-elements-fo.vm nur zur Existenzprüfung) |
+| `$issueLinkManager.getLinkCollection(issue, user)` | ✅ Cloud verfügbar | **Alternative zu `$pdfContent.linkCollectionByIssue()`** |
+| `$pdfContent.linkCollectionByIssue()` | ⚠️ nicht in Doku gelistet | auf `$issueLinkManager` umstellen |
+
+---
+
+## Konkrete Konsequenz für `rechnung-common-elements-fo.vm`
+
+Die einzige notwendige Änderung ist minimal — die `$ComponentAccessor`-Zeile:
+
+```vm
+## DC — löschen:
+#set($customFieldManager = $ComponentAccessor.customFieldManager)
+
+## Cloud — NICHT ersetzen. $customFieldManager einfach direkt verwenden,
+## es ist bereits im Velocity-Kontext vorhanden.
+```
+
+Und für die Issue-Link-Auflösung kann statt dem unsicheren `$pdfContent.linkCollectionByIssue()` der dokumentierte `$issueLinkManager` verwendet werden:
+
+```vm
+## Cloud-sicherer Ersatz für $pdfContent.linkCollectionByIssue():
+#set($linkCollection = $issueLinkManager.getLinkCollection($issues.get(0), $user))
+
+#foreach ($issueLinkType in $linkCollection.linkTypes)
+    #foreach ($linkedIssue in $linkCollection.getInwardIssues($issueLinkType.name))
+        #if($linkedIssue.projectObject.name == "Auftrag")
+            #set($auftrag = $linkedIssue)
+        #end
+    #end
+    ...
+#end
+```
+
+Das ist die dokumentierte Methode — gleiche Signatur wie DC-intern, aber über das von Midori bereitgestellte `$issueLinkManager`-Tool statt über Java-Direktzugriff.
+
+---
+
+**Fazit:** Der Migrationsaufwand für euer Rechnungstemplate ist damit auf **eine einzige zu löschende Zeile** (`$ComponentAccessor.customFieldManager`) geschrumpft, plus optionale Umstellung der Link-Auflösung auf `$issueLinkManager`. Alles andere — Scripting, CustomFieldManager, RemoteIssueLinkManager — ist in der Cloud-Version dokumentiert verfügbar.
+
+Soll ich die gestrigen Migrationsdateien entsprechend korrigieren?
+
+Gut — das Haupttemplate ist bereits korrekt migriert. Jetzt die drei Dateien aktualisieren:
+
+**1. `rechnung-common-elements-fo.vm`** — Migrationskommentare korrigieren + `$issueLinkManager` als primäre Methode einsetzen, `$pdfContent.linkCollectionByIssue()` als Fallback auskommentieren:**2. `rechnung-in-issue-fo.vm`** — Migrationskommentar im Header korrigieren, `$customFieldManager.getCustomFieldObject()` wieder zulassen (ist Cloud-kompatibel):
