@@ -1,0 +1,15 @@
+## Platzhalter
+## debug-rechnung.vm — NUR zum Testen, kein FO
+$include.parse($ctx, "rechnung-common-elements-fo.vm")
+$scripting.execute("articles-tool.groovy")
+
+PROJEKT:  $project.name
+AUFTRAG:  $auftrag.summary  ($auftrag.key)
+REGION:   $region.summary   ($region.key)
+RECHNUNG: $rechnung.summary ($rechnung.key)
+
+CF-Test customfield_10287: $region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10287"))
+CF-Test customfield_10303: $region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10303"))
+CF-Test customfield_10309: $region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10309"))
+
+articlesTool.formatNumber(1234.5): $articlesTool.formatNumber(1234.5)
