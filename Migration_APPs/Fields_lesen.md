@@ -298,3 +298,23 @@ Exportiert nach CSV (Excel-kompatibel, UTF-8 mit BOM)
 5
 Exportiert nach JSON (vollständige Rohdaten)
 Tipp: Die Custom Field IDs (customfield_XXXXX) werden beim ersten Aufruf von get_all_fields() in der Konsole ausgegeben. Damit kannst du das CUSTOM_FIELDS-Dict oben im Skript mit den exakten IDs deiner Instanz befüllen.
+
+# Einfache Lösung
+Ja, genau! Du kannst die Jira REST API direkt im Browser aufrufen – kein Code nötig.
+Alle Felder abrufen
+Einfach diese URL in den Browser eingeben (du bist bereits in Jira eingeloggt, also keine extra Authentifizierung nötig):
+# https://aktivsenioren-sandbox.atlassian.net/rest/api/3/field
+D
+as gibt dir eine JSON-Liste aller Felder – Standard- und Custom Fields – mit Name und ID.
+Weitere nützliche Browser-Aufrufe
+Was                            URL
+Alle Felder                    /rest/api/3/field
+Ein bestimmtes Issue           /rest/api/3/issue/BEZ-1
+Issue mit allen Custom Fields  /rest/api/3/issue/BEZ-1?expand=names
+JQL-Suche                     /rest/api/3/search?jql=project=BEZ&maxResults=10
+Alle Projekte                 /rest/api/3/project
+Feldkonfigurationen          /rest/api/3/fieldconfiguration
+
+# Tipp: JSON lesbarer machen
+Browser zeigen JSON oft als unlesbaren Fließtext an. 
+## Mit der kostenlosen Browser-Extension JSON Formatter (Chrome/Edge) wird die Ausgabe automatisch schön formatiert und durchsuchbar.
