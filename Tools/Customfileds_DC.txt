@@ -1,0 +1,8 @@
+$jiraUrl = "https://dein-jira.de/rest/api/2/issue/KEY-123"
+$auth = ("user:token")
+$authHeader = "Basic " + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($auth))
+
+$response = Invoke-RestMethod -Uri $jiraUrl -Headers @{Authorization=$authHeader}
+
+$response.fields.customfield_10042
+$response.fields.customfield_10301.value
