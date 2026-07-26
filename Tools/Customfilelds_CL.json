@@ -1,0 +1,6925 @@
+[
+  {
+    "id": "customfield_10070",
+    "key": "customfield_10070",
+    "name": "Story Points",
+    "untranslatedName": "Story Points",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10070]",
+      "Story Points[Number]",
+      "Story Points"
+    ],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 10070
+    }
+  },
+  {
+    "id": "statusCategory",
+    "key": "statusCategory",
+    "name": "Statuskategorie",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "statusCategory"
+    ],
+    "schema": {
+      "type": "statusCategory",
+      "system": "statusCategory"
+    }
+  },
+  {
+    "id": "parent",
+    "key": "parent",
+    "name": "Übergeordnet",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "parent"
+    ]
+  },
+  {
+    "id": "lastViewed",
+    "key": "lastViewed",
+    "name": "Zuletzt angezeigt",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [
+      "lastViewed"
+    ],
+    "schema": {
+      "type": "datetime",
+      "system": "lastViewed"
+    }
+  },
+  {
+    "id": "aggregatetimeoriginalestimate",
+    "key": "aggregatetimeoriginalestimate",
+    "name": "Σ Ursprüngliche Schätzung",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [],
+    "schema": {
+      "type": "number",
+      "system": "aggregatetimeoriginalestimate"
+    }
+  },
+  {
+    "id": "issuelinks",
+    "key": "issuelinks",
+    "name": "Verknüpfte Vorgänge",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "issueLink",
+      "workItemLink"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "issuelinks",
+      "system": "issuelinks"
+    }
+  },
+  {
+    "id": "assignee",
+    "key": "assignee",
+    "name": "Zugewiesene Person",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "assignee"
+    ],
+    "schema": {
+      "type": "user",
+      "system": "assignee"
+    }
+  },
+  {
+    "id": "components",
+    "key": "components",
+    "name": "Komponenten",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "component"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "component",
+      "system": "components"
+    }
+  },
+  {
+    "id": "customfield_10290",
+    "key": "customfield_10290",
+    "name": "M.Tel-Mobil",
+    "untranslatedName": "M.Tel-Mobil",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10290]",
+      "M.Tel-Mobil[Short text]",
+      "M.Tel-Mobil"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10290
+    }
+  },
+  {
+    "id": "customfield_10291",
+    "key": "customfield_10291",
+    "name": "Vereinsfunktion 8 Bis",
+    "untranslatedName": "Vereinsfunktion 8 Bis",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 8 Bis[Short text]",
+      "Vereinsfunktion 8 Bis",
+      "cf[10291]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10291
+    }
+  },
+  {
+    "id": "customfield_10292",
+    "key": "customfield_10292",
+    "name": "Vereinsfunktion 2 Geändert am",
+    "untranslatedName": "Vereinsfunktion 2 Geändert am",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10292]",
+      "Vereinsfunktion 2 Geändert am[Short text]",
+      "Vereinsfunktion 2 Geändert am"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10292
+    }
+  },
+  {
+    "id": "customfield_10172",
+    "key": "customfield_10172",
+    "name": "Time to done",
+    "untranslatedName": "Time to done",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Time to done",
+      "cf[10172]"
+    ],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 10172
+    }
+  },
+  {
+    "id": "customfield_10293",
+    "key": "customfield_10293",
+    "name": "Vereinsfunktion 10 Geändert am",
+    "untranslatedName": "Vereinsfunktion 10 Geändert am",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 10 Geändert am[Short text]",
+      "cf[10293]",
+      "Vereinsfunktion 10 Geändert am"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10293
+    }
+  },
+  {
+    "id": "customfield_10173",
+    "key": "customfield_10173",
+    "name": "Time to first response",
+    "untranslatedName": "Time to first response",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10173]",
+      "Time to first response"
+    ],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 10173
+    }
+  },
+  {
+    "id": "customfield_10294",
+    "key": "customfield_10294",
+    "name": "Vereinsfunktion 3 Von",
+    "untranslatedName": "Vereinsfunktion 3 Von",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10294]",
+      "Vereinsfunktion 3 Von[Short text]",
+      "Vereinsfunktion 3 Von"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10294
+    }
+  },
+  {
+    "id": "customfield_10295",
+    "key": "customfield_10295",
+    "name": "Branchen Schwerpunkt",
+    "untranslatedName": "Branchen Schwerpunkt",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Branchen Schwerpunkt[Checkboxes]",
+      "cf[10295]",
+      "Branchen Schwerpunkt"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 10295
+    }
+  },
+  {
+    "id": "customfield_10174",
+    "key": "customfield_10174",
+    "name": "Request language",
+    "untranslatedName": "Request language",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10174]",
+      "Request language"
+    ],
+    "schema": {
+      "type": "sd-request-lang",
+      "custom": "com.atlassian.servicedesk.servicedesk-lingo-integration-plugin:sd-request-language",
+      "customId": 10174
+    }
+  },
+  {
+    "id": "customfield_10296",
+    "key": "customfield_10296",
+    "name": "Vereinsfunktion 5 Geändert am",
+    "untranslatedName": "Vereinsfunktion 5 Geändert am",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10296]",
+      "Vereinsfunktion 5 Geändert am[Short text]",
+      "Vereinsfunktion 5 Geändert am"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10296
+    }
+  },
+  {
+    "id": "customfield_10297",
+    "key": "customfield_10297",
+    "name": "Vereinsfunktion 5 Von",
+    "untranslatedName": "Vereinsfunktion 5 Von",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 5 Von[Short text]",
+      "Vereinsfunktion 5 Von",
+      "cf[10297]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10297
+    }
+  },
+  {
+    "id": "customfield_10298",
+    "key": "customfield_10298",
+    "name": "RL.E-Mail AS",
+    "untranslatedName": "RL.E-Mail AS",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10298]",
+      "RL.E-Mail AS[Short text]",
+      "RL.E-Mail AS"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10298
+    }
+  },
+  {
+    "id": "customfield_10299",
+    "key": "customfield_10299",
+    "name": "Vereinsfunktion 8 Geändert am",
+    "untranslatedName": "Vereinsfunktion 8 Geändert am",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10299]",
+      "Vereinsfunktion 8 Geändert am[Short text]",
+      "Vereinsfunktion 8 Geändert am"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10299
+    }
+  },
+  {
+    "id": "subtasks",
+    "key": "subtasks",
+    "name": "Sub-Tasks",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [
+      "subtasks"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "issuelinks",
+      "system": "subtasks"
+    }
+  },
+  {
+    "id": "customfield_10280",
+    "key": "customfield_10280",
+    "name": "Vereinsfunktion 1",
+    "untranslatedName": "Vereinsfunktion 1",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 1[Dropdown]",
+      "Vereinsfunktion 1",
+      "cf[10280]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10280
+    }
+  },
+  {
+    "id": "customfield_10281",
+    "key": "customfield_10281",
+    "name": "Vereinsfunktion 3",
+    "untranslatedName": "Vereinsfunktion 3",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10281]",
+      "Vereinsfunktion 3",
+      "Vereinsfunktion 3[Dropdown]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10281
+    }
+  },
+  {
+    "id": "customfield_10282",
+    "key": "customfield_10282",
+    "name": "Vereinsfunktion 4 Bis",
+    "untranslatedName": "Vereinsfunktion 4 Bis",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 4 Bis[Short text]",
+      "Vereinsfunktion 4 Bis",
+      "cf[10282]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10282
+    }
+  },
+  {
+    "id": "customfield_10283",
+    "key": "customfield_10283",
+    "name": "Vereinsfunktion 2 Bis",
+    "untranslatedName": "Vereinsfunktion 2 Bis",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10283]",
+      "Vereinsfunktion 2 Bis[Short text]",
+      "Vereinsfunktion 2 Bis"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10283
+    }
+  },
+  {
+    "id": "customfield_10284",
+    "key": "customfield_10284",
+    "name": "Vereinsfunktion 4 Von",
+    "untranslatedName": "Vereinsfunktion 4 Von",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10284]",
+      "Vereinsfunktion 4 Von",
+      "Vereinsfunktion 4 Von[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10284
+    }
+  },
+  {
+    "id": "customfield_10285",
+    "key": "customfield_10285",
+    "name": "Vereinsfunktion 5",
+    "untranslatedName": "Vereinsfunktion 5",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 5",
+      "cf[10285]",
+      "Vereinsfunktion 5[Dropdown]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10285
+    }
+  },
+  {
+    "id": "reporter",
+    "key": "reporter",
+    "name": "Autor",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "reporter"
+    ],
+    "schema": {
+      "type": "user",
+      "system": "reporter"
+    }
+  },
+  {
+    "id": "customfield_10286",
+    "key": "customfield_10286",
+    "name": "Vereinsfunktion 5 Bis",
+    "untranslatedName": "Vereinsfunktion 5 Bis",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 5 Bis[Short text]",
+      "cf[10286]",
+      "Vereinsfunktion 5 Bis"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10286
+    }
+  },
+  {
+    "id": "customfield_10287",
+    "key": "customfield_10287",
+    "name": "Vereinsfunktion 6",
+    "untranslatedName": "Vereinsfunktion 6",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10287]",
+      "Vereinsfunktion 6[Dropdown]",
+      "Vereinsfunktion 6"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10287
+    }
+  },
+  {
+    "id": "customfield_10288",
+    "key": "customfield_10288",
+    "name": "Vereinsfunktion 6 Bis",
+    "untranslatedName": "Vereinsfunktion 6 Bis",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10288]",
+      "Vereinsfunktion 6 Bis[Short text]",
+      "Vereinsfunktion 6 Bis"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10288
+    }
+  },
+  {
+    "id": "customfield_10289",
+    "key": "customfield_10289",
+    "name": "Vereinsfunktion 8 Von",
+    "untranslatedName": "Vereinsfunktion 8 Von",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 8 Von",
+      "cf[10289]",
+      "Vereinsfunktion 8 Von[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10289
+    }
+  },
+  {
+    "id": "progress",
+    "key": "progress",
+    "name": "Fortschritt",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [
+      "progress"
+    ],
+    "schema": {
+      "type": "progress",
+      "system": "progress"
+    }
+  },
+  {
+    "id": "votes",
+    "key": "votes",
+    "name": "Stimmen",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [
+      "votes"
+    ],
+    "schema": {
+      "type": "votes",
+      "system": "votes"
+    }
+  },
+  {
+    "id": "worklog",
+    "key": "worklog",
+    "name": "Arbeit protokollieren",
+    "custom": false,
+    "orderable": true,
+    "navigable": false,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "array",
+      "items": "worklog",
+      "system": "worklog"
+    }
+  },
+  {
+    "id": "issuetype",
+    "key": "issuetype",
+    "name": "Vorgangstyp",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "issuetype",
+      "type",
+      "worktype"
+    ],
+    "schema": {
+      "type": "issuetype",
+      "system": "issuetype"
+    }
+  },
+  {
+    "id": "customfield_10390",
+    "key": "customfield_10390",
+    "name": "Rechtsform",
+    "untranslatedName": "Rechtsform",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Rechtsform[Short text]",
+      "cf[10390]",
+      "Rechtsform"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10390
+    }
+  },
+  {
+    "id": "customfield_10270",
+    "key": "customfield_10270",
+    "name": "M.Nachname",
+    "untranslatedName": "M.Nachname",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "M.Nachname[Short text]",
+      "cf[10270]",
+      "M.Nachname"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10270
+    }
+  },
+  {
+    "id": "customfield_10391",
+    "key": "customfield_10391",
+    "name": "K.Ort",
+    "untranslatedName": "K.Ort",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "K.Ort[Short text]",
+      "K.Ort",
+      "cf[10391]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10391
+    }
+  },
+  {
+    "id": "customfield_10271",
+    "key": "customfield_10271",
+    "name": "Anrede",
+    "untranslatedName": "Anrede",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Anrede[Dropdown]",
+      "cf[10271]",
+      "Anrede"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10271
+    }
+  },
+  {
+    "id": "customfield_10392",
+    "key": "customfield_10392",
+    "name": "K.Vorname",
+    "untranslatedName": "K.Vorname",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "K.Vorname[Short text]",
+      "cf[10392]",
+      "K.Vorname"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10392
+    }
+  },
+  {
+    "id": "customfield_10030",
+    "key": "customfield_10030",
+    "name": "Formulare insgesamt",
+    "untranslatedName": "Total forms",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10030]",
+      "Total forms"
+    ],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugins.proforma-managed-fields:forms-total-field-cftype",
+      "customId": 10030
+    }
+  },
+  {
+    "id": "customfield_10272",
+    "key": "customfield_10272",
+    "name": "Gewünschte Einsatzgebiete",
+    "untranslatedName": "Gewünschte Einsatzgebiete",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10272]",
+      "Gewünschte Einsatzgebiete",
+      "Gewünschte Einsatzgebiete[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10272
+    }
+  },
+  {
+    "id": "customfield_10393",
+    "key": "customfield_10393",
+    "name": "Art des Unternehmens",
+    "untranslatedName": "Art des Unternehmens",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10393]",
+      "Art des Unternehmens[Checkboxes]",
+      "Art des Unternehmens"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 10393
+    }
+  },
+  {
+    "id": "project",
+    "key": "project",
+    "name": "Projekt",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "project",
+      "spaceJira"
+    ],
+    "schema": {
+      "type": "project",
+      "system": "project"
+    }
+  },
+  {
+    "id": "customfield_10031",
+    "key": "customfield_10031",
+    "name": "Gesendete Formulare",
+    "untranslatedName": "Submitted forms",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10031]",
+      "Submitted forms"
+    ],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugins.proforma-managed-fields:forms-submitted-field-cftype",
+      "customId": 10031
+    }
+  },
+  {
+    "id": "customfield_10273",
+    "key": "customfield_10273",
+    "name": "M.Vorname",
+    "untranslatedName": "M.Vorname",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "M.Vorname",
+      "cf[10273]",
+      "M.Vorname[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10273
+    }
+  },
+  {
+    "id": "customfield_10394",
+    "key": "customfield_10394",
+    "name": "K.Rechnung-Anrede",
+    "untranslatedName": "K.Rechnung-Anrede",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "K.Rechnung-Anrede[Dropdown]",
+      "cf[10394]",
+      "K.Rechnung-Anrede"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10394
+    }
+  },
+  {
+    "id": "customfield_10032",
+    "key": "customfield_10032",
+    "name": "Gesperrte Formulare",
+    "untranslatedName": "Locked forms",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10032]",
+      "Locked forms"
+    ],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugins.proforma-managed-fields:forms-locked-field-cftype",
+      "customId": 10032
+    }
+  },
+  {
+    "id": "customfield_10274",
+    "key": "customfield_10274",
+    "name": "M.Geburtsdatum",
+    "untranslatedName": "M.Geburtsdatum",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "M.Geburtsdatum[Date]",
+      "M.Geburtsdatum",
+      "cf[10274]"
+    ],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 10274
+    }
+  },
+  {
+    "id": "customfield_10395",
+    "key": "customfield_10395",
+    "name": "K.Nachname",
+    "untranslatedName": "K.Nachname",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "K.Nachname[Short text]",
+      "cf[10395]",
+      "K.Nachname"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10395
+    }
+  },
+  {
+    "id": "customfield_10275",
+    "key": "customfield_10275",
+    "name": "M.Strasse",
+    "untranslatedName": "M.Strasse",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "M.Strasse[Short text]",
+      "cf[10275]",
+      "M.Strasse"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10275
+    }
+  },
+  {
+    "id": "customfield_10396",
+    "key": "customfield_10396",
+    "name": "K.Fax",
+    "untranslatedName": "K.Fax",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "K.Fax",
+      "K.Fax[Short text]",
+      "cf[10396]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10396
+    }
+  },
+  {
+    "id": "customfield_10033",
+    "key": "customfield_10033",
+    "name": "Design",
+    "untranslatedName": "Design",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Design",
+      "cf[10033]"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "design.field.name",
+      "custom": "com.atlassian.jira.plugins.jira-development-integration-plugin:designcf",
+      "customId": 10033
+    }
+  },
+  {
+    "id": "customfield_10276",
+    "key": "customfield_10276",
+    "name": "Selbstauskunft",
+    "untranslatedName": "Selbstauskunft",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10276]",
+      "Selbstauskunft[Paragraph]",
+      "Selbstauskunft"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10276
+    }
+  },
+  {
+    "id": "customfield_10397",
+    "key": "customfield_10397",
+    "name": "K.Rechnung-Ort",
+    "untranslatedName": "K.Rechnung-Ort",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10397]",
+      "K.Rechnung-Ort",
+      "K.Rechnung-Ort[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10397
+    }
+  },
+  {
+    "id": "customfield_10034",
+    "key": "customfield_10034",
+    "name": "Sicherheitsrisiko",
+    "untranslatedName": "Vulnerability",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10034]",
+      "Vulnerability"
+    ],
+    "schema": {
+      "type": "any",
+      "custom": "com.atlassian.jira.plugins.jira-development-integration-plugin:vulnerabilitycf",
+      "customId": 10034
+    }
+  },
+  {
+    "id": "customfield_10277",
+    "key": "customfield_10277",
+    "name": "M.PLZ",
+    "untranslatedName": "M.PLZ",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "M.PLZ[Short text]",
+      "cf[10277]",
+      "M.PLZ"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10277
+    }
+  },
+  {
+    "id": "customfield_10398",
+    "key": "customfield_10398",
+    "name": "K.Wei.Tel",
+    "untranslatedName": "K.Wei.Tel",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "K.Wei.Tel[Short text]",
+      "cf[10398]",
+      "K.Wei.Tel"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10398
+    }
+  },
+  {
+    "id": "customfield_10035",
+    "key": "customfield_10035",
+    "name": "Fokusbereiche",
+    "untranslatedName": "Focus Areas",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10035]",
+      "Focus Areas",
+      "Focus Areas[FocusAreas]"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "Fokusbereiche",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:focus-areas",
+      "customId": 10035
+    }
+  },
+  {
+    "id": "customfield_10278",
+    "key": "customfield_10278",
+    "name": "Bildverwertung in Medien",
+    "untranslatedName": "Bildverwertung in Medien",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Bildverwertung in Medien",
+      "cf[10278]",
+      "Bildverwertung in Medien[Radio Buttons]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10278
+    }
+  },
+  {
+    "id": "customfield_10399",
+    "key": "customfield_10399",
+    "name": "K.Strasse",
+    "untranslatedName": "K.Strasse",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "K.Strasse",
+      "K.Strasse[Short text]",
+      "cf[10399]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10399
+    }
+  },
+  {
+    "id": "customfield_10036",
+    "key": "com.atlassian.atlas.jira__project-key",
+    "name": "Project overview key",
+    "untranslatedName": "Project overview key",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Project overview key",
+      "cf[10036]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "read-only-string-issue-field",
+      "customId": 10036
+    }
+  },
+  {
+    "id": "customfield_10279",
+    "key": "customfield_10279",
+    "name": "Einsatzbereitschaft (in Std./Woche)",
+    "untranslatedName": "Einsatzbereitschaft (in Std./Woche)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Einsatzbereitschaft (in Std./Woche)",
+      "Einsatzbereitschaft (in Std./Woche)[Short text]",
+      "cf[10279]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10279
+    }
+  },
+  {
+    "id": "customfield_10037",
+    "key": "com.atlassian.atlas.jira__project-status",
+    "name": "Project overview status",
+    "untranslatedName": "Project overview status",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Project overview status",
+      "cf[10037]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "read-only-string-issue-field",
+      "customId": 10037
+    }
+  },
+  {
+    "id": "customfield_10027",
+    "key": "customfield_10027",
+    "name": "[CHART] Time in Status",
+    "untranslatedName": "[CHART] Time in Status",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10027]",
+      "[CHART] Time in Status[Time in Status]",
+      "[CHART] Time in Status"
+    ],
+    "schema": {
+      "type": "any",
+      "custom": "com.atlassian.jira.ext.charting:timeinstatus",
+      "customId": 10027
+    }
+  },
+  {
+    "id": "customfield_10269",
+    "key": "customfield_10269",
+    "name": "Vereinsfunktion 1 Geändert am",
+    "untranslatedName": "Vereinsfunktion 1 Geändert am",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10269]",
+      "Vereinsfunktion 1 Geändert am[Short text]",
+      "Vereinsfunktion 1 Geändert am"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10269
+    }
+  },
+  {
+    "id": "customfield_10028",
+    "key": "customfield_10028",
+    "name": "Ziele",
+    "untranslatedName": "Goals",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10028]",
+      "Goals",
+      "Goals[Goals]"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "Ziele",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:goals",
+      "customId": 10028
+    }
+  },
+  {
+    "id": "customfield_10029",
+    "key": "customfield_10029",
+    "name": "Offene Formulare",
+    "untranslatedName": "Open forms",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Open forms",
+      "cf[10029]"
+    ],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugins.proforma-managed-fields:forms-open-field-cftype",
+      "customId": 10029
+    }
+  },
+  {
+    "id": "resolutiondate",
+    "key": "resolutiondate",
+    "name": "Erledigt",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "resolutiondate",
+      "resolved"
+    ],
+    "schema": {
+      "type": "datetime",
+      "system": "resolutiondate"
+    }
+  },
+  {
+    "id": "watches",
+    "key": "watches",
+    "name": "Beobachter",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [
+      "watchers"
+    ],
+    "schema": {
+      "type": "watches",
+      "system": "watches"
+    }
+  },
+  {
+    "id": "customfield_10380",
+    "key": "customfield_10380",
+    "name": "Bezahldatum",
+    "untranslatedName": "Bezahldatum",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Bezahldatum",
+      "Bezahldatum[Date]",
+      "cf[10380]"
+    ],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 10380
+    }
+  },
+  {
+    "id": "customfield_10260",
+    "key": "customfield_10260",
+    "name": "Feedback angefordert",
+    "untranslatedName": "Feedback angefordert",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Feedback angefordert[Dropdown]",
+      "Feedback angefordert",
+      "cf[10260]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10260
+    }
+  },
+  {
+    "id": "customfield_10381",
+    "key": "customfield_10381",
+    "name": "Betrag 6",
+    "untranslatedName": "Betrag 6",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Betrag 6",
+      "Betrag 6[Number]",
+      "cf[10381]"
+    ],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 10381
+    }
+  },
+  {
+    "id": "customfield_10261",
+    "key": "customfield_10261",
+    "name": "V.LfdNr",
+    "untranslatedName": "V.LfdNr",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10261]",
+      "V.LfdNr[Short text]",
+      "V.LfdNr"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10261
+    }
+  },
+  {
+    "id": "customfield_10382",
+    "key": "customfield_10382",
+    "name": "Auftragstyp",
+    "untranslatedName": "Auftragstyp",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10382]",
+      "Auftragstyp",
+      "Auftragstyp[Dropdown]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10382
+    }
+  },
+  {
+    "id": "customfield_10383",
+    "key": "customfield_10383",
+    "name": "Betrag 3",
+    "untranslatedName": "Betrag 3",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Betrag 3[Number]",
+      "cf[10383]",
+      "Betrag 3"
+    ],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 10383
+    }
+  },
+  {
+    "id": "customfield_10020",
+    "key": "customfield_10020",
+    "name": "Sprint",
+    "untranslatedName": "Sprint",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10020]",
+      "Sprint"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "json",
+      "custom": "com.pyxis.greenhopper.jira:gh-sprint",
+      "customId": 10020
+    }
+  },
+  {
+    "id": "customfield_10262",
+    "key": "customfield_10262",
+    "name": "Storno Hinweis",
+    "untranslatedName": "Storno Hinweis",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10262]",
+      "Storno Hinweis[Paragraph]",
+      "Storno Hinweis"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10262
+    }
+  },
+  {
+    "id": "customfield_10384",
+    "key": "customfield_10384",
+    "name": "Betrag 4",
+    "untranslatedName": "Betrag 4",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Betrag 4[Number]",
+      "cf[10384]",
+      "Betrag 4"
+    ],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 10384
+    }
+  },
+  {
+    "id": "customfield_10021",
+    "key": "customfield_10021",
+    "name": "Flagged",
+    "untranslatedName": "Flagged",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Flagged",
+      "Flagged[Checkboxes]",
+      "cf[10021]"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 10021
+    }
+  },
+  {
+    "id": "customfield_10263",
+    "key": "customfield_10263",
+    "name": "Infos zusenden",
+    "untranslatedName": "Infos zusenden",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Infos zusenden[Dropdown]",
+      "cf[10263]",
+      "Infos zusenden"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10263
+    }
+  },
+  {
+    "id": "customfield_10385",
+    "key": "customfield_10385",
+    "name": "Betrag 5",
+    "untranslatedName": "Betrag 5",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Betrag 5",
+      "Betrag 5[Number]",
+      "cf[10385]"
+    ],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 10385
+    }
+  },
+  {
+    "id": "customfield_10022",
+    "key": "customfield_10022",
+    "name": "Target start",
+    "untranslatedName": "Target start",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Target start",
+      "cf[10022]"
+    ],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jpo:jpo-custom-field-baseline-start",
+      "customId": 10022
+    }
+  },
+  {
+    "id": "customfield_10264",
+    "key": "customfield_10264",
+    "name": "E-Mail_RL_New_Interessent",
+    "untranslatedName": "E-Mail_RL_New_Interessent",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "E-Mail_RL_New_Interessent",
+      "E-Mail_RL_New_Interessent[Select List (multiple choices)]",
+      "cf[10264]"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiselect",
+      "customId": 10264
+    }
+  },
+  {
+    "id": "customfield_10023",
+    "key": "customfield_10023",
+    "name": "Target end",
+    "untranslatedName": "Target end",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10023]",
+      "Target end"
+    ],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jpo:jpo-custom-field-baseline-end",
+      "customId": 10023
+    }
+  },
+  {
+    "id": "customfield_10265",
+    "key": "customfield_10265",
+    "name": "V.Vorstand",
+    "untranslatedName": "V.Vorstand",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10265]",
+      "V.Vorstand[Short text]",
+      "V.Vorstand"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10265
+    }
+  },
+  {
+    "id": "customfield_10386",
+    "key": "customfield_10386",
+    "name": "K.Rechnung-Vorname",
+    "untranslatedName": "K.Rechnung-Vorname",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10386]",
+      "K.Rechnung-Vorname",
+      "K.Rechnung-Vorname[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10386
+    }
+  },
+  {
+    "id": "customfield_10024",
+    "key": "customfield_10024",
+    "name": "Sentiment",
+    "untranslatedName": "Sentiment",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10024]",
+      "Sentiment"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "sd-sentiment",
+      "custom": "com.atlassian.servicedesk.sentiment:sd-sentiment",
+      "customId": 10024
+    }
+  },
+  {
+    "id": "customfield_10266",
+    "key": "customfield_10266",
+    "name": "Sonstige Bemerkungen",
+    "untranslatedName": "Sonstige Bemerkungen",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Sonstige Bemerkungen",
+      "cf[10266]",
+      "Sonstige Bemerkungen[Paragraph]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10266
+    }
+  },
+  {
+    "id": "customfield_10387",
+    "key": "customfield_10387",
+    "name": "K.Tel.",
+    "untranslatedName": "K.Tel.",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10387]",
+      "K.Tel.",
+      "K.Tel.[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10387
+    }
+  },
+  {
+    "id": "customfield_10025",
+    "key": "customfield_10025",
+    "name": "Genehmigungen",
+    "untranslatedName": "Approvals",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Approvals",
+      "Approvals[Approvals]",
+      "cf[10025]"
+    ],
+    "schema": {
+      "type": "sd-approvals",
+      "custom": "com.atlassian.servicedesk.approvals-plugin:sd-approvals",
+      "customId": 10025
+    }
+  },
+  {
+    "id": "customfield_10267",
+    "key": "customfield_10267",
+    "name": "M.Tel-Fest",
+    "untranslatedName": "M.Tel-Fest",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10267]",
+      "M.Tel-Fest",
+      "M.Tel-Fest[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10267
+    }
+  },
+  {
+    "id": "customfield_10388",
+    "key": "customfield_10388",
+    "name": "K.Firma",
+    "untranslatedName": "K.Firma",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "K.Firma[Short text]",
+      "cf[10388]",
+      "K.Firma"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10388
+    }
+  },
+  {
+    "id": "customfield_10026",
+    "key": "customfield_10026",
+    "name": "[CHART] Date of First Response",
+    "untranslatedName": "[CHART] Date of First Response",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "[CHART] Date of First Response[Date of first response]",
+      "[CHART] Date of First Response",
+      "cf[10026]"
+    ],
+    "schema": {
+      "type": "datetime",
+      "custom": "com.atlassian.jira.ext.charting:firstresponsedate",
+      "customId": 10026
+    }
+  },
+  {
+    "id": "customfield_10268",
+    "key": "customfield_10268",
+    "name": "Vereinsfunktion 1 Bis",
+    "untranslatedName": "Vereinsfunktion 1 Bis",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 1 Bis",
+      "Vereinsfunktion 1 Bis[Short text]",
+      "cf[10268]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10268
+    }
+  },
+  {
+    "id": "customfield_10389",
+    "key": "customfield_10389",
+    "name": "K.PLZ",
+    "untranslatedName": "K.PLZ",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "K.PLZ",
+      "K.PLZ[Short text]",
+      "cf[10389]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10389
+    }
+  },
+  {
+    "id": "customfield_10137",
+    "key": "customfield_10137",
+    "name": "Request participants",
+    "untranslatedName": "Request participants",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10137]",
+      "Request participants"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "user",
+      "custom": "com.atlassian.servicedesk:sd-request-participants",
+      "customId": 10137
+    }
+  },
+  {
+    "id": "customfield_10258",
+    "key": "customfield_10258",
+    "name": "V.BIC",
+    "untranslatedName": "V.BIC",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "V.BIC[Short text]",
+      "cf[10258]",
+      "V.BIC"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10258
+    }
+  },
+  {
+    "id": "customfield_10379",
+    "key": "customfield_10379",
+    "name": "Beratungsfall",
+    "untranslatedName": "Beratungsfall",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10379]",
+      "Beratungsfall",
+      "Beratungsfall[Checkboxes]"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 10379
+    }
+  },
+  {
+    "id": "customfield_10016",
+    "key": "customfield_10016",
+    "name": "Story point estimate",
+    "untranslatedName": "Story point estimate",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10016]",
+      "Story point estimate"
+    ],
+    "schema": {
+      "type": "number",
+      "custom": "com.pyxis.greenhopper.jira:jsw-story-points",
+      "customId": 10016
+    }
+  },
+  {
+    "id": "customfield_10138",
+    "key": "customfield_10138",
+    "name": "Satisfaction",
+    "untranslatedName": "Satisfaction",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10138]",
+      "Satisfaction"
+    ],
+    "schema": {
+      "type": "sd-feedback",
+      "custom": "com.atlassian.servicedesk:sd-request-feedback",
+      "customId": 10138
+    }
+  },
+  {
+    "id": "customfield_10259",
+    "key": "customfield_10259",
+    "name": "Mitgliedsnummer-Basis",
+    "untranslatedName": "Mitgliedsnummer-Basis",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Mitgliedsnummer-Basis[Short text]",
+      "cf[10259]",
+      "Mitgliedsnummer-Basis"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10259
+    }
+  },
+  {
+    "id": "customfield_10017",
+    "key": "customfield_10017",
+    "name": "Vorgangsfarbe",
+    "untranslatedName": "Issue color",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10017]",
+      "Issue color"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.pyxis.greenhopper.jira:jsw-issue-color",
+      "customId": 10017
+    }
+  },
+  {
+    "id": "customfield_10018",
+    "key": "customfield_10018",
+    "name": "Parent Link",
+    "untranslatedName": "Parent Link",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Parent Link",
+      "cf[10018]"
+    ],
+    "schema": {
+      "type": "any",
+      "custom": "com.atlassian.jpo:jpo-custom-field-parent",
+      "customId": 10018
+    }
+  },
+  {
+    "id": "customfield_10139",
+    "key": "customfield_10139",
+    "name": "Satisfaction date",
+    "untranslatedName": "Satisfaction date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Satisfaction date",
+      "cf[10139]"
+    ],
+    "schema": {
+      "type": "datetime",
+      "custom": "com.atlassian.servicedesk:sd-request-feedback-date",
+      "customId": 10139
+    }
+  },
+  {
+    "id": "customfield_10019",
+    "key": "customfield_10019",
+    "name": "Rang",
+    "untranslatedName": "Rank",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10019]",
+      "Rank"
+    ],
+    "schema": {
+      "type": "any",
+      "custom": "com.pyxis.greenhopper.jira:gh-lexo-rank",
+      "customId": 10019
+    }
+  },
+  {
+    "id": "updated",
+    "key": "updated",
+    "name": "Aktualisiert",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "updated",
+      "updatedDate"
+    ],
+    "schema": {
+      "type": "datetime",
+      "system": "updated"
+    }
+  },
+  {
+    "id": "timeoriginalestimate",
+    "key": "timeoriginalestimate",
+    "name": "Ursprüngliche Schätzung",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [
+      "originalEstimate",
+      "timeoriginalestimate"
+    ],
+    "schema": {
+      "type": "number",
+      "system": "timeoriginalestimate"
+    }
+  },
+  {
+    "id": "customfield_10370",
+    "key": "customfield_10370",
+    "name": "Bemerkung",
+    "untranslatedName": "Bemerkung",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Bemerkung[Paragraph]",
+      "Bemerkung",
+      "cf[10370]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10370
+    }
+  },
+  {
+    "id": "customfield_10250",
+    "key": "customfield_10250",
+    "name": "Feedback gewünscht",
+    "untranslatedName": "Feedback gewünscht",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10250]",
+      "Feedback gewünscht",
+      "Feedback gewünscht[Radio Buttons]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10250
+    }
+  },
+  {
+    "id": "customfield_10371",
+    "key": "customfield_10371",
+    "name": "Partnertyp",
+    "untranslatedName": "Partnertyp",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10371]",
+      "Partnertyp[Dropdown]",
+      "Partnertyp"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10371
+    }
+  },
+  {
+    "id": "description",
+    "key": "description",
+    "name": "Beschreibung",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "description"
+    ],
+    "schema": {
+      "type": "string",
+      "system": "description"
+    }
+  },
+  {
+    "id": "customfield_10251",
+    "key": "customfield_10251",
+    "name": "RechnungNummerIntern",
+    "untranslatedName": "RechnungNummerIntern",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "RechnungNummerIntern",
+      "cf[10251]",
+      "RechnungNummerIntern[Number]"
+    ],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 10251
+    }
+  },
+  {
+    "id": "customfield_10372",
+    "key": "customfield_10372",
+    "name": "Fachthemen",
+    "untranslatedName": "Fachthemen",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Fachthemen[Checkboxes]",
+      "cf[10372]",
+      "Fachthemen"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 10372
+    }
+  },
+  {
+    "id": "customfield_10010",
+    "key": "customfield_10010",
+    "name": "Request Type",
+    "untranslatedName": "Request Type",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Request Type",
+      "cf[10010]"
+    ],
+    "schema": {
+      "type": "sd-customerrequesttype",
+      "custom": "com.atlassian.servicedesk:vp-origin",
+      "customId": 10010
+    }
+  },
+  {
+    "id": "customfield_10252",
+    "key": "customfield_10252",
+    "name": "Leistung",
+    "untranslatedName": "Leistung",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Leistung[Paragraph]",
+      "cf[10252]",
+      "Leistung"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10252
+    }
+  },
+  {
+    "id": "customfield_10373",
+    "key": "customfield_10373",
+    "name": "Stornodatum",
+    "untranslatedName": "Stornodatum",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Stornodatum[Date]",
+      "cf[10373]",
+      "Stornodatum"
+    ],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 10373
+    }
+  },
+  {
+    "id": "customfield_10011",
+    "key": "customfield_10011",
+    "name": "Epic-Name",
+    "untranslatedName": "Epic Name",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Epic Name",
+      "cf[10011]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.pyxis.greenhopper.jira:gh-epic-label",
+      "customId": 10011
+    }
+  },
+  {
+    "id": "customfield_10253",
+    "key": "customfield_10253",
+    "name": "Rechnung gesendet",
+    "untranslatedName": "Rechnung gesendet",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Rechnung gesendet[Radio Buttons]",
+      "Rechnung gesendet",
+      "cf[10253]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10253
+    }
+  },
+  {
+    "id": "customfield_10374",
+    "key": "customfield_10374",
+    "name": "K.Rechnung-Land",
+    "untranslatedName": "K.Rechnung-Land",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "K.Rechnung-Land[Dropdown]",
+      "K.Rechnung-Land",
+      "cf[10374]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10374
+    }
+  },
+  {
+    "id": "customfield_10012",
+    "key": "customfield_10012",
+    "name": "Epic-Status",
+    "untranslatedName": "Epic Status",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Epic Status",
+      "cf[10012]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.pyxis.greenhopper.jira:gh-epic-status",
+      "customId": 10012
+    }
+  },
+  {
+    "id": "customfield_10254",
+    "key": "customfield_10254",
+    "name": "V.Bank",
+    "untranslatedName": "V.Bank",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10254]",
+      "V.Bank",
+      "V.Bank[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10254
+    }
+  },
+  {
+    "id": "customfield_10375",
+    "key": "customfield_10375",
+    "name": "K.Rechnung-Nachname",
+    "untranslatedName": "K.Rechnung-Nachname",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10375]",
+      "K.Rechnung-Nachname[Short text]",
+      "K.Rechnung-Nachname"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10375
+    }
+  },
+  {
+    "id": "customfield_10013",
+    "key": "customfield_10013",
+    "name": "Epic Color",
+    "untranslatedName": "Epic Color",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10013]",
+      "Epic Color"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.pyxis.greenhopper.jira:gh-epic-color",
+      "customId": 10013
+    }
+  },
+  {
+    "id": "customfield_10255",
+    "key": "customfield_10255",
+    "name": "Betrag 1",
+    "untranslatedName": "Betrag 1",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Betrag 1[Number]",
+      "cf[10255]",
+      "Betrag 1"
+    ],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 10255
+    }
+  },
+  {
+    "id": "customfield_10376",
+    "key": "customfield_10376",
+    "name": "Betrag 2",
+    "untranslatedName": "Betrag 2",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Betrag 2",
+      "cf[10376]",
+      "Betrag 2[Number]"
+    ],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 10376
+    }
+  },
+  {
+    "id": "customfield_10014",
+    "key": "customfield_10014",
+    "name": "Epic-Verknüpfung",
+    "untranslatedName": "Epic Link",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10014]",
+      "Epic Link"
+    ],
+    "schema": {
+      "type": "any",
+      "custom": "com.pyxis.greenhopper.jira:gh-epic-link",
+      "customId": 10014
+    }
+  },
+  {
+    "id": "customfield_10256",
+    "key": "customfield_10256",
+    "name": "Auftragsentwurf",
+    "untranslatedName": "Auftragsentwurf",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Auftragsentwurf[Dropdown]",
+      "cf[10256]",
+      "Auftragsentwurf"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10256
+    }
+  },
+  {
+    "id": "customfield_10377",
+    "key": "customfield_10377",
+    "name": "Rechnungsnummer",
+    "untranslatedName": "Rechnungsnummer",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Rechnungsnummer",
+      "Rechnungsnummer[Short text]",
+      "cf[10377]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10377
+    }
+  },
+  {
+    "id": "timetracking",
+    "key": "timetracking",
+    "name": "Zeiterfassung",
+    "custom": false,
+    "orderable": true,
+    "navigable": false,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "timetracking",
+      "system": "timetracking"
+    }
+  },
+  {
+    "id": "customfield_10136",
+    "key": "customfield_10136",
+    "name": "Arbeitskategorie",
+    "untranslatedName": "Work category",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Work category",
+      "cf[10136]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugins.work-category-field:work-category-field-cftype",
+      "customId": 10136
+    }
+  },
+  {
+    "id": "customfield_10257",
+    "key": "customfield_10257",
+    "name": "V.Strasse",
+    "untranslatedName": "V.Strasse",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "V.Strasse",
+      "V.Strasse[Short text]",
+      "cf[10257]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10257
+    }
+  },
+  {
+    "id": "customfield_10378",
+    "key": "customfield_10378",
+    "name": "Rechnungsdatum",
+    "untranslatedName": "Rechnungsdatum",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Rechnungsdatum[Date]",
+      "Rechnungsdatum",
+      "cf[10378]"
+    ],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 10378
+    }
+  },
+  {
+    "id": "customfield_10015",
+    "key": "customfield_10015",
+    "name": "Startdatum",
+    "untranslatedName": "Start date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10015]",
+      "Start date",
+      "Start date[Date]"
+    ],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 10015
+    }
+  },
+  {
+    "id": "customfield_10005",
+    "key": "customfield_10005",
+    "name": "Change type",
+    "untranslatedName": "Change type",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Change type[Dropdown]",
+      "cf[10005]",
+      "Change type"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10005
+    }
+  },
+  {
+    "id": "customfield_10247",
+    "key": "customfield_10247",
+    "name": "Kontodaten",
+    "untranslatedName": "Kontodaten",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10247]",
+      "Kontodaten[Checkboxes]",
+      "Kontodaten"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 10247
+    }
+  },
+  {
+    "id": "customfield_10368",
+    "key": "customfield_10368",
+    "name": "P.Strasse",
+    "untranslatedName": "P.Strasse",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10368]",
+      "P.Strasse[Short text]",
+      "P.Strasse"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10368
+    }
+  },
+  {
+    "id": "customfield_10006",
+    "key": "customfield_10006",
+    "name": "Change risk",
+    "untranslatedName": "Change risk",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10006]",
+      "Change risk",
+      "Change risk[Dropdown]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10006
+    }
+  },
+  {
+    "id": "customfield_10248",
+    "key": "customfield_10248",
+    "name": "Auftrag mail comment 2",
+    "untranslatedName": "Auftrag mail comment 2",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10248]",
+      "Auftrag mail comment 2[Paragraph]",
+      "Auftrag mail comment 2"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10248
+    }
+  },
+  {
+    "id": "customfield_10369",
+    "key": "customfield_10369",
+    "name": "P.PLZ",
+    "untranslatedName": "P.PLZ",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "P.PLZ[Short text]",
+      "cf[10369]",
+      "P.PLZ"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10369
+    }
+  },
+  {
+    "id": "customfield_10007",
+    "key": "customfield_10007",
+    "name": "Change reason",
+    "untranslatedName": "Change reason",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Change reason",
+      "Change reason[Dropdown]",
+      "cf[10007]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10007
+    }
+  },
+  {
+    "id": "customfield_10249",
+    "key": "customfield_10249",
+    "name": "Steuersatz in Prozent",
+    "untranslatedName": "Steuersatz in Prozent",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Steuersatz in Prozent",
+      "Steuersatz in Prozent[Dropdown]",
+      "cf[10249]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10249
+    }
+  },
+  {
+    "id": "customfield_10008",
+    "key": "customfield_10008",
+    "name": "Actual start",
+    "untranslatedName": "Actual start",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Actual start[Time stamp]",
+      "cf[10008]",
+      "Actual start"
+    ],
+    "schema": {
+      "type": "datetime",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datetime",
+      "customId": 10008
+    }
+  },
+  {
+    "id": "customfield_10009",
+    "key": "customfield_10009",
+    "name": "Actual end",
+    "untranslatedName": "Actual end",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Actual end[Time stamp]",
+      "cf[10009]",
+      "Actual end"
+    ],
+    "schema": {
+      "type": "datetime",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datetime",
+      "customId": 10009
+    }
+  },
+  {
+    "id": "summary",
+    "key": "summary",
+    "name": "Zusammenfassung",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "summary"
+    ],
+    "schema": {
+      "type": "string",
+      "system": "summary"
+    }
+  },
+  {
+    "id": "customfield_10360",
+    "key": "customfield_10360",
+    "name": "Endedatum",
+    "untranslatedName": "Endedatum",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10360]",
+      "Endedatum[Date]",
+      "Endedatum"
+    ],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 10360
+    }
+  },
+  {
+    "id": "customfield_10240",
+    "key": "customfield_10240",
+    "name": "Weiterempfehlung",
+    "untranslatedName": "Weiterempfehlung",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Weiterempfehlung[Radio Buttons]",
+      "Weiterempfehlung",
+      "cf[10240]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10240
+    }
+  },
+  {
+    "id": "customfield_10361",
+    "key": "customfield_10361",
+    "name": "P.Ort",
+    "untranslatedName": "P.Ort",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10361]",
+      "P.Ort",
+      "P.Ort[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10361
+    }
+  },
+  {
+    "id": "customfield_10241",
+    "key": "customfield_10241",
+    "name": "Datum Feedback ",
+    "untranslatedName": "Datum Feedback ",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Datum Feedback [Date]",
+      "cf[10241]",
+      "Datum Feedback "
+    ],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 10241
+    }
+  },
+  {
+    "id": "customfield_10362",
+    "key": "customfield_10362",
+    "name": "Bearbeiter (Partner)",
+    "untranslatedName": "Bearbeiter (Partner)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Bearbeiter (Partner)[User Picker (single user)]",
+      "cf[10362]",
+      "Bearbeiter (Partner)"
+    ],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 10362
+    }
+  },
+  {
+    "id": "customfield_10242",
+    "key": "customfield_10242",
+    "name": "Kontakt nicht möglich",
+    "untranslatedName": "Kontakt nicht möglich",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Kontakt nicht möglich[Checkboxes]",
+      "Kontakt nicht möglich",
+      "cf[10242]"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 10242
+    }
+  },
+  {
+    "id": "customfield_10363",
+    "key": "customfield_10363",
+    "name": "P.Telefon",
+    "untranslatedName": "P.Telefon",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "P.Telefon",
+      "P.Telefon[Short text]",
+      "cf[10363]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10363
+    }
+  },
+  {
+    "id": "customfield_10000",
+    "key": "customfield_10000",
+    "name": "development",
+    "untranslatedName": "development",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10000]",
+      "development"
+    ],
+    "schema": {
+      "type": "any",
+      "custom": "com.atlassian.jira.plugins.jira-development-integration-plugin:devsummarycf",
+      "customId": 10000
+    }
+  },
+  {
+    "id": "customfield_10243",
+    "key": "customfield_10243",
+    "name": "Kommentare FB",
+    "untranslatedName": "Kommentare FB",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10243]",
+      "Kommentare FB",
+      "Kommentare FB[Paragraph]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10243
+    }
+  },
+  {
+    "id": "customfield_10364",
+    "key": "customfield_10364",
+    "name": "P.Fax",
+    "untranslatedName": "P.Fax",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10364]",
+      "P.Fax[Short text]",
+      "P.Fax"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10364
+    }
+  },
+  {
+    "id": "customfield_10001",
+    "key": "customfield_10001",
+    "name": "Team",
+    "untranslatedName": "Team",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Team[Team]",
+      "cf[10001]",
+      "Team"
+    ],
+    "schema": {
+      "type": "team",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:atlassian-team",
+      "customId": 10001,
+      "configuration": {
+        "com.atlassian.jira.plugin.system.customfieldtypes:atlassian-team": true
+      }
+    }
+  },
+  {
+    "id": "customfield_10365",
+    "key": "customfield_10365",
+    "name": "Partner",
+    "untranslatedName": "Partner",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10365]",
+      "Partner",
+      "Partner[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10365
+    }
+  },
+  {
+    "id": "customfield_10002",
+    "key": "customfield_10002",
+    "name": "Organizations",
+    "untranslatedName": "Organizations",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10002]",
+      "Organizations"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "sd-customerorganization",
+      "custom": "com.atlassian.servicedesk:sd-customer-organizations",
+      "customId": 10002
+    }
+  },
+  {
+    "id": "customfield_10244",
+    "key": "customfield_10244",
+    "name": "Zus. Bearbeiter",
+    "untranslatedName": "Zus. Bearbeiter",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Zus. Bearbeiter",
+      "cf[10244]",
+      "Zus. Bearbeiter[User Picker (multiple users)]"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker",
+      "customId": 10244
+    }
+  },
+  {
+    "id": "customfield_10366",
+    "key": "customfield_10366",
+    "name": "P.E-Mail",
+    "untranslatedName": "P.E-Mail",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "P.E-Mail",
+      "P.E-Mail[Short text]",
+      "cf[10366]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10366
+    }
+  },
+  {
+    "id": "customfield_10003",
+    "key": "customfield_10003",
+    "name": "Approvers",
+    "untranslatedName": "Approvers",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Approvers[User Picker (multiple users)]",
+      "cf[10003]",
+      "Approvers"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker",
+      "customId": 10003
+    }
+  },
+  {
+    "id": "customfield_10245",
+    "key": "customfield_10245",
+    "name": "Feedback-Status",
+    "untranslatedName": "Feedback-Status",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Feedback-Status[Checkboxes]",
+      "cf[10245]",
+      "Feedback-Status"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 10245
+    }
+  },
+  {
+    "id": "customfield_10367",
+    "key": "customfield_10367",
+    "name": "P.Telefon-Mobil",
+    "untranslatedName": "P.Telefon-Mobil",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "P.Telefon-Mobil[Short text]",
+      "cf[10367]",
+      "P.Telefon-Mobil"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10367
+    }
+  },
+  {
+    "id": "customfield_10004",
+    "key": "customfield_10004",
+    "name": "Impact",
+    "untranslatedName": "Impact",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Impact",
+      "cf[10004]",
+      "Impact[Dropdown]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10004
+    }
+  },
+  {
+    "id": "customfield_10246",
+    "key": "customfield_10246",
+    "name": "Abschlussbericht-Status",
+    "untranslatedName": "Abschlussbericht-Status",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Abschlussbericht-Status[Checkboxes]",
+      "Abschlussbericht-Status",
+      "cf[10246]"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 10246
+    }
+  },
+  {
+    "id": "customfield_10236",
+    "key": "customfield_10236",
+    "name": "Auftragsbeginn",
+    "untranslatedName": "Auftragsbeginn",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10236]",
+      "Auftragsbeginn[Date]",
+      "Auftragsbeginn"
+    ],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 10236
+    }
+  },
+  {
+    "id": "customfield_10357",
+    "key": "customfield_10357",
+    "name": "Bitte erläutern Sie uns kurz Ihr Anliegen",
+    "untranslatedName": "Bitte erläutern Sie uns kurz Ihr Anliegen",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10357]",
+      "Bitte erläutern Sie uns kurz Ihr Anliegen[Paragraph]",
+      "Bitte erläutern Sie uns kurz Ihr Anliegen"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10357
+    }
+  },
+  {
+    "id": "customfield_10237",
+    "key": "customfield_10237",
+    "name": "Bearbeiter (Mitglieder)",
+    "untranslatedName": "Bearbeiter (Mitglieder)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Bearbeiter (Mitglieder)",
+      "cf[10237]",
+      "Bearbeiter (Mitglieder)[User Picker (single user)]"
+    ],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 10237
+    }
+  },
+  {
+    "id": "customfield_10358",
+    "key": "customfield_10358",
+    "name": "Partnerstatus",
+    "untranslatedName": "Partnerstatus",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10358]",
+      "Partnerstatus",
+      "Partnerstatus[Dropdown]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10358
+    }
+  },
+  {
+    "id": "customfield_10238",
+    "key": "customfield_10238",
+    "name": "Auftrag mail comment",
+    "untranslatedName": "Auftrag mail comment",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Auftrag mail comment[Paragraph]",
+      "Auftrag mail comment",
+      "cf[10238]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10238
+    }
+  },
+  {
+    "id": "customfield_10359",
+    "key": "customfield_10359",
+    "name": "Beginndatum",
+    "untranslatedName": "Beginndatum",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Beginndatum[Date]",
+      "cf[10359]",
+      "Beginndatum"
+    ],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 10359
+    }
+  },
+  {
+    "id": "environment",
+    "key": "environment",
+    "name": "Umgebung",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "environment"
+    ],
+    "schema": {
+      "type": "string",
+      "system": "environment"
+    }
+  },
+  {
+    "id": "customfield_10239",
+    "key": "customfield_10239",
+    "name": "Auf richtigem Weg",
+    "untranslatedName": "Auf richtigem Weg",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Auf richtigem Weg[Radio Buttons]",
+      "Auf richtigem Weg",
+      "cf[10239]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10239
+    }
+  },
+  {
+    "id": "duedate",
+    "key": "duedate",
+    "name": "Fälligkeitsdatum",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "due",
+      "duedate"
+    ],
+    "schema": {
+      "type": "date",
+      "system": "duedate"
+    }
+  },
+  {
+    "id": "comment",
+    "key": "comment",
+    "name": "Kommentieren",
+    "custom": false,
+    "orderable": true,
+    "navigable": false,
+    "searchable": true,
+    "clauseNames": [
+      "comment"
+    ],
+    "schema": {
+      "type": "comments-page",
+      "system": "comment"
+    }
+  },
+  {
+    "id": "statuscategorychangedate",
+    "key": "statuscategorychangedate",
+    "name": "Statuskategorie geändert",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "statusCategoryChangedDate"
+    ],
+    "schema": {
+      "type": "datetime",
+      "system": "statuscategorychangedate"
+    }
+  },
+  {
+    "id": "customfield_10350",
+    "key": "customfield_10350",
+    "name": "Kon. Straße, Hausnummer",
+    "untranslatedName": "Kon. Straße, Hausnummer",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10350]",
+      "Kon. Straße, Hausnummer[Short text]",
+      "Kon. Straße, Hausnummer"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10350
+    }
+  },
+  {
+    "id": "customfield_10230",
+    "key": "customfield_10230",
+    "name": "V.StNr",
+    "untranslatedName": "V.StNr",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "V.StNr[Short text]",
+      "V.StNr",
+      "cf[10230]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10230
+    }
+  },
+  {
+    "id": "customfield_10351",
+    "key": "customfield_10351",
+    "name": "Kon. Nachname",
+    "untranslatedName": "Kon. Nachname",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Kon. Nachname",
+      "Kon. Nachname[Short text]",
+      "cf[10351]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10351
+    }
+  },
+  {
+    "id": "fixVersions",
+    "key": "fixVersions",
+    "name": "Lösungsversionen",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "fixVersion"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "version",
+      "system": "fixVersions"
+    }
+  },
+  {
+    "id": "customfield_10231",
+    "key": "customfield_10231",
+    "name": "V.Name Vorstand",
+    "untranslatedName": "V.Name Vorstand",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "V.Name Vorstand",
+      "V.Name Vorstand[Short text]",
+      "cf[10231]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10231
+    }
+  },
+  {
+    "id": "customfield_10352",
+    "key": "customfield_10352",
+    "name": "Kon. Postleitzahl",
+    "untranslatedName": "Kon. Postleitzahl",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Kon. Postleitzahl",
+      "Kon. Postleitzahl[Short text]",
+      "cf[10352]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10352
+    }
+  },
+  {
+    "id": "customfield_10232",
+    "key": "customfield_10232",
+    "name": "Erläut. zu Hilfreich",
+    "untranslatedName": "Erläut. zu Hilfreich",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10232]",
+      "Erläut. zu Hilfreich",
+      "Erläut. zu Hilfreich[Paragraph]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10232
+    }
+  },
+  {
+    "id": "customfield_10353",
+    "key": "customfield_10353",
+    "name": "Kon. Vorname",
+    "untranslatedName": "Kon. Vorname",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10353]",
+      "Kon. Vorname",
+      "Kon. Vorname[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10353
+    }
+  },
+  {
+    "id": "customfield_10233",
+    "key": "customfield_10233",
+    "name": "Idee zur Weiterentwicklung",
+    "untranslatedName": "Idee zur Weiterentwicklung",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10233]",
+      "Idee zur Weiterentwicklung",
+      "Idee zur Weiterentwicklung[Paragraph]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10233
+    }
+  },
+  {
+    "id": "customfield_10354",
+    "key": "customfield_10354",
+    "name": "Kon. E-Mail",
+    "untranslatedName": "Kon. E-Mail",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Kon. E-Mail[Short text]",
+      "cf[10354]",
+      "Kon. E-Mail"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10354
+    }
+  },
+  {
+    "id": "customfield_10234",
+    "key": "customfield_10234",
+    "name": "Weitere Kommentare Klient",
+    "untranslatedName": "Weitere Kommentare Klient",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Weitere Kommentare Klient[Paragraph]",
+      "cf[10234]",
+      "Weitere Kommentare Klient"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10234
+    }
+  },
+  {
+    "id": "customfield_10355",
+    "key": "customfield_10355",
+    "name": "Kon. Ort",
+    "untranslatedName": "Kon. Ort",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Kon. Ort[Short text]",
+      "Kon. Ort",
+      "cf[10355]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10355
+    }
+  },
+  {
+    "id": "customfield_10235",
+    "key": "customfield_10235",
+    "name": "RL relevant",
+    "untranslatedName": "RL relevant",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "RL relevant[Radio Buttons]",
+      "RL relevant",
+      "cf[10235]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10235
+    }
+  },
+  {
+    "id": "customfield_10356",
+    "key": "customfield_10356",
+    "name": "Kon. Website",
+    "untranslatedName": "Kon. Website",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Kon. Website",
+      "Kon. Website[Short text]",
+      "cf[10356]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10356
+    }
+  },
+  {
+    "id": "customfield_10225",
+    "key": "customfield_10225",
+    "name": "E-Mail_RL_New_Kontakt",
+    "untranslatedName": "E-Mail_RL_New_Kontakt",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10225]",
+      "E-Mail_RL_New_Kontakt",
+      "E-Mail_RL_New_Kontakt[Dropdown]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10225
+    }
+  },
+  {
+    "id": "customfield_10346",
+    "key": "customfield_10346",
+    "name": "Ansprechpartner",
+    "untranslatedName": "Ansprechpartner",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Ansprechpartner[Short text]",
+      "cf[10346]",
+      "Ansprechpartner"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10346
+    }
+  },
+  {
+    "id": "customfield_10226",
+    "key": "customfield_10226",
+    "name": "Auftragsbestätigung-Status",
+    "untranslatedName": "Auftragsbestätigung-Status",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Auftragsbestätigung-Status[Dropdown]",
+      "cf[10226]",
+      "Auftragsbestätigung-Status"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10226
+    }
+  },
+  {
+    "id": "customfield_10347",
+    "key": "customfield_10347",
+    "name": "Kon. Telefon",
+    "untranslatedName": "Kon. Telefon",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Kon. Telefon",
+      "cf[10347]",
+      "Kon. Telefon[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10347
+    }
+  },
+  {
+    "id": "customfield_10348",
+    "key": "customfield_10348",
+    "name": "Kon. Firmenname",
+    "untranslatedName": "Kon. Firmenname",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Kon. Firmenname[Short text]",
+      "cf[10348]",
+      "Kon. Firmenname"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10348
+    }
+  },
+  {
+    "id": "customfield_10227",
+    "key": "customfield_10227",
+    "name": "V.Tel",
+    "untranslatedName": "V.Tel",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "V.Tel[Short text]",
+      "V.Tel",
+      "cf[10227]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10227
+    }
+  },
+  {
+    "id": "customfield_10349",
+    "key": "customfield_10349",
+    "name": "Kon. Telefax",
+    "untranslatedName": "Kon. Telefax",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Kon. Telefax[Short text]",
+      "Kon. Telefax",
+      "cf[10349]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10349
+    }
+  },
+  {
+    "id": "customfield_10228",
+    "key": "customfield_10228",
+    "name": "V.IBAN",
+    "untranslatedName": "V.IBAN",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "V.IBAN",
+      "V.IBAN[Short text]",
+      "cf[10228]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10228
+    }
+  },
+  {
+    "id": "customfield_10229",
+    "key": "customfield_10229",
+    "name": "V.Nr",
+    "untranslatedName": "V.Nr",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10229]",
+      "V.Nr[Short text]",
+      "V.Nr"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10229
+    }
+  },
+  {
+    "id": "customfield_10460",
+    "key": "customfield_10460",
+    "name": "RL.E-Mail privat",
+    "untranslatedName": "RL.E-Mail privat",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "RL.E-Mail privat[Short text]",
+      "cf[10460]",
+      "RL.E-Mail privat"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10460
+    }
+  },
+  {
+    "id": "customfield_10340",
+    "key": "customfield_10340",
+    "name": "Vereinsfunktion 9",
+    "untranslatedName": "Vereinsfunktion 9",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 9",
+      "Vereinsfunktion 9[Dropdown]",
+      "cf[10340]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10340
+    }
+  },
+  {
+    "id": "customfield_10461",
+    "key": "customfield_10461",
+    "name": "Hinweise zur Branche",
+    "untranslatedName": "Hinweise zur Branche",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10461]",
+      "Hinweise zur Branche[Paragraph]",
+      "Hinweise zur Branche"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10461
+    }
+  },
+  {
+    "id": "customfield_10220",
+    "key": "customfield_10220",
+    "name": "Storno mail comment 1",
+    "untranslatedName": "Storno mail comment 1",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Storno mail comment 1[Short text]",
+      "Storno mail comment 1",
+      "cf[10220]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10220
+    }
+  },
+  {
+    "id": "customfield_10341",
+    "key": "customfield_10341",
+    "name": "Vereinsfunktion 9 Von",
+    "untranslatedName": "Vereinsfunktion 9 Von",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 9 Von[Short text]",
+      "Vereinsfunktion 9 Von",
+      "cf[10341]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10341
+    }
+  },
+  {
+    "id": "customfield_10462",
+    "key": "customfield_10462",
+    "name": "Zusatzvereinbarung ",
+    "untranslatedName": "Zusatzvereinbarung ",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Zusatzvereinbarung [Paragraph]",
+      "cf[10462]",
+      "Zusatzvereinbarung "
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10462
+    }
+  },
+  {
+    "id": "customfield_10221",
+    "key": "customfield_10221",
+    "name": "V.JahresMaxKeyS",
+    "untranslatedName": "V.JahresMaxKeyS",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10221]",
+      "V.JahresMaxKeyS[Short text]",
+      "V.JahresMaxKeyS"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10221
+    }
+  },
+  {
+    "id": "customfield_10342",
+    "key": "customfield_10342",
+    "name": "Vereinsfunktion 10 Bis",
+    "untranslatedName": "Vereinsfunktion 10 Bis",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10342]",
+      "Vereinsfunktion 10 Bis",
+      "Vereinsfunktion 10 Bis[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10342
+    }
+  },
+  {
+    "id": "customfield_10463",
+    "key": "customfield_10463",
+    "name": "RegionF",
+    "untranslatedName": "RegionF",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "RegionF[Short text]",
+      "cf[10463]",
+      "RegionF"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10463
+    }
+  },
+  {
+    "id": "customfield_10222",
+    "key": "customfield_10222",
+    "name": "Lösung",
+    "untranslatedName": "Lösung",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Lösung[Paragraph]",
+      "cf[10222]",
+      "Lösung"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10222
+    }
+  },
+  {
+    "id": "customfield_10343",
+    "key": "customfield_10343",
+    "name": "Branchen Basiskompetenz",
+    "untranslatedName": "Branchen Basiskompetenz",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10343]",
+      "Branchen Basiskompetenz",
+      "Branchen Basiskompetenz[Checkboxes]"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 10343
+    }
+  },
+  {
+    "id": "customfield_10464",
+    "key": "customfield_10464",
+    "name": "Wünsche im Detail",
+    "untranslatedName": "Wünsche im Detail",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10464]",
+      "Wünsche im Detail",
+      "Wünsche im Detail[Paragraph]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10464
+    }
+  },
+  {
+    "id": "customfield_10223",
+    "key": "customfield_10223",
+    "name": "Auftragsbestätigung",
+    "untranslatedName": "Auftragsbestätigung",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Auftragsbestätigung[Short text]",
+      "cf[10223]",
+      "Auftragsbestätigung"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10223
+    }
+  },
+  {
+    "id": "customfield_10344",
+    "key": "customfield_10344",
+    "name": "RL.Strasse",
+    "untranslatedName": "RL.Strasse",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "RL.Strasse",
+      "cf[10344]",
+      "RL.Strasse[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10344
+    }
+  },
+  {
+    "id": "customfield_10224",
+    "key": "customfield_10224",
+    "name": "Intern",
+    "untranslatedName": "Intern",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Intern",
+      "Intern[Radio Buttons]",
+      "cf[10224]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10224
+    }
+  },
+  {
+    "id": "customfield_10345",
+    "key": "customfield_10345",
+    "name": "M.Nächstes-Jubiläum",
+    "untranslatedName": "M.Nächstes-Jubiläum",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "M.Nächstes-Jubiläum[Date]",
+      "cf[10345]",
+      "M.Nächstes-Jubiläum"
+    ],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 10345
+    }
+  },
+  {
+    "id": "customfield_10103",
+    "key": "customfield_10103",
+    "name": "Kategorie",
+    "untranslatedName": "Kategorie",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Kategorie[Category]",
+      "Kategorie",
+      "cf[10103]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:jwm-category",
+      "customId": 10103
+    }
+  },
+  {
+    "id": "customfield_10214",
+    "key": "customfield_10214",
+    "name": "Gesamtaufwand in Std.",
+    "untranslatedName": "Gesamtaufwand in Std.",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10214]",
+      "Gesamtaufwand in Std.[Number]",
+      "Gesamtaufwand in Std."
+    ],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 10214
+    }
+  },
+  {
+    "id": "customfield_10335",
+    "key": "customfield_10335",
+    "name": "Vereinsfunktion 3 Geändert am",
+    "untranslatedName": "Vereinsfunktion 3 Geändert am",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10335]",
+      "Vereinsfunktion 3 Geändert am[Short text]",
+      "Vereinsfunktion 3 Geändert am"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10335
+    }
+  },
+  {
+    "id": "customfield_10456",
+    "key": "customfield_10456",
+    "name": "Storno mail comment 2",
+    "untranslatedName": "Storno mail comment 2",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Storno mail comment 2[Paragraph]",
+      "cf[10456]",
+      "Storno mail comment 2"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10456
+    }
+  },
+  {
+    "id": "customfield_10215",
+    "key": "customfield_10215",
+    "name": "V.Ort",
+    "untranslatedName": "V.Ort",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "V.Ort[Short text]",
+      "cf[10215]",
+      "V.Ort"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10215
+    }
+  },
+  {
+    "id": "customfield_10336",
+    "key": "customfield_10336",
+    "name": "Vereinsfunktion 4",
+    "untranslatedName": "Vereinsfunktion 4",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 4[Dropdown]",
+      "cf[10336]",
+      "Vereinsfunktion 4"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10336
+    }
+  },
+  {
+    "id": "customfield_10457",
+    "key": "customfield_10457",
+    "name": "Automatic Empfangsbestatigung",
+    "untranslatedName": "Automatic Empfangsbestatigung",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Automatic Empfangsbestatigung",
+      "cf[10457]",
+      "Automatic Empfangsbestatigung[Radio Buttons]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10457
+    }
+  },
+  {
+    "id": "customfield_10216",
+    "key": "customfield_10216",
+    "name": "Kurze Zusammenfassung der geleisteten Beratung",
+    "untranslatedName": "Kurze Zusammenfassung der geleisteten Beratung",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Kurze Zusammenfassung der geleisteten Beratung",
+      "Kurze Zusammenfassung der geleisteten Beratung[Paragraph]",
+      "cf[10216]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10216
+    }
+  },
+  {
+    "id": "customfield_10337",
+    "key": "customfield_10337",
+    "name": "Vereinsfunktion 4 Geändert am",
+    "untranslatedName": "Vereinsfunktion 4 Geändert am",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 4 Geändert am[Short text]",
+      "cf[10337]",
+      "Vereinsfunktion 4 Geändert am"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10337
+    }
+  },
+  {
+    "id": "customfield_10458",
+    "key": "customfield_10458",
+    "name": "AS Berater",
+    "untranslatedName": "AS Berater",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10458]",
+      "AS Berater",
+      "AS Berater[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10458
+    }
+  },
+  {
+    "id": "customfield_10217",
+    "key": "customfield_10217",
+    "name": "V.Fax",
+    "untranslatedName": "V.Fax",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "V.Fax[Short text]",
+      "V.Fax",
+      "cf[10217]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10217
+    }
+  },
+  {
+    "id": "customfield_10338",
+    "key": "customfield_10338",
+    "name": "Vereinsfunktion 7",
+    "untranslatedName": "Vereinsfunktion 7",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 7[Dropdown]",
+      "Vereinsfunktion 7",
+      "cf[10338]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10338
+    }
+  },
+  {
+    "id": "customfield_10459",
+    "key": "customfield_10459",
+    "name": "Auftragsende",
+    "untranslatedName": "Auftragsende",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Auftragsende[Date]",
+      "cf[10459]",
+      "Auftragsende"
+    ],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 10459
+    }
+  },
+  {
+    "id": "timeestimate",
+    "key": "timeestimate",
+    "name": "Verbleibende Schätzung",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [
+      "remainingEstimate",
+      "timeestimate"
+    ],
+    "schema": {
+      "type": "number",
+      "system": "timeestimate"
+    }
+  },
+  {
+    "id": "customfield_10218",
+    "key": "customfield_10218",
+    "name": "Auftrag mail comment 1",
+    "untranslatedName": "Auftrag mail comment 1",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10218]",
+      "Auftrag mail comment 1",
+      "Auftrag mail comment 1[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10218
+    }
+  },
+  {
+    "id": "customfield_10339",
+    "key": "customfield_10339",
+    "name": "Vereinsfunktion 7 Geändert am",
+    "untranslatedName": "Vereinsfunktion 7 Geändert am",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10339]",
+      "Vereinsfunktion 7 Geändert am[Short text]",
+      "Vereinsfunktion 7 Geändert am"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10339
+    }
+  },
+  {
+    "id": "versions",
+    "key": "versions",
+    "name": "Betrifft Versionen",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "affectedVersion"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "version",
+      "system": "versions"
+    }
+  },
+  {
+    "id": "customfield_10219",
+    "key": "customfield_10219",
+    "name": "V.Mail",
+    "untranslatedName": "V.Mail",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "V.Mail[Short text]",
+      "cf[10219]",
+      "V.Mail"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10219
+    }
+  },
+  {
+    "id": "status",
+    "key": "status",
+    "name": "Status",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "status"
+    ],
+    "schema": {
+      "type": "status",
+      "system": "status"
+    }
+  },
+  {
+    "id": "issuekey",
+    "key": "issuekey",
+    "name": "Schlüssel",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [
+      "id",
+      "issue",
+      "issuekey",
+      "key",
+      "workItem",
+      "workItemKey"
+    ]
+  },
+  {
+    "id": "customfield_10450",
+    "key": "customfield_10450",
+    "name": "Rechnung comment field 2",
+    "untranslatedName": "Rechnung comment field 2",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Rechnung comment field 2[Paragraph]",
+      "cf[10450]",
+      "Rechnung comment field 2"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10450
+    }
+  },
+  {
+    "id": "customfield_10330",
+    "key": "customfield_10330",
+    "name": "M.Ort",
+    "untranslatedName": "M.Ort",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "M.Ort[Short text]",
+      "cf[10330]",
+      "M.Ort"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10330
+    }
+  },
+  {
+    "id": "customfield_10451",
+    "key": "customfield_10451",
+    "name": "Leistung 3",
+    "untranslatedName": "Leistung 3",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10451]",
+      "Leistung 3[Short text]",
+      "Leistung 3"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10451
+    }
+  },
+  {
+    "id": "customfield_10331",
+    "key": "customfield_10331",
+    "name": "Vereinsfunktion 1 Von",
+    "untranslatedName": "Vereinsfunktion 1 Von",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10331]",
+      "Vereinsfunktion 1 Von",
+      "Vereinsfunktion 1 Von[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10331
+    }
+  },
+  {
+    "id": "customfield_10452",
+    "key": "customfield_10452",
+    "name": "Leistung 6",
+    "untranslatedName": "Leistung 6",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Leistung 6",
+      "Leistung 6[Short text]",
+      "cf[10452]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10452
+    }
+  },
+  {
+    "id": "customfield_10210",
+    "key": "customfield_10210",
+    "name": "Bezahlstatus",
+    "untranslatedName": "Bezahlstatus",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10210]",
+      "Bezahlstatus",
+      "Bezahlstatus[Dropdown]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10210
+    }
+  },
+  {
+    "id": "customfield_10332",
+    "key": "customfield_10332",
+    "name": "Vereinsfunktion  2",
+    "untranslatedName": "Vereinsfunktion  2",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion  2[Dropdown]",
+      "cf[10332]",
+      "Vereinsfunktion  2"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10332
+    }
+  },
+  {
+    "id": "customfield_10453",
+    "key": "customfield_10453",
+    "name": "Leistung 1",
+    "untranslatedName": "Leistung 1",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Leistung 1[Short text]",
+      "Leistung 1",
+      "cf[10453]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10453
+    }
+  },
+  {
+    "id": "customfield_10211",
+    "key": "customfield_10211",
+    "name": "Eingangsart",
+    "untranslatedName": "Eingangsart",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Eingangsart[Dropdown]",
+      "cf[10211]",
+      "Eingangsart"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10211
+    }
+  },
+  {
+    "id": "customfield_10454",
+    "key": "customfield_10454",
+    "name": "Leistung 4",
+    "untranslatedName": "Leistung 4",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Leistung 4[Short text]",
+      "cf[10454]",
+      "Leistung 4"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10454
+    }
+  },
+  {
+    "id": "customfield_10212",
+    "key": "customfield_10212",
+    "name": "E-Mail_RL_New_Auftrag",
+    "untranslatedName": "E-Mail_RL_New_Auftrag",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "E-Mail_RL_New_Auftrag[Dropdown]",
+      "cf[10212]",
+      "E-Mail_RL_New_Auftrag"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10212
+    }
+  },
+  {
+    "id": "customfield_10333",
+    "key": "customfield_10333",
+    "name": "Vereinsfunktion 2 Von",
+    "untranslatedName": "Vereinsfunktion 2 Von",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 2 Von[Short text]",
+      "cf[10333]",
+      "Vereinsfunktion 2 Von"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10333
+    }
+  },
+  {
+    "id": "customfield_10455",
+    "key": "customfield_10455",
+    "name": "Leistung 5",
+    "untranslatedName": "Leistung 5",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10455]",
+      "Leistung 5[Short text]",
+      "Leistung 5"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10455
+    }
+  },
+  {
+    "id": "customfield_10213",
+    "key": "customfield_10213",
+    "name": "Rechnung comment field 3",
+    "untranslatedName": "Rechnung comment field 3",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Rechnung comment field 3",
+      "Rechnung comment field 3[Paragraph]",
+      "cf[10213]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10213
+    }
+  },
+  {
+    "id": "customfield_10334",
+    "key": "customfield_10334",
+    "name": "Vereinsfunktion 3 Bis",
+    "untranslatedName": "Vereinsfunktion 3 Bis",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 3 Bis",
+      "Vereinsfunktion 3 Bis[Short text]",
+      "cf[10334]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10334
+    }
+  },
+  {
+    "id": "customfield_10203",
+    "key": "customfield_10203",
+    "name": "Weitere Unterstützung",
+    "untranslatedName": "Weitere Unterstützung",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10203]",
+      "Weitere Unterstützung",
+      "Weitere Unterstützung[Radio Buttons]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10203
+    }
+  },
+  {
+    "id": "customfield_10324",
+    "key": "customfield_10324",
+    "name": "M.Alter",
+    "untranslatedName": "M.Alter",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "M.Alter[Short text]",
+      "cf[10324]",
+      "M.Alter"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10324
+    }
+  },
+  {
+    "id": "customfield_10445",
+    "key": "customfield_10445",
+    "name": "Stellvertreter 3",
+    "untranslatedName": "Stellvertreter 3",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Stellvertreter 3[Short text]",
+      "Stellvertreter 3",
+      "cf[10445]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10445
+    }
+  },
+  {
+    "id": "customfield_10204",
+    "key": "customfield_10204",
+    "name": "Erläut. zu Weitere Unterstützung",
+    "untranslatedName": "Erläut. zu Weitere Unterstützung",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Erläut. zu Weitere Unterstützung[Paragraph]",
+      "cf[10204]",
+      "Erläut. zu Weitere Unterstützung"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10204
+    }
+  },
+  {
+    "id": "customfield_10325",
+    "key": "customfield_10325",
+    "name": "Eintrittsdatum",
+    "untranslatedName": "Eintrittsdatum",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Eintrittsdatum[Date]",
+      "cf[10325]",
+      "Eintrittsdatum"
+    ],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 10325
+    }
+  },
+  {
+    "id": "customfield_10446",
+    "key": "customfield_10446",
+    "name": "Finanzbeauftragter-E-Mail",
+    "untranslatedName": "Finanzbeauftragter-E-Mail",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Finanzbeauftragter-E-Mail[Short text]",
+      "cf[10446]",
+      "Finanzbeauftragter-E-Mail"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10446
+    }
+  },
+  {
+    "id": "customfield_10205",
+    "key": "customfield_10205",
+    "name": "Mitgliedsstatus",
+    "untranslatedName": "Mitgliedsstatus",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Mitgliedsstatus[Dropdown]",
+      "cf[10205]",
+      "Mitgliedsstatus"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10205
+    }
+  },
+  {
+    "id": "customfield_10326",
+    "key": "customfield_10326",
+    "name": "M.Fax",
+    "untranslatedName": "M.Fax",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "M.Fax[Short text]",
+      "cf[10326]",
+      "M.Fax"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10326
+    }
+  },
+  {
+    "id": "customfield_10447",
+    "key": "customfield_10447",
+    "name": "Feedbackbeauftragter",
+    "untranslatedName": "Feedbackbeauftragter",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Feedbackbeauftragter[Short text]",
+      "cf[10447]",
+      "Feedbackbeauftragter"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10447
+    }
+  },
+  {
+    "id": "customfield_10206",
+    "key": "customfield_10206",
+    "name": "Hilfreich",
+    "untranslatedName": "Hilfreich",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Hilfreich[Radio Buttons]",
+      "cf[10206]",
+      "Hilfreich"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10206
+    }
+  },
+  {
+    "id": "customfield_10327",
+    "key": "customfield_10327",
+    "name": "M.E-Mail AS",
+    "untranslatedName": "M.E-Mail AS",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "M.E-Mail AS[Short text]",
+      "M.E-Mail AS",
+      "cf[10327]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10327
+    }
+  },
+  {
+    "id": "customfield_10448",
+    "key": "customfield_10448",
+    "name": "Stellvertreter 1 (migrated)",
+    "untranslatedName": "Stellvertreter 1 (migrated)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10448]",
+      "Stellvertreter 1 (migrated)[User Picker (single user)]",
+      "Stellvertreter 1 (migrated)"
+    ],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 10448
+    }
+  },
+  {
+    "id": "aggregatetimeestimate",
+    "key": "aggregatetimeestimate",
+    "name": "Σ Verbleibende Schätzung",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [],
+    "schema": {
+      "type": "number",
+      "system": "aggregatetimeestimate"
+    }
+  },
+  {
+    "id": "customfield_10207",
+    "key": "customfield_10207",
+    "name": "AS-Referenz",
+    "untranslatedName": "AS-Referenz",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10207]",
+      "AS-Referenz",
+      "AS-Referenz[Radio Buttons]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10207
+    }
+  },
+  {
+    "id": "customfield_10328",
+    "key": "customfield_10328",
+    "name": "M.E-Mail privat",
+    "untranslatedName": "M.E-Mail privat",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "M.E-Mail privat[Short text]",
+      "cf[10328]",
+      "M.E-Mail privat"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10328
+    }
+  },
+  {
+    "id": "customfield_10449",
+    "key": "customfield_10449",
+    "name": "Leistung 2",
+    "untranslatedName": "Leistung 2",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Leistung 2",
+      "Leistung 2[Short text]",
+      "cf[10449]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10449
+    }
+  },
+  {
+    "id": "customfield_10208",
+    "key": "customfield_10208",
+    "name": "Auftragsstatus",
+    "untranslatedName": "Auftragsstatus",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10208]",
+      "Auftragsstatus[Dropdown]",
+      "Auftragsstatus"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10208
+    }
+  },
+  {
+    "id": "customfield_10329",
+    "key": "customfield_10329",
+    "name": "Webseite",
+    "untranslatedName": "Webseite",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10329]",
+      "Webseite[Short text]",
+      "Webseite"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10329
+    }
+  },
+  {
+    "id": "customfield_10209",
+    "key": "customfield_10209",
+    "name": "Rechnung comment field 1",
+    "untranslatedName": "Rechnung comment field 1",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Rechnung comment field 1[Paragraph]",
+      "cf[10209]",
+      "Rechnung comment field 1"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10209
+    }
+  },
+  {
+    "id": "creator",
+    "key": "creator",
+    "name": "Ersteller",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "creator"
+    ],
+    "schema": {
+      "type": "user",
+      "system": "creator"
+    }
+  },
+  {
+    "id": "aggregateprogress",
+    "key": "aggregateprogress",
+    "name": "Σ Fortschritt",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [],
+    "schema": {
+      "type": "progress",
+      "system": "aggregateprogress"
+    }
+  },
+  {
+    "id": "customfield_10440",
+    "key": "customfield_10440",
+    "name": "Zusätzliche E-Mail",
+    "untranslatedName": "Zusätzliche E-Mail",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Zusätzliche E-Mail[Short text]",
+      "cf[10440]",
+      "Zusätzliche E-Mail"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10440
+    }
+  },
+  {
+    "id": "customfield_10320",
+    "key": "customfield_10320",
+    "name": "Weitere Angaben zu Branchen",
+    "untranslatedName": "Weitere Angaben zu Branchen",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10320]",
+      "Weitere Angaben zu Branchen",
+      "Weitere Angaben zu Branchen[Paragraph]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10320
+    }
+  },
+  {
+    "id": "customfield_10441",
+    "key": "customfield_10441",
+    "name": "Stellvertreter 1",
+    "untranslatedName": "Stellvertreter 1",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Stellvertreter 1[Short text]",
+      "Stellvertreter 1",
+      "cf[10441]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10441
+    }
+  },
+  {
+    "id": "customfield_10200",
+    "key": "customfield_10200",
+    "name": "Auftragsnummer",
+    "untranslatedName": "Auftragsnummer",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10200]",
+      "Auftragsnummer",
+      "Auftragsnummer[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10200
+    }
+  },
+  {
+    "id": "customfield_10321",
+    "key": "customfield_10321",
+    "name": "M.Statusänderung",
+    "untranslatedName": "M.Statusänderung",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "M.Statusänderung",
+      "M.Statusänderung[Dropdown]",
+      "cf[10321]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10321
+    }
+  },
+  {
+    "id": "customfield_10442",
+    "key": "customfield_10442",
+    "name": "Stellvertreter 1-E-Mail",
+    "untranslatedName": "Stellvertreter 1-E-Mail",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10442]",
+      "Stellvertreter 1-E-Mail[Short text]",
+      "Stellvertreter 1-E-Mail"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10442
+    }
+  },
+  {
+    "id": "customfield_10563",
+    "key": "customfield_10563",
+    "name": "Agentensitzungen",
+    "untranslatedName": "Agentensitzungen",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10563]",
+      "Agentensitzungen"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "admin.customfield.type.agent.sessions.name",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:agent-sessions",
+      "customId": 10563
+    }
+  },
+  {
+    "id": "customfield_10201",
+    "key": "customfield_10201",
+    "name": "Erläut. zu Auf richtigem Weg",
+    "untranslatedName": "Erläut. zu Auf richtigem Weg",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10201]",
+      "Erläut. zu Auf richtigem Weg",
+      "Erläut. zu Auf richtigem Weg[Paragraph]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10201
+    }
+  },
+  {
+    "id": "customfield_10322",
+    "key": "customfield_10322",
+    "name": "M.Nummer",
+    "untranslatedName": "M.Nummer",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10322]",
+      "M.Nummer",
+      "M.Nummer[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10322
+    }
+  },
+  {
+    "id": "customfield_10443",
+    "key": "customfield_10443",
+    "name": "Stellvertreter 2",
+    "untranslatedName": "Stellvertreter 2",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10443]",
+      "Stellvertreter 2[Short text]",
+      "Stellvertreter 2"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10443
+    }
+  },
+  {
+    "id": "customfield_10202",
+    "key": "customfield_10202",
+    "name": "Region",
+    "untranslatedName": "Region",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Region[Dropdown]",
+      "Region",
+      "cf[10202]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10202
+    }
+  },
+  {
+    "id": "customfield_10323",
+    "key": "customfield_10323",
+    "name": "RL.Fax",
+    "untranslatedName": "RL.Fax",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "RL.Fax[Short text]",
+      "cf[10323]",
+      "RL.Fax"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10323
+    }
+  },
+  {
+    "id": "customfield_10444",
+    "key": "customfield_10444",
+    "name": "Stellvertreter 2-E-Mail",
+    "untranslatedName": "Stellvertreter 2-E-Mail",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Stellvertreter 2-E-Mail[Short text]",
+      "cf[10444]",
+      "Stellvertreter 2-E-Mail"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10444
+    }
+  },
+  {
+    "id": "customfield_10313",
+    "key": "customfield_10313",
+    "name": "M.Jahre-im-Verein",
+    "untranslatedName": "M.Jahre-im-Verein",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "M.Jahre-im-Verein[Short text]",
+      "cf[10313]",
+      "M.Jahre-im-Verein"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10313
+    }
+  },
+  {
+    "id": "customfield_10434",
+    "key": "customfield_10434",
+    "name": "Kontoinhaber",
+    "untranslatedName": "Kontoinhaber",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Kontoinhaber[Short text]",
+      "Kontoinhaber",
+      "cf[10434]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10434
+    }
+  },
+  {
+    "id": "customfield_10314",
+    "key": "customfield_10314",
+    "name": "Vereinsfunktion 9 Bis",
+    "untranslatedName": "Vereinsfunktion 9 Bis",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 9 Bis[Short text]",
+      "cf[10314]",
+      "Vereinsfunktion 9 Bis"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10314
+    }
+  },
+  {
+    "id": "customfield_10435",
+    "key": "customfield_10435",
+    "name": "Bank Name",
+    "untranslatedName": "Bank Name",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Bank Name",
+      "Bank Name[Short text]",
+      "cf[10435]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10435
+    }
+  },
+  {
+    "id": "customfield_10436",
+    "key": "customfield_10436",
+    "name": "Bank Konto IBAN",
+    "untranslatedName": "Bank Konto IBAN",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Bank Konto IBAN",
+      "Bank Konto IBAN[Short text]",
+      "cf[10436]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10436
+    }
+  },
+  {
+    "id": "customfield_10315",
+    "key": "customfield_10315",
+    "name": "Vereinsfunktion 9 Geändert am",
+    "untranslatedName": "Vereinsfunktion 9 Geändert am",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 9 Geändert am[Short text]",
+      "cf[10315]",
+      "Vereinsfunktion 9 Geändert am"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10315
+    }
+  },
+  {
+    "id": "customfield_10437",
+    "key": "customfield_10437",
+    "name": "Stellvertreter 3-E-Mail",
+    "untranslatedName": "Stellvertreter 3-E-Mail",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10437]",
+      "Stellvertreter 3-E-Mail[Short text]",
+      "Stellvertreter 3-E-Mail"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10437
+    }
+  },
+  {
+    "id": "customfield_10316",
+    "key": "customfield_10316",
+    "name": "M.Datum Statuswechsel",
+    "untranslatedName": "M.Datum Statuswechsel",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "M.Datum Statuswechsel",
+      "M.Datum Statuswechsel[Date]",
+      "cf[10316]"
+    ],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 10316
+    }
+  },
+  {
+    "id": "customfield_10438",
+    "key": "customfield_10438",
+    "name": "Finanzbeauftragter",
+    "untranslatedName": "Finanzbeauftragter",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Finanzbeauftragter[Short text]",
+      "cf[10438]",
+      "Finanzbeauftragter"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10438
+    }
+  },
+  {
+    "id": "customfield_10317",
+    "key": "customfield_10317",
+    "name": "Vereinsfunktion 10",
+    "untranslatedName": "Vereinsfunktion 10",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10317]",
+      "Vereinsfunktion 10[Dropdown]",
+      "Vereinsfunktion 10"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10317
+    }
+  },
+  {
+    "id": "customfield_10318",
+    "key": "customfield_10318",
+    "name": "Vereinsfunktion 10 Von",
+    "untranslatedName": "Vereinsfunktion 10 Von",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10318]",
+      "Vereinsfunktion 10 Von[Short text]",
+      "Vereinsfunktion 10 Von"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10318
+    }
+  },
+  {
+    "id": "customfield_10439",
+    "key": "customfield_10439",
+    "name": "Feedbackbeauftragter-E-Mail",
+    "untranslatedName": "Feedbackbeauftragter-E-Mail",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Feedbackbeauftragter-E-Mail[Short text]",
+      "Feedbackbeauftragter-E-Mail",
+      "cf[10439]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10439
+    }
+  },
+  {
+    "id": "customfield_10319",
+    "key": "customfield_10319",
+    "name": "Kompetenzen Schwerpunkt",
+    "untranslatedName": "Kompetenzen Schwerpunkt",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Kompetenzen Schwerpunkt",
+      "Kompetenzen Schwerpunkt[Checkboxes]",
+      "cf[10319]"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 10319
+    }
+  },
+  {
+    "id": "timespent",
+    "key": "timespent",
+    "name": "Benötigte Zeit",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [
+      "timespent"
+    ],
+    "schema": {
+      "type": "number",
+      "system": "timespent"
+    }
+  },
+  {
+    "id": "aggregatetimespent",
+    "key": "aggregatetimespent",
+    "name": "Σ Benötigte Zeit",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [],
+    "schema": {
+      "type": "number",
+      "system": "aggregatetimespent"
+    }
+  },
+  {
+    "id": "customfield_10430",
+    "key": "customfield_10430",
+    "name": "I.Straße",
+    "untranslatedName": "I.Straße",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "I.Straße[Short text]",
+      "I.Straße",
+      "cf[10430]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10430
+    }
+  },
+  {
+    "id": "customfield_10310",
+    "key": "customfield_10310",
+    "name": "RL.Tel-Fest",
+    "untranslatedName": "RL.Tel-Fest",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10310]",
+      "RL.Tel-Fest[Short text]",
+      "RL.Tel-Fest"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10310
+    }
+  },
+  {
+    "id": "customfield_10431",
+    "key": "customfield_10431",
+    "name": "I.Ort",
+    "untranslatedName": "I.Ort",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10431]",
+      "I.Ort",
+      "I.Ort[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10431
+    }
+  },
+  {
+    "id": "customfield_10311",
+    "key": "customfield_10311",
+    "name": "RL.Tel-Mobil",
+    "untranslatedName": "RL.Tel-Mobil",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "RL.Tel-Mobil",
+      "cf[10311]",
+      "RL.Tel-Mobil[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10311
+    }
+  },
+  {
+    "id": "customfield_10432",
+    "key": "customfield_10432",
+    "name": "Region Name",
+    "untranslatedName": "Region Name",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Region Name",
+      "cf[10432]",
+      "Region Name[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10432
+    }
+  },
+  {
+    "id": "customfield_10312",
+    "key": "customfield_10312",
+    "name": "Vereinsfunktion 8",
+    "untranslatedName": "Vereinsfunktion 8",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 8",
+      "Vereinsfunktion 8[Dropdown]",
+      "cf[10312]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10312
+    }
+  },
+  {
+    "id": "customfield_10433",
+    "key": "customfield_10433",
+    "name": "Bank Konto BIC",
+    "untranslatedName": "Bank Konto BIC",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10433]",
+      "Bank Konto BIC[Short text]",
+      "Bank Konto BIC"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10433
+    }
+  },
+  {
+    "id": "customfield_10302",
+    "key": "customfield_10302",
+    "name": "RL.PLZ",
+    "untranslatedName": "RL.PLZ",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "RL.PLZ[Short text]",
+      "cf[10302]",
+      "RL.PLZ"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10302
+    }
+  },
+  {
+    "id": "customfield_10423",
+    "key": "customfield_10423",
+    "name": "Veranstaltungsort",
+    "untranslatedName": "Veranstaltungsort",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Veranstaltungsort[Short text]",
+      "Veranstaltungsort",
+      "cf[10423]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10423
+    }
+  },
+  {
+    "id": "customfield_10303",
+    "key": "customfield_10303",
+    "name": "Vereinsfunktion 6 Geändert am",
+    "untranslatedName": "Vereinsfunktion 6 Geändert am",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 6 Geändert am[Short text]",
+      "cf[10303]",
+      "Vereinsfunktion 6 Geändert am"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10303
+    }
+  },
+  {
+    "id": "customfield_10424",
+    "key": "customfield_10424",
+    "name": "Kreis(zur autom. Anzeige)",
+    "untranslatedName": "Kreis(zur autom. Anzeige)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Kreis(zur autom. Anzeige)[Dropdown]",
+      "cf[10424]",
+      "Kreis(zur autom. Anzeige)"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10424
+    }
+  },
+  {
+    "id": "customfield_10304",
+    "key": "customfield_10304",
+    "name": "Weitere Angaben zu Kompetenzen",
+    "untranslatedName": "Weitere Angaben zu Kompetenzen",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Weitere Angaben zu Kompetenzen",
+      "cf[10304]",
+      "Weitere Angaben zu Kompetenzen[Paragraph]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10304
+    }
+  },
+  {
+    "id": "customfield_10425",
+    "key": "customfield_10425",
+    "name": "Termine",
+    "untranslatedName": "Termine",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10425]",
+      "Termine",
+      "Termine[Paragraph]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10425
+    }
+  },
+  {
+    "id": "customfield_10305",
+    "key": "customfield_10305",
+    "name": "RL.Ort",
+    "untranslatedName": "RL.Ort",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "RL.Ort[Short text]",
+      "cf[10305]",
+      "RL.Ort"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10305
+    }
+  },
+  {
+    "id": "customfield_10426",
+    "key": "customfield_10426",
+    "name": "Uhrzeit",
+    "untranslatedName": "Uhrzeit",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Uhrzeit[Short text]",
+      "cf[10426]",
+      "Uhrzeit"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10426
+    }
+  },
+  {
+    "id": "customfield_10306",
+    "key": "customfield_10306",
+    "name": "RL.Name",
+    "untranslatedName": "RL.Name",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10306]",
+      "RL.Name[Short text]",
+      "RL.Name"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10306
+    }
+  },
+  {
+    "id": "customfield_10427",
+    "key": "customfield_10427",
+    "name": "Anmeldung",
+    "untranslatedName": "Anmeldung",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Anmeldung[Paragraph]",
+      "Anmeldung",
+      "cf[10427]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10427
+    }
+  },
+  {
+    "id": "customfield_10307",
+    "key": "customfield_10307",
+    "name": "M.Nächster-Geburtstag",
+    "untranslatedName": "M.Nächster-Geburtstag",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10307]",
+      "M.Nächster-Geburtstag",
+      "M.Nächster-Geburtstag[Date]"
+    ],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 10307
+    }
+  },
+  {
+    "id": "customfield_10428",
+    "key": "customfield_10428",
+    "name": "Hinweise",
+    "untranslatedName": "Hinweise",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Hinweise",
+      "cf[10428]",
+      "Hinweise[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10428
+    }
+  },
+  {
+    "id": "customfield_10308",
+    "key": "customfield_10308",
+    "name": "Vereinsfunktion 7 Von",
+    "untranslatedName": "Vereinsfunktion 7 Von",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 7 Von[Short text]",
+      "cf[10308]",
+      "Vereinsfunktion 7 Von"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10308
+    }
+  },
+  {
+    "id": "customfield_10429",
+    "key": "customfield_10429",
+    "name": "CityID",
+    "untranslatedName": "CityID",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "CityID",
+      "cf[10429]",
+      "CityID[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10429
+    }
+  },
+  {
+    "id": "customfield_10309",
+    "key": "customfield_10309",
+    "name": "Vereinsfunktion 7 Bis",
+    "untranslatedName": "Vereinsfunktion 7 Bis",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 7 Bis",
+      "Vereinsfunktion 7 Bis[Short text]",
+      "cf[10309]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10309
+    }
+  },
+  {
+    "id": "workratio",
+    "key": "workratio",
+    "name": "Verhältnis tatsächlicher zu geschätzter Arbeit",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "workratio"
+    ],
+    "schema": {
+      "type": "number",
+      "system": "workratio"
+    }
+  },
+  {
+    "id": "issuerestriction",
+    "key": "issuerestriction",
+    "name": "Beschränken auf",
+    "custom": false,
+    "orderable": true,
+    "navigable": false,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "issuerestriction",
+      "system": "issuerestriction"
+    }
+  },
+  {
+    "id": "thumbnail",
+    "key": "thumbnail",
+    "name": "Bilder",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": []
+  },
+  {
+    "id": "created",
+    "key": "created",
+    "name": "Erstellt",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "created",
+      "createdDate"
+    ],
+    "schema": {
+      "type": "datetime",
+      "system": "created"
+    }
+  },
+  {
+    "id": "customfield_10420",
+    "key": "customfield_10420",
+    "name": "Weitere Unterstützung/Folgeberatung angeboten",
+    "untranslatedName": "Weitere Unterstützung/Folgeberatung angeboten",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10420]",
+      "Weitere Unterstützung/Folgeberatung angeboten[Radio Buttons]",
+      "Weitere Unterstützung/Folgeberatung angeboten"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10420
+    }
+  },
+  {
+    "id": "customfield_10300",
+    "key": "customfield_10300",
+    "name": "Vereinsfunktion 6 Von",
+    "untranslatedName": "Vereinsfunktion 6 Von",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Vereinsfunktion 6 Von[Short text]",
+      "cf[10300]",
+      "Vereinsfunktion 6 Von"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10300
+    }
+  },
+  {
+    "id": "customfield_10421",
+    "key": "customfield_10421",
+    "name": "Erstkontakt",
+    "untranslatedName": "Erstkontakt",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Erstkontakt[Checkboxes]",
+      "cf[10421]",
+      "Erstkontakt"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 10421
+    }
+  },
+  {
+    "id": "customfield_10301",
+    "key": "customfield_10301",
+    "name": "Kompetenzen Basiskompetenz",
+    "untranslatedName": "Kompetenzen Basiskompetenz",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Kompetenzen Basiskompetenz[Checkboxes]",
+      "Kompetenzen Basiskompetenz",
+      "cf[10301]"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 10301
+    }
+  },
+  {
+    "id": "customfield_10422",
+    "key": "customfield_10422",
+    "name": "I.PLZ",
+    "untranslatedName": "I.PLZ",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10422]",
+      "I.PLZ[Short text]",
+      "I.PLZ"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10422
+    }
+  },
+  {
+    "id": "customfield_10412",
+    "key": "customfield_10412",
+    "name": "Bei Nein, warum",
+    "untranslatedName": "Bei Nein, warum",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Bei Nein, warum",
+      "Bei Nein, warum[Short text]",
+      "cf[10412]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10412
+    }
+  },
+  {
+    "id": "customfield_10413",
+    "key": "customfield_10413",
+    "name": "Gründungszuschuss beantragt",
+    "untranslatedName": "Gründungszuschuss beantragt",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Gründungszuschuss beantragt[Radio Buttons]",
+      "cf[10413]",
+      "Gründungszuschuss beantragt"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10413
+    }
+  },
+  {
+    "id": "customfield_10414",
+    "key": "customfield_10414",
+    "name": "Signature",
+    "untranslatedName": "Signature",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10414]",
+      "Signature[User Picker (single user)]",
+      "Signature"
+    ],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 10414
+    }
+  },
+  {
+    "id": "customfield_10415",
+    "key": "customfield_10415",
+    "name": "Gründungszuschuss genehmigt",
+    "untranslatedName": "Gründungszuschuss genehmigt",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Gründungszuschuss genehmigt[Radio Buttons]",
+      "cf[10415]",
+      "Gründungszuschuss genehmigt"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10415
+    }
+  },
+  {
+    "id": "customfield_10416",
+    "key": "customfield_10416",
+    "name": "Kunde steht als Referenz zur Verfügung",
+    "untranslatedName": "Kunde steht als Referenz zur Verfügung",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Kunde steht als Referenz zur Verfügung",
+      "Kunde steht als Referenz zur Verfügung[Radio Buttons]",
+      "cf[10416]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10416
+    }
+  },
+  {
+    "id": "customfield_10417",
+    "key": "customfield_10417",
+    "name": "AbschlussberichtsnummerIntern",
+    "untranslatedName": "AbschlussberichtsnummerIntern",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "AbschlussberichtsnummerIntern[Short text]",
+      "AbschlussberichtsnummerIntern",
+      "cf[10417]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10417
+    }
+  },
+  {
+    "id": "customfield_10418",
+    "key": "customfield_10418",
+    "name": "Ziel erreicht",
+    "untranslatedName": "Ziel erreicht",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Ziel erreicht[Short text]",
+      "cf[10418]",
+      "Ziel erreicht"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10418
+    }
+  },
+  {
+    "id": "customfield_10419",
+    "key": "customfield_10419",
+    "name": "Kunde mit Beratung zufrieden",
+    "untranslatedName": "Kunde mit Beratung zufrieden",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10419]",
+      "Kunde mit Beratung zufrieden[Radio Buttons]",
+      "Kunde mit Beratung zufrieden"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10419
+    }
+  },
+  {
+    "id": "customfield_10530",
+    "key": "customfield_10530",
+    "name": "Über Formulare erstellte Vorgänge",
+    "untranslatedName": "Über Formulare erstellte Vorgänge",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "array",
+      "items": "Formulare",
+      "custom": "com.atlassian.jira.plugins.proforma-managed-fields:proforma-forms-field-cftype",
+      "customId": 10530
+    }
+  },
+  {
+    "id": "customfield_10410",
+    "key": "customfield_10410",
+    "name": "Abschlussberichtsnummer",
+    "untranslatedName": "Abschlussberichtsnummer",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Abschlussberichtsnummer",
+      "cf[10410]",
+      "Abschlussberichtsnummer[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10410
+    }
+  },
+  {
+    "id": "customfield_10411",
+    "key": "customfield_10411",
+    "name": "Gründungsberatung",
+    "untranslatedName": "Gründungsberatung",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10411]",
+      "Gründungsberatung[Radio Buttons]",
+      "Gründungsberatung"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10411
+    }
+  },
+  {
+    "id": "customfield_10401",
+    "key": "customfield_10401",
+    "name": "K.Rechnung-Firma",
+    "untranslatedName": "K.Rechnung-Firma",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "K.Rechnung-Firma[Short text]",
+      "K.Rechnung-Firma",
+      "cf[10401]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10401
+    }
+  },
+  {
+    "id": "customfield_10402",
+    "key": "customfield_10402",
+    "name": "K.Rechnung-E-Mail",
+    "untranslatedName": "K.Rechnung-E-Mail",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "K.Rechnung-E-Mail[Short text]",
+      "K.Rechnung-E-Mail",
+      "cf[10402]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10402
+    }
+  },
+  {
+    "id": "security",
+    "key": "security",
+    "name": "Sicherheitsstufe",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "level"
+    ],
+    "schema": {
+      "type": "securitylevel",
+      "system": "security"
+    }
+  },
+  {
+    "id": "customfield_10403",
+    "key": "customfield_10403",
+    "name": "K.Rechnung-Strasse",
+    "untranslatedName": "K.Rechnung-Strasse",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "K.Rechnung-Strasse",
+      "cf[10403]",
+      "K.Rechnung-Strasse[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10403
+    }
+  },
+  {
+    "id": "customfield_10404",
+    "key": "customfield_10404",
+    "name": "K.Rechnung-PLZ",
+    "untranslatedName": "K.Rechnung-PLZ",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10404]",
+      "K.Rechnung-PLZ[Short text]",
+      "K.Rechnung-PLZ"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10404
+    }
+  },
+  {
+    "id": "attachment",
+    "key": "attachment",
+    "name": "Anhang",
+    "custom": false,
+    "orderable": true,
+    "navigable": false,
+    "searchable": true,
+    "clauseNames": [
+      "attachments"
+    ],
+    "schema": {
+      "type": "array",
+      "items": "attachment",
+      "system": "attachment"
+    }
+  },
+  {
+    "id": "customfield_10405",
+    "key": "customfield_10405",
+    "name": "K.Land",
+    "untranslatedName": "K.Land",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "K.Land[Dropdown]",
+      "K.Land",
+      "cf[10405]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10405
+    }
+  },
+  {
+    "id": "customfield_10406",
+    "key": "customfield_10406",
+    "name": "Weitere Informationen",
+    "untranslatedName": "Weitere Informationen",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10406]",
+      "Weitere Informationen",
+      "Weitere Informationen[Paragraph]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10406
+    }
+  },
+  {
+    "id": "customfield_10407",
+    "key": "customfield_10407",
+    "name": "K.ID",
+    "untranslatedName": "K.ID",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "K.ID",
+      "cf[10407]",
+      "K.ID[Short text]"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10407
+    }
+  },
+  {
+    "id": "customfield_10408",
+    "key": "customfield_10408",
+    "name": "Beratung vollständig durchgeführt (Bei Nein, konnte helfen?)",
+    "untranslatedName": "Beratung vollständig durchgeführt (Bei Nein, konnte helfen?)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10408]",
+      "Beratung vollständig durchgeführt (Bei Nein, konnte helfen?)",
+      "Beratung vollständig durchgeführt (Bei Nein, konnte helfen?)[Select List (cascading)]"
+    ],
+    "schema": {
+      "type": "option-with-child",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:cascadingselect",
+      "customId": 10408
+    }
+  },
+  {
+    "id": "customfield_10409",
+    "key": "customfield_10409",
+    "name": "Zahl der Mitarbeiter",
+    "untranslatedName": "Zahl der Mitarbeiter",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "Zahl der Mitarbeiter",
+      "Zahl der Mitarbeiter[Radio Buttons]",
+      "cf[10409]"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10409
+    }
+  },
+  {
+    "id": "customfield_10400",
+    "key": "customfield_10400",
+    "name": "K.E-Mail",
+    "untranslatedName": "K.E-Mail",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[10400]",
+      "K.E-Mail[Short text]",
+      "K.E-Mail"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10400
+    }
+  }
+]
