@@ -1,0 +1,42 @@
+[
+  {
+    "id_DC": "customfield_11702",
+    "Feldname": "Warning"
+  },
+  {
+    "id_DC": "customfield_11805",
+    "Feldname": "External issue ID"
+  },
+  {
+    "id_DC": "customfield_10233",
+    "Feldname": "Nachname"
+  },
+  {
+    "id_DC": "customfield_10105",
+    "Feldname": "Rank"
+  },
+  {
+    "id_DC": "customfield_10100",
+    "Feldname": "Epic Link"
+  },
+  {
+    "id_DC": "customfield_10101",
+    "Feldname": "Epic Status"
+  },
+  {
+    "id_DC": "customfield_10102",
+    "Feldname": "Epic Name"
+  },
+  {
+    "id_DC": "customfield_13600",
+    "Feldname": "QR_Code"
+  },
+  {
+    "id_DC": "customfield_10429",
+    "Feldname": "issueFunction"
+  },
+  {
+    "id_DC": "customfield_12704",
+    "Feldname": "Original story points"
+  }
+]

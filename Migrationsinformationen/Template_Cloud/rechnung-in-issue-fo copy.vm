@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+##_________________________________________________________
+##
+## Rechnung-V3.0-CLOUD: 			rechnung-in-issue-fo.vm
+##
+## --------------------------------------------------------
+##
+## MIGRATIONSHINWEIS (DC -> Cloud):
+##
+## Einzige inhaltliche Änderung gegenüber der DC-Version:
+## Alle Vorkommen von
+##     $xyz.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_NNNNN"))
+## wurden ersetzt durch
+##     $xyz.getCustomFieldValue("customfield_NNNNN")
+## Das entspricht exakt dem Muster, das im Original bereits für
+## $issues.get(0) verwendet wurde (z.B. customfield_11457 etc.) und ist
+## das Standard-Cloud-kompatible Better-PDF-API-Pattern -- es musste nur
+## konsequent auch auf $region, $auftrag und $rechnung angewendet werden.
+##
+## Alles andere (FO-Markup, Tabellenlogik, QR-Code-Block, articlesTool-
+## Aufrufe) ist UNVERÄNDERT, da rein Velocity/FO bzw. bereits Cloud-
+## kompatibles Scripting ohne DC-Java-Abhängigkeiten.
+##
+## Versionshistorie der DC-Version (Stand 1.11.25) bleibt als Referenz
+## unten erhalten.
+##
+## Stand: 	04.02.2022 / Gr V2.1  -- Anpassung an neues Corporate Design
+## Stand:   20.05.2022 / Gr V2.1  -- TIC 305: "i.A. gez." entfällt ersatzlos
+## Stand:	03.01.2023 / Gr V2.1  -- Fehler beim Erzeugen ohne €-Wert abgefangen
+## Stand:	30.01.2023 / Gr V2.1  -- TIC 338: Betrag ohne Leistung
+## Stand:   19.04.23 / Gr V2.2    -- TIC-352: Fusszeile ohne Vorstände
+## Stand:   13.10.23 / Gr V2.2.1  -- TIC-371: Nur Mail des RL, keine Telefonnummer
+## Stand:   12.12.23 / Gr V2.3    -- TIC-396: Sicherheitsupdate-Fix
+## Stand:   1.11.25 / Gr V2.4     -- Strasse/Ort des RL entfallen
+## Stand:   [Migrationsdatum] / CLOUD V3.0 -- Migration auf Jira Cloud
+##_____________________________________________________________
+
+## We include the file rechnung-common-elements-fo.vm, where are set the logo, footer, linked issues, and all the common elements
+$include.parse($ctx, "rechnung-common-elements-fo.vm")
+
+$scripting.execute("articles-tool.groovy")
+
+#set($filename = "${issues.get(0).summary}_Rechnung.pdf")
+
+## Debugging true/false
+#set($debug = true)
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+	<fo:layout-master-set>
+		<fo:simple-page-master master-name="A4" margin-top="0.0cm" margin-bottom="0.0cm" margin-left="1cm" margin-right="1cm">
+			<fo:region-body region-name="page-body" margin-top ="1.5cm" margin-bottom="1.0cm" margin-left="1.5cm" margin-right="1.5cm"/>
+			<fo:region-before region-name="page-header" extent="0.0cm" margin-left="1.5cm" margin-right="1.5cm"/>
+            <fo:region-after region-name="page-footer" extent="2.5cm" margin-left="0.5cm" margin-right="0.5cm"/>
+		</fo:simple-page-master>
+	</fo:layout-master-set>
+
+    	<fo:page-sequence font-family="OpenSANS" font-size="9pt" master-reference="A4">
+
+		<!-- footer -->
+		<fo:static-content flow-name="page-footer" font-size="82%">
+			<fo:block  text-align="center"> Seite <fo:page-number/> </fo:block>
+			<fo:block text-align="left"> <fo:external-graphic content-width="190mm" src="url($xmlutils.escape($FZ_ImageUrl))" overflow="hidden"/> </fo:block>
+        </fo:static-content>
+
+		<!-- body -->
+		<fo:flow flow-name="page-body" >
+			#if($project)
+				<!-- header -->
+					<fo:table space-before="0cm" space-before.conditionality="retain">
+                    	<fo:table-column column-width="65.8%" />
+						<fo:table-column column-width="34.2%" />
+						<fo:table-body>
+
+							<fo:table-row>
+								<fo:table-cell text-align="left">
+									<fo:block>
+                                     <fo:external-graphic content-width="scale-down-to-fit" src="url($xmlutils.escape($logoImageUrl_Banner))" overflow="hidden"/>
+   									</fo:block>
+								</fo:table-cell>
+						    </fo:table-row>
+
+                            <fo:table-row>
+                            	<fo:table-cell >
+                                    <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block>
+                                    <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block>
+                                    <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block>
+                                    <fo:block white-space-collapse="false" space-before="3mm" >  </fo:block>
+
+                                    <fo:block space-before="3mm" font-size="70%">AktivSenioren Bayern e.V. | Landshuter Allee 11 | 80637 München</fo:block>
+
+									<fo:block font-size="125%" space-before="3mm">
+                                    	<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10222"))</fo:block>
+                                    	<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11400")) $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11401"))</fo:block>
+                                    	<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10208"))</fo:block>
+                                    	<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10209")) $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10210"))</fo:block>
+                                        <fo:block>
+                                        	## MIGRIERT: $customFieldManager.getCustomFieldObject(...) entfernt
+                                        	#if($rechnung.getCustomFieldValue("customfield_11300").value != "Deutschland")
+                                            	$rechnung.getCustomFieldValue("customfield_11300").value
+                                           	#end
+                                      	</fo:block>
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell text-align="left">
+									<fo:block>
+                                    <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block>
+                                    <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block>
+                                    <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block>
+
+										## MIGRIERT: $customFieldManager.getCustomFieldObject(...) entfernt
+                                        <fo:block space-before="6mm" font-size="90%">Regionalleitung $xmlutils.escape($region.getCustomFieldValue("customfield_10287"))</fo:block>
+
+                                        <fo:block font-size="110%" space-before="2mm">
+                                        	<fo:block>$xmlutils.escape($region.getCustomFieldValue("customfield_10303"))</fo:block>
+                                            ## Strasse und Ort des RL entfallen gem. Vorstandsbeschluss 1.10.25 (unverändert übernommen)
+										</fo:block>
+
+                                        <fo:block font-size="90%">M: $xmlutils.escape($region.getCustomFieldValue("customfield_10309"))</fo:block>
+
+                                        <fo:block space-before="10mm">$userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($currentDate)</fo:block>
+
+									</fo:block>
+								</fo:table-cell>
+
+                            </fo:table-row>
+						</fo:table-body>
+					</fo:table>
+
+<fo:table table-layout="fixed" width="100%" space-before="12mm">
+    <fo:table-column column-width="65%"/>
+    <fo:table-column column-width="35%"/>
+
+    <fo:table-body>
+        <fo:table-row>
+            <!-- Linke Spalte: Text -->
+            <fo:table-cell>
+                <fo:block font-size="120%" font-weight="bold">
+                    Rechnung
+                </fo:block>
+
+                <fo:block space-before="6mm" font-weight="bold">
+                    Rechnung Nr. $xmlutils.escape($issues.get(0).summary)
+                </fo:block>
+                <fo:block font-weight="bold">
+                    ## MIGRIERT: $customFieldManager.getCustomFieldObject(...) entfernt
+                    Auftrag Nr. $xmlutils.escape($auftrag.getCustomFieldValue("customfield_10230"))
+                </fo:block>
+            </fo:table-cell>
+
+            <!-- Rechte Spalte: QR-Code -->
+              <fo:table-cell text-align="start" display-align="left">
+
+                #set($rechnungKey = $issues.get(0).key)
+                #set($QRpfad = "/7qukupxeUC399rraqxKK/QR/")
+                #set($QRdat = "${rechnungKey}_qr.png")
+
+                #if($env.equals("TEST"))
+                   #set($LfzUrl = "https://vampir.aktivsenioren-bayern.de")
+                 #else
+                   #set($LfzUrl = "https://vampir.as-by.de")
+                #end
+                #set($qrUrl = "$LfzUrl$QRpfad$QRdat")
+
+#if($debug && $env.equals("TEST"))
+    <fo:block space-before="6mm" color="red" font-size="8pt">
+        DEBUG – Umgebung: $env, QR-URL: $qrUrl
+    </fo:block>
+#end
+                <fo:block>
+                    <fo:external-graphic
+                        src="url($qrUrl)"
+                        content-width="25mm"
+                        scaling="uniform"/>
+                </fo:block>
+            </fo:table-cell>
+        </fo:table-row>
+    </fo:table-body>
+</fo:table>
+
+				#set($renderedDescription = $pdfRenderer.asRendered($issues.get(0), "comment", $issues.get(0).getCustomFieldValue("customfield_10298")))
+				<fo:block space-before="1cm">$renderedDescription</fo:block>
+				#set($renderedDescription = $pdfRenderer.asRendered($issues.get(0), "comment", $issues.get(0).getCustomFieldValue("customfield_10299")))
+				<fo:block>$renderedDescription</fo:block>
+
+                    $articlesTool.calculateTotalPriceRechnung($issues.get(0).getCustomFieldValue("customfield_11457"),
+                                    												$issues.get(0).getCustomFieldValue("customfield_11459"),
+                                                                                   	$issues.get(0).getCustomFieldValue("customfield_11461"),
+                                                                                    $issues.get(0).getCustomFieldValue("customfield_11463"),
+                                                                                    $issues.get(0).getCustomFieldValue("customfield_11465"),
+                                                                                    $issues.get(0).getCustomFieldValue("customfield_11467"))
+
+                    <fo:table >
+                    <fo:table-column column-width="110mm" />
+					<fo:table-column column-width="20mm"/>
+                       	<fo:table-body>
+                        	<fo:table-row font-weight="bold">
+								<fo:table-cell >
+                                   	<fo:block >Position</fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell text-align="right">
+                                 	<fo:block>Betrag</fo:block>
+                                </fo:table-cell>
+							</fo:table-row>
+
+                                ## Leistung 1
+                            <fo:table-row>
+                              	<fo:table-cell >
+                   	            	<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11456"))</fo:block>
+                  		        </fo:table-cell>
+                                <fo:table-cell text-align="right">
+                                    <fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11457")) EUR</fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+
+                            ## Leistung 2
+                            #if($issues.get(0).getCustomFieldValue("customfield_11458") )
+                              #then
+                        		<fo:table-row>
+                              		<fo:table-cell >
+                   	            		<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11458"))</fo:block>
+                  		        	</fo:table-cell>
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11459") )
+                                	    <fo:table-cell text-align="right">
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11459")) EUR</fo:block>
+                                        </fo:table-cell>
+                                    #end
+                            	</fo:table-row>
+                                #else
+                                    #if($issues.get(0).getCustomFieldValue("customfield_114659") )
+                              		  <fo:table-row>
+                                        <fo:table-cell >  <fo:block> </fo:block>  </fo:table-cell>
+                                	    <fo:table-cell text-align="right">
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11459")) EUR</fo:block>
+                                        </fo:table-cell>
+                                      </fo:table-row>
+                                     #end
+                            	#end
+
+                            ## Leistung 3
+                            #if($issues.get(0).getCustomFieldValue("customfield_11460") )
+                              #then
+                        		<fo:table-row>
+                              		<fo:table-cell >
+                   	            		<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11460"))</fo:block>
+                  		        	</fo:table-cell>
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11461") )
+                                	    <fo:table-cell text-align="right">
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11461")) EUR</fo:block>
+                                        </fo:table-cell>
+                                    #end
+                            	</fo:table-row>
+                                #else
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11461") )
+                              		  <fo:table-row>
+                                        <fo:table-cell >  <fo:block> </fo:block>  </fo:table-cell>
+                                	    <fo:table-cell text-align="right">
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11461")) EUR</fo:block>
+                                        </fo:table-cell>
+                                      </fo:table-row>
+                                     #end
+                            	#end
+
+                            ## Leistung 4
+                            #if($issues.get(0).getCustomFieldValue("customfield_11462") )
+                              #then
+                        		<fo:table-row>
+                              		<fo:table-cell >
+                   	            		<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11462"))</fo:block>
+                  		        	</fo:table-cell>
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11463") )
+                                	    <fo:table-cell text-align="right">
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11463")) EUR</fo:block>
+                                        </fo:table-cell>
+                                    #end
+                            	</fo:table-row>
+                                #else
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11463") )
+                              		  <fo:table-row>
+                                        <fo:table-cell >  <fo:block> </fo:block>  </fo:table-cell>
+                                	    <fo:table-cell text-align="right">
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11463")) EUR</fo:block>
+                                        </fo:table-cell>
+                                      </fo:table-row>
+                                     #end
+                            	#end
+
+                            ## Leistung 5
+                            #if($issues.get(0).getCustomFieldValue("customfield_11464") )
+                              #then
+                        		<fo:table-row>
+                              		<fo:table-cell >
+                   	            		<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11464"))</fo:block>
+                  		        	</fo:table-cell>
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11465") )
+                                	    <fo:table-cell text-align="right">
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11465")) EUR</fo:block>
+                                        </fo:table-cell>
+                                    #end
+                            	</fo:table-row>
+                                #else
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11465") )
+                              		  <fo:table-row>
+                                        <fo:table-cell >  <fo:block> </fo:block>  </fo:table-cell>
+                                	    <fo:table-cell text-align="right">
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11465")) EUR</fo:block>
+                                        </fo:table-cell>
+                                      </fo:table-row>
+                                     #end
+                            	#end
+
+                            ## Leistung 6
+                            #if($issues.get(0).getCustomFieldValue("customfield_11466") )
+                              #then
+                        		<fo:table-row>
+                              		<fo:table-cell >
+                   	            		<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11467"))</fo:block>
+                  		        	</fo:table-cell>
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11467") )
+                                	    <fo:table-cell text-align="right">
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11467")) EUR</fo:block>
+                                        </fo:table-cell>
+                                    #end
+                            	</fo:table-row>
+                                #else
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11467") )
+                              		  <fo:table-row>
+                                        <fo:table-cell >  <fo:block> </fo:block>  </fo:table-cell>
+                                	    <fo:table-cell text-align="right">
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11467")) EUR</fo:block>
+                                        </fo:table-cell>
+                                      </fo:table-row>
+                                     #end
+                            	#end
+
+
+                            <fo:table-row font-weight="bold">
+								<fo:table-cell >
+                                   	<fo:block >Zwischensumme</fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell text-align="right">
+                                 	<fo:block>
+                                    	$articlesTool.getTotalPriceRechnung() EUR
+                                	</fo:block>
+                                </fo:table-cell>
+							</fo:table-row>
+                       	</fo:table-body>
+                   	</fo:table>
+
+                    <fo:table space-before="0.2cm" >
+                    <fo:table-column column-width="110mm" />
+					<fo:table-column column-width="20mm"/>
+                       	<fo:table-body>
+                            <fo:table-row>
+								<fo:table-cell >
+                                   	<fo:block>zuzüglich $issues.get(0).getCustomFieldValue("customfield_10433").value% MwSt.</fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell text-align="right">
+                                   	<fo:block>$articlesTool.getTaxesRechnung($issues.get(0).getCustomFieldValue("customfield_10433").value) EUR</fo:block>
+                                </fo:table-cell>
+							</fo:table-row>
+                            <fo:table-row font-weight="bold">
+								<fo:table-cell >
+                                   	<fo:block >Gesamt</fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell text-align="right">
+                                   	<fo:block>$articlesTool.getFinalPriceRechnung() EUR</fo:block>
+                                </fo:table-cell>
+							</fo:table-row>
+                    	</fo:table-body>
+                    </fo:table>
+
+                <fo:block  space-before="6mm">
+                  Leistungsdatum entspricht Rechnungsdatum.
+                </fo:block>
+
+				#set($renderedDescription = $pdfRenderer.asRendered($issues.get(0), "comment", $issues.get(0).getCustomFieldValue("customfield_10300")))
+				<fo:block space-before="6mm">$renderedDescription</fo:block>
+
+                <fo:block space-before="6mm">Mit freundlichen Grüßen</fo:block>
+              	<fo:block space-before="3mm">AktivSenioren Bayern e.V.</fo:block>
+                ## MIGRIERT: $customFieldManager.getCustomFieldObject(...) entfernt
+                <fo:block space-before="6mm">$xmlutils.escape($region.getCustomFieldValue("customfield_10303"))</fo:block>
+
+
+#if($env.equals("TEST"))
+    <fo:block space-before="6mm" color="red" font-size="8pt">
+        DEBUG – Umgebung: $env
+    </fo:block>
+#end
+			#end
+		</fo:flow>
+	</fo:page-sequence>
+
+</fo:root>

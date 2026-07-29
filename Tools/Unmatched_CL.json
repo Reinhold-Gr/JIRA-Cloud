@@ -1,0 +1,214 @@
+[
+  {
+    "id_CL": "customfield_10172",
+    "Feldname": "Time to done"
+  },
+  {
+    "id_CL": "customfield_10173",
+    "Feldname": "Time to first response"
+  },
+  {
+    "id_CL": "customfield_10174",
+    "Feldname": "Request language"
+  },
+  {
+    "id_CL": "customfield_10030",
+    "Feldname": "Formulare insgesamt"
+  },
+  {
+    "id_CL": "customfield_10031",
+    "Feldname": "Gesendete Formulare"
+  },
+  {
+    "id_CL": "customfield_10032",
+    "Feldname": "Gesperrte Formulare"
+  },
+  {
+    "id_CL": "customfield_10033",
+    "Feldname": "Design"
+  },
+  {
+    "id_CL": "customfield_10034",
+    "Feldname": "Sicherheitsrisiko"
+  },
+  {
+    "id_CL": "customfield_10035",
+    "Feldname": "Fokusbereiche"
+  },
+  {
+    "id_CL": "customfield_10036",
+    "Feldname": "Project overview key"
+  },
+  {
+    "id_CL": "customfield_10037",
+    "Feldname": "Project overview status"
+  },
+  {
+    "id_CL": "customfield_10027",
+    "Feldname": "[CHART] Time in Status"
+  },
+  {
+    "id_CL": "customfield_10028",
+    "Feldname": "Ziele"
+  },
+  {
+    "id_CL": "customfield_10029",
+    "Feldname": "Offene Formulare"
+  },
+  {
+    "id_CL": "customfield_10021",
+    "Feldname": "Flagged"
+  },
+  {
+    "id_CL": "customfield_10024",
+    "Feldname": "Sentiment"
+  },
+  {
+    "id_CL": "customfield_10025",
+    "Feldname": "Genehmigungen"
+  },
+  {
+    "id_CL": "customfield_10026",
+    "Feldname": "[CHART] Date of First Response"
+  },
+  {
+    "id_CL": "customfield_10137",
+    "Feldname": "Request participants"
+  },
+  {
+    "id_CL": "customfield_10016",
+    "Feldname": "Story point estimate"
+  },
+  {
+    "id_CL": "customfield_10138",
+    "Feldname": "Satisfaction"
+  },
+  {
+    "id_CL": "customfield_10017",
+    "Feldname": "Vorgangsfarbe"
+  },
+  {
+    "id_CL": "customfield_10139",
+    "Feldname": "Satisfaction date"
+  },
+  {
+    "id_CL": "customfield_10019",
+    "Feldname": "Rang"
+  },
+  {
+    "id_CL": "customfield_10010",
+    "Feldname": "Request Type"
+  },
+  {
+    "id_CL": "customfield_10011",
+    "Feldname": "Epic-Name"
+  },
+  {
+    "id_CL": "customfield_10253",
+    "Feldname": "Rechnung gesendet"
+  },
+  {
+    "id_CL": "customfield_10012",
+    "Feldname": "Epic-Status"
+  },
+  {
+    "id_CL": "customfield_10014",
+    "Feldname": "Epic-Verknüpfung"
+  },
+  {
+    "id_CL": "customfield_10136",
+    "Feldname": "Arbeitskategorie"
+  },
+  {
+    "id_CL": "customfield_10015",
+    "Feldname": "Startdatum"
+  },
+  {
+    "id_CL": "customfield_10005",
+    "Feldname": "Change type"
+  },
+  {
+    "id_CL": "customfield_10006",
+    "Feldname": "Change risk"
+  },
+  {
+    "id_CL": "customfield_10007",
+    "Feldname": "Change reason"
+  },
+  {
+    "id_CL": "customfield_10008",
+    "Feldname": "Actual start"
+  },
+  {
+    "id_CL": "customfield_10009",
+    "Feldname": "Actual end"
+  },
+  {
+    "id_CL": "customfield_10002",
+    "Feldname": "Organizations"
+  },
+  {
+    "id_CL": "customfield_10003",
+    "Feldname": "Approvers"
+  },
+  {
+    "id_CL": "customfield_10004",
+    "Feldname": "Impact"
+  },
+  {
+    "id_CL": "customfield_10460",
+    "Feldname": "RL.E-Mail privat"
+  },
+  {
+    "id_CL": "customfield_10224",
+    "Feldname": "Intern"
+  },
+  {
+    "id_CL": "customfield_10345",
+    "Feldname": "M.Nächstes-Jubiläum"
+  },
+  {
+    "id_CL": "customfield_10103",
+    "Feldname": "Kategorie"
+  },
+  {
+    "id_CL": "customfield_10324",
+    "Feldname": "M.Alter"
+  },
+  {
+    "id_CL": "customfield_10205",
+    "Feldname": "Mitgliedsstatus"
+  },
+  {
+    "id_CL": "customfield_10448",
+    "Feldname": "Stellvertreter 1 (migrated)"
+  },
+  {
+    "id_CL": "customfield_10563",
+    "Feldname": "Agentensitzungen"
+  },
+  {
+    "id_CL": "customfield_10313",
+    "Feldname": "M.Jahre-im-Verein"
+  },
+  {
+    "id_CL": "customfield_10316",
+    "Feldname": "M.Datum Statuswechsel"
+  },
+  {
+    "id_CL": "customfield_10307",
+    "Feldname": "M.Nächster-Geburtstag"
+  },
+  {
+    "id_CL": "customfield_10414",
+    "Feldname": "Signature"
+  },
+  {
+    "id_CL": "customfield_10418",
+    "Feldname": "Ziel erreicht"
+  },
+  {
+    "id_CL": "customfield_10530",
+    "Feldname": "Über Formulare erstellte Vorgänge"
+  }
+]

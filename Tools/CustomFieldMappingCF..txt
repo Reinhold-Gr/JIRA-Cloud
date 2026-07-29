@@ -1,0 +1,326 @@
+id_DC	id_CL	Feldname
+	customfield_10026	[CHART] Date of First Response
+	customfield_10027	[CHART] Time in Status
+customfield_12002	customfield_10410	Abschlussberichtsnummer
+customfield_12001	customfield_10417	AbschlussberichtsnummerIntern
+customfield_10239	customfield_10246	Abschlussbericht-Status
+	customfield_10009	Actual end
+	customfield_10008	Actual start
+	customfield_10563	Agentensitzungen
+customfield_10415	customfield_10427	Anmeldung
+customfield_11806	customfield_10271	Anrede
+customfield_10331	customfield_10346	Ansprechpartner
+	customfield_10003	Approvers
+	customfield_10136	Arbeitskategorie
+customfield_10604	customfield_10393	Art des Unternehmens
+customfield_11807	customfield_10458	AS Berater
+customfield_10324	customfield_10207	AS-Referenz
+customfield_10325	customfield_10239	Auf richtigem Weg
+customfield_10297	customfield_10238	Auftrag mail comment
+customfield_10426	customfield_10218	Auftrag mail comment 1
+customfield_10427	customfield_10248	Auftrag mail comment 2
+customfield_10231	customfield_10236	Auftragsbeginn
+customfield_11448	customfield_10223	Auftragsbest�tigung
+customfield_11513	customfield_10226	Auftragsbest�tigung-Status
+customfield_10229	customfield_10459	Auftragsende
+customfield_12101	customfield_10256	Auftragsentwurf
+customfield_10230	customfield_10200	Auftragsnummer
+customfield_10232	customfield_10208	Auftragsstatus
+customfield_10432	customfield_10382	Auftragstyp
+customfield_10701	customfield_10457	Automatic Empfangsbestatigung
+customfield_10293	customfield_10433	Bank Konto BIC
+customfield_10292	customfield_10436	Bank Konto IBAN
+customfield_10289	customfield_10435	Bank Name
+customfield_10260	customfield_10237	Bearbeiter (Mitglieder)
+customfield_13500	customfield_10362	Bearbeiter (Partner)
+customfield_12803	customfield_10359	Beginndatum
+customfield_12902	customfield_10412	Bei Nein, warum
+customfield_10333	customfield_10370	Bemerkung
+customfield_10310	customfield_10408	Beratung vollst�ndig durchgef�hrt (Bei Nein, konnte helfen?)
+customfield_11301	customfield_10379	Beratungsfall
+customfield_11457	customfield_10255	Betrag 1
+customfield_11459	customfield_10376	Betrag 2
+customfield_11461	customfield_10383	Betrag 3
+customfield_11463	customfield_10384	Betrag 4
+customfield_11465	customfield_10385	Betrag 5
+customfield_11467	customfield_10381	Betrag 6
+customfield_13100	customfield_10380	Bezahldatum
+customfield_10202	customfield_10210	Bezahlstatus
+customfield_12605	customfield_10278	Bildverwertung in Medien
+customfield_11510	customfield_10357	Bitte erl�utern Sie uns kurz Ihr Anliegen
+customfield_10611	customfield_10343	Branchen Basiskompetenz
+customfield_10610	customfield_10295	Branchen Schwerpunkt
+	customfield_10007	Change reason
+	customfield_10006	Change risk
+	customfield_10005	Change type
+customfield_10807	customfield_10429	CityID
+customfield_10279	customfield_10241	Datum Feedback
+	customfield_10033	Design
+customfield_10000	customfield_10000	Development
+customfield_10420	customfield_10211	Eingangsart
+customfield_12604	customfield_10279	Einsatzbereitschaft (in Std./Woche)
+customfield_10258	customfield_10325	Eintrittsdatum
+customfield_10808	customfield_10212	E-Mail_RL_New_Auftrag
+customfield_12603	customfield_10264	E-Mail_RL_New_Interessent
+customfield_11512	customfield_10225	E-Mail_RL_New_Kontakt
+customfield_12804	customfield_10360	Endedatum
+customfield_10103	customfield_10013	Epic Color
+customfield_10100		Epic Link
+customfield_10102		Epic Name
+customfield_10101		Epic Status
+	customfield_10011	Epic-Name
+	customfield_10012	Epic-Status
+	customfield_10014	Epic-Verkn�pfung
+customfield_10277	customfield_10201	Erl�ut. zu Auf richtigem Weg
+customfield_10276	customfield_10232	Erl�ut. zu Hilfreich
+customfield_12903	customfield_10204	Erl�ut. zu Weitere Unterst�tzung
+customfield_10606	customfield_10421	Erstkontakt
+customfield_11805		External issue ID
+customfield_10605	customfield_10372	Fachthemen
+customfield_11704	customfield_10260	Feedback angefordert
+customfield_10313	customfield_10250	Feedback gew�nscht
+customfield_12900	customfield_10447	Feedbackbeauftragter
+customfield_12901	customfield_10439	Feedbackbeauftragter-E-Mail
+customfield_10238	customfield_10245	Feedback-Status
+customfield_11453	customfield_10438	Finanzbeauftragter
+customfield_11454	customfield_10446	Finanzbeauftragter-E-Mail
+	customfield_10021	Flagged
+	customfield_10035	Fokusbereiche
+	customfield_10030	Formulare insgesamt
+	customfield_10025	Genehmigungen
+customfield_11468	customfield_10214	Gesamtaufwand in Std.
+	customfield_10031	Gesendete Formulare
+	customfield_10032	Gesperrte Formulare
+customfield_10263	customfield_10272	Gew�nschte Einsatzgebiete
+customfield_10316	customfield_10411	Gr�ndungsberatung
+customfield_10317	customfield_10413	Gr�ndungszuschuss beantragt
+customfield_10318	customfield_10415	Gr�ndungszuschuss genehmigt
+customfield_10321	customfield_10206	Hilfreich
+customfield_10416	customfield_10428	Hinweise
+customfield_10602	customfield_10461	Hinweise zur Branche
+customfield_10419	customfield_10431	I.Ort
+customfield_11902	customfield_10422	I.PLZ
+customfield_10335	customfield_10430	I.Stra�e
+customfield_10278	customfield_10233	Idee zur Weiterentwicklung
+	customfield_10004	Impact
+customfield_12602	customfield_10263	Infos zusenden
+	customfield_10224	Intern
+customfield_10429		issueFunction
+customfield_10221	customfield_10400	K.E-Mail
+customfield_10428	customfield_10396	K.Fax
+customfield_11402	customfield_10388	K.Firma
+customfield_12600	customfield_10407	K.ID
+customfield_11305	customfield_10405	K.Land
+customfield_10207	customfield_10395	K.Nachname
+customfield_11202	customfield_10391	K.Ort
+customfield_11201	customfield_10389	K.PLZ
+customfield_13200	customfield_10394	K.Rechnung-Anrede
+customfield_11007	customfield_10402	K.Rechnung-E-Mail
+customfield_10222	customfield_10401	K.Rechnung-Firma
+customfield_11300	customfield_10374	K.Rechnung-Land
+customfield_11401	customfield_10375	K.Rechnung-Nachname
+customfield_10210	customfield_10397	K.Rechnung-Ort
+customfield_10209	customfield_10404	K.Rechnung-PLZ
+customfield_10208	customfield_10403	K.Rechnung-Strasse
+customfield_11400	customfield_10386	K.Rechnung-Vorname
+customfield_11200	customfield_10399	K.Strasse
+customfield_10256	customfield_10387	K.Tel.
+customfield_10206	customfield_10392	K.Vorname
+customfield_10257	customfield_10398	K.Wei.Tel
+	customfield_10103	Kategorie
+customfield_10329	customfield_10243	Kommentare FB
+customfield_10609	customfield_10301	Kompetenzen Basiskompetenz
+customfield_10608	customfield_10319	Kompetenzen Schwerpunkt
+customfield_11508	customfield_10354	Kon. E-Mail
+customfield_11505	customfield_10348	Kon. Firmenname
+customfield_11500	customfield_10351	Kon. Nachname
+customfield_11504	customfield_10355	Kon. Ort
+customfield_11503	customfield_10352	Kon. Postleitzahl
+customfield_11502	customfield_10350	Kon. Stra�e, Hausnummer
+customfield_11507	customfield_10349	Kon. Telefax
+customfield_11506	customfield_10347	Kon. Telefon
+customfield_11501	customfield_10353	Kon. Vorname
+customfield_11509	customfield_10356	Kon. Website
+customfield_10320	customfield_10242	Kontakt nicht m�glich
+customfield_10267	customfield_10247	Kontodaten
+customfield_10407	customfield_10434	Kontoinhaber
+customfield_11304	customfield_10424	Kreis(zur autom. Anzeige)
+customfield_10311	customfield_10419	Kunde mit Beratung zufrieden
+customfield_10319	customfield_10416	Kunde steht als Referenz zur Verf�gung
+customfield_10314	customfield_10216	Kurze Zusammenfassung der geleisteten Beratung
+customfield_10425	customfield_10252	Leistung
+customfield_11456	customfield_10453	Leistung 1
+customfield_11458	customfield_10449	Leistung 2
+customfield_11460	customfield_10451	Leistung 3
+customfield_11462	customfield_10454	Leistung 4
+customfield_11464	customfield_10455	Leistung 5
+customfield_11466	customfield_10452	Leistung 6
+customfield_13000	customfield_10222	L�sung
+	customfield_10324	M.Alter
+	customfield_10316	M.Datum Statuswechsel
+customfield_10217	customfield_10327	M.E-Mail AS
+customfield_10262	customfield_10328	M.E-Mail privat
+customfield_11006	customfield_10326	M.Fax
+customfield_10214	customfield_10274	M.Geburtsdatum
+	customfield_10313	M.Jahre-im-Verein
+customfield_10212	customfield_10270	M.Nachname
+	customfield_10307	M.N�chster-Geburtstag
+	customfield_10345	M.N�chstes-Jubil�um
+customfield_10216	customfield_10322	M.Nummer
+customfield_10220	customfield_10330	M.Ort
+customfield_10219	customfield_10277	M.PLZ
+customfield_13300	customfield_10321	M.Status�nderung
+customfield_10218	customfield_10275	M.Strasse
+customfield_10213	customfield_10267	M.Tel-Fest
+customfield_10261	customfield_10290	M.Tel-Mobil
+customfield_10211	customfield_10273	M.Vorname
+customfield_12611	customfield_10259	Mitgliedsnummer-Basis
+	customfield_10205	Mitgliedsstatus
+customfield_10233		Nachname
+	customfield_10029	Offene Formulare
+	customfield_10002	Organizations
+customfield_12704		Original story points
+customfield_11009	customfield_10366	P.E-Mail
+customfield_11008	customfield_10364	P.Fax
+customfield_10337	customfield_10361	P.Ort
+customfield_11900	customfield_10369	P.PLZ
+customfield_11010	customfield_10368	P.Strasse
+customfield_10334	customfield_10363	P.Telefon
+customfield_12802	customfield_10367	P.Telefon-Mobil
+customfield_12701	customfield_10018	Parent Link
+customfield_10412	customfield_10365	Partner
+customfield_12801	customfield_10358	Partnerstatus
+customfield_12800	customfield_10371	Partnertyp
+	customfield_10036	Project overview key
+	customfield_10037	Project overview status
+customfield_13600		QR_Code
+	customfield_10019	Rang
+customfield_10105		Rank
+customfield_10298	customfield_10209	Rechnung comment field 1
+customfield_10299	customfield_10450	Rechnung comment field 2
+customfield_10300	customfield_10213	Rechnung comment field 3
+	customfield_10253	Rechnung gesendet
+customfield_11012	customfield_10251	RechnungNummerIntern
+customfield_10501	customfield_10378	Rechnungsdatum
+customfield_11013	customfield_10377	Rechnungsnummer
+customfield_10254	customfield_10390	Rechtsform
+customfield_10234	customfield_10202	Region
+customfield_10287	customfield_10432	Region Name
+customfield_11706	customfield_10463	RegionF
+	customfield_10174	Request language
+	customfield_10137	Request participants
+	customfield_10010	Request Type
+customfield_10327	customfield_10235	RL relevant
+customfield_10309	customfield_10298	RL.E-Mail AS
+	customfield_10460	RL.E-Mail privat
+customfield_10308	customfield_10323	RL.Fax
+customfield_10303	customfield_10306	RL.Name
+customfield_10305	customfield_10305	RL.Ort
+customfield_10306	customfield_10302	RL.PLZ
+customfield_10304	customfield_10344	RL.Strasse
+customfield_10804	customfield_10310	RL.Tel-Fest
+customfield_10307	customfield_10311	RL.Tel-Mobil
+	customfield_10138	Satisfaction
+	customfield_10139	Satisfaction date
+customfield_12609	customfield_10276	Selbstauskunft
+	customfield_10024	Sentiment
+	customfield_10034	Sicherheitsrisiko
+	customfield_10414	Signature
+customfield_12606	customfield_10266	Sonstige Bemerkungen
+customfield_10104	customfield_10020	Sprint
+	customfield_10015	Startdatum
+customfield_11449	customfield_10441	Stellvertreter 1
+	customfield_10448	Stellvertreter 1 (migrated)
+customfield_11450	customfield_10442	Stellvertreter 1-E-Mail
+customfield_11451	customfield_10443	Stellvertreter 2
+customfield_11452	customfield_10444	Stellvertreter 2-E-Mail
+customfield_13400	customfield_10445	Stellvertreter 3
+customfield_13401	customfield_10437	Stellvertreter 3-E-Mail
+customfield_10433	customfield_10249	Steuersatz in Prozent
+customfield_12200	customfield_10262	Storno Hinweis
+customfield_10430	customfield_10220	Storno mail comment 1
+customfield_10431	customfield_10456	Storno mail comment 2
+customfield_12100	customfield_10373	Stornodatum
+	customfield_10016	Story point estimate
+customfield_10106	customfield_10070	Story Points
+customfield_12703	customfield_10023	Target end
+customfield_12702	customfield_10022	Target start
+customfield_12700	customfield_10001	Team
+customfield_10600	customfield_10425	Termine
+	customfield_10172	Time to done
+	customfield_10173	Time to first response
+	customfield_10530	�ber Formulare erstellte Vorg�nge
+customfield_10418	customfield_10426	Uhrzeit
+customfield_11520	customfield_10254	V.Bank
+customfield_11522	customfield_10258	V.BIC
+customfield_11518	customfield_10217	V.Fax
+customfield_11521	customfield_10228	V.IBAN
+customfield_11802	customfield_10221	V.JahresMaxKeyS
+customfield_11803	customfield_10261	V.LfdNr
+customfield_11519	customfield_10219	V.Mail
+customfield_11705	customfield_10231	V.Name Vorstand
+customfield_11523	customfield_10229	V.Nr
+customfield_11516	customfield_10215	V.Ort
+customfield_11524	customfield_10230	V.StNr
+customfield_11515	customfield_10257	V.Strasse
+customfield_11517	customfield_10227	V.Tel
+customfield_11525	customfield_10265	V.Vorstand
+customfield_10413	customfield_10423	Veranstaltungsort
+customfield_11408	customfield_10332	Vereinsfunktion  2
+customfield_11404	customfield_10280	Vereinsfunktion 1
+customfield_11619	customfield_10268	Vereinsfunktion 1 Bis
+customfield_11629	customfield_10269	Vereinsfunktion 1 Ge�ndert am
+customfield_11609	customfield_10331	Vereinsfunktion 1 Von
+customfield_11416	customfield_10317	Vereinsfunktion 10
+customfield_11628	customfield_10342	Vereinsfunktion 10 Bis
+customfield_11638	customfield_10293	Vereinsfunktion 10 Ge�ndert am
+customfield_11618	customfield_10318	Vereinsfunktion 10 Von
+customfield_11620	customfield_10283	Vereinsfunktion 2 Bis
+customfield_11630	customfield_10292	Vereinsfunktion 2 Ge�ndert am
+customfield_11610	customfield_10333	Vereinsfunktion 2 Von
+customfield_11409	customfield_10281	Vereinsfunktion 3
+customfield_11621	customfield_10334	Vereinsfunktion 3 Bis
+customfield_11631	customfield_10335	Vereinsfunktion 3 Ge�ndert am
+customfield_11611	customfield_10294	Vereinsfunktion 3 Von
+customfield_11410	customfield_10336	Vereinsfunktion 4
+customfield_11622	customfield_10282	Vereinsfunktion 4 Bis
+customfield_11632	customfield_10337	Vereinsfunktion 4 Ge�ndert am
+customfield_11612	customfield_10284	Vereinsfunktion 4 Von
+customfield_11411	customfield_10285	Vereinsfunktion 5
+customfield_11623	customfield_10286	Vereinsfunktion 5 Bis
+customfield_11633	customfield_10296	Vereinsfunktion 5 Ge�ndert am
+customfield_11613	customfield_10297	Vereinsfunktion 5 Von
+customfield_11412	customfield_10287	Vereinsfunktion 6
+customfield_11624	customfield_10288	Vereinsfunktion 6 Bis
+customfield_11634	customfield_10303	Vereinsfunktion 6 Ge�ndert am
+customfield_11614	customfield_10300	Vereinsfunktion 6 Von
+customfield_11413	customfield_10338	Vereinsfunktion 7
+customfield_11625	customfield_10309	Vereinsfunktion 7 Bis
+customfield_11635	customfield_10339	Vereinsfunktion 7 Ge�ndert am
+customfield_11615	customfield_10308	Vereinsfunktion 7 Von
+customfield_11414	customfield_10312	Vereinsfunktion 8
+customfield_11626	customfield_10291	Vereinsfunktion 8 Bis
+customfield_11636	customfield_10299	Vereinsfunktion 8 Ge�ndert am
+customfield_11616	customfield_10289	Vereinsfunktion 8 Von
+customfield_11415	customfield_10340	Vereinsfunktion 9
+customfield_11627	customfield_10314	Vereinsfunktion 9 Bis
+customfield_11637	customfield_10315	Vereinsfunktion 9 Ge�ndert am
+customfield_11617	customfield_10341	Vereinsfunktion 9 Von
+	customfield_10017	Vorgangsfarbe
+customfield_11702		Warning
+customfield_11810	customfield_10329	Webseite
+customfield_12608	customfield_10320	Weitere Angaben zu Branchen
+customfield_12607	customfield_10304	Weitere Angaben zu Kompetenzen
+customfield_10271	customfield_10406	Weitere Informationen
+customfield_10328	customfield_10234	Weitere Kommentare Klient
+customfield_10322	customfield_10203	Weitere Unterst�tzung
+customfield_10312	customfield_10420	Weitere Unterst�tzung/Folgeberatung angeboten
+customfield_10323	customfield_10240	Weiterempfehlung
+customfield_10603	customfield_10464	W�nsche im Detail
+customfield_10315	customfield_10409	Zahl der Mitarbeiter
+	customfield_10418	Ziel erreicht
+	customfield_10028	Ziele
+customfield_10800	customfield_10244	Zus. Bearbeiter
+customfield_11455	customfield_10440	Zus�tzliche E-Mail
+customfield_10502	customfield_10462	Zusatzvereinbarung
+

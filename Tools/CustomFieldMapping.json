@@ -1,0 +1,1357 @@
+[
+  {
+    "id_DC": "customfield_13100",
+    "id_CL": "customfield_10380",
+    "Feldname": "Bezahldatum"
+  },
+  {
+    "id_DC": "customfield_12800",
+    "id_CL": "customfield_10371",
+    "Feldname": "Partnertyp"
+  },
+  {
+    "id_DC": "customfield_10501",
+    "id_CL": "customfield_10378",
+    "Feldname": "Rechnungsdatum"
+  },
+  {
+    "id_DC": "customfield_12802",
+    "id_CL": "customfield_10367",
+    "Feldname": "P.Telefon-Mobil"
+  },
+  {
+    "id_DC": "customfield_10502",
+    "id_CL": "customfield_10462",
+    "Feldname": "Zusatzvereinbarung"
+  },
+  {
+    "id_DC": "customfield_12801",
+    "id_CL": "customfield_10358",
+    "Feldname": "Partnerstatus"
+  },
+  {
+    "id_DC": "customfield_12804",
+    "id_CL": "customfield_10360",
+    "Feldname": "Endedatum"
+  },
+  {
+    "id_DC": "customfield_12803",
+    "id_CL": "customfield_10359",
+    "Feldname": "Beginndatum"
+  },
+  {
+    "id_DC": "customfield_12002",
+    "id_CL": "customfield_10410",
+    "Feldname": "Abschlussberichtsnummer"
+  },
+  {
+    "id_DC": "customfield_12001",
+    "id_CL": "customfield_10417",
+    "Feldname": "AbschlussberichtsnummerIntern"
+  },
+  {
+    "id_DC": "customfield_10610",
+    "id_CL": "customfield_10295",
+    "Feldname": "Branchen Schwerpunkt"
+  },
+  {
+    "id_DC": "customfield_10611",
+    "id_CL": "customfield_10343",
+    "Feldname": "Branchen Basiskompetenz"
+  },
+  {
+    "id_DC": "customfield_11702",
+    "id_CL": null,
+    "Feldname": "Warning"
+  },
+  {
+    "id_DC": "customfield_11704",
+    "id_CL": "customfield_10260",
+    "Feldname": "Feedback angefordert"
+  },
+  {
+    "id_DC": "customfield_11706",
+    "id_CL": "customfield_10463",
+    "Feldname": "RegionF"
+  },
+  {
+    "id_DC": "customfield_11705",
+    "id_CL": "customfield_10231",
+    "Feldname": "V.Name Vorstand"
+  },
+  {
+    "id_DC": "customfield_10292",
+    "id_CL": "customfield_10436",
+    "Feldname": "Bank Konto IBAN"
+  },
+  {
+    "id_DC": "customfield_10293",
+    "id_CL": "customfield_10433",
+    "Feldname": "Bank Konto BIC"
+  },
+  {
+    "id_DC": "customfield_10297",
+    "id_CL": "customfield_10238",
+    "Feldname": "Auftrag mail comment"
+  },
+  {
+    "id_DC": "customfield_13200",
+    "id_CL": "customfield_10394",
+    "Feldname": "K.Rechnung-Anrede"
+  },
+  {
+    "id_DC": "customfield_10298",
+    "id_CL": "customfield_10209",
+    "Feldname": "Rechnung comment field 1"
+  },
+  {
+    "id_DC": "customfield_10299",
+    "id_CL": "customfield_10450",
+    "Feldname": "Rechnung comment field 2"
+  },
+  {
+    "id_DC": "customfield_11810",
+    "id_CL": "customfield_10329",
+    "Feldname": "Webseite"
+  },
+  {
+    "id_DC": "customfield_10600",
+    "id_CL": "customfield_10425",
+    "Feldname": "Termine"
+  },
+  {
+    "id_DC": "customfield_12901",
+    "id_CL": "customfield_10439",
+    "Feldname": "Feedbackbeauftragter-E-Mail"
+  },
+  {
+    "id_DC": "customfield_12900",
+    "id_CL": "customfield_10447",
+    "Feldname": "Feedbackbeauftragter"
+  },
+  {
+    "id_DC": "customfield_10602",
+    "id_CL": "customfield_10461",
+    "Feldname": "Hinweise zur Branche"
+  },
+  {
+    "id_DC": "customfield_12903",
+    "id_CL": "customfield_10204",
+    "Feldname": "Erläut. zu Weitere Unterstützung"
+  },
+  {
+    "id_DC": "customfield_10603",
+    "id_CL": "customfield_10464",
+    "Feldname": "Wünsche im Detail"
+  },
+  {
+    "id_DC": "customfield_10604",
+    "id_CL": "customfield_10393",
+    "Feldname": "Art des Unternehmens"
+  },
+  {
+    "id_DC": "customfield_12902",
+    "id_CL": "customfield_10412",
+    "Feldname": "Bei Nein, warum"
+  },
+  {
+    "id_DC": "customfield_10605",
+    "id_CL": "customfield_10372",
+    "Feldname": "Fachthemen"
+  },
+  {
+    "id_DC": "customfield_10606",
+    "id_CL": "customfield_10421",
+    "Feldname": "Erstkontakt"
+  },
+  {
+    "id_DC": "customfield_10608",
+    "id_CL": "customfield_10319",
+    "Feldname": "Kompetenzen Schwerpunkt"
+  },
+  {
+    "id_DC": "customfield_10609",
+    "id_CL": "customfield_10301",
+    "Feldname": "Kompetenzen Basiskompetenz"
+  },
+  {
+    "id_DC": "customfield_11010",
+    "id_CL": "customfield_10368",
+    "Feldname": "P.Strasse"
+  },
+  {
+    "id_DC": "customfield_12101",
+    "id_CL": "customfield_10256",
+    "Feldname": "Auftragsentwurf"
+  },
+  {
+    "id_DC": "customfield_11012",
+    "id_CL": "customfield_10251",
+    "Feldname": "RechnungNummerIntern"
+  },
+  {
+    "id_DC": "customfield_12100",
+    "id_CL": "customfield_10373",
+    "Feldname": "Stornodatum"
+  },
+  {
+    "id_DC": "customfield_11013",
+    "id_CL": "customfield_10377",
+    "Feldname": "Rechnungsnummer"
+  },
+  {
+    "id_DC": "customfield_10287",
+    "id_CL": "customfield_10432",
+    "Feldname": "Region Name"
+  },
+  {
+    "id_DC": "customfield_10289",
+    "id_CL": "customfield_10435",
+    "Feldname": "Bank Name"
+  },
+  {
+    "id_DC": "customfield_11006",
+    "id_CL": "customfield_10326",
+    "Feldname": "M.Fax"
+  },
+  {
+    "id_DC": "customfield_11007",
+    "id_CL": "customfield_10402",
+    "Feldname": "K.Rechnung-E-Mail"
+  },
+  {
+    "id_DC": "customfield_11008",
+    "id_CL": "customfield_10364",
+    "Feldname": "P.Fax"
+  },
+  {
+    "id_DC": "customfield_11009",
+    "id_CL": "customfield_10366",
+    "Feldname": "P.E-Mail"
+  },
+  {
+    "id_DC": "customfield_11803",
+    "id_CL": "customfield_10261",
+    "Feldname": "V.LfdNr"
+  },
+  {
+    "id_DC": "customfield_11802",
+    "id_CL": "customfield_10221",
+    "Feldname": "V.JahresMaxKeyS"
+  },
+  {
+    "id_DC": "customfield_11805",
+    "id_CL": null,
+    "Feldname": "External issue ID"
+  },
+  {
+    "id_DC": "customfield_11807",
+    "id_CL": "customfield_10458",
+    "Feldname": "AS Berater"
+  },
+  {
+    "id_DC": "customfield_11806",
+    "id_CL": "customfield_10271",
+    "Feldname": "Anrede"
+  },
+  {
+    "id_DC": "customfield_10271",
+    "id_CL": "customfield_10406",
+    "Feldname": "Weitere Informationen"
+  },
+  {
+    "id_DC": "customfield_13300",
+    "id_CL": "customfield_10321",
+    "Feldname": "M.Statusänderung"
+  },
+  {
+    "id_DC": "customfield_10276",
+    "id_CL": "customfield_10232",
+    "Feldname": "Erläut. zu Hilfreich"
+  },
+  {
+    "id_DC": "customfield_10277",
+    "id_CL": "customfield_10201",
+    "Feldname": "Erläut. zu Auf richtigem Weg"
+  },
+  {
+    "id_DC": "customfield_10278",
+    "id_CL": "customfield_10233",
+    "Feldname": "Idee zur Weiterentwicklung"
+  },
+  {
+    "id_DC": "customfield_10279",
+    "id_CL": "customfield_10241",
+    "Feldname": "Datum Feedback"
+  },
+  {
+    "id_DC": "customfield_10701",
+    "id_CL": "customfield_10457",
+    "Feldname": "Automatic Empfangsbestatigung"
+  },
+  {
+    "id_DC": "customfield_10260",
+    "id_CL": "customfield_10237",
+    "Feldname": "Bearbeiter (Mitglieder)"
+  },
+  {
+    "id_DC": "customfield_10261",
+    "id_CL": "customfield_10290",
+    "Feldname": "M.Tel-Mobil"
+  },
+  {
+    "id_DC": "customfield_10262",
+    "id_CL": "customfield_10328",
+    "Feldname": "M.E-Mail privat"
+  },
+  {
+    "id_DC": "customfield_10263",
+    "id_CL": "customfield_10272",
+    "Feldname": "Gewünschte Einsatzgebiete"
+  },
+  {
+    "id_DC": "customfield_12200",
+    "id_CL": "customfield_10262",
+    "Feldname": "Storno Hinweis"
+  },
+  {
+    "id_DC": "customfield_10267",
+    "id_CL": "customfield_10247",
+    "Feldname": "Kontodaten"
+  },
+  {
+    "id_DC": "customfield_10258",
+    "id_CL": "customfield_10325",
+    "Feldname": "Eintrittsdatum"
+  },
+  {
+    "id_DC": "customfield_11468",
+    "id_CL": "customfield_10214",
+    "Feldname": "Gesamtaufwand in Std."
+  },
+  {
+    "id_DC": "customfield_11900",
+    "id_CL": "customfield_10369",
+    "Feldname": "P.PLZ"
+  },
+  {
+    "id_DC": "customfield_11902",
+    "id_CL": "customfield_10422",
+    "Feldname": "I.PLZ"
+  },
+  {
+    "id_DC": "customfield_11461",
+    "id_CL": "customfield_10383",
+    "Feldname": "Betrag 3"
+  },
+  {
+    "id_DC": "customfield_11460",
+    "id_CL": "customfield_10451",
+    "Feldname": "Leistung 3"
+  },
+  {
+    "id_DC": "customfield_11463",
+    "id_CL": "customfield_10384",
+    "Feldname": "Betrag 4"
+  },
+  {
+    "id_DC": "customfield_11462",
+    "id_CL": "customfield_10454",
+    "Feldname": "Leistung 4"
+  },
+  {
+    "id_DC": "customfield_11465",
+    "id_CL": "customfield_10385",
+    "Feldname": "Betrag 5"
+  },
+  {
+    "id_DC": "customfield_10254",
+    "id_CL": "customfield_10390",
+    "Feldname": "Rechtsform"
+  },
+  {
+    "id_DC": "customfield_13401",
+    "id_CL": "customfield_10437",
+    "Feldname": "Stellvertreter 3-E-Mail"
+  },
+  {
+    "id_DC": "customfield_11464",
+    "id_CL": "customfield_10455",
+    "Feldname": "Leistung 5"
+  },
+  {
+    "id_DC": "customfield_13400",
+    "id_CL": "customfield_10445",
+    "Feldname": "Stellvertreter 3"
+  },
+  {
+    "id_DC": "customfield_11467",
+    "id_CL": "customfield_10381",
+    "Feldname": "Betrag 6"
+  },
+  {
+    "id_DC": "customfield_10256",
+    "id_CL": "customfield_10387",
+    "Feldname": "K.Tel."
+  },
+  {
+    "id_DC": "customfield_10257",
+    "id_CL": "customfield_10398",
+    "Feldname": "K.Wei.Tel"
+  },
+  {
+    "id_DC": "customfield_11466",
+    "id_CL": "customfield_10452",
+    "Feldname": "Leistung 6"
+  },
+  {
+    "id_DC": "customfield_11458",
+    "id_CL": "customfield_10449",
+    "Feldname": "Leistung 2"
+  },
+  {
+    "id_DC": "customfield_11457",
+    "id_CL": "customfield_10255",
+    "Feldname": "Betrag 1"
+  },
+  {
+    "id_DC": "customfield_11459",
+    "id_CL": "customfield_10376",
+    "Feldname": "Betrag 2"
+  },
+  {
+    "id_DC": "customfield_10800",
+    "id_CL": "customfield_10244",
+    "Feldname": "Zus. Bearbeiter"
+  },
+  {
+    "id_DC": "customfield_10804",
+    "id_CL": "customfield_10310",
+    "Feldname": "RL.Tel-Fest"
+  },
+  {
+    "id_DC": "customfield_10807",
+    "id_CL": "customfield_10429",
+    "Feldname": "CityID"
+  },
+  {
+    "id_DC": "customfield_10808",
+    "id_CL": "customfield_10212",
+    "Feldname": "E-Mail_RL_New_Auftrag"
+  },
+  {
+    "id_DC": "customfield_11450",
+    "id_CL": "customfield_10442",
+    "Feldname": "Stellvertreter 1-E-Mail"
+  },
+  {
+    "id_DC": "customfield_11452",
+    "id_CL": "customfield_10444",
+    "Feldname": "Stellvertreter 2-E-Mail"
+  },
+  {
+    "id_DC": "customfield_10000",
+    "id_CL": "customfield_10000",
+    "Feldname": "Development"
+  },
+  {
+    "id_DC": "customfield_11451",
+    "id_CL": "customfield_10443",
+    "Feldname": "Stellvertreter 2"
+  },
+  {
+    "id_DC": "customfield_11454",
+    "id_CL": "customfield_10446",
+    "Feldname": "Finanzbeauftragter-E-Mail"
+  },
+  {
+    "id_DC": "customfield_11453",
+    "id_CL": "customfield_10438",
+    "Feldname": "Finanzbeauftragter"
+  },
+  {
+    "id_DC": "customfield_11456",
+    "id_CL": "customfield_10453",
+    "Feldname": "Leistung 1"
+  },
+  {
+    "id_DC": "customfield_11455",
+    "id_CL": "customfield_10440",
+    "Feldname": "Zusätzliche E-Mail"
+  },
+  {
+    "id_DC": "customfield_10238",
+    "id_CL": "customfield_10245",
+    "Feldname": "Feedback-Status"
+  },
+  {
+    "id_DC": "customfield_11449",
+    "id_CL": "customfield_10441",
+    "Feldname": "Stellvertreter 1"
+  },
+  {
+    "id_DC": "customfield_10239",
+    "id_CL": "customfield_10246",
+    "Feldname": "Abschlussbericht-Status"
+  },
+  {
+    "id_DC": "customfield_11448",
+    "id_CL": "customfield_10223",
+    "Feldname": "Auftragsbestätigung"
+  },
+  {
+    "id_DC": "customfield_10230",
+    "id_CL": "customfield_10200",
+    "Feldname": "Auftragsnummer"
+  },
+  {
+    "id_DC": "customfield_10231",
+    "id_CL": "customfield_10236",
+    "Feldname": "Auftragsbeginn"
+  },
+  {
+    "id_DC": "customfield_10232",
+    "id_CL": "customfield_10208",
+    "Feldname": "Auftragsstatus"
+  },
+  {
+    "id_DC": "customfield_13500",
+    "id_CL": "customfield_10362",
+    "Feldname": "Bearbeiter (Partner)"
+  },
+  {
+    "id_DC": "customfield_11200",
+    "id_CL": "customfield_10399",
+    "Feldname": "K.Strasse"
+  },
+  {
+    "id_DC": "customfield_11201",
+    "id_CL": "customfield_10389",
+    "Feldname": "K.PLZ"
+  },
+  {
+    "id_DC": "customfield_10233",
+    "id_CL": null,
+    "Feldname": "Nachname"
+  },
+  {
+    "id_DC": "customfield_11202",
+    "id_CL": "customfield_10391",
+    "Feldname": "K.Ort"
+  },
+  {
+    "id_DC": "customfield_10234",
+    "id_CL": "customfield_10202",
+    "Feldname": "Region"
+  },
+  {
+    "id_DC": "customfield_10104",
+    "id_CL": "customfield_10020",
+    "Feldname": "Sprint"
+  },
+  {
+    "id_DC": "customfield_10105",
+    "id_CL": null,
+    "Feldname": "Rank"
+  },
+  {
+    "id_DC": "customfield_10106",
+    "id_CL": "customfield_10070",
+    "Feldname": "Story Points"
+  },
+  {
+    "id_DC": "customfield_10229",
+    "id_CL": "customfield_10459",
+    "Feldname": "Auftragsende"
+  },
+  {
+    "id_DC": "customfield_10220",
+    "id_CL": "customfield_10330",
+    "Feldname": "M.Ort"
+  },
+  {
+    "id_DC": "customfield_10100",
+    "id_CL": null,
+    "Feldname": "Epic Link"
+  },
+  {
+    "id_DC": "customfield_10221",
+    "id_CL": "customfield_10400",
+    "Feldname": "K.E-Mail"
+  },
+  {
+    "id_DC": "customfield_10101",
+    "id_CL": null,
+    "Feldname": "Epic Status"
+  },
+  {
+    "id_DC": "customfield_10222",
+    "id_CL": "customfield_10401",
+    "Feldname": "K.Rechnung-Firma"
+  },
+  {
+    "id_DC": "customfield_10102",
+    "id_CL": null,
+    "Feldname": "Epic Name"
+  },
+  {
+    "id_DC": "customfield_10103",
+    "id_CL": "customfield_10013",
+    "Feldname": "Epic Color"
+  },
+  {
+    "id_DC": "customfield_10335",
+    "id_CL": "customfield_10430",
+    "Feldname": "I.Straße"
+  },
+  {
+    "id_DC": "customfield_10214",
+    "id_CL": "customfield_10274",
+    "Feldname": "M.Geburtsdatum"
+  },
+  {
+    "id_DC": "customfield_11304",
+    "id_CL": "customfield_10424",
+    "Feldname": "Kreis(zur autom. Anzeige)"
+  },
+  {
+    "id_DC": "customfield_11305",
+    "id_CL": "customfield_10405",
+    "Feldname": "K.Land"
+  },
+  {
+    "id_DC": "customfield_10216",
+    "id_CL": "customfield_10322",
+    "Feldname": "M.Nummer"
+  },
+  {
+    "id_DC": "customfield_10337",
+    "id_CL": "customfield_10361",
+    "Feldname": "P.Ort"
+  },
+  {
+    "id_DC": "customfield_10217",
+    "id_CL": "customfield_10327",
+    "Feldname": "M.E-Mail AS"
+  },
+  {
+    "id_DC": "customfield_10218",
+    "id_CL": "customfield_10275",
+    "Feldname": "M.Strasse"
+  },
+  {
+    "id_DC": "customfield_10219",
+    "id_CL": "customfield_10277",
+    "Feldname": "M.PLZ"
+  },
+  {
+    "id_DC": "customfield_10331",
+    "id_CL": "customfield_10346",
+    "Feldname": "Ansprechpartner"
+  },
+  {
+    "id_DC": "customfield_10210",
+    "id_CL": "customfield_10397",
+    "Feldname": "K.Rechnung-Ort"
+  },
+  {
+    "id_DC": "customfield_11300",
+    "id_CL": "customfield_10374",
+    "Feldname": "K.Rechnung-Land"
+  },
+  {
+    "id_DC": "customfield_10211",
+    "id_CL": "customfield_10273",
+    "Feldname": "M.Vorname"
+  },
+  {
+    "id_DC": "customfield_10333",
+    "id_CL": "customfield_10370",
+    "Feldname": "Bemerkung"
+  },
+  {
+    "id_DC": "customfield_11301",
+    "id_CL": "customfield_10379",
+    "Feldname": "Beratungsfall"
+  },
+  {
+    "id_DC": "customfield_10212",
+    "id_CL": "customfield_10270",
+    "Feldname": "M.Nachname"
+  },
+  {
+    "id_DC": "customfield_10213",
+    "id_CL": "customfield_10267",
+    "Feldname": "M.Tel-Fest"
+  },
+  {
+    "id_DC": "customfield_10334",
+    "id_CL": "customfield_10363",
+    "Feldname": "P.Telefon"
+  },
+  {
+    "id_DC": "customfield_13600",
+    "id_CL": null,
+    "Feldname": "QR_Code"
+  },
+  {
+    "id_DC": "customfield_10324",
+    "id_CL": "customfield_10207",
+    "Feldname": "AS-Referenz"
+  },
+  {
+    "id_DC": "customfield_11414",
+    "id_CL": "customfield_10312",
+    "Feldname": "Vereinsfunktion 8"
+  },
+  {
+    "id_DC": "customfield_10325",
+    "id_CL": "customfield_10239",
+    "Feldname": "Auf richtigem Weg"
+  },
+  {
+    "id_DC": "customfield_11413",
+    "id_CL": "customfield_10338",
+    "Feldname": "Vereinsfunktion 7"
+  },
+  {
+    "id_DC": "customfield_11416",
+    "id_CL": "customfield_10317",
+    "Feldname": "Vereinsfunktion 10"
+  },
+  {
+    "id_DC": "customfield_10206",
+    "id_CL": "customfield_10392",
+    "Feldname": "K.Vorname"
+  },
+  {
+    "id_DC": "customfield_10327",
+    "id_CL": "customfield_10235",
+    "Feldname": "RL relevant"
+  },
+  {
+    "id_DC": "customfield_11415",
+    "id_CL": "customfield_10340",
+    "Feldname": "Vereinsfunktion 9"
+  },
+  {
+    "id_DC": "customfield_10207",
+    "id_CL": "customfield_10395",
+    "Feldname": "K.Nachname"
+  },
+  {
+    "id_DC": "customfield_10328",
+    "id_CL": "customfield_10234",
+    "Feldname": "Weitere Kommentare Klient"
+  },
+  {
+    "id_DC": "customfield_10208",
+    "id_CL": "customfield_10403",
+    "Feldname": "K.Rechnung-Strasse"
+  },
+  {
+    "id_DC": "customfield_10329",
+    "id_CL": "customfield_10243",
+    "Feldname": "Kommentare FB"
+  },
+  {
+    "id_DC": "customfield_10209",
+    "id_CL": "customfield_10404",
+    "Feldname": "K.Rechnung-PLZ"
+  },
+  {
+    "id_DC": "customfield_10320",
+    "id_CL": "customfield_10242",
+    "Feldname": "Kontakt nicht möglich"
+  },
+  {
+    "id_DC": "customfield_11410",
+    "id_CL": "customfield_10336",
+    "Feldname": "Vereinsfunktion 4"
+  },
+  {
+    "id_DC": "customfield_10321",
+    "id_CL": "customfield_10206",
+    "Feldname": "Hilfreich"
+  },
+  {
+    "id_DC": "customfield_11412",
+    "id_CL": "customfield_10287",
+    "Feldname": "Vereinsfunktion 6"
+  },
+  {
+    "id_DC": "customfield_10322",
+    "id_CL": "customfield_10203",
+    "Feldname": "Weitere Unterstützung"
+  },
+  {
+    "id_DC": "customfield_10202",
+    "id_CL": "customfield_10210",
+    "Feldname": "Bezahlstatus"
+  },
+  {
+    "id_DC": "customfield_11411",
+    "id_CL": "customfield_10285",
+    "Feldname": "Vereinsfunktion 5"
+  },
+  {
+    "id_DC": "customfield_10323",
+    "id_CL": "customfield_10240",
+    "Feldname": "Weiterempfehlung"
+  },
+  {
+    "id_DC": "customfield_10313",
+    "id_CL": "customfield_10250",
+    "Feldname": "Feedback gewünscht"
+  },
+  {
+    "id_DC": "customfield_11524",
+    "id_CL": "customfield_10230",
+    "Feldname": "V.StNr"
+  },
+  {
+    "id_DC": "customfield_11402",
+    "id_CL": "customfield_10388",
+    "Feldname": "K.Firma"
+  },
+  {
+    "id_DC": "customfield_10314",
+    "id_CL": "customfield_10216",
+    "Feldname": "Kurze Zusammenfassung der geleisteten Beratung"
+  },
+  {
+    "id_DC": "customfield_11523",
+    "id_CL": "customfield_10229",
+    "Feldname": "V.Nr"
+  },
+  {
+    "id_DC": "customfield_10315",
+    "id_CL": "customfield_10409",
+    "Feldname": "Zahl der Mitarbeiter"
+  },
+  {
+    "id_DC": "customfield_10316",
+    "id_CL": "customfield_10411",
+    "Feldname": "Gründungsberatung"
+  },
+  {
+    "id_DC": "customfield_11525",
+    "id_CL": "customfield_10265",
+    "Feldname": "V.Vorstand"
+  },
+  {
+    "id_DC": "customfield_11404",
+    "id_CL": "customfield_10280",
+    "Feldname": "Vereinsfunktion 1"
+  },
+  {
+    "id_DC": "customfield_10317",
+    "id_CL": "customfield_10413",
+    "Feldname": "Gründungszuschuss beantragt"
+  },
+  {
+    "id_DC": "customfield_10318",
+    "id_CL": "customfield_10415",
+    "Feldname": "Gründungszuschuss genehmigt"
+  },
+  {
+    "id_DC": "customfield_10319",
+    "id_CL": "customfield_10416",
+    "Feldname": "Kunde steht als Referenz zur Verfügung"
+  },
+  {
+    "id_DC": "customfield_11409",
+    "id_CL": "customfield_10281",
+    "Feldname": "Vereinsfunktion 3"
+  },
+  {
+    "id_DC": "customfield_11408",
+    "id_CL": "customfield_10332",
+    "Feldname": "Vereinsfunktion  2"
+  },
+  {
+    "id_DC": "customfield_10430",
+    "id_CL": "customfield_10220",
+    "Feldname": "Storno mail comment 1"
+  },
+  {
+    "id_DC": "customfield_11520",
+    "id_CL": "customfield_10254",
+    "Feldname": "V.Bank"
+  },
+  {
+    "id_DC": "customfield_10310",
+    "id_CL": "customfield_10408",
+    "Feldname": "Beratung vollständig durchgeführt (Bei Nein, konnte helfen?)"
+  },
+  {
+    "id_DC": "customfield_10431",
+    "id_CL": "customfield_10456",
+    "Feldname": "Storno mail comment 2"
+  },
+  {
+    "id_DC": "customfield_10432",
+    "id_CL": "customfield_10382",
+    "Feldname": "Auftragstyp"
+  },
+  {
+    "id_DC": "customfield_11401",
+    "id_CL": "customfield_10375",
+    "Feldname": "K.Rechnung-Nachname"
+  },
+  {
+    "id_DC": "customfield_10311",
+    "id_CL": "customfield_10419",
+    "Feldname": "Kunde mit Beratung zufrieden"
+  },
+  {
+    "id_DC": "customfield_12611",
+    "id_CL": "customfield_10259",
+    "Feldname": "Mitgliedsnummer-Basis"
+  },
+  {
+    "id_DC": "customfield_11522",
+    "id_CL": "customfield_10258",
+    "Feldname": "V.BIC"
+  },
+  {
+    "id_DC": "customfield_11400",
+    "id_CL": "customfield_10386",
+    "Feldname": "K.Rechnung-Vorname"
+  },
+  {
+    "id_DC": "customfield_10433",
+    "id_CL": "customfield_10249",
+    "Feldname": "Steuersatz in Prozent"
+  },
+  {
+    "id_DC": "customfield_11521",
+    "id_CL": "customfield_10228",
+    "Feldname": "V.IBAN"
+  },
+  {
+    "id_DC": "customfield_10312",
+    "id_CL": "customfield_10420",
+    "Feldname": "Weitere Unterstützung/Folgeberatung angeboten"
+  },
+  {
+    "id_DC": "customfield_11513",
+    "id_CL": "customfield_10226",
+    "Feldname": "Auftragsbestätigung-Status"
+  },
+  {
+    "id_DC": "customfield_12602",
+    "id_CL": "customfield_10263",
+    "Feldname": "Infos zusenden"
+  },
+  {
+    "id_DC": "customfield_11634",
+    "id_CL": "customfield_10303",
+    "Feldname": "Vereinsfunktion 6 Geändert am"
+  },
+  {
+    "id_DC": "customfield_11512",
+    "id_CL": "customfield_10225",
+    "Feldname": "E-Mail_RL_New_Kontakt"
+  },
+  {
+    "id_DC": "customfield_10303",
+    "id_CL": "customfield_10306",
+    "Feldname": "RL.Name"
+  },
+  {
+    "id_DC": "customfield_11633",
+    "id_CL": "customfield_10296",
+    "Feldname": "Vereinsfunktion 5 Geändert am"
+  },
+  {
+    "id_DC": "customfield_12604",
+    "id_CL": "customfield_10279",
+    "Feldname": "Einsatzbereitschaft (in Std./Woche)"
+  },
+  {
+    "id_DC": "customfield_10425",
+    "id_CL": "customfield_10252",
+    "Feldname": "Leistung"
+  },
+  {
+    "id_DC": "customfield_10304",
+    "id_CL": "customfield_10344",
+    "Feldname": "RL.Strasse"
+  },
+  {
+    "id_DC": "customfield_11515",
+    "id_CL": "customfield_10257",
+    "Feldname": "V.Strasse"
+  },
+  {
+    "id_DC": "customfield_11636",
+    "id_CL": "customfield_10299",
+    "Feldname": "Vereinsfunktion 8 Geändert am"
+  },
+  {
+    "id_DC": "customfield_10426",
+    "id_CL": "customfield_10218",
+    "Feldname": "Auftrag mail comment 1"
+  },
+  {
+    "id_DC": "customfield_12603",
+    "id_CL": "customfield_10264",
+    "Feldname": "E-Mail_RL_New_Interessent"
+  },
+  {
+    "id_DC": "customfield_10305",
+    "id_CL": "customfield_10305",
+    "Feldname": "RL.Ort"
+  },
+  {
+    "id_DC": "customfield_11635",
+    "id_CL": "customfield_10339",
+    "Feldname": "Vereinsfunktion 7 Geändert am"
+  },
+  {
+    "id_DC": "customfield_10427",
+    "id_CL": "customfield_10248",
+    "Feldname": "Auftrag mail comment 2"
+  },
+  {
+    "id_DC": "customfield_10306",
+    "id_CL": "customfield_10302",
+    "Feldname": "RL.PLZ"
+  },
+  {
+    "id_DC": "customfield_12606",
+    "id_CL": "customfield_10266",
+    "Feldname": "Sonstige Bemerkungen"
+  },
+  {
+    "id_DC": "customfield_11517",
+    "id_CL": "customfield_10227",
+    "Feldname": "V.Tel"
+  },
+  {
+    "id_DC": "customfield_11638",
+    "id_CL": "customfield_10293",
+    "Feldname": "Vereinsfunktion 10 Geändert am"
+  },
+  {
+    "id_DC": "customfield_12605",
+    "id_CL": "customfield_10278",
+    "Feldname": "Bildverwertung in Medien"
+  },
+  {
+    "id_DC": "customfield_10428",
+    "id_CL": "customfield_10396",
+    "Feldname": "K.Fax"
+  },
+  {
+    "id_DC": "customfield_10307",
+    "id_CL": "customfield_10311",
+    "Feldname": "RL.Tel-Mobil"
+  },
+  {
+    "id_DC": "customfield_11516",
+    "id_CL": "customfield_10215",
+    "Feldname": "V.Ort"
+  },
+  {
+    "id_DC": "customfield_11637",
+    "id_CL": "customfield_10315",
+    "Feldname": "Vereinsfunktion 9 Geändert am"
+  },
+  {
+    "id_DC": "customfield_10308",
+    "id_CL": "customfield_10323",
+    "Feldname": "RL.Fax"
+  },
+  {
+    "id_DC": "customfield_11519",
+    "id_CL": "customfield_10219",
+    "Feldname": "V.Mail"
+  },
+  {
+    "id_DC": "customfield_12608",
+    "id_CL": "customfield_10320",
+    "Feldname": "Weitere Angaben zu Branchen"
+  },
+  {
+    "id_DC": "customfield_10429",
+    "id_CL": null,
+    "Feldname": "issueFunction"
+  },
+  {
+    "id_DC": "customfield_10309",
+    "id_CL": "customfield_10298",
+    "Feldname": "RL.E-Mail AS"
+  },
+  {
+    "id_DC": "customfield_11518",
+    "id_CL": "customfield_10217",
+    "Feldname": "V.Fax"
+  },
+  {
+    "id_DC": "customfield_12607",
+    "id_CL": "customfield_10304",
+    "Feldname": "Weitere Angaben zu Kompetenzen"
+  },
+  {
+    "id_DC": "customfield_12609",
+    "id_CL": "customfield_10276",
+    "Feldname": "Selbstauskunft"
+  },
+  {
+    "id_DC": "customfield_11630",
+    "id_CL": "customfield_10292",
+    "Feldname": "Vereinsfunktion 2 Geändert am"
+  },
+  {
+    "id_DC": "customfield_10420",
+    "id_CL": "customfield_10211",
+    "Feldname": "Eingangsart"
+  },
+  {
+    "id_DC": "customfield_12600",
+    "id_CL": "customfield_10407",
+    "Feldname": "K.ID"
+  },
+  {
+    "id_DC": "customfield_10300",
+    "id_CL": "customfield_10213",
+    "Feldname": "Rechnung comment field 3"
+  },
+  {
+    "id_DC": "customfield_11632",
+    "id_CL": "customfield_10337",
+    "Feldname": "Vereinsfunktion 4 Geändert am"
+  },
+  {
+    "id_DC": "customfield_11510",
+    "id_CL": "customfield_10357",
+    "Feldname": "Bitte erläutern Sie uns kurz Ihr Anliegen"
+  },
+  {
+    "id_DC": "customfield_11631",
+    "id_CL": "customfield_10335",
+    "Feldname": "Vereinsfunktion 3 Geändert am"
+  },
+  {
+    "id_DC": "customfield_11502",
+    "id_CL": "customfield_10350",
+    "Feldname": "Kon. Straße, Hausnummer"
+  },
+  {
+    "id_DC": "customfield_10412",
+    "id_CL": "customfield_10365",
+    "Feldname": "Partner"
+  },
+  {
+    "id_DC": "customfield_11623",
+    "id_CL": "customfield_10286",
+    "Feldname": "Vereinsfunktion 5 Bis"
+  },
+  {
+    "id_DC": "customfield_11501",
+    "id_CL": "customfield_10353",
+    "Feldname": "Kon. Vorname"
+  },
+  {
+    "id_DC": "customfield_10413",
+    "id_CL": "customfield_10423",
+    "Feldname": "Veranstaltungsort"
+  },
+  {
+    "id_DC": "customfield_11622",
+    "id_CL": "customfield_10282",
+    "Feldname": "Vereinsfunktion 4 Bis"
+  },
+  {
+    "id_DC": "customfield_11504",
+    "id_CL": "customfield_10355",
+    "Feldname": "Kon. Ort"
+  },
+  {
+    "id_DC": "customfield_11625",
+    "id_CL": "customfield_10309",
+    "Feldname": "Vereinsfunktion 7 Bis"
+  },
+  {
+    "id_DC": "customfield_10415",
+    "id_CL": "customfield_10427",
+    "Feldname": "Anmeldung"
+  },
+  {
+    "id_DC": "customfield_11503",
+    "id_CL": "customfield_10352",
+    "Feldname": "Kon. Postleitzahl"
+  },
+  {
+    "id_DC": "customfield_11624",
+    "id_CL": "customfield_10288",
+    "Feldname": "Vereinsfunktion 6 Bis"
+  },
+  {
+    "id_DC": "customfield_10416",
+    "id_CL": "customfield_10428",
+    "Feldname": "Hinweise"
+  },
+  {
+    "id_DC": "customfield_11506",
+    "id_CL": "customfield_10347",
+    "Feldname": "Kon. Telefon"
+  },
+  {
+    "id_DC": "customfield_11627",
+    "id_CL": "customfield_10314",
+    "Feldname": "Vereinsfunktion 9 Bis"
+  },
+  {
+    "id_DC": "customfield_11505",
+    "id_CL": "customfield_10348",
+    "Feldname": "Kon. Firmenname"
+  },
+  {
+    "id_DC": "customfield_11626",
+    "id_CL": "customfield_10291",
+    "Feldname": "Vereinsfunktion 8 Bis"
+  },
+  {
+    "id_DC": "customfield_11508",
+    "id_CL": "customfield_10354",
+    "Feldname": "Kon. E-Mail"
+  },
+  {
+    "id_DC": "customfield_10418",
+    "id_CL": "customfield_10426",
+    "Feldname": "Uhrzeit"
+  },
+  {
+    "id_DC": "customfield_11629",
+    "id_CL": "customfield_10269",
+    "Feldname": "Vereinsfunktion 1 Geändert am"
+  },
+  {
+    "id_DC": "customfield_10419",
+    "id_CL": "customfield_10431",
+    "Feldname": "I.Ort"
+  },
+  {
+    "id_DC": "customfield_11507",
+    "id_CL": "customfield_10349",
+    "Feldname": "Kon. Telefax"
+  },
+  {
+    "id_DC": "customfield_11628",
+    "id_CL": "customfield_10342",
+    "Feldname": "Vereinsfunktion 10 Bis"
+  },
+  {
+    "id_DC": "customfield_11509",
+    "id_CL": "customfield_10356",
+    "Feldname": "Kon. Website"
+  },
+  {
+    "id_DC": "customfield_13000",
+    "id_CL": "customfield_10222",
+    "Feldname": "Lösung"
+  },
+  {
+    "id_DC": "customfield_11500",
+    "id_CL": "customfield_10351",
+    "Feldname": "Kon. Nachname"
+  },
+  {
+    "id_DC": "customfield_11621",
+    "id_CL": "customfield_10334",
+    "Feldname": "Vereinsfunktion 3 Bis"
+  },
+  {
+    "id_DC": "customfield_11620",
+    "id_CL": "customfield_10283",
+    "Feldname": "Vereinsfunktion 2 Bis"
+  },
+  {
+    "id_DC": "customfield_12701",
+    "id_CL": "customfield_10018",
+    "Feldname": "Parent Link"
+  },
+  {
+    "id_DC": "customfield_11612",
+    "id_CL": "customfield_10284",
+    "Feldname": "Vereinsfunktion 4 Von"
+  },
+  {
+    "id_DC": "customfield_12700",
+    "id_CL": "customfield_10001",
+    "Feldname": "Team"
+  },
+  {
+    "id_DC": "customfield_11611",
+    "id_CL": "customfield_10294",
+    "Feldname": "Vereinsfunktion 3 Von"
+  },
+  {
+    "id_DC": "customfield_12703",
+    "id_CL": "customfield_10023",
+    "Feldname": "Target end"
+  },
+  {
+    "id_DC": "customfield_11614",
+    "id_CL": "customfield_10300",
+    "Feldname": "Vereinsfunktion 6 Von"
+  },
+  {
+    "id_DC": "customfield_12702",
+    "id_CL": "customfield_10022",
+    "Feldname": "Target start"
+  },
+  {
+    "id_DC": "customfield_11613",
+    "id_CL": "customfield_10297",
+    "Feldname": "Vereinsfunktion 5 Von"
+  },
+  {
+    "id_DC": "customfield_11616",
+    "id_CL": "customfield_10289",
+    "Feldname": "Vereinsfunktion 8 Von"
+  },
+  {
+    "id_DC": "customfield_12704",
+    "id_CL": null,
+    "Feldname": "Original story points"
+  },
+  {
+    "id_DC": "customfield_11615",
+    "id_CL": "customfield_10308",
+    "Feldname": "Vereinsfunktion 7 Von"
+  },
+  {
+    "id_DC": "customfield_10407",
+    "id_CL": "customfield_10434",
+    "Feldname": "Kontoinhaber"
+  },
+  {
+    "id_DC": "customfield_11618",
+    "id_CL": "customfield_10318",
+    "Feldname": "Vereinsfunktion 10 Von"
+  },
+  {
+    "id_DC": "customfield_11617",
+    "id_CL": "customfield_10341",
+    "Feldname": "Vereinsfunktion 9 Von"
+  },
+  {
+    "id_DC": "customfield_11619",
+    "id_CL": "customfield_10268",
+    "Feldname": "Vereinsfunktion 1 Bis"
+  },
+  {
+    "id_DC": "customfield_11610",
+    "id_CL": "customfield_10333",
+    "Feldname": "Vereinsfunktion 2 Von"
+  },
+  {
+    "id_DC": "customfield_11609",
+    "id_CL": "customfield_10331",
+    "Feldname": "Vereinsfunktion 1 Von"
+  }
+]
