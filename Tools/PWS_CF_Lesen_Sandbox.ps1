@@ -1,0 +1,345 @@
+# =============================================================
+# Jira Cloud – Issue Custom Fields auslesen
+# Authentifizierung via Umgebungsvariablen:
+#   $env:JIRA_USER  = "deine-email@example.com"
+#   $env:JIRA_TOKEN = "dein-api-token"
+# =============================================================
+
+param(
+    [string]$IssueKey  = "AUFTRAG-26376",
+    [string]$BaseUrl   = "https://aktivsenioren-sandbox.atlassian.net",
+    [string]$OutputFile = ".\jira_output.json"
+)
+
+# --- Credentials aus Umgebungsvariablen ---
+$JiraUser  = $env:Sandbox_USER
+$JiraToken = $env:JIRA_API_TOKEN_CL
+
+if (-not $JiraUser -or -not $JiraToken) {
+    Write-Error "Bitte Umgebungsvariablen setzen: `$env:JIRA_USER und `$env:JIRA_TOKEN"
+    exit 1
+}
+
+# --- Basic Auth Header erstellen ---
+$Credentials = [Convert]::ToBase64String(
+    [Text.Encoding]::UTF8.GetBytes("${JiraUser}:${JiraToken}")
+)
+
+$Headers = @{
+    "Authorization" = "Basic $Credentials"
+    "Accept"        = "application/json"
+}
+
+# --- REST-Call ---
+$Url = "$BaseUrl/rest/api/3/issue/$IssueKey"
+
+try {
+    $Response = Invoke-RestMethod -Uri $Url -Headers $Headers -Method Get
+} catch {
+    Write-Error "Fehler beim Abrufen von ${IssueKey}: $($_.Exception.Message)"
+    exit 1
+}
+
+# --- Felder auslesen ---
+$Fields = $Response.fields
+
+$Result = [ordered]@{
+    "Issue"             = $Response.key
+    "Summary"           = $Fields.summary
+    "Bezahldatum"                                                  = if ($Fields.customfield_10380) { $Fields.customfield_10380.ToString() } else { "leer" }
+    "Partnertyp"                                                   = if ($Fields.customfield_10371) { $Fields.customfield_10371.ToString() } else { "leer" }
+    "Rechnungsdatum"                                               = if ($Fields.customfield_10378) { $Fields.customfield_10378.ToString() } else { "leer" }
+    "P.Telefon-Mobil"                                              = if ($Fields.customfield_10367) { $Fields.customfield_10367.ToString() } else { "leer" }
+    "Zusatzvereinbarung"                                           = if ($Fields.customfield_10462) { $Fields.customfield_10462.ToString() } else { "leer" }
+    "Partnerstatus"                                                = if ($Fields.customfield_10358) { $Fields.customfield_10358.ToString() } else { "leer" }
+    "Endedatum"                                                    = if ($Fields.customfield_10360) { $Fields.customfield_10360.ToString() } else { "leer" }
+    "Beginndatum"                                                  = if ($Fields.customfield_10359) { $Fields.customfield_10359.ToString() } else { "leer" }
+    "Abschlussberichtsnummer"                                      = if ($Fields.customfield_10410) { $Fields.customfield_10410.ToString() } else { "leer" }
+    "AbschlussberichtsnummerIntern"                                = if ($Fields.customfield_10417) { $Fields.customfield_10417.ToString() } else { "leer" }
+    "Branchen Schwerpunkt"                                         = if ($Fields.customfield_10295) { $Fields.customfield_10295.ToString() } else { "leer" }
+    "Branchen Basiskompetenz"                                      = if ($Fields.customfield_10343) { $Fields.customfield_10343.ToString() } else { "leer" }
+    "Feedback angefordert"                                         = if ($Fields.customfield_10260) { $Fields.customfield_10260.ToString() } else { "leer" }
+    "RegionF"                                                      = if ($Fields.customfield_10463) { $Fields.customfield_10463.ToString() } else { "leer" }
+    "V.Name Vorstand"                                              = if ($Fields.customfield_10231) { $Fields.customfield_10231.ToString() } else { "leer" }
+    "Bank Konto IBAN"                                              = if ($Fields.customfield_10436) { $Fields.customfield_10436.ToString() } else { "leer" }
+    "Bank Konto BIC"                                               = if ($Fields.customfield_10433) { $Fields.customfield_10433.ToString() } else { "leer" }
+    "Auftrag mail comment"                                         = if ($Fields.customfield_10238) { $Fields.customfield_10238.ToString() } else { "leer" }
+    "K.Rechnung-Anrede"                                            = if ($Fields.customfield_10394) { $Fields.customfield_10394.ToString() } else { "leer" }
+    "Rechnung comment field 1"                                     = if ($Fields.customfield_10209) { $Fields.customfield_10209.ToString() } else { "leer" }
+    "Rechnung comment field 2"                                     = if ($Fields.customfield_10450) { $Fields.customfield_10450.ToString() } else { "leer" }
+    "Webseite"                                                     = if ($Fields.customfield_10329) { $Fields.customfield_10329.ToString() } else { "leer" }
+    "Termine"                                                      = if ($Fields.customfield_10425) { $Fields.customfield_10425.ToString() } else { "leer" }
+    "Feedbackbeauftragter-E-Mail"                                  = if ($Fields.customfield_10439) { $Fields.customfield_10439.ToString() } else { "leer" }
+    "Feedbackbeauftragter"                                         = if ($Fields.customfield_10447) { $Fields.customfield_10447.ToString() } else { "leer" }
+    "Hinweise zur Branche"                                         = if ($Fields.customfield_10461) { $Fields.customfield_10461.ToString() } else { "leer" }
+    "Erläut. zu Weitere Unterstützung"                             = if ($Fields.customfield_10204) { $Fields.customfield_10204.ToString() } else { "leer" }
+    "Wünsche im Detail"                                            = if ($Fields.customfield_10464) { $Fields.customfield_10464.ToString() } else { "leer" }
+    "Art des Unternehmens"                                         = if ($Fields.customfield_10393) { $Fields.customfield_10393.ToString() } else { "leer" }
+    "Bei Nein, warum"                                              = if ($Fields.customfield_10412) { $Fields.customfield_10412.ToString() } else { "leer" }
+    "Fachthemen"                                                   = if ($Fields.customfield_10372) { $Fields.customfield_10372.ToString() } else { "leer" }
+    "Erstkontakt"                                                  = if ($Fields.customfield_10421) { $Fields.customfield_10421.ToString() } else { "leer" }
+    "Kompetenzen Schwerpunkt"                                      = if ($Fields.customfield_10319) { $Fields.customfield_10319.ToString() } else { "leer" }
+    "Kompetenzen Basiskompetenz"                                   = if ($Fields.customfield_10301) { $Fields.customfield_10301.ToString() } else { "leer" }
+    "P.Strasse"                                                    = if ($Fields.customfield_10368) { $Fields.customfield_10368.ToString() } else { "leer" }
+    "Auftragsentwurf"                                              = if ($Fields.customfield_10256) { $Fields.customfield_10256.ToString() } else { "leer" }
+    "RechnungNummerIntern"                                         = if ($Fields.customfield_10251) { $Fields.customfield_10251.ToString() } else { "leer" }
+    "Stornodatum"                                                  = if ($Fields.customfield_10373) { $Fields.customfield_10373.ToString() } else { "leer" }
+    "Rechnungsnummer"                                              = if ($Fields.customfield_10377) { $Fields.customfield_10377.ToString() } else { "leer" }
+    "Region Name"                                                  = if ($Fields.customfield_10432) { $Fields.customfield_10432.ToString() } else { "leer" }
+    "Bank Name"                                                    = if ($Fields.customfield_10435) { $Fields.customfield_10435.ToString() } else { "leer" }
+    "M.Fax"                                                        = if ($Fields.customfield_10326) { $Fields.customfield_10326.ToString() } else { "leer" }
+    "K.Rechnung-E-Mail"                                            = if ($Fields.customfield_10402) { $Fields.customfield_10402.ToString() } else { "leer" }
+    "P.Fax"                                                        = if ($Fields.customfield_10364) { $Fields.customfield_10364.ToString() } else { "leer" }
+    "P.E-Mail"                                                     = if ($Fields.customfield_10366) { $Fields.customfield_10366.ToString() } else { "leer" }
+    "V.LfdNr"                                                      = if ($Fields.customfield_10261) { $Fields.customfield_10261.ToString() } else { "leer" }
+    "V.JahresMaxKeyS"                                              = if ($Fields.customfield_10221) { $Fields.customfield_10221.ToString() } else { "leer" }
+    "AS Berater"                                                   = if ($Fields.customfield_10458) { $Fields.customfield_10458.ToString() } else { "leer" }
+    "Anrede"                                                       = if ($Fields.customfield_10271) { $Fields.customfield_10271.ToString() } else { "leer" }
+    "Weitere Informationen"                                        = if ($Fields.customfield_10406) { $Fields.customfield_10406.ToString() } else { "leer" }
+    "M.Statusänderung"                                             = if ($Fields.customfield_10321) { $Fields.customfield_10321.ToString() } else { "leer" }
+    "Erläut. zu Hilfreich"                                         = if ($Fields.customfield_10232) { $Fields.customfield_10232.ToString() } else { "leer" }
+    "Erläut. zu Auf richtigem Weg"                                 = if ($Fields.customfield_10201) { $Fields.customfield_10201.ToString() } else { "leer" }
+    "Idee zur Weiterentwicklung"                                   = if ($Fields.customfield_10233) { $Fields.customfield_10233.ToString() } else { "leer" }
+    "Datum Feedback"                                               = if ($Fields.customfield_10241) { $Fields.customfield_10241.ToString() } else { "leer" }
+    "Automatic Empfangsbestatigung"                                = if ($Fields.customfield_10457) { $Fields.customfield_10457.ToString() } else { "leer" }
+    "Bearbeiter (Mitglieder)"                                      = if ($Fields.customfield_10237) { $Fields.customfield_10237.ToString() } else { "leer" }
+    "M.Tel-Mobil"                                                  = if ($Fields.customfield_10290) { $Fields.customfield_10290.ToString() } else { "leer" }
+    "M.E-Mail privat"                                              = if ($Fields.customfield_10328) { $Fields.customfield_10328.ToString() } else { "leer" }
+    "Gewünschte Einsatzgebiete"                                    = if ($Fields.customfield_10272) { $Fields.customfield_10272.ToString() } else { "leer" }
+    "Storno Hinweis"                                               = if ($Fields.customfield_10262) { $Fields.customfield_10262.ToString() } else { "leer" }
+    "Kontodaten"                                                   = if ($Fields.customfield_10247) { $Fields.customfield_10247.ToString() } else { "leer" }
+    "Eintrittsdatum"                                               = if ($Fields.customfield_10325) { $Fields.customfield_10325.ToString() } else { "leer" }
+    "Gesamtaufwand in Std."                                        = if ($Fields.customfield_10214) { $Fields.customfield_10214.ToString() } else { "leer" }
+    "P.PLZ"                                                        = if ($Fields.customfield_10369) { $Fields.customfield_10369.ToString() } else { "leer" }
+    "I.PLZ"                                                        = if ($Fields.customfield_10422) { $Fields.customfield_10422.ToString() } else { "leer" }
+    "Betrag 3"                                                     = if ($Fields.customfield_10383) { $Fields.customfield_10383.ToString() } else { "leer" }
+    "Leistung 3"                                                   = if ($Fields.customfield_10451) { $Fields.customfield_10451.ToString() } else { "leer" }
+    "Betrag 4"                                                     = if ($Fields.customfield_10384) { $Fields.customfield_10384.ToString() } else { "leer" }
+    "Leistung 4"                                                   = if ($Fields.customfield_10454) { $Fields.customfield_10454.ToString() } else { "leer" }
+    "Betrag 5"                                                     = if ($Fields.customfield_10385) { $Fields.customfield_10385.ToString() } else { "leer" }
+    "Rechtsform"                                                   = if ($Fields.customfield_10390) { $Fields.customfield_10390.ToString() } else { "leer" }
+    "Stellvertreter 3-E-Mail"                                      = if ($Fields.customfield_10437) { $Fields.customfield_10437.ToString() } else { "leer" }
+    "Leistung 5"                                                   = if ($Fields.customfield_10455) { $Fields.customfield_10455.ToString() } else { "leer" }
+    "Stellvertreter 3"                                             = if ($Fields.customfield_10445) { $Fields.customfield_10445.ToString() } else { "leer" }
+    "Betrag 6"                                                     = if ($Fields.customfield_10381) { $Fields.customfield_10381.ToString() } else { "leer" }
+    "K.Tel."                                                       = if ($Fields.customfield_10387) { $Fields.customfield_10387.ToString() } else { "leer" }
+    "K.Wei.Tel"                                                    = if ($Fields.customfield_10398) { $Fields.customfield_10398.ToString() } else { "leer" }
+    "Leistung 6"                                                   = if ($Fields.customfield_10452) { $Fields.customfield_10452.ToString() } else { "leer" }
+    "Leistung 2"                                                   = if ($Fields.customfield_10449) { $Fields.customfield_10449.ToString() } else { "leer" }
+    "Betrag 1"                                                     = if ($Fields.customfield_10255) { $Fields.customfield_10255.ToString() } else { "leer" }
+    "Betrag 2"                                                     = if ($Fields.customfield_10376) { $Fields.customfield_10376.ToString() } else { "leer" }
+    "Zus. Bearbeiter"                                              = if ($Fields.customfield_10244) { $Fields.customfield_10244.ToString() } else { "leer" }
+    "RL.Tel-Fest"                                                  = if ($Fields.customfield_10310) { $Fields.customfield_10310.ToString() } else { "leer" }
+    "CityID"                                                       = if ($Fields.customfield_10429) { $Fields.customfield_10429.ToString() } else { "leer" }
+    "E-Mail_RL_New_Auftrag"                                        = if ($Fields.customfield_10212) { $Fields.customfield_10212.ToString() } else { "leer" }
+    "Stellvertreter 1-E-Mail"                                      = if ($Fields.customfield_10442) { $Fields.customfield_10442.ToString() } else { "leer" }
+    "Stellvertreter 2-E-Mail"                                      = if ($Fields.customfield_10444) { $Fields.customfield_10444.ToString() } else { "leer" }
+    "Development"                                                  = if ($Fields.customfield_10000) { $Fields.customfield_10000.ToString() } else { "leer" }
+    "Stellvertreter 2"                                             = if ($Fields.customfield_10443) { $Fields.customfield_10443.ToString() } else { "leer" }
+    "Finanzbeauftragter-E-Mail"                                    = if ($Fields.customfield_10446) { $Fields.customfield_10446.ToString() } else { "leer" }
+    "Finanzbeauftragter"                                           = if ($Fields.customfield_10438) { $Fields.customfield_10438.ToString() } else { "leer" }
+    "Leistung 1"                                                   = if ($Fields.customfield_10453) { $Fields.customfield_10453.ToString() } else { "leer" }
+    "Zusätzliche E-Mail"                                           = if ($Fields.customfield_10440) { $Fields.customfield_10440.ToString() } else { "leer" }
+    "Feedback-Status"                                              = if ($Fields.customfield_10245) { $Fields.customfield_10245.ToString() } else { "leer" }
+    "Stellvertreter 1"                                             = if ($Fields.customfield_10441) { $Fields.customfield_10441.ToString() } else { "leer" }
+    "Abschlussbericht-Status"                                      = if ($Fields.customfield_10246) { $Fields.customfield_10246.ToString() } else { "leer" }
+    "Auftragsbestätigung"                                          = if ($Fields.customfield_10223) { $Fields.customfield_10223.ToString() } else { "leer" }
+    "Auftragsnummer"                                               = if ($Fields.customfield_10200) { $Fields.customfield_10200.ToString() } else { "leer" }
+    "Auftragsbeginn"                                               = if ($Fields.customfield_10236) { $Fields.customfield_10236.ToString() } else { "leer" }
+    "Auftragsstatus"                                               = if ($Fields.customfield_10208) { $Fields.customfield_10208.ToString() } else { "leer" }
+    "Bearbeiter (Partner)"                                         = if ($Fields.customfield_10362) { $Fields.customfield_10362.ToString() } else { "leer" }
+    "K.Strasse"                                                    = if ($Fields.customfield_10399) { $Fields.customfield_10399.ToString() } else { "leer" }
+    "K.PLZ"                                                        = if ($Fields.customfield_10389) { $Fields.customfield_10389.ToString() } else { "leer" }
+    "K.Ort"                                                        = if ($Fields.customfield_10391) { $Fields.customfield_10391.ToString() } else { "leer" }
+    "Region"                                                       = if ($Fields.customfield_10202) { $Fields.customfield_10202.ToString() } else { "leer" }
+    "Sprint"                                                       = if ($Fields.customfield_10020) { $Fields.customfield_10020.ToString() } else { "leer" }
+    "Story Points"                                                 = if ($Fields.customfield_10070) { $Fields.customfield_10070.ToString() } else { "leer" }
+    "Auftragsende"                                                 = if ($Fields.customfield_10459) { $Fields.customfield_10459.ToString() } else { "leer" }
+    "M.Ort"                                                        = if ($Fields.customfield_10330) { $Fields.customfield_10330.ToString() } else { "leer" }
+    "K.E-Mail"                                                     = if ($Fields.customfield_10400) { $Fields.customfield_10400.ToString() } else { "leer" }
+    "K.Rechnung-Firma"                                             = if ($Fields.customfield_10401) { $Fields.customfield_10401.ToString() } else { "leer" }
+    "Epic Color"                                                   = if ($Fields.customfield_10013) { $Fields.customfield_10013.ToString() } else { "leer" }
+    "I.Straße"                                                     = if ($Fields.customfield_10430) { $Fields.customfield_10430.ToString() } else { "leer" }
+    "M.Geburtsdatum"                                               = if ($Fields.customfield_10274) { $Fields.customfield_10274.ToString() } else { "leer" }
+    "Kreis(zur autom. Anzeige)"                                    = if ($Fields.customfield_10424) { $Fields.customfield_10424.ToString() } else { "leer" }
+    "K.Land"                                                       = if ($Fields.customfield_10405) { $Fields.customfield_10405.ToString() } else { "leer" }
+    "M.Nummer"                                                     = if ($Fields.customfield_10322) { $Fields.customfield_10322.ToString() } else { "leer" }
+    "P.Ort"                                                        = if ($Fields.customfield_10361) { $Fields.customfield_10361.ToString() } else { "leer" }
+    "M.E-Mail AS"                                                  = if ($Fields.customfield_10327) { $Fields.customfield_10327.ToString() } else { "leer" }
+    "M.Strasse"                                                    = if ($Fields.customfield_10275) { $Fields.customfield_10275.ToString() } else { "leer" }
+    "M.PLZ"                                                        = if ($Fields.customfield_10277) { $Fields.customfield_10277.ToString() } else { "leer" }
+    "Ansprechpartner"                                              = if ($Fields.customfield_10346) { $Fields.customfield_10346.ToString() } else { "leer" }
+    "K.Rechnung-Ort"                                               = if ($Fields.customfield_10397) { $Fields.customfield_10397.ToString() } else { "leer" }
+    "K.Rechnung-Land"                                              = if ($Fields.customfield_10374) { $Fields.customfield_10374.ToString() } else { "leer" }
+    "M.Vorname"                                                    = if ($Fields.customfield_10273) { $Fields.customfield_10273.ToString() } else { "leer" }
+    "Bemerkung"                                                    = if ($Fields.customfield_10370) { $Fields.customfield_10370.ToString() } else { "leer" }
+    "Beratungsfall"                                                = if ($Fields.customfield_10379) { $Fields.customfield_10379.ToString() } else { "leer" }
+    "M.Nachname"                                                   = if ($Fields.customfield_10270) { $Fields.customfield_10270.ToString() } else { "leer" }
+    "M.Tel-Fest"                                                   = if ($Fields.customfield_10267) { $Fields.customfield_10267.ToString() } else { "leer" }
+    "P.Telefon"                                                    = if ($Fields.customfield_10363) { $Fields.customfield_10363.ToString() } else { "leer" }
+    "AS-Referenz"                                                  = if ($Fields.customfield_10207) { $Fields.customfield_10207.ToString() } else { "leer" }
+    "Vereinsfunktion 8"                                            = if ($Fields.customfield_10312) { $Fields.customfield_10312.ToString() } else { "leer" }
+    "Auf richtigem Weg"                                            = if ($Fields.customfield_10239) { $Fields.customfield_10239.ToString() } else { "leer" }
+    "Vereinsfunktion 7"                                            = if ($Fields.customfield_10338) { $Fields.customfield_10338.ToString() } else { "leer" }
+    "Vereinsfunktion 10"                                           = if ($Fields.customfield_10317) { $Fields.customfield_10317.ToString() } else { "leer" }
+    "K.Vorname"                                                    = if ($Fields.customfield_10392) { $Fields.customfield_10392.ToString() } else { "leer" }
+    "RL relevant"                                                  = if ($Fields.customfield_10235) { $Fields.customfield_10235.ToString() } else { "leer" }
+    "Vereinsfunktion 9"                                            = if ($Fields.customfield_10340) { $Fields.customfield_10340.ToString() } else { "leer" }
+    "K.Nachname"                                                   = if ($Fields.customfield_10395) { $Fields.customfield_10395.ToString() } else { "leer" }
+    "Weitere Kommentare Klient"                                    = if ($Fields.customfield_10234) { $Fields.customfield_10234.ToString() } else { "leer" }
+    "K.Rechnung-Strasse"                                           = if ($Fields.customfield_10403) { $Fields.customfield_10403.ToString() } else { "leer" }
+    "Kommentare FB"                                                = if ($Fields.customfield_10243) { $Fields.customfield_10243.ToString() } else { "leer" }
+    "K.Rechnung-PLZ"                                               = if ($Fields.customfield_10404) { $Fields.customfield_10404.ToString() } else { "leer" }
+    "Kontakt nicht möglich"                                        = if ($Fields.customfield_10242) { $Fields.customfield_10242.ToString() } else { "leer" }
+    "Vereinsfunktion 4"                                            = if ($Fields.customfield_10336) { $Fields.customfield_10336.ToString() } else { "leer" }
+    "Hilfreich"                                                    = if ($Fields.customfield_10206) { $Fields.customfield_10206.ToString() } else { "leer" }
+    "Vereinsfunktion 6"                                            = if ($Fields.customfield_10287) { $Fields.customfield_10287.ToString() } else { "leer" }
+    "Weitere Unterstützung"                                        = if ($Fields.customfield_10203) { $Fields.customfield_10203.ToString() } else { "leer" }
+    "Bezahlstatus"                                                 = if ($Fields.customfield_10210) { $Fields.customfield_10210.ToString() } else { "leer" }
+    "Vereinsfunktion 5"                                            = if ($Fields.customfield_10285) { $Fields.customfield_10285.ToString() } else { "leer" }
+    "Weiterempfehlung"                                             = if ($Fields.customfield_10240) { $Fields.customfield_10240.ToString() } else { "leer" }
+    "Feedback gewünscht"                                           = if ($Fields.customfield_10250) { $Fields.customfield_10250.ToString() } else { "leer" }
+    "V.StNr"                                                       = if ($Fields.customfield_10230) { $Fields.customfield_10230.ToString() } else { "leer" }
+    "K.Firma"                                                      = if ($Fields.customfield_10388) { $Fields.customfield_10388.ToString() } else { "leer" }
+    "Kurze Zusammenfassung der geleisteten Beratung"               = if ($Fields.customfield_10216) { $Fields.customfield_10216.ToString() } else { "leer" }
+    "V.Nr"                                                         = if ($Fields.customfield_10229) { $Fields.customfield_10229.ToString() } else { "leer" }
+    "Zahl der Mitarbeiter"                                         = if ($Fields.customfield_10409) { $Fields.customfield_10409.ToString() } else { "leer" }
+    "Gründungsberatung"                                            = if ($Fields.customfield_10411) { $Fields.customfield_10411.ToString() } else { "leer" }
+    "V.Vorstand"                                                   = if ($Fields.customfield_10265) { $Fields.customfield_10265.ToString() } else { "leer" }
+    "Vereinsfunktion 1"                                            = if ($Fields.customfield_10280) { $Fields.customfield_10280.ToString() } else { "leer" }
+    "Gründungszuschuss beantragt"                                  = if ($Fields.customfield_10413) { $Fields.customfield_10413.ToString() } else { "leer" }
+    "Gründungszuschuss genehmigt"                                  = if ($Fields.customfield_10415) { $Fields.customfield_10415.ToString() } else { "leer" }
+    "Kunde steht als Referenz zur Verfügung"                       = if ($Fields.customfield_10416) { $Fields.customfield_10416.ToString() } else { "leer" }
+    "Vereinsfunktion 3"                                            = if ($Fields.customfield_10281) { $Fields.customfield_10281.ToString() } else { "leer" }
+    "Vereinsfunktion  2"                                           = if ($Fields.customfield_10332) { $Fields.customfield_10332.ToString() } else { "leer" }
+    "Storno mail comment 1"                                        = if ($Fields.customfield_10220) { $Fields.customfield_10220.ToString() } else { "leer" }
+    "V.Bank"                                                       = if ($Fields.customfield_10254) { $Fields.customfield_10254.ToString() } else { "leer" }
+    "Beratung vollständig durchgeführt (Bei Nein, konnte helfen?)" = if ($Fields.customfield_10408) { $Fields.customfield_10408.ToString() } else { "leer" }
+    "Storno mail comment 2"                                        = if ($Fields.customfield_10456) { $Fields.customfield_10456.ToString() } else { "leer" }
+    "Auftragstyp"                                                  = if ($Fields.customfield_10382) { $Fields.customfield_10382.ToString() } else { "leer" }
+    "K.Rechnung-Nachname"                                          = if ($Fields.customfield_10375) { $Fields.customfield_10375.ToString() } else { "leer" }
+    "Kunde mit Beratung zufrieden"                                 = if ($Fields.customfield_10419) { $Fields.customfield_10419.ToString() } else { "leer" }
+    "Mitgliedsnummer-Basis"                                        = if ($Fields.customfield_10259) { $Fields.customfield_10259.ToString() } else { "leer" }
+    "V.BIC"                                                        = if ($Fields.customfield_10258) { $Fields.customfield_10258.ToString() } else { "leer" }
+    "K.Rechnung-Vorname"                                           = if ($Fields.customfield_10386) { $Fields.customfield_10386.ToString() } else { "leer" }
+    "Steuersatz in Prozent"                                        = if ($Fields.customfield_10249) { $Fields.customfield_10249.ToString() } else { "leer" }
+    "V.IBAN"                                                       = if ($Fields.customfield_10228) { $Fields.customfield_10228.ToString() } else { "leer" }
+    "Weitere Unterstützung/Folgeberatung angeboten"                = if ($Fields.customfield_10420) { $Fields.customfield_10420.ToString() } else { "leer" }
+    "Auftragsbestätigung-Status"                                   = if ($Fields.customfield_10226) { $Fields.customfield_10226.ToString() } else { "leer" }
+    "Infos zusenden"                                               = if ($Fields.customfield_10263) { $Fields.customfield_10263.ToString() } else { "leer" }
+    "Vereinsfunktion 6 Geändert am"                                = if ($Fields.customfield_10303) { $Fields.customfield_10303.ToString() } else { "leer" }
+    "E-Mail_RL_New_Kontakt"                                        = if ($Fields.customfield_10225) { $Fields.customfield_10225.ToString() } else { "leer" }
+    "RL.Name"                                                      = if ($Fields.customfield_10306) { $Fields.customfield_10306.ToString() } else { "leer" }
+    "Vereinsfunktion 5 Geändert am"                                = if ($Fields.customfield_10296) { $Fields.customfield_10296.ToString() } else { "leer" }
+    "Einsatzbereitschaft (in Std./Woche)"                          = if ($Fields.customfield_10279) { $Fields.customfield_10279.ToString() } else { "leer" }
+    "Leistung"                                                     = if ($Fields.customfield_10252) { $Fields.customfield_10252.ToString() } else { "leer" }
+    "RL.Strasse"                                                   = if ($Fields.customfield_10344) { $Fields.customfield_10344.ToString() } else { "leer" }
+    "V.Strasse"                                                    = if ($Fields.customfield_10257) { $Fields.customfield_10257.ToString() } else { "leer" }
+    "Vereinsfunktion 8 Geändert am"                                = if ($Fields.customfield_10299) { $Fields.customfield_10299.ToString() } else { "leer" }
+    "Auftrag mail comment 1"                                       = if ($Fields.customfield_10218) { $Fields.customfield_10218.ToString() } else { "leer" }
+    "E-Mail_RL_New_Interessent"                                    = if ($Fields.customfield_10264) { $Fields.customfield_10264.ToString() } else { "leer" }
+    "RL.Ort"                                                       = if ($Fields.customfield_10305) { $Fields.customfield_10305.ToString() } else { "leer" }
+    "Vereinsfunktion 7 Geändert am"                                = if ($Fields.customfield_10339) { $Fields.customfield_10339.ToString() } else { "leer" }
+    "Auftrag mail comment 2"                                       = if ($Fields.customfield_10248) { $Fields.customfield_10248.ToString() } else { "leer" }
+    "RL.PLZ"                                                       = if ($Fields.customfield_10302) { $Fields.customfield_10302.ToString() } else { "leer" }
+    "Sonstige Bemerkungen"                                         = if ($Fields.customfield_10266) { $Fields.customfield_10266.ToString() } else { "leer" }
+    "V.Tel"                                                        = if ($Fields.customfield_10227) { $Fields.customfield_10227.ToString() } else { "leer" }
+    "Vereinsfunktion 10 Geändert am"                               = if ($Fields.customfield_10293) { $Fields.customfield_10293.ToString() } else { "leer" }
+    "Bildverwertung in Medien"                                     = if ($Fields.customfield_10278) { $Fields.customfield_10278.ToString() } else { "leer" }
+    "K.Fax"                                                        = if ($Fields.customfield_10396) { $Fields.customfield_10396.ToString() } else { "leer" }
+    "RL.Tel-Mobil"                                                 = if ($Fields.customfield_10311) { $Fields.customfield_10311.ToString() } else { "leer" }
+    "V.Ort"                                                        = if ($Fields.customfield_10215) { $Fields.customfield_10215.ToString() } else { "leer" }
+    "Vereinsfunktion 9 Geändert am"                                = if ($Fields.customfield_10315) { $Fields.customfield_10315.ToString() } else { "leer" }
+    "RL.Fax"                                                       = if ($Fields.customfield_10323) { $Fields.customfield_10323.ToString() } else { "leer" }
+    "V.Mail"                                                       = if ($Fields.customfield_10219) { $Fields.customfield_10219.ToString() } else { "leer" }
+    "Weitere Angaben zu Branchen"                                  = if ($Fields.customfield_10320) { $Fields.customfield_10320.ToString() } else { "leer" }
+    "RL.E-Mail AS"                                                 = if ($Fields.customfield_10298) { $Fields.customfield_10298.ToString() } else { "leer" }
+    "V.Fax"                                                        = if ($Fields.customfield_10217) { $Fields.customfield_10217.ToString() } else { "leer" }
+    "Weitere Angaben zu Kompetenzen"                               = if ($Fields.customfield_10304) { $Fields.customfield_10304.ToString() } else { "leer" }
+    "Selbstauskunft"                                               = if ($Fields.customfield_10276) { $Fields.customfield_10276.ToString() } else { "leer" }
+    "Vereinsfunktion 2 Geändert am"                                = if ($Fields.customfield_10292) { $Fields.customfield_10292.ToString() } else { "leer" }
+    "Eingangsart"                                                  = if ($Fields.customfield_10211) { $Fields.customfield_10211.ToString() } else { "leer" }
+    "K.ID"                                                         = if ($Fields.customfield_10407) { $Fields.customfield_10407.ToString() } else { "leer" }
+    "Rechnung comment field 3"                                     = if ($Fields.customfield_10213) { $Fields.customfield_10213.ToString() } else { "leer" }
+    "Vereinsfunktion 4 Geändert am"                                = if ($Fields.customfield_10337) { $Fields.customfield_10337.ToString() } else { "leer" }
+    "Bitte erläutern Sie uns kurz Ihr Anliegen"                    = if ($Fields.customfield_10357) { $Fields.customfield_10357.ToString() } else { "leer" }
+    "Vereinsfunktion 3 Geändert am"                                = if ($Fields.customfield_10335) { $Fields.customfield_10335.ToString() } else { "leer" }
+    "Kon. Straße, Hausnummer"                                      = if ($Fields.customfield_10350) { $Fields.customfield_10350.ToString() } else { "leer" }
+    "Partner"                                                      = if ($Fields.customfield_10365) { $Fields.customfield_10365.ToString() } else { "leer" }
+    "Vereinsfunktion 5 Bis"                                        = if ($Fields.customfield_10286) { $Fields.customfield_10286.ToString() } else { "leer" }
+    "Kon. Vorname"                                                 = if ($Fields.customfield_10353) { $Fields.customfield_10353.ToString() } else { "leer" }
+    "Veranstaltungsort"                                            = if ($Fields.customfield_10423) { $Fields.customfield_10423.ToString() } else { "leer" }
+    "Vereinsfunktion 4 Bis"                                        = if ($Fields.customfield_10282) { $Fields.customfield_10282.ToString() } else { "leer" }
+    "Kon. Ort"                                                     = if ($Fields.customfield_10355) { $Fields.customfield_10355.ToString() } else { "leer" }
+    "Vereinsfunktion 7 Bis"                                        = if ($Fields.customfield_10309) { $Fields.customfield_10309.ToString() } else { "leer" }
+    "Anmeldung"                                                    = if ($Fields.customfield_10427) { $Fields.customfield_10427.ToString() } else { "leer" }
+    "Kon. Postleitzahl"                                            = if ($Fields.customfield_10352) { $Fields.customfield_10352.ToString() } else { "leer" }
+    "Vereinsfunktion 6 Bis"                                        = if ($Fields.customfield_10288) { $Fields.customfield_10288.ToString() } else { "leer" }
+    "Hinweise"                                                     = if ($Fields.customfield_10428) { $Fields.customfield_10428.ToString() } else { "leer" }
+    "Kon. Telefon"                                                 = if ($Fields.customfield_10347) { $Fields.customfield_10347.ToString() } else { "leer" }
+    "Vereinsfunktion 9 Bis"                                        = if ($Fields.customfield_10314) { $Fields.customfield_10314.ToString() } else { "leer" }
+    "Kon. Firmenname"                                              = if ($Fields.customfield_10348) { $Fields.customfield_10348.ToString() } else { "leer" }
+    "Vereinsfunktion 8 Bis"                                        = if ($Fields.customfield_10291) { $Fields.customfield_10291.ToString() } else { "leer" }
+    "Kon. E-Mail"                                                  = if ($Fields.customfield_10354) { $Fields.customfield_10354.ToString() } else { "leer" }
+    "Uhrzeit"                                                      = if ($Fields.customfield_10426) { $Fields.customfield_10426.ToString() } else { "leer" }
+    "Vereinsfunktion 1 Geändert am"                                = if ($Fields.customfield_10269) { $Fields.customfield_10269.ToString() } else { "leer" }
+    "I.Ort"                                                        = if ($Fields.customfield_10431) { $Fields.customfield_10431.ToString() } else { "leer" }
+    "Kon. Telefax"                                                 = if ($Fields.customfield_10349) { $Fields.customfield_10349.ToString() } else { "leer" }
+    "Vereinsfunktion 10 Bis"                                       = if ($Fields.customfield_10342) { $Fields.customfield_10342.ToString() } else { "leer" }
+    "Kon. Website"                                                 = if ($Fields.customfield_10356) { $Fields.customfield_10356.ToString() } else { "leer" }
+    "Lösung"                                                       = if ($Fields.customfield_10222) { $Fields.customfield_10222.ToString() } else { "leer" }
+    "Kon. Nachname"                                                = if ($Fields.customfield_10351) { $Fields.customfield_10351.ToString() } else { "leer" }
+    "Vereinsfunktion 3 Bis"                                        = if ($Fields.customfield_10334) { $Fields.customfield_10334.ToString() } else { "leer" }
+    "Vereinsfunktion 2 Bis"                                        = if ($Fields.customfield_10283) { $Fields.customfield_10283.ToString() } else { "leer" }
+    "Parent Link"                                                  = if ($Fields.customfield_10018) { $Fields.customfield_10018.ToString() } else { "leer" }
+    "Vereinsfunktion 4 Von"                                        = if ($Fields.customfield_10284) { $Fields.customfield_10284.ToString() } else { "leer" }
+    "Team"                                                         = if ($Fields.customfield_10001) { $Fields.customfield_10001.ToString() } else { "leer" }
+    "Vereinsfunktion 3 Von"                                        = if ($Fields.customfield_10294) { $Fields.customfield_10294.ToString() } else { "leer" }
+    "Target end"                                                   = if ($Fields.customfield_10023) { $Fields.customfield_10023.ToString() } else { "leer" }
+    "Vereinsfunktion 6 Von"                                        = if ($Fields.customfield_10300) { $Fields.customfield_10300.ToString() } else { "leer" }
+    "Target start"                                                 = if ($Fields.customfield_10022) { $Fields.customfield_10022.ToString() } else { "leer" }
+    "Vereinsfunktion 5 Von"                                        = if ($Fields.customfield_10297) { $Fields.customfield_10297.ToString() } else { "leer" }
+    "Vereinsfunktion 8 Von"                                        = if ($Fields.customfield_10289) { $Fields.customfield_10289.ToString() } else { "leer" }
+    "Vereinsfunktion 7 Von"                                        = if ($Fields.customfield_10308) { $Fields.customfield_10308.ToString() } else { "leer" }
+    "Kontoinhaber"                                                 = if ($Fields.customfield_10434) { $Fields.customfield_10434.ToString() } else { "leer" }
+    "Vereinsfunktion 10 Von"                                       = if ($Fields.customfield_10318) { $Fields.customfield_10318.ToString() } else { "leer" }
+    "Vereinsfunktion 9 Von"                                        = if ($Fields.customfield_10341) { $Fields.customfield_10341.ToString() } else { "leer" }
+    "Vereinsfunktion 1 Bis"                                        = if ($Fields.customfield_10268) { $Fields.customfield_10268.ToString() } else { "leer" }
+    "Vereinsfunktion 2 Von"                                        = if ($Fields.customfield_10333) { $Fields.customfield_10333.ToString() } else { "leer" }
+    "Vereinsfunktion 1 Von"                                        = if ($Fields.customfield_10331) { $Fields.customfield_10331.ToString() } else { "leer" }
+}
+
+# --- Ausgabe in JSON-Datei ---
+$Result | ConvertTo-Json -Depth 5 | Out-File -FilePath $OutputFile -Encoding utf8
+
+Write-Host "✅ Ergebnis gespeichert in: $OutputFile"
+Write-Host ($Result | ConvertTo-Json -Depth 5)
+
+# =============================================================
+# Aufteilung in "Werte" (echter Inhalt) und "leer" (leer/"leer")
+# =============================================================
+
+$ValuesResult = [ordered]@{}
+$EmptyResult  = [ordered]@{}
+
+foreach ($key in $Result.Keys) {
+    $value = $Result[$key]
+    if ($value -eq "" -or $value -eq "leer" -or $null -eq $value) {
+        $EmptyResult[$key] = $value
+    } else {
+        $ValuesResult[$key] = $value
+    }
+}
+
+# --- Zielverzeichnis aus $OutputFile ableiten ---
+$OutputDir = Split-Path -Path $OutputFile -Parent
+if ([string]::IsNullOrEmpty($OutputDir)) { $OutputDir = "." }
+
+$WerteFile = Join-Path $OutputDir "${IssueKey}_CF_Werte.json"
+$LeerFile  = Join-Path $OutputDir "${IssueKey}_CF_leer.json"
+
+$ValuesResult | ConvertTo-Json -Depth 5 | Out-File -FilePath $WerteFile -Encoding utf8
+$EmptyResult  | ConvertTo-Json -Depth 5 | Out-File -FilePath $LeerFile  -Encoding utf8
+
+Write-Host "✅ Felder mit Werten ($($ValuesResult.Count)) gespeichert in: $WerteFile"
+Write-Host "✅ Leere Felder ($($EmptyResult.Count)) gespeichert in: $LeerFile"
