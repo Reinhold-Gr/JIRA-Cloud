@@ -77,7 +77,7 @@ return [
     "PNG gültig"  : qrPngBytes[0] == (byte)0x89,
     "PDF-Bibliothek verfügbar" : pdfLib
 ]
-
+g
 ---
 
 {
