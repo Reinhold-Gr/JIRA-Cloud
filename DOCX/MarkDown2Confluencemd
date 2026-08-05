@@ -1,0 +1,100 @@
+Ja, es gibt mehrere praxistaugliche Wege in beide Richtungen. Hier eine Übersicht:
+Markdown → Confluence
+1. „Mark" (Empfehlung für Automatisierung)
+Das Open-Source-Tool https://github.com/kovetskiy/mark ist speziell für diesen Zweck gebaut:
+# Installation
+go install github.com/kovetskiy/mark@latest
+# oder als Binary von GitHub Releases
+
+# Einzelne Datei hochladen
+mark -u user@example.com -p API_TOKEN \
+     -b https://aktivsenioren-sandbox.atlassian.net/wiki \
+     -f dokument.md
+Steuert Space, Titel und Elternseite über Metadaten im Markdown-Header:
+
+
+Inhalt hier
+Normaler Markdown-Text...
+* Unterstützt **Confluence-Makros** direkt im Markdown (Code-Blöcke, Info-Panels, TOC)
+* Ideal für **CI/CD-Pipelines** (Doku aus Git → Confluence automatisch)
+
+---
+
+### **2. Confluence-eigener Import**
+Confluence Cloud kann Markdown direkt importieren:
+
+* **Einzelne Seite**: Seite erstellen → `⋯` Menü → **„Importieren"** → Markdown-Datei auswählen
+* Funktioniert für einfache Dokumente gut, bei komplexem Markdown (Tabellen, verschachtelte Listen) teilweise mit Formatierungsverlusten
+
+---
+
+### **3. Pandoc (universeller Konverter)**
+[Pandoc](https://pandoc.org/) kann Markdown in Confluence Storage Format (XHTML) umwandeln:
+
+```bash
+# MD → Confluence-kompatibles XHTML
+pandoc dokument.md -f markdown -t html -o output.html
+Das HTML kann dann per REST API als Seite erstellt werden:
+curl -X POST \
+  "https://aktivsenioren-sandbox.atlassian.net/wiki/api/v2/pages" \
+  -H "Content-Type: application/json" \
+  -u "user@example.com:API_TOKEN" \
+  -d '{
+    "spaceId": "SPACE_ID",
+    "title": "Importierte Seite",
+    "body": {"representation": "storage", "value": "'$(cat output.html)'"}
+  }'
+Confluence → Markdown
+1. Pandoc (Empfehlung)
+# Confluence-Seite als HTML exportieren, dann konvertieren
+curl -s "https://aktivsenioren-sandbox.atlassian.net/wiki/api/v2/pages/PAGE_ID?body-format=storage" \
+  -u "user@example.com:API_TOKEN" | jq -r '.body.storage.value' > seite.html
+
+# HTML → Markdown
+pandoc seite.html -f html -t markdown -o seite.md
+2. Confluence-Export + Konvertierung
+Space exportieren: Space-Einstellungen → Export → HTML
+Dann alle HTML-Dateien mit Pandoc batch-konvertieren:
+
+for f in *.html; do
+  pandoc "$f" -f html -t markdown -o "${f%.html}.md"
+done
+3. Browser-Erweiterungen
+„Copy as Markdown" (Chrome/Firefox) — markierten Confluence-Inhalt als Markdown in die Zwischenablage kopieren
+Gut für einzelne Abschnitte, nicht für Massenexport
+
+Vergleich
+Tool
+Richtung
+Stärke
+Schwäche
+Mark
+MD → Confluence
+Automatisierbar, Makro-Support
+Nur Richtung MD → Confluence
+Confluence Import
+MD → Confluence
+Kein Tool nötig
+Formatierungsverluste möglich
+Pandoc
+Beide ↔
+Universell, batch-fähig
+Confluence-Makros gehen verloren
+REST API
+Beide ↔
+Volle Kontrolle
+Mehr Aufwand
+Für euren Use Case
+Falls ihr eure Change-Protokolle oder Skript-Dokumentation in Git als Markdown pflegen und automatisch nach Confluence synchronisieren wollt, wäre folgende Kombination ideal:
+Dokumentation in Git als .md-Dateien mit Mark-Headern
+GitHub Action / GitLab CI führt bei jedem Push mark aus
+Confluence zeigt immer die aktuelle Version
+
+# Beispiel GitHub Action
+- name: Sync docs to Confluence
+  run: |
+    mark -u ${{ secrets.CONFLUENCE_USER }} \
+         -p ${{ secrets.CONFLUENCE_TOKEN }} \
+         -b https://aktivsenioren-sandbox.atlassian.net/wiki \
+         -f docs/*.md
+So bleibt Git die Single Source of Truth, und Confluence wird automatisch aktuell gehalten.

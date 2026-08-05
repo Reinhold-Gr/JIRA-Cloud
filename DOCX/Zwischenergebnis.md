@@ -196,29 +196,21 @@ Du alte QR-Codes per API wieder löschen kannst
 
 ----
 
-
-return [
-    "Issue"       : issueKey,
-    "Summary"     : summary,
-    "Betrag"      : betrag,
-    "QR-Bytes"    : qrPngBytes.length,
-    "PNG gültig"  : qrPngBytes[0] == (byte)0x89,
-    "PDF-Bibliothek verfügbar" : pdfLib
-]
-79 lines
- 
-No type checking errors detected
-Run code as:
-Current User
-
-Run
-Result
-Logs
-{
-  "Issue": "RECHNUNG-8208",
-  "Summary": "25-100-1730-01",
-  "Betrag": "130.0",
-  "QR-Bytes": 810,
-  "PNG gültig": true,
-  "PDF-Bibliothek verfügbar": "none"
-}
+Bibliothek
+Status
+com.lowagie.text.Document (iText 2/OpenPDF)
+❌ nicht vorhanden
+com.itextpdf.text.Document (iText 5)
+❌ nicht vorhanden
+Konsequenz für dein Vorhaben:
+Was du willst
+Machbar?
+QR-Code als PNG anhängen
+✅ Funktioniert bereits
+QR-Code in ein PDF einbetten (serverseitig)
+❌ Nicht möglich in Cloud ohne externe Bibliothek
+PDF über externe API generieren
+✅ Möglich (z.B. api.html2pdf.io, gotenberg)
+QR-Code direkt in Jira-Beschreibung einbetten
+✅ Möglich als !qrcode_xxx.png|thumbnail!
+Empfehlung: Wenn du nur den GiroCode-QR brauchst, reicht das PNG völlig aus — Banken-Apps wie z.B. die Sparkassen-App lesen direkt PNG-Anhänge. Ein PDF ist nur nötig, wenn du ein vollständiges Rechnungsdokument generieren willst.
