@@ -176,11 +176,11 @@ Du alte QR-Codes per API wieder löschen kannst
 ┌─────────────────────────────────────────────────┐
 │              Ein einziges Skript                │
 │                                                 │
-│  1. Jira Issue lesen  →  Auftragsdaten (RAM)   │
+│  1. Jira Issue lesen  →  Auftragsdaten (RAM)    │
 │           ↓                                     │
-│  2. QR-Code erzeugen  →  byte[] PNG  (RAM)     │
+│  2. QR-Code erzeugen  →  byte[] PNG  (RAM)      │
 │           ↓                                     │
-│  3. PDF erzeugen      →  byte[] PDF  (RAM)     │
+│  3. PDF erzeugen      →  byte[] PDF  (RAM)      │
 │     + QR-Code einbetten                         │
 │           ↓                                     │
 │  4. PDF als Attachment am Issue speichern       │

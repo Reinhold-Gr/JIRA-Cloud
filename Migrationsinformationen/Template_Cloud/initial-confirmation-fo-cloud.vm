@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+##____________________________________________________________________
+##
+## Empfangsbestätigung_V2.0 (CLOUD-VERSION): initial-confirmation-fo.vm
+##
+## Migriert von DC nach Cloud: 2025-08-13
+## Basis: DC-Version V2.4 (Stand 12.07.25)
+##
+## WICHTIGE ÄNDERUNGEN gegenüber DC-Version:
+##
+## 1. Encoding: ISO-8859-1 → UTF-8
+##    (Better PDF Exporter Cloud erwartet UTF-8)
+##
+## 2. $scripting.execute("articles-tool.groovy") ENTFERNT
+##    Groovy-Scripts werden in Cloud NICHT unterstützt.
+##    Alle Variablen, die articles-tool.groovy gesetzt hat,
+##    müssen entweder direkt im Template definiert oder
+##    über Cloud-kompatible Mechanismen bereitgestellt werden.
+##    → Platzhalter-Kommentare markieren die betroffenen Stellen.
+##
+## 3. $include.parse(...) bleibt erhalten, aber:
+##    auftrag-common-elements-fo.vm muss ebenfalls nach Cloud
+##    migriert und dort als separates Template hinterlegt sein.
+##
+## 4. $env-Variable: In Cloud nicht verfügbar.
+##    Debug-Ausgabe für TEST-Umgebung wurde angepasst.
+##
+## 5. $cf12602: Direktzugriff auf Custom Field Value.
+##    In Cloud: Zugriff über $issue.getCustomFieldValue("customfield_12602")
+##    oder über den im Template bereits verwendeten Mechanismus.
+##    → Siehe Abschnitt "Info senden Ja/Nein"
+##
+## 6. Debug-Flag: Vor Produktiveinsatz auf false setzen!
+##
+##____________________________________________________________________
+
+## JIRA PDF View Plugin – Cloud Version
+## Zugriff nur mit Auftrag-Projekt
+
+## Einbinden der gemeinsamen Elemente (muss ebenfalls nach Cloud migriert sein!)
+$include.parse($ctx, "auftrag-common-elements-fo.vm")
+
+## HINWEIS: $scripting.execute("articles-tool.groovy") wurde entfernt.
+## Falls articles-tool.groovy Variablen wie $klient, $region, $FZ_ImageUrl,
+## $logoImageUrl_Banner, $logoImageUrl_Banner_S2 gesetzt hat,
+## müssen diese in auftrag-common-elements-fo.vm oder direkt hier definiert werden.
+## Beispiel (auskommentiert – anpassen nach tatsächlichem Inhalt des Groovy-Scripts):
+##
+## #set($klient = $issues.get(0))   ## falls klient = das Issue selbst ist
+## #set($region = ...)              ## Verlinktes Issue vom Typ "Region" – siehe unten
+##
+## EMPFEHLUNG: Prüfen Sie, welche verlinkten Issues articles-tool.groovy
+## ausgewertet hat, und replizieren Sie die Logik hier mit Velocity.
+## Beispiel für verlinkte Issues (Region):
+##
+## #foreach($type in $linkCollection.linkTypes)
+##   #foreach($i in $linkCollection.getOutwardIssues($type.name))
+##     #if($i.projectObject.key == "REG")   ## Projektschlüssel der Region anpassen!
+##       #set($region = $i)
+##     #end
+##   #end
+## #end
+
+#set($filename = "$issues.get(0).getCustomFieldValue('customfield_10230')_Auftrag.pdf")
+
+## Debugging true/false – VOR PRODUKTIVEINSATZ auf false setzen!
+#set($debug = false)
+
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+	<fo:layout-master-set>
+		<fo:simple-page-master master-name="A4" margin-top="0.0cm" margin-bottom="0.0cm" margin-left="1.0cm" margin-right="1.0cm">
+			<fo:region-body region-name="page-body" margin-top="0.5cm" margin-bottom="0.8cm" margin-left="1.5cm" margin-right="1.5cm"/>
+			<fo:region-before region-name="page-header" extent="2.5cm" margin-left="1.5cm" margin-right="1.5cm"/>
+			<fo:region-after region-name="page-footer" extent="2.5cm" margin-left="1.5cm" margin-right="1.5cm"/>
+		</fo:simple-page-master>
+	</fo:layout-master-set>
+
+	<fo:page-sequence font-family="OpenSANS" font-size="8pt" master-reference="A4">
+
+		<!-- Fußzeile -->
+		<fo:static-content flow-name="page-footer" font-size="82%">
+			<fo:block text-align="center"> Seite <fo:page-number/> </fo:block>
+			<fo:block text-align="left">
+				<fo:external-graphic content-width="190mm" src="url($xmlutils.escape($FZ_ImageUrl))" overflow="hidden"/>
+			</fo:block>
+		</fo:static-content>
+
+		<!-- Seiteninhalt -->
+		<fo:flow flow-name="page-body">
+
+#if($debug)
+			## DEBUG – Verlinkte Issues
+			<fo:block font-size="8pt" color="red">
+				DEBUG – Verlinkte Issues:
+			</fo:block>
+			#foreach($type in $linkCollection.linkTypes)
+				#foreach($i in $linkCollection.getInwardIssues($type.name))
+					<fo:block font-size="8pt">
+						Inward: $i.key | Projekt: $i.projectObject.name | Summary: $i.summary
+					</fo:block>
+				#end
+				#foreach($i in $linkCollection.getOutwardIssues($type.name))
+					<fo:block font-size="8pt">
+						Outward: $i.key | Projekt: $i.projectObject.name | Summary: $i.summary
+					</fo:block>
+				#end
+			#end
+#end
+
+			<fo:block space-after="10mm"/>
+
+			#if($project)
+
+				<!-- ===== SEITE 1 ===== -->
+
+				<!-- Kopfbereich mit Logo und Adresse -->
+				<fo:block start-indent="0">
+					<fo:table space-before="0.5cm" space-before.conditionality="retain">
+						<fo:table-column column-width="65%"/>
+						<fo:table-column column-width="35%"/>
+						<fo:table-body>
+
+							<!-- Logo -->
+							<fo:table-row>
+								<fo:table-cell>
+									<fo:block>
+										<fo:external-graphic space-before="3mm" content-width="scale-down-to-fit"
+											src="url($xmlutils.escape($logoImageUrl_Banner))" overflow="hidden"/>
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+
+							<!-- Empfängeradresse (links) + Absender Regionalleitung (rechts) -->
+							<fo:table-row>
+								<fo:table-cell>
+									<fo:block white-space-collapse="false" space-before="5mm"> </fo:block>
+									<fo:block white-space-collapse="false" space-before="5mm"> </fo:block>
+									<fo:block white-space-collapse="false" space-before="3mm"> </fo:block>
+
+									<fo:block space-before="3mm" font-size="90%">AktivSenioren Bayern e.V. | Landshuter Allee 11 | 80637 München</fo:block>
+
+									<fo:block font-size="120%" space-before="3mm">
+										<fo:block>$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11402")))</fo:block>
+										<fo:block>$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10206"))) $xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10207")))</fo:block>
+										<fo:block>$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11200")))</fo:block>
+										<fo:block>$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11201"))) $xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11202")))</fo:block>
+										<fo:block>
+											#if($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11305")).value != "Deutschland")
+												$klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11305")).value
+											#end
+										</fo:block>
+									</fo:block>
+								</fo:table-cell>
+
+								<!-- Absender Regionalleitung -->
+								<fo:table-cell text-align="left">
+									<fo:block>
+										<fo:block white-space-collapse="false" space-before="5mm"> </fo:block>
+										<fo:block white-space-collapse="false" space-before="5mm"> </fo:block>
+										<fo:block white-space-collapse="false" space-before="3mm"> </fo:block>
+
+										<fo:block space-before="3mm" font-size="90%">Regionalleitung $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10287")))</fo:block>
+
+										<fo:block font-size="110%" space-before="2mm">
+											<!-- Name RL -->
+											<fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10303")))</fo:block>
+											## Straße und Ort des RL entfallen gem. Vorstandsbeschluss 1.10.25
+										</fo:block>
+
+										## TIC-371: Auftragseingangsbestätigung ohne Telefonnummern
+										## Telefon (customfield_10804) und Fax (customfield_10308) werden nicht ausgegeben
+
+										<fo:block font-size="90%">M: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10309")))</fo:block>
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+
+						</fo:table-body>
+					</fo:table>
+				</fo:block>
+
+				<!-- Betreffzeile -->
+				<fo:block font-size="8pt" space-before="0.8cm" text-align-last="justify" font-weight="bold">
+					Auftrag Nr. $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10230"))
+					<fo:leader leader-pattern="space"/>
+					$userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($currentDate)
+				</fo:block>
+
+				<fo:block space-before="0.4cm">
+					<fo:block>Herzlichen Dank für Ihre Beauftragung der AktivSenioren Bayern e.V. Wir haben dazu folgende von Ihnen eingegebene Daten empfangen:</fo:block>
+				</fo:block>
+
+				<!-- ===== Beratungsfall ===== -->
+				<fo:block font-size="100%" space-before="0.4cm" font-weight="bold">Beratungsfall</fo:block>
+
+				<fo:table border-style="dotted" table-layout="fixed">
+					<fo:table-column column-width="5mm"/>
+					<fo:table-column/>
+					<fo:table-body>
+						<fo:table-row>
+							<fo:table-cell padding="0.2em"><fo:block/></fo:table-cell>
+							<fo:table-cell padding="0.2em">
+								<fo:table table-layout="fixed" width="100%">
+									<fo:table-column column-width="50%"/>
+									<fo:table-column column-width="50%"/>
+									<fo:table-body>
+										#set($col = 0)
+										#foreach($v in $issues.get(0).getCustomFieldValue("customfield_11301"))
+											#if($col == 0)<fo:table-row>#end
+											<fo:table-cell padding="2pt">
+												<fo:block>• $v.value</fo:block>
+											</fo:table-cell>
+											#set($col = $col + 1)
+											#if($col == 2)
+												</fo:table-row>
+												#set($col = 0)
+											#end
+										#end
+										#if($col == 1)
+											<fo:table-cell><fo:block/></fo:table-cell>
+											</fo:table-row>
+										#end
+									</fo:table-body>
+								</fo:table>
+							</fo:table-cell>
+						</fo:table-row>
+					</fo:table-body>
+				</fo:table>
+
+				<!-- ===== Fachthemen ===== -->
+				<fo:block font-size="100%" space-before="0.4cm" font-weight="bold">Fachthemen</fo:block>
+
+				<fo:table border-style="dotted" table-layout="fixed">
+					<fo:table-column column-width="5mm"/>
+					<fo:table-column/>
+					<fo:table-body>
+						<fo:table-row>
+							<fo:table-cell padding="0.2em"><fo:block/></fo:table-cell>
+							<fo:table-cell padding="0.2em">
+								<fo:table table-layout="fixed" width="100%">
+									<fo:table-column column-width="50%"/>
+									<fo:table-column column-width="50%"/>
+									<fo:table-body>
+										#set($col = 0)
+										#foreach($v in $issues.get(0).getCustomFieldValue("customfield_10605"))
+											#if($col == 0)<fo:table-row>#end
+											<fo:table-cell padding="2pt">
+												<fo:block>• $v.value</fo:block>
+											</fo:table-cell>
+											#set($col = $col + 1)
+											#if($col == 2)
+												</fo:table-row>
+												#set($col = 0)
+											#end
+										#end
+										#if($col == 1)
+											<fo:table-cell><fo:block/></fo:table-cell>
+											</fo:table-row>
+										#end
+									</fo:table-body>
+								</fo:table>
+							</fo:table-cell>
+						</fo:table-row>
+					</fo:table-body>
+				</fo:table>
+
+				<!-- ===== 1. Kontaktdaten ===== -->
+				<fo:block font-size="8pt" space-before="0.8cm" font-weight="bold">1. Kontaktdaten</fo:block>
+				<fo:table table-layout="fixed" space-before="3mm">
+					<fo:table-body>
+						<fo:table-row border-bottom="solid">
+							<fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
+								<fo:block>Nachname:*</fo:block>
+								<fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10207")))</fo:block>
+							</fo:table-cell>
+							<fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
+								<fo:block>Firmenname: (falls bekannt)</fo:block>
+								<fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11402")))</fo:block>
+							</fo:table-cell>
+						</fo:table-row>
+						<fo:table-row border-bottom="solid">
+							<fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
+								<fo:block>Vorname:*</fo:block>
+								<fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10206")))</fo:block>
+							</fo:table-cell>
+							<fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
+								<fo:block>Rechtsform des Unternehmens: (falls bekannt)</fo:block>
+								<fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10254")))</fo:block>
+							</fo:table-cell>
+						</fo:table-row>
+						<fo:table-row border-bottom="solid">
+							<fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
+								<fo:block>Straße, Hausnummer:*</fo:block>
+								<fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11200")))</fo:block>
+							</fo:table-cell>
+							<fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.5em">
+								<fo:block>Telefon mit Vorwahl:* / weitere Telefonnummer:</fo:block>
+								<fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10256"))) / $xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10257")))</fo:block>
+							</fo:table-cell>
+						</fo:table-row>
+						<fo:table-row border-bottom="solid">
+							<fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
+								<fo:block>PLZ/Ort:*</fo:block>
+								<fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11201"))) $xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11202")))</fo:block>
+							</fo:table-cell>
+							<fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
+								<fo:block>Telefax mit Vorwahl:</fo:block>
+								<fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10428")))</fo:block>
+							</fo:table-cell>
+						</fo:table-row>
+						<fo:table-row border-bottom="solid">
+							<fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
+								<fo:block>Land:</fo:block>
+								<fo:block space-before="2mm">$klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11305")).value</fo:block>
+							</fo:table-cell>
+							<fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
+								<fo:block>Internet:</fo:block>
+								<fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11810")))</fo:block>
+							</fo:table-cell>
+						</fo:table-row>
+						<fo:table-row border-bottom="solid">
+							<fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
+								<fo:block>E-Mail:*</fo:block>
+								<fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10221")))</fo:block>
+							</fo:table-cell>
+							<fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
+								<fo:block></fo:block>
+							</fo:table-cell>
+						</fo:table-row>
+					</fo:table-body>
+				</fo:table>
+
+				<!-- ===== SEITE 2 ===== -->
+				<fo:block page-break-before="always"> </fo:block>
+
+				<!-- Logo Seite 2 -->
+				<fo:block space-before="2mm" text-align-last="left">
+					<fo:external-graphic content-width="scale-down-to-fit"
+						src="url($xmlutils.escape($logoImageUrl_Banner_S2))" overflow="hidden"/>
+				</fo:block>
+
+				<fo:block space-before="1.5cm" text-align-last="justify" font-weight="bold">
+					Auftrags-Nr: $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10230"))
+					<fo:leader leader-pattern="space"/>
+					$userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($currentDate)
+				</fo:block>
+
+				<!-- ===== 2. Art des Unternehmens ===== -->
+				<fo:block font-size="100%" space-before="0.4cm" font-weight="bold">2. Art des Unternehmens / der Einrichtung</fo:block>
+
+				<fo:table border-style="dotted" table-layout="fixed">
+					<fo:table-column column-width="5mm"/>
+					<fo:table-column/>
+					<fo:table-body>
+						<fo:table-row>
+							<fo:table-cell padding="0.2em"><fo:block/></fo:table-cell>
+							<fo:table-cell padding="0.2em">
+								<fo:table table-layout="fixed" width="100%">
+									<fo:table-column column-width="50%"/>
+									<fo:table-column column-width="50%"/>
+									<fo:table-body>
+										#set($col = 0)
+										#foreach($v in $issues.get(0).getCustomFieldValue("customfield_10604"))
+											#if($col == 0)<fo:table-row>#end
+											<fo:table-cell padding="2pt">
+												<fo:block>• $v.value</fo:block>
+											</fo:table-cell>
+											#set($col = $col + 1)
+											#if($col == 2)
+												</fo:table-row>
+												#set($col = 0)
+											#end
+										#end
+										#if($col == 1)
+											<fo:table-cell><fo:block/></fo:table-cell>
+											</fo:table-row>
+										#end
+									</fo:table-body>
+								</fo:table>
+							</fo:table-cell>
+						</fo:table-row>
+					</fo:table-body>
+				</fo:table>
+
+				<!-- Details Branche -->
+				<fo:block font-size="100%" space-before="0.6cm" font-weight="bold">Nähere Angaben über Branche / Art der Einrichtung</fo:block>
+				<fo:block border-style="dotted">$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10602"))</fo:block>
+
+				<!-- Wünsche -->
+				<fo:block font-size="100%" space-before="0.6cm" font-weight="bold">Erläuterung Ihrer Wünsche</fo:block>
+				<fo:block border-style="dotted">$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10603"))</fo:block>
+
+				<!-- ===== 3. Erstkontakt ===== -->
+				<fo:block font-size="100%" space-before="0.4cm" font-weight="bold">3. Auf die Aktivsenioren aufmerksam geworden durch</fo:block>
+
+				<fo:table border-style="dotted" table-layout="fixed">
+					<fo:table-column column-width="5mm"/>
+					<fo:table-column/>
+					<fo:table-body>
+						<fo:table-row>
+							<fo:table-cell padding="0.2em"><fo:block/></fo:table-cell>
+							<fo:table-cell padding="0.2em">
+								<fo:table table-layout="fixed" width="100%">
+									<fo:table-column column-width="50%"/>
+									<fo:table-column column-width="50%"/>
+									<fo:table-body>
+										#set($col = 0)
+										#foreach($v in $issues.get(0).getCustomFieldValue("customfield_10606"))
+											#if($col == 0)<fo:table-row>#end
+											<fo:table-cell padding="2pt">
+												<fo:block>• $v.value</fo:block>
+											</fo:table-cell>
+											#set($col = $col + 1)
+											#if($col == 2)
+												</fo:table-row>
+												#set($col = 0)
+											#end
+										#end
+										#if($col == 1)
+											<fo:table-cell><fo:block/></fo:table-cell>
+											</fo:table-row>
+										#end
+									</fo:table-body>
+								</fo:table>
+							</fo:table-cell>
+						</fo:table-row>
+					</fo:table-body>
+				</fo:table>
+
+				<!-- ===== 4. Konditionen ===== -->
+				<fo:block font-size="100%" space-before="0.6cm" font-weight="bold">4. Konditionen und Arbeitsweise der AktivSenioren Bayern e.V.</fo:block>
+				<fo:block space-before="3mm" text-align="justify">
+					Die Vereinsmitglieder erbringen ihre Leistungen ehrenamtlich und honorarfrei. Nur Reisekosten sind an sie direkt zu erstatten. Der Verein erhebt zur Finanzierung seiner Infrastruktur einen Kostendeckungsbeitrag.
+				</fo:block>
+				<fo:block space-before="3mm" text-align="justify" font-weight="bold">
+					Die Auftragsbestätigung und die Rechnung erhalten Sie per E-Mail. Bitte überweisen Sie den Betrag auf das in der Rechnung stehende Konto unter Angabe der Rechnungsnummer.
+				</fo:block>
+				<fo:block space-before="3mm" text-align="justify">
+					Nach Eingang des Kostendeckungsbeitrags nimmt ein AS-Mitglied Kontakt mit Ihnen auf und vereinbart das weitere Vorgehen.
+				</fo:block>
+
+				#if($xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11456")) == "Rahmenauftrag")
+					<fo:block space-before="3mm" text-align="left" font-weight="bold">
+						Art, Inhalt und Umfang der Betreuung sowie Zeitraum und Konditionen werden individuell vereinbart.
+					</fo:block>
+					<fo:block space-before="3mm" text-align="justify">
+						Dazu erhalten Sie gegebenenfalls eine Auftragsbestätigung und, je nach Vereinbarung, eine oder mehrere Rechnungen – jeweils per E-Mail. Bitte überweisen Sie den Rechnungsbetrag auf das in der Rechnung stehende Konto unter Angabe der Rechnungsnummer. Falls noch nicht geschehen, wird ein AS-Mitglied mit Ihnen zeitnah Kontakt aufnehmen und das weitere Vorgehen besprechen.
+					</fo:block>
+				#end
+
+				<!-- ===== 5. Vereinspflichten ===== -->
+				<fo:block font-size="100%" space-before="0.6cm" font-weight="bold">5. Vereinspflichten, Haftungsausschluss</fo:block>
+				<fo:block space-before="3mm" text-align="justify">
+					Die Mitglieder des als gemeinnützig anerkannten Vereins leisten "Lotsendienste" bei Existenzgründungen und für bestehende Unternehmen und Einrichtungen. Sie sind im Sinne der satzungsgemäßen Ziele des Vereins tätig und zur Verschwiegenheit verpflichtet. Aus diesen Aktivitäten können keine juristischen, wirtschaftlichen oder sonstigen Ansprüche abgeleitet und geltend gemacht werden. Der Verein übernimmt keinerlei Haftung.
+				</fo:block>
+
+				<!-- ===== 6. Datenschutz ===== -->
+				<fo:block font-size="100%" space-before="0.6cm" font-weight="bold">6. Datenschutz-Erklärung siehe dazu auch www.aktivsenioren.de - Unterstützung/Kontakt - Datenschutz.</fo:block>
+				<fo:block space-before="3mm" text-align="justify">
+					Soweit persönliche Daten erhoben werden, dienen diese nur internen Zwecken.
+				</fo:block>
+
+				<!-- ===== Weitere Informationen (Info zusenden Ja/Nein) ===== -->
+				##
+				## CLOUD-HINWEIS zu customfield_12602:
+				## In DC wurde $cf12602 über articles-tool.groovy gesetzt.
+				## In Cloud: Direktzugriff über $issues.get(0).getCustomFieldValue("customfield_12602")
+				## Falls es ein Select-Feld ist, liefert .value den Anzeigewert.
+				##
+				#set($cf12602obj = $issues.get(0).getCustomFieldValue("customfield_12602"))
+				#if($cf12602obj)
+					#set($info = $cf12602obj.value)
+				#else
+					#set($info = "")
+				#end
+
+#if($debug)
+				<fo:block font-size="8pt" color="blue" space-before="5mm">
+					DEBUG CF12602 (Cloud):
+					CF12602 raw: $!{cf12602obj}
+					CF12602.value: $!{info}
+				</fo:block>
+#end
+
+				<fo:block font-size="100%" space-before="0.6cm" font-weight="bold">Weitere Informationen</fo:block>
+
+				#if($info == "Ja")
+					<fo:block space-before="3mm" text-align="justify">
+						Sie haben zugestimmt, dass Sie über interessante Entwicklungen im Geschäftsfeld
+						informiert werden möchten und Empfehlungen zu weiteren Dienstleistungen und
+						Einladungen zu Vortragsveranstaltungen / Seminaren erhalten wollen.
+					</fo:block>
+				#else
+					<fo:block space-before="3mm" text-align="justify">
+						Sie haben abgelehnt, dass Sie über interessante Entwicklungen im Geschäftsfeld
+						informiert werden möchten und wollen keine Empfehlungen zu weiteren
+						Dienstleistungen und Einladungen zu Vortragsveranstaltungen / Seminaren erhalten.
+					</fo:block>
+				#end
+
+				<fo:block space-before="0.6cm" text-align="justify" font-weight="bold">
+					Die Konditionen und Arbeitsweise der AktivSenioren Bayern e.V. haben Sie durch ABSENDEN des Formulars akzeptiert.
+				</fo:block>
+
+				## Debug-Ausgabe für Testumgebung
+				## CLOUD-HINWEIS: $env ist in Cloud nicht verfügbar.
+				## Verwenden Sie stattdessen eine eigene #set-Variable oder entfernen Sie diesen Block.
+				## Beispiel: #set($isTestEnv = false) – im Produktivbetrieb auf false setzen.
+#if($debug)
+				<fo:block space-before="6mm" color="red" font-size="8pt">
+					DEBUG – Cloud-Version (Umgebungsvariable $env nicht verfügbar in Cloud)
+				</fo:block>
+#end
+
+			#end ## Ende #if($project)
+
+		</fo:flow>
+	</fo:page-sequence>
+
+</fo:root>

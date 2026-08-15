@@ -1,0 +1,152 @@
+## =====================================================================
+##
+## Gemeinsame_Auftrags_Elemente-V3.0: auftrag-common-elements-fo.vm
+##
+## CLOUD-MIGRATION: DC → Cloud
+## Erstellt: 2026-08-13 / Gr V3.0
+##
+## Änderungen gegenüber DC V2.5:
+## 1. $env-Erkennung: Nicht mehr manuell – automatisch via
+##    $baseUrl (enthält "sandbox" → TEST, sonst → PROD)
+## 2. $ComponentAccessor entfernt – in Cloud nicht verfügbar.
+##    $customFieldManager steht in Cloud direkt als
+##    implizite Variable zur Verfügung.
+## 3. $remoteIssueLinkManager: In Cloud nicht verfügbar –
+##    $remoteIssueLinks wird auf leere Liste gesetzt (Fallback).
+##    Falls Remote-Links benötigt werden: REST-API-Aufruf nötig.
+## 4. Alle übrigen Logiken ($linkCollection, $klient, $region,
+##    $abschlussbericht, $rechnung) sind 1:1 übernommen –
+##    sie nutzen nur Velocity und $pdfContent, beides Cloud-kompatibel.
+## 5. URL-Syntax in #set: Markdown-Links entfernt, nur reine URLs.
+##
+## =====================================================================
+
+## --- Projekt holen ---
+#set($project = $issues.get(0).projectObject)
+
+## =====================================================================
+## RUN-TIME Umgebung: automatisch aus $baseUrl ableiten
+## In DC war dies manuell (#set($env = "TEST")).
+## In Cloud erkennen wir die Sandbox-Umgebung am Hostnamen.
+## $baseUrl ist in Better PDF Cloud als implizite Variable verfügbar
+## und enthält z.B. "https://aktivsenioren-sandbox.atlassian.net"
+## bzw. "https://aktivsenioren.atlassian.net" (Produktion).
+## =====================================================================
+#if($baseUrl && $baseUrl.contains("sandbox"))
+    #set($env = "TEST")
+#else
+    #set($env = "PROD")
+#end
+## RUN-TIME Umgebung ENDE
+
+## =====================================================================
+## Logos und Fußzeile – abhängig von Umgebung
+## HINWEIS: Die Bild-URLs zeigen weiterhin auf euren externen Server
+## (vampir.as-by.de / vampir.aktivsenioren-bayern.de).
+## Das ist in Cloud genauso möglich wie in DC, solange der Server
+## öffentlich erreichbar ist. Keine Änderung nötig.
+## =====================================================================
+#if($env == "PROD")
+    ## Produktionsumgebung
+    #set($logoImageUrl_Banner    = "https://vampir.as-by.de/7qukupxeUC399rraqxKK/Header_S1_Auftr.png")
+    #set($logoImageUrl_Banner_S2 = "https://vampir.as-by.de/7qukupxeUC399rraqxKK/Header_S2_Auftr.png")
+    #set($FZ_ImageUrl            = "https://vampir.as-by.de/7qukupxeUC399rraqxKK/AS_Fusszeile.png")
+#end
+#if($env == "TEST")
+    ## Testumgebung
+    #set($logoImageUrl_Banner    = "https://vampir.aktivsenioren-bayern.de/7qukupxeUC399rraqxKK/Header_S1_Auftr.png")
+    #set($logoImageUrl_Banner_S2 = "https://vampir.aktivsenioren-bayern.de/7qukupxeUC399rraqxKK/Header_S2_Auftr.png")
+    #set($FZ_ImageUrl            = "https://vampir.aktivsenioren-bayern.de/7qukupxeUC399rraqxKK/AS_Fusszeile.png")
+#end
+
+## =====================================================================
+## CustomFieldManager
+## DC:    $ComponentAccessor.customFieldManager  (Groovy/Java-Aufruf)
+## Cloud: $customFieldManager ist implizit verfügbar – kein Accessor nötig.
+## =====================================================================
+## $customFieldManager steht direkt zur Verfügung – keine Zuweisung nötig.
+## Die Zeile unten ist ein Sicherheits-Fallback, falls die Variable
+## in manchen Cloud-Versionen doch explizit gesetzt werden muss:
+## #set($customFieldManager = $customFieldManager)   ## no-op, nur zur Dokumentation
+
+## =====================================================================
+## LinkCollection – unverändert, Cloud-kompatibel
+## $pdfContent ist in Better PDF Cloud verfügbar.
+## =====================================================================
+#set($linkCollection = $pdfContent.linkCollectionByIssue($issues.get(0)))
+
+## =====================================================================
+## CF 12602 (Info zusenden) – direkt aus dem Issue holen
+## In DC wurde dies teilweise via Groovy gesetzt.
+## In Cloud: direkt via getCustomFieldValue – identisch.
+## =====================================================================
+#set($cf12602 = $issues.get(0).getCustomFieldValue("customfield_12602"))
+
+## =====================================================================
+## Initialisierung der verlinkten Issue-Variablen
+## =====================================================================
+#set($auftrag         = false)
+#set($klient          = false)
+#set($region          = false)
+#set($abschlussbericht = false)
+#set($rechnung        = false)
+
+## =====================================================================
+## Remote Issue Links
+## DC:    $remoteIssueLinkManager.getRemoteIssueLinksForIssue(...)
+## Cloud: $remoteIssueLinkManager ist NICHT verfügbar.
+##        Fallback: leere Liste. Falls Remote-Links benötigt werden,
+##        muss ein REST-API-Aufruf über $httpClient implementiert werden.
+##        In der Empfangsbestätigung werden Remote-Links nicht genutzt,
+##        daher ist dieser Fallback unkritisch.
+## =====================================================================
+#set($remoteIssueLinks = [])
+## Falls Remote-Links später benötigt werden, hier REST-Aufruf einfügen:
+## #set($remoteIssueLinks = $httpClient.get("rest/api/3/issue/$issues.get(0).key/remotelink"))
+
+## =====================================================================
+## Verlinkte Issues auflösen: $klient, $region, $abschlussbericht, $rechnung
+## Logik unverändert gegenüber DC – Velocity + $linkCollection sind
+## in Better PDF Cloud identisch verfügbar.
+## =====================================================================
+#if($linkCollection.linkTypes && !$linkCollection.linkTypes.empty)
+    #foreach($issueLinkType in $linkCollection.linkTypes)
+
+        ## INWARD
+        #foreach($linkedIssue in $linkCollection.getInwardIssues($issueLinkType.name))
+            #if($linkedIssue.projectObject.name == "Klienten")
+                #set($klient = $linkedIssue)
+            #end
+            #if($linkedIssue.projectObject.name == "Region")
+                #set($region = $linkedIssue)
+            #end
+            #if($linkedIssue.projectObject.name == "Abschlussbericht")
+                #set($abschlussbericht = $linkedIssue)
+            #end
+            #if($linkedIssue.projectObject.name == "Rechnungen")
+                #set($rechnung = $linkedIssue)
+            #end
+        #end
+
+        ## OUTWARD
+        #foreach($linkedIssue in $linkCollection.getOutwardIssues($issueLinkType.name))
+            #if($linkedIssue.projectObject.name == "Klienten")
+                #set($klient = $linkedIssue)
+            #end
+            #if($linkedIssue.projectObject.name == "Region")
+                #set($region = $linkedIssue)
+            #end
+            #if($linkedIssue.projectObject.name == "Abschlussbericht")
+                #set($abschlussbericht = $linkedIssue)
+            #end
+            #if($linkedIssue.projectObject.name == "Rechnungen")
+                #set($rechnung = $linkedIssue)
+            #end
+        #end
+
+    #end
+#end
+
+## =====================================================================
+## Ende auftrag-common-elements-fo.vm (Cloud V3.0)
+## =====================================================================
