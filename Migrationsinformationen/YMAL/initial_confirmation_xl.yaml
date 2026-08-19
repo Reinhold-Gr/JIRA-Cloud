@@ -1,0 +1,36 @@
+version: 1
+
+rules:
+  - name: "Auftragsbestätigung – Initiale Bestätigung"
+    trigger:
+      type: issue_transitioned
+      to_status: "Bestätigt"
+
+    conditions:
+      - field: "issuetype"
+        operator: equals
+        value: "Auftrag"   # Nur für diesen Issue-Typ
+
+    actions:
+      - type: generate_pdf
+        template: "AS_initial-confirmation-fo.vm"
+        attach_to_issue: true
+        filename: "Auftragsbestaetigung-{{issue.key}}.pdf"
+        overwrite_existing: true   # Vorhandene PDF überschreiben
+
+  - name: "Rechnung PDF bei Abschluss"
+    trigger:
+      type: issue_transitioned
+      to_status: "Abgeschlossen"
+
+    conditions:
+      - field: "issuetype"
+        operator: equals
+        value: "Auftrag"
+
+    actions:
+      - type: generate_pdf
+        template: "AS_rechnung-fo.vm"   # Anpassen falls vorhanden
+        attach_to_issue: true
+        filename: "Rechnung-{{issue.key}}.pdf"
+        overwrite_existing: true

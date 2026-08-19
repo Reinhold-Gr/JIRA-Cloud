@@ -24,7 +24,8 @@ Normaler Markdown-Text...
 Confluence Cloud kann Markdown direkt importieren:
 
 * **Einzelne Seite**: Seite erstellen → `⋯` Menü → **„Importieren"** → Markdown-Datei auswählen
-* Funktioniert für einfache Dokumente gut, bei komplexem Markdown (Tabellen, verschachtelte Listen) teilweise mit Formatierungsverlusten
+* Funktioniert für einfache Dokumente gut, bei komplexem Markdown (Tabellen, verschachtelte Listen) teilweise 
+  mit Formatierungsverlusten
 
 ---
 
@@ -63,14 +64,8 @@ done
 „Copy as Markdown" (Chrome/Firefox) — markierten Confluence-Inhalt als Markdown in die Zwischenablage kopieren
 Gut für einzelne Abschnitte, nicht für Massenexport
 
-Vergleich
-Tool
-Richtung
-Stärke
-Schwäche
-Mark
-MD → Confluence
-Automatisierbar, Makro-Support
+Vergleich | Tool | Richtung | Stärke |Schwäche | Mark |
+MD → Confluence | Automatisierbar, Makro-Support
 Nur Richtung MD → Confluence
 Confluence Import
 MD → Confluence
@@ -85,7 +80,8 @@ Beide ↔
 Volle Kontrolle
 Mehr Aufwand
 Für euren Use Case
-Falls ihr eure Change-Protokolle oder Skript-Dokumentation in Git als Markdown pflegen und automatisch nach Confluence synchronisieren wollt, wäre folgende Kombination ideal:
+Falls ihr eure Change-Protokolle oder Skript-Dokumentation in Git als Markdown pflegen und 
+automatisch nach Confluence synchronisieren wollt, wäre folgende Kombination ideal:
 Dokumentation in Git als .md-Dateien mit Mark-Headern
 GitHub Action / GitLab CI führt bei jedem Push mark aus
 Confluence zeigt immer die aktuelle Version

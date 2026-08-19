@@ -214,3 +214,96 @@ PDF über externe API generieren
 QR-Code direkt in Jira-Beschreibung einbetten
 ✅ Möglich als !qrcode_xxx.png|thumbnail!
 Empfehlung: Wenn du nur den GiroCode-QR brauchst, reicht das PNG völlig aus — Banken-Apps wie z.B. die Sparkassen-App lesen direkt PNG-Anhänge. Ein PDF ist nur nötig, wenn du ein vollständiges Rechnungsdokument generieren willst.
+
+---  
+
+# 13.08.26
+
+---
+
+Download initial-confirmation-fo-cloud.vm
+Was wurde geändert – Übersicht
+✅ Direkt übernommen (keine Änderung nötig)
+Gesamte XSL-FO-Struktur (Apache FOP ist identisch)
+Alle Velocity-Direktiven (#if, #foreach, #set)
+Alle $customFieldManager.getCustomFieldObject(...) Aufrufe
+$userDateTimeFormatter, $xmlutils.escape(...), $linkCollection
+$include.parse(...) für auftrag-common-elements-fo.vm
+
+⚠️ Geändert / Angepasst
+Problem
+DC
+Cloud-Lösung
+Encoding
+ISO-8859-1
+UTF-8 (Cloud-Standard)
+Groovy-Script
+$scripting.execute("articles-tool.groovy")
+Entfernt – Velocity-Ersatz als Kommentar hinterlegt
+$cf12602
+Wurde von Groovy gesetzt
+Jetzt direkt: $issues.get(0).getCustomFieldValue("customfield_12602")
+$env-Variable
+$env.equals("TEST")
+Nicht verfügbar in Cloud – durch #set($debug = false) ersetzt
+Debug-Flag
+#set($debug = true)
+Auf false gesetzt – vor Produktiveinsatz prüfen!
+🔴 Manuell zu klären (kritisch!)
+articles-tool.groovy – Dieses Script hat vermutlich die Variablen $klient, $region, $FZ_ImageUrl, $logoImageUrl_Banner, $logoImageUrl_Banner_S2 gesetzt. Im Template habe ich Kommentare mit Velocity-Beispielcode hinterlegt, wie man verlinkte Issues direkt in Velocity auflöst. Sie müssen mir den Inhalt von articles-tool.groovy zeigen, damit ich die Logik vollständig replizieren kann.
+
+Analyse-Ergebnis des DC-Templates:
+
+Bereich
+
+DC (alt)
+
+Cloud-Anpassung nötig
+
+Template-Engine
+
+Velocity (.vm)
+
+✅ Velocity bleibt gleich
+
+$include.parse(...)
+
+auftrag-common-elements-fo.vm
+
+⚠️ Muss als separates Template existieren
+
+$scripting.execute(...)
+
+articles-tool.groovy
+
+⚠️ Groovy-Scripts nicht in Cloud verfügbar
+
+$customFieldManager.getCustomFieldObject(...)
+
+DC Java API
+
+✅ Gleiche Syntax in Cloud
+
+$userDateTimeFormatter
+
+DC API
+
+✅ Gleiche Syntax in Cloud
+
+$env.equals("TEST")
+
+DC-Umgebungsvariable
+
+⚠️ In Cloud anders
+
+$cf12602
+
+Direktzugriff auf CF
+
+⚠️ Syntax prüfen
+
+FO-Struktur (XSL-FO)
+
+Apache FOP
+
+✅ Identisch in Cloud

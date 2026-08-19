@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+##____________________________________________________________________
+##
+## Auftragsbestätigung-V2.4-CLOUD: AS_acceptation-confirmation-fo-cloud.vm
+##
+## -------------------------------------------------------------------
+##
+## Stand: 01.02.2022 / Gr / V1.0
+##        Anpassung an neues Corporate Design
+##
+##        20.05.2022 / Gr / V2.0
+##        TIC 305: "i.A. gez." entfällt ersatzlos
+##
+## -------------------------------------------------------------------
+##
+## Stand: 19.04.23 / Gr  / V2.1
+##         TIC-352   Fusszeile ohne Vorstände
+##
+## -------------------------------------------------------------------
+##
+## Stand: 27.07.23 / Gr  / V2.2
+##         TIC-371: In Auftragsbestätigungen an Klienten soll
+##                  nur die Mail des Regionalleiters genannt werden,
+##                  keine Telefonnummer.
+##
+## -------------------------------------------------------------------
+##
+## Stand: 12.12.23 / Gr  / V2.3
+##
+## 1.   TIC-396: Der Sicherheitsupdate verursachte Probleme
+##       bei Auftrags- und Rechnungsdokumenten
+##
+## -------------------------------------------------------------------
+##
+## Stand: 1.11.25 / Gr  / V2.4
+##
+## 1.   Strasse und Ort des RL entfallen
+##      gem. Vorstandsbeschluss 1.10.25
+##
+## -------------------------------------------------------------------
+##
+## Stand: 15.08.26 / Gr  / V2.5-CLOUD
+##
+## 1.   CLOUD-Anpassung:
+##      - $customFieldManager.getCustomFieldObject() entfernt
+##        -> direkte customfield_IDs verwendet
+##      - $scripting.execute("articles-tool.groovy") entfernt
+##        -> $articlesTool steht in Cloud via Better PDF Exporter
+##           als registriertes Tool-Objekt zur Verfügung
+##      - $env.equals("TEST") -> $env == "TEST" (Velocity-Syntax)
+##      - $userDateTimeFormatter: Cloud-kompatible Syntax
+##
+##____________________________________________________________________
+## JIRA PDF View Plugin
+## We are just going to access this template with Auftrag Project
+## We include the file auftrag-common-elements-fo.vm, where are set the logo, footer, linked issues, and all the common elements
+$include.parse($ctx, "auftrag-common-elements-fo.vm")
+##
+## CLOUD: $scripting.execute("articles-tool.groovy") entfällt.
+## $articlesTool muss als Custom Tool in Better PDF Exporter Cloud
+## registriert sein (Administration > PDF Templates > Custom Tools).
+##
+#set($filename = "${issues.get(0).getCustomFieldValue('customfield_10230')}_Auftragsbestaetigung.pdf")
+## Debugging true/false
+## #set($debug = true)
+#set($debug = false)    ## <<<<  Autoanpassung2: true nach false, falls nötig
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+	<fo:layout-master-set>
+		<fo:simple-page-master master-name="A4" margin-top="0.0cm" margin-bottom="1.0cm" margin-left="1cm" margin-right="1cm">
+			<fo:region-body region-name="page-body" margin-top="0.5cm" margin-bottom="0.5cm" margin-left="1.5cm" margin-right="1.5cm"/>
+			<fo:region-before region-name="page-header" extent="0.0cm" margin-left="0.5cm" margin-right="0.5cm"/>
+			<fo:region-after region-name="page-footer" extent="1.5cm" />
+		</fo:simple-page-master>
+	</fo:layout-master-set>
+
+	<fo:page-sequence font-family="OpenSANS" font-size="9pt" master-reference="A4">
+
+		<!-- footer -->
+		<fo:static-content flow-name="page-footer" font-size="82%">
+			<fo:block text-align="center"> Seite <fo:page-number/> </fo:block>
+			<fo:block text-align="left"> <fo:external-graphic content-width="190mm" src="url($xmlutils.escape($FZ_ImageUrl))" overflow="hidden"/> </fo:block>
+		</fo:static-content>
+
+		<!-- body -->
+		<fo:flow flow-name="page-body" >
+			#if($project)
+				<!-- header -->
+				<fo:block start-indent="0">
+					<fo:table space-before="1cm" space-before.conditionality="retain">
+						<fo:table-column column-width="65%" />
+						<fo:table-column column-width="35%" />
+						<fo:table-body>
+
+							<!-- LOGO -->
+							<fo:table-row>
+								<fo:table-cell text-align="left">
+									<fo:block>
+										<fo:external-graphic content-width="scale-down-to-fit" src="url($xmlutils.escape($logoImageUrl_Banner))" overflow="hidden"/>
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+
+							<!-- Adresse Klient / Absender Regionalleitung -->
+							<fo:table-row>
+								<fo:table-cell>
+									## Leerzeilen für Fensterumschlag
+									<fo:block white-space-collapse="false" space-before="5mm" >  </fo:block>
+									<fo:block white-space-collapse="false" space-before="5mm" >  </fo:block>
+									<fo:block white-space-collapse="false" space-before="5mm" >  </fo:block>
+									<fo:block white-space-collapse="false" space-before="3mm" >  </fo:block>
+
+									<fo:block space-before="3mm" font-size="70%">AktivSenioren Bayern e.V. | Landshuter Allee 11 | 80637 München</fo:block>
+
+									<fo:block font-size="100%" space-before="3mm">
+										## CLOUD: direkte customfield_IDs statt $customFieldManager.getCustomFieldObject()
+										<fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_11402"))</fo:block>
+										<fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_10206")) $xmlutils.escape($klient.getCustomFieldValue("customfield_10207"))</fo:block>
+										<fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_11200"))</fo:block>
+										<fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_11201")) $xmlutils.escape($klient.getCustomFieldValue("customfield_11202"))</fo:block>
+										<fo:block>
+											#if($klient.getCustomFieldValue("customfield_11305").value != "Deutschland")
+												$klient.getCustomFieldValue("customfield_11305").value
+											#end
+										</fo:block>
+									</fo:block>
+								</fo:table-cell>
+
+								## Absender Regionalleitung
+								<fo:table-cell text-align="left">
+									<fo:block>
+										<fo:block white-space-collapse="false" space-before="5mm" >  </fo:block>
+										<fo:block white-space-collapse="false" space-before="5mm" >  </fo:block>
+										<fo:block white-space-collapse="false" space-before="5mm" >  </fo:block>
+
+										## CLOUD: direkte customfield_IDs
+										<fo:block space-before="6mm" font-size="90%">Regionalleitung $xmlutils.escape($region.getCustomFieldValue("customfield_10287"))</fo:block>
+
+										<fo:block font-size="110%" space-before="2mm"> </fo:block>
+
+										<fo:block>$xmlutils.escape($region.getCustomFieldValue("customfield_10303"))</fo:block>
+
+										## GR 1.11.25: Strasse und Ort des RL entfallen (Vorstandsbeschluss 1.10.25)
+										## <fo:block>$xmlutils.escape($region.getCustomFieldValue("customfield_10304"))</fo:block>
+										## <fo:block>$xmlutils.escape($region.getCustomFieldValue("customfield_10306")) $xmlutils.escape($region.getCustomFieldValue("customfield_10305"))</fo:block>
+
+										## Gr 27.07.23 Keine Telefonnummern TIC-371
+										## <fo:block>T: $xmlutils.escape($region.getCustomFieldValue("customfield_10804"))</fo:block>
+										## <fo:block>F: $xmlutils.escape($region.getCustomFieldValue("customfield_10308"))</fo:block>
+
+										<fo:block font-size="90%">M: $xmlutils.escape($region.getCustomFieldValue("customfield_10309"))</fo:block>
+
+										## CLOUD: $userDateTimeFormatter - in Better PDF Exporter Cloud verfügbar
+										<fo:block space-before="10mm">$userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($rechnung.getCustomFieldValue("customfield_10501"))</fo:block>
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+
+						</fo:table-body>
+					</fo:table>
+				</fo:block>
+
+				## Auftragsbestätigungstext
+				<fo:block space-before="11mm"></fo:block>
+				<fo:block font-size="100%" space-before="1cm" font-weight="bold">Auftragsbestätigung zu Auftrag Nr. $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10230"))</fo:block>
+
+				<fo:block space-before="3mm">
+					#set($renderedDescription = $pdfRenderer.asRendered($issues.get(0), "comment", $issues.get(0).getCustomFieldValue("customfield_10426")))
+					<fo:block>$renderedDescription</fo:block>
+
+					#set($renderedDescription = $pdfRenderer.asRendered($issues.get(0), "comment", $issues.get(0).getCustomFieldValue("customfield_10427")))
+					<fo:block space-before="3mm">$renderedDescription</fo:block>
+
+					#set($renderedDescription = $pdfRenderer.asRendered($issues.get(0), "comment", $issues.get(0).getCustomFieldValue("customfield_10297")))
+					<fo:block space-before="6mm">$renderedDescription</fo:block>
+
+					## Preistabelle (nur wenn kein Rahmenauftrag)
+					#if($xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10432").value) != "Rahmenauftrag")
+						<fo:table>
+							<fo:table-column column-width="110mm" />
+							<fo:table-column column-width="20mm"/>
+							<fo:table-body>
+								<fo:table-row font-weight="bold">
+									<fo:table-cell>
+										<fo:block>Position</fo:block>
+									</fo:table-cell>
+									<fo:table-cell text-align="right">
+										<fo:block>Betrag</fo:block>
+									</fo:table-cell>
+								</fo:table-row>
+								<fo:table-row>
+									<fo:table-cell>
+										<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11456"))</fo:block>
+									</fo:table-cell>
+									<fo:table-cell text-align="right">
+										## CLOUD: $articlesTool muss als Custom Tool registriert sein
+										<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11457")) EUR</fo:block>
+									</fo:table-cell>
+								</fo:table-row>
+								<fo:table-row>
+									<fo:table-cell>
+										<fo:block>zuzüglich $issues.get(0).getCustomFieldValue("customfield_10433").value% MwSt.</fo:block>
+									</fo:table-cell>
+									<fo:table-cell text-align="right">
+										<fo:block>$articlesTool.getTaxesAuftrag($issues.get(0).getCustomFieldValue("customfield_11457"), $issues.get(0).getCustomFieldValue("customfield_10433").value) EUR</fo:block>
+									</fo:table-cell>
+								</fo:table-row>
+								<fo:table-row font-weight="bold">
+									<fo:table-cell>
+										<fo:block>Gesamt</fo:block>
+									</fo:table-cell>
+									<fo:table-cell text-align="right">
+										<fo:block>$articlesTool.getTotalPriceAuftrag() EUR</fo:block>
+									</fo:table-cell>
+								</fo:table-row>
+							</fo:table-body>
+						</fo:table>
+					#elseif($xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10432")) == "Rahmenauftrag")
+						<fo:block space-before="3mm" text-align="justify">
+						</fo:block>
+					#end
+
+					## Optionaler Zusatztext (customfield_10502)
+					#if($issues.get(0).getCustomFieldValue("customfield_10502"))
+						#set($renderedDescription = $pdfRenderer.asRendered($issues.get(0), "comment", $issues.get(0).getCustomFieldValue("customfield_10502")))
+						<fo:block space-before="6mm">$renderedDescription</fo:block>
+					#end
+
+					<fo:block space-before="6mm">Mit freundlichen Grüßen</fo:block>
+					<fo:block space-before="3mm">AktivSenioren Bayern e.V.</fo:block>
+					## GR 20.05.22 TIC 305: "i.A. gez." entfällt
+					## CLOUD: direkte customfield_ID
+					<fo:block space-before="6mm">$xmlutils.escape($region.getCustomFieldValue("customfield_10303"))</fo:block>
+
+					## Debug-Block (nur in TEST-Umgebung)
+					## CLOUD: $env == "TEST" statt $env.equals("TEST")
+					#set($debug = true)
+					#if($debug && $env == "TEST")
+						<fo:block space-before="6mm" color="red" font-size="8pt">
+							DEBUG – Umgebung: $env
+						</fo:block>
+					#end
+
+				</fo:block>
+			#end
+		</fo:flow>
+	</fo:page-sequence>
+</fo:root>

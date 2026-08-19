@@ -1,5 +1,3 @@
-
-
 <?xml version="1.0" encoding="UTF-8"?>
 ##____________________________________________________________________
 ##
@@ -11,15 +9,15 @@
 ## ÄNDERUNGEN gegenüber V2.0:
 ## - $customFieldManager.getCustomFieldObject("customfield_XXXXX")
 ##   ersetzt durch direkten String "customfield_XXXXX"
-## - Select-Felder (customfield_11305/Land) mit Null-Check versehen
+## - Select-Felder (customfield_10405/Land) mit Null-Check versehen
 ##
 ##____________________________________________________________________
-$include.parse($ctx, "auftrag-common-elements-fo.vm")
+$include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
 
-#set($filename = "$issues.get(0).getCustomFieldValue('customfield_10230')_Auftrag.pdf")
+#set($filename = "$issues.get(0).getCustomFieldValue('customfield_10200')_Auftrag.pdf")
 
 ## Debugging true/false – VOR PRODUKTIVEINSATZ auf false setzen!
-#set($debug = false)
+#set($debug = true)
 
 <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
 
@@ -95,12 +93,12 @@ $include.parse($ctx, "auftrag-common-elements-fo.vm")
                                     <fo:block space-before="3mm" font-size="90%">AktivSenioren Bayern e.V. | Landshuter Allee 11 | 80637 München</fo:block>
 
                                     <fo:block font-size="120%" space-before="3mm">
-                                        <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_11402"))</fo:block>
-                                        <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_10206")) $xmlutils.escape($klient.getCustomFieldValue("customfield_10207"))</fo:block>
-                                        <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_11200"))</fo:block>
-                                        <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_11201")) $xmlutils.escape($klient.getCustomFieldValue("customfield_11202"))</fo:block>
+                                        <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_10388"))</fo:block>
+                                        <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_10392")) $xmlutils.escape($klient.getCustomFieldValue("customfield_10395"))</fo:block>
+                                        <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_10399"))</fo:block>
+                                        <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_10389")) $xmlutils.escape($klient.getCustomFieldValue("customfield_10391"))</fo:block>
                                         <fo:block>
-                                            #set($land = $klient.getCustomFieldValue("customfield_11305"))
+                                            #set($land = $klient.getCustomFieldValue("customfield_10405"))
                                             #if($land && $land.value != "Deutschland")
                                                 $land.value
                                             #end
@@ -115,18 +113,18 @@ $include.parse($ctx, "auftrag-common-elements-fo.vm")
                                         <fo:block white-space-collapse="false" space-before="5mm"> </fo:block>
                                         <fo:block white-space-collapse="false" space-before="3mm"> </fo:block>
 
-                                        <fo:block space-before="3mm" font-size="90%">Regionalleitung $xmlutils.escape($region.getCustomFieldValue("customfield_10287"))</fo:block>
+                                        <fo:block space-before="3mm" font-size="90%">Regionalleitung $xmlutils.escape($region.getCustomFieldValue("customfield_10432"))</fo:block>
 
                                         <fo:block font-size="110%" space-before="2mm">
                                             <!-- Name RL -->
-                                            <fo:block>$xmlutils.escape($region.getCustomFieldValue("customfield_10303"))</fo:block>
+                                            <fo:block>$xmlutils.escape($region.getCustomFieldValue("customfield_10306"))</fo:block>
                                             ## Straße und Ort des RL entfallen gem. Vorstandsbeschluss 1.10.25
                                         </fo:block>
 
                                         ## TIC-371: Auftragseingangsbestätigung ohne Telefonnummern
-                                        ## Telefon (customfield_10804) und Fax (customfield_10308) werden nicht ausgegeben
+                                        ## Telefon (customfield_10310) und Fax (customfield_10323) werden nicht ausgegeben
 
-                                        <fo:block font-size="90%">M: $xmlutils.escape($region.getCustomFieldValue("customfield_10309"))</fo:block>
+                                        <fo:block font-size="90%">M: $xmlutils.escape($region.getCustomFieldValue("customfield_10298"))</fo:block>
                                     </fo:block>
                                 </fo:table-cell>
                             </fo:table-row>
@@ -137,7 +135,7 @@ $include.parse($ctx, "auftrag-common-elements-fo.vm")
 
                 <!-- Betreffzeile -->
                 <fo:block font-size="8pt" space-before="0.8cm" text-align-last="justify" font-weight="bold">
-                    Auftrag Nr. $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10230"))
+                    Auftrag Nr. $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10200"))
                     <fo:leader leader-pattern="space"/>
                     $userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($currentDate)
                 </fo:block>
@@ -149,39 +147,32 @@ $include.parse($ctx, "auftrag-common-elements-fo.vm")
                 <!-- ===== Beratungsfall ===== -->
                 <fo:block font-size="100%" space-before="0.4cm" font-weight="bold">Beratungsfall</fo:block>
 
-                <fo:table border-style="dotted" table-layout="fixed">
-                    <fo:table-column column-width="5mm"/>
-                    <fo:table-column/>
-                    <fo:table-body>
-                        <fo:table-row>
-                            <fo:table-cell padding="0.2em"><fo:block/></fo:table-cell>
-                            <fo:table-cell padding="0.2em">
-                                <fo:table table-layout="fixed" width="100%">
-                                    <fo:table-column column-width="50%"/>
-                                    <fo:table-column column-width="50%"/>
-                                    <fo:table-body>
-                                        #set($col = 0)
-                                        #foreach($v in $issues.get(0).getCustomFieldValue("customfield_11301"))
-                                            #if($col == 0)<fo:table-row>#end
-                                            <fo:table-cell padding="2pt">
-                                                <fo:block>• $v.value</fo:block>
-                                            </fo:table-cell>
-                                            #set($col = $col + 1)
-                                            #if($col == 2)
-                                                </fo:table-row>
-                                                #set($col = 0)
-                                            #end
-                                        #end
-                                        #if($col == 1)
-                                            <fo:table-cell><fo:block/></fo:table-cell>
-                                            </fo:table-row>
-                                        #end
-                                    </fo:table-body>
-                                </fo:table>
-                            </fo:table-cell>
-                        </fo:table-row>
-                    </fo:table-body>
-                </fo:table>
+                <fo:table-body>
+                     #set($col = 0)
+                     #set($beratungsfall = $issues.get(0).getCustomFieldValue("customfield_10379"))
+                     #if($beratungsfall && $beratungsfall.size() > 0)
+                         #foreach($v in $beratungsfall)
+                             #if($col == 0)<fo:table-row>#end
+                             <fo:table-cell padding="2pt">
+                                 <fo:block>• $v.value</fo:block>
+                             </fo:table-cell>
+                             #set($col = $col + 1)
+                             #if($col == 2)
+                                 </fo:table-row>
+                                 #set($col = 0)
+                             #end
+                         #end
+                         #if($col == 1)
+                             <fo:table-cell><fo:block/></fo:table-cell>
+                            </fo:table-row>
+                         #end
+                     #else
+                         <fo:table-row>
+                             <fo:table-cell padding="2pt"><fo:block>–</fo:block></fo:table-cell>
+                             <fo:table-cell padding="2pt"><fo:block/></fo:table-cell>
+                         </fo:table-row>
+                     #end
+                </fo:table-body>
 
                 <!-- ===== Fachthemen ===== -->
                 <fo:block font-size="100%" space-before="0.4cm" font-weight="bold">Fachthemen</fo:block>
@@ -198,7 +189,7 @@ $include.parse($ctx, "auftrag-common-elements-fo.vm")
                                     <fo:table-column column-width="50%"/>
                                     <fo:table-body>
                                         #set($col = 0)
-                                        #foreach($v in $issues.get(0).getCustomFieldValue("customfield_10605"))
+                                        #foreach($v in $issues.get(0).getCustomFieldValue("customfield_10372"))
                                             #if($col == 0)<fo:table-row>#end
                                             <fo:table-cell padding="2pt">
                                                 <fo:block>• $v.value</fo:block>
@@ -227,60 +218,60 @@ $include.parse($ctx, "auftrag-common-elements-fo.vm")
                         <fo:table-row border-bottom="solid">
                             <fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
                                 <fo:block>Nachname:*</fo:block>
-                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10207"))</fo:block>
+                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10395"))</fo:block>
                             </fo:table-cell>
                             <fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
                                 <fo:block>Firmenname: (falls bekannt)</fo:block>
-                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_11402"))</fo:block>
+                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10388"))</fo:block>
                             </fo:table-cell>
                         </fo:table-row>
                         <fo:table-row border-bottom="solid">
                             <fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
                                 <fo:block>Vorname:*</fo:block>
-                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10206"))</fo:block>
+                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10392"))</fo:block>
                             </fo:table-cell>
                             <fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
                                 <fo:block>Rechtsform des Unternehmens: (falls bekannt)</fo:block>
-                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10254"))</fo:block>
+                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10390"))</fo:block>
                             </fo:table-cell>
                         </fo:table-row>
                         <fo:table-row border-bottom="solid">
                             <fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
                                 <fo:block>Straße, Hausnummer:*</fo:block>
-                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_11200"))</fo:block>
+                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10399"))</fo:block>
                             </fo:table-cell>
                             <fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.5em">
                                 <fo:block>Telefon mit Vorwahl:* / weitere Telefonnummer:</fo:block>
-                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10256")) / $xmlutils.escape($klient.getCustomFieldValue("customfield_10257"))</fo:block>
+                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10387")) / $xmlutils.escape($klient.getCustomFieldValue("customfield_10398"))</fo:block>
                             </fo:table-cell>
                         </fo:table-row>
                         <fo:table-row border-bottom="solid">
                             <fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
                                 <fo:block>PLZ/Ort:*</fo:block>
-                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_11201")) $xmlutils.escape($klient.getCustomFieldValue("customfield_11202"))</fo:block>
+                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10389")) $xmlutils.escape($klient.getCustomFieldValue("customfield_10391"))</fo:block>
                             </fo:table-cell>
                             <fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
                                 <fo:block>Telefax mit Vorwahl:</fo:block>
-                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10428"))</fo:block>
+                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10396"))</fo:block>
                             </fo:table-cell>
                         </fo:table-row>
                         <fo:table-row border-bottom="solid">
                             <fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
                                 <fo:block>Land:</fo:block>
                                 <fo:block space-before="2mm">
-                                    #set($land = $klient.getCustomFieldValue("customfield_11305"))
+                                    #set($land = $klient.getCustomFieldValue("customfield_10405"))
                                     #if($land)$land.value#end
                                 </fo:block>
                             </fo:table-cell>
                             <fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
                                 <fo:block>Internet:</fo:block>
-                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_11810"))</fo:block>
+                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10329"))</fo:block>
                             </fo:table-cell>
                         </fo:table-row>
                         <fo:table-row border-bottom="solid">
                             <fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
                                 <fo:block>E-Mail:*</fo:block>
-                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10221"))</fo:block>
+                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10400"))</fo:block>
                             </fo:table-cell>
                             <fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
                                 <fo:block></fo:block>
@@ -299,7 +290,7 @@ $include.parse($ctx, "auftrag-common-elements-fo.vm")
                 </fo:block>
 
                 <fo:block space-before="1.5cm" text-align-last="justify" font-weight="bold">
-                    Auftrags-Nr: $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10230"))
+                    Auftrags-Nr: $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10200"))
                     <fo:leader leader-pattern="space"/>
                     $userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($currentDate)
                 </fo:block>
@@ -319,7 +310,7 @@ $include.parse($ctx, "auftrag-common-elements-fo.vm")
                                     <fo:table-column column-width="50%"/>
                                     <fo:table-body>
                                         #set($col = 0)
-                                        #foreach($v in $issues.get(0).getCustomFieldValue("customfield_10604"))
+                                        #foreach($v in $issues.get(0).getCustomFieldValue("customfield_10393"))
                                             #if($col == 0)<fo:table-row>#end
                                             <fo:table-cell padding="2pt">
                                                 <fo:block>• $v.value</fo:block>
@@ -343,11 +334,11 @@ $include.parse($ctx, "auftrag-common-elements-fo.vm")
 
                 <!-- Details Branche -->
                 <fo:block font-size="100%" space-before="0.6cm" font-weight="bold">Nähere Angaben über Branche / Art der Einrichtung</fo:block>
-                <fo:block border-style="dotted">$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10602"))</fo:block>
+                <fo:block border-style="dotted">$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10461"))</fo:block>
 
                 <!-- Wünsche -->
                 <fo:block font-size="100%" space-before="0.6cm" font-weight="bold">Erläuterung Ihrer Wünsche</fo:block>
-                <fo:block border-style="dotted">$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10603"))</fo:block>
+                <fo:block border-style="dotted">$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10464"))</fo:block>
 
                 <!-- ===== 3. Erstkontakt ===== -->
                 <fo:block font-size="100%" space-before="0.4cm" font-weight="bold">3. Auf die Aktivsenioren aufmerksam geworden durch</fo:block>
@@ -364,7 +355,7 @@ $include.parse($ctx, "auftrag-common-elements-fo.vm")
                                     <fo:table-column column-width="50%"/>
                                     <fo:table-body>
                                         #set($col = 0)
-                                        #foreach($v in $issues.get(0).getCustomFieldValue("customfield_10606"))
+                                        #foreach($v in $issues.get(0).getCustomFieldValue("customfield_10421"))
                                             #if($col == 0)<fo:table-row>#end
                                             <fo:table-cell padding="2pt">
                                                 <fo:block>• $v.value</fo:block>
@@ -398,7 +389,7 @@ $include.parse($ctx, "auftrag-common-elements-fo.vm")
                     Nach Eingang des Kostendeckungsbeitrags nimmt ein AS-Mitglied Kontakt mit Ihnen auf und vereinbart das weitere Vorgehen.
                 </fo:block>
 
-                #if($xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11456")) == "Rahmenauftrag")
+                #if($xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10453")) == "Rahmenauftrag")
                     <fo:block space-before="3mm" text-align="left" font-weight="bold">
                         Art, Inhalt und Umfang der Betreuung sowie Zeitraum und Konditionen werden individuell vereinbart.
                     </fo:block>
@@ -420,7 +411,7 @@ $include.parse($ctx, "auftrag-common-elements-fo.vm")
                 </fo:block>
 
                 <!-- ===== Weitere Informationen (Info zusenden Ja/Nein) ===== -->
-                #set($cf12602obj = $issues.get(0).getCustomFieldValue("customfield_12602"))
+                #set($cf12602obj = $issues.get(0).getCustomFieldValue("customfield_10263"))
                 #if($cf12602obj)
                     #set($info = $cf12602obj.value)
                 #else

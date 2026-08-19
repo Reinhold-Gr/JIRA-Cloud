@@ -1,0 +1,94 @@
+// java
+
+// 1. Endpoint, den Jira aufruft
+@RestController
+@RequestMapping("/api/pdf")
+public class InvoicePdfController {
+
+    private final JiraCloudClient jiraClient;
+    private final PdfRenderService pdfRenderService;
+
+    @GetMapping(value = "/rechnung/{issueKey}", produces = "application/pdf")
+    public ResponseEntity<byte[]> generateInvoice(@PathVariable String issueKey) {
+
+        // 1. Issue-Daten von Jira Cloud holen
+        IssueData issue = jiraClient.getIssueWithFields(issueKey);
+
+        // 2. In Velocity-Context packen und XSL-FO rendern
+        byte[] pdfBytes = pdfRenderService.renderInvoice(issue);
+
+        return ResponseEntity.ok()
+            .header("Content-Disposition", "attachment; filename=" + issueKey + ".pdf")
+            .contentType(MediaType.APPLICATION_PDF)
+            .body(pdfBytes);
+    }
+}
+
+// 2. Aufruf, den dein Microservice gegen Jira Cloud macht
+@Component
+public class JiraCloudClient {
+
+    @Value("${jira.baseUrl}")      private String baseUrl;      // https://deinedomain.atlassian.net
+    @Value("${jira.email}")        private String email;
+    @Value("${jira.apiToken}")     private String apiToken;
+
+    private final RestTemplate restTemplate = new RestTemplate();
+
+    public IssueData getIssueWithFields(String issueKey) {
+        String url = baseUrl + "/rest/api/3/issue/" + issueKey
+            + "?fields=summary,customfield_10050,customfield_10061,issuelinks";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBasicAuth(email, apiToken);   // Basic Auth mit API-Token
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+
+        ResponseEntity<JsonNode> response = restTemplate.exchange(
+            url, HttpMethod.GET, new HttpEntity<>(headers), JsonNode.class);
+
+        return IssueDataMapper.fromJson(response.getBody());
+    }
+}
+
+//  2 Deteillierter
+@Component
+public class JiraCloudClient {
+
+    @Value("${jira.baseUrl}")   private String baseUrl;    // https://deinedomain.atlassian.net
+    @Value("${jira.email}")     private String email;
+    @Value("${jira.apiToken}")  private String apiToken;
+
+    private final RestTemplate restTemplate = new RestTemplate();
+
+    public IssueData getIssueWithFields(String issueKey) {
+        String fields = String.join(",",
+            "summary", "status", "created",
+            "customfield_10050",   // z.B. Rechnungsnummer
+            "customfield_10061",   // z.B. Betrag/Positionen
+            "issuelinks"
+        );
+
+        String url = UriComponentsBuilder
+            .fromHttpUrl(baseUrl + "/rest/api/3/issue/" + issueKey)
+            .queryParam("fields", fields)
+            .queryParam("expand", "renderedFields")  // optional: HTML-gerenderte Feldwerte
+            .toUriString();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBasicAuth(email, apiToken);
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+
+        try {
+            ResponseEntity<JsonNode> response = restTemplate.exchange(
+                url, HttpMethod.GET, new HttpEntity<>(headers), JsonNode.class);
+            return IssueDataMapper.fromJson(response.getBody());
+
+        } catch (HttpClientErrorException.NotFound e) {
+            throw new IssueNotFoundException(issueKey);
+        } catch (HttpClientErrorException.Unauthorized e) {
+            throw new JiraAuthException("API-Token ungültig oder abgelaufen");
+        } catch (HttpClientErrorException.TooManyRequests e) {
+            // Retry-After Header auswerten und ggf. mit Backoff erneut versuchen
+            throw new JiraRateLimitException(e.getResponseHeaders().getFirst("Retry-After"));
+        }
+    }
+}
