@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 /*
- * ExtractCustomFields.groovy
+ * ExtractCFs.groovy
  * ---------------------------------------------------------------
  * 1. Liest eine Eingabedatei (Pfad als Argument oder interaktive Abfrage)
  * 2. Durchsucht den Inhalt nach allen Vorkommen von "customfield-nnnnn" (5-stellig)
@@ -10,8 +10,8 @@
  * 4. Schreibt das Ergebnis nach CF_<Name der Eingabedatei>.txt (gleiches Verzeichnis)
  *
  * Aufruf:
- *   groovy ExtractCustomFields.groovy <Pfad-zur-Datei> <ISSUE-KEY>
- *   (fehlende Argumente werden interaktiv abgefragt, z.B. groovy ExtractCustomFields.groovy)
+ *   groovy ExtractCFs.groovy <Pfad-zur-Datei> <ISSUE-KEY>
+ *   (fehlende Argumente werden interaktiv abgefragt, z.B. groovy ExtractCFs.groovy)
  *
  * Base-URL ist fest auf die Sandbox voreingestellt (via JIRA_BASE_URL überschreibbar).
  * Benötigte Umgebungsvariablen (alternativ interaktive Abfrage, falls nicht gesetzt):
@@ -68,12 +68,12 @@ String content = new String(Files.readAllBytes(inputPath), StandardCharsets.UTF_
 // 2. Alle customfield-nnnnn (5-stellig) extrahieren, eindeutig + sortiert
 // -----------------------------------------------------------------
 
-def matcher = (content =~ /customfield-(\d{5})/)
+def matcher = (content =~ /customfield[_-](\d{5})/)
 Set<String> fieldIds = new TreeSet<>()
 matcher.each { fullMatch, id -> fieldIds << id }
 
 if (fieldIds.isEmpty()) {
-    println "Keine customfield-nnnnn Referenzen in ${inputPath.getFileName()} gefunden."
+    println "Keine customfield_nnnnn / customfield-nnnnn Referenzen in ${inputPath.getFileName()} gefunden. Es wird keine Ausgabedatei erzeugt."
     System.exit(0)
 }
 

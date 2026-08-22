@@ -1,0 +1,224 @@
+Custom-Field-Übersicht für: AS_initial-confirmation-fo-cloud_1_CF.vm
+Issue:  AUFTRAG-26564
+Quelle: https://aktivsenioren-sandbox.atlassian.net
+Erzeugt am: 2026-08-20 17:08:40
+======================================================================
+
+ID:     customfield-10200
+Name:   Auftragsnummer
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10200
+Items:  -
+Wert (AUFTRAG-26564): 26564
+----------------------------------------------------------------------
+ID:     customfield-10263
+Name:   Infos zusenden
+Typ:    option
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:select
+CustomId: 10263
+Items:  -
+Wert (AUFTRAG-26564): {"self":"https://aktivsenioren-sandbox.atlassian.net/rest/api/3/customFieldOption/10168","value":"Nein","id":"10168"}
+----------------------------------------------------------------------
+ID:     customfield-10298
+Name:   RL.E-Mail AS
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10298
+Items:  -
+Wert (AUFTRAG-26564): gerd.arnold@aktivsenioren.de
+----------------------------------------------------------------------
+ID:     customfield-10306
+Name:   RL.Name
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10306
+Items:  -
+Wert (AUFTRAG-26564): Hans Alois Thiel
+----------------------------------------------------------------------
+ID:     customfield-10310
+Name:   RL.Tel-Fest
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10310
+Items:  -
+Wert (AUFTRAG-26564): 09181 297 9585
+----------------------------------------------------------------------
+ID:     customfield-10323
+Name:   RL.Fax
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10323
+Items:  -
+Wert (AUFTRAG-26564): (leer)
+----------------------------------------------------------------------
+ID:     customfield-10329
+Name:   Webseite
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10329
+Items:  -
+Wert (AUFTRAG-26564): (leer)
+----------------------------------------------------------------------
+ID:     customfield-10372
+Name:   Fachthemen
+Typ:    array
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes
+CustomId: 10372
+Items:  option
+Wert (AUFTRAG-26564): [{"self":"https://aktivsenioren-sandbox.atlassian.net/rest/api/3/customFieldOption/10534","value":"Business- und Finanzplanung","id":"10534"},{"self":"https://aktivsenioren-sandbox.atlassian.net/rest/api/3/customFieldOption/10535","value":"Tragf\u00e4higkeitsbescheinigung","id":"10535"}]
+----------------------------------------------------------------------
+ID:     customfield-10379
+Name:   Beratungsfall
+Typ:    array
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes
+CustomId: 10379
+Items:  option
+Wert (AUFTRAG-26564): [{"self":"https://aktivsenioren-sandbox.atlassian.net/rest/api/3/customFieldOption/10525","value":"Existenzgr\u00fcndung","id":"10525"}]
+----------------------------------------------------------------------
+ID:     customfield-10387
+Name:   K.Tel.
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10387
+Items:  -
+Wert (AUFTRAG-26564): 0821 436962
+----------------------------------------------------------------------
+ID:     customfield-10388
+Name:   K.Firma
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10388
+Items:  -
+Wert (AUFTRAG-26564): (leer)
+----------------------------------------------------------------------
+ID:     customfield-10389
+Name:   K.PLZ
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10389
+Items:  -
+Wert (AUFTRAG-26564): 86391
+----------------------------------------------------------------------
+ID:     customfield-10390
+Name:   Rechtsform
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10390
+Items:  -
+Wert (AUFTRAG-26564): (leer)
+----------------------------------------------------------------------
+ID:     customfield-10391
+Name:   K.Ort
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10391
+Items:  -
+Wert (AUFTRAG-26564): Stadtbergen
+----------------------------------------------------------------------
+ID:     customfield-10392
+Name:   K.Vorname
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10392
+Items:  -
+Wert (AUFTRAG-26564): Dieter
+----------------------------------------------------------------------
+ID:     customfield-10393
+Name:   Art des Unternehmens
+Typ:    array
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes
+CustomId: 10393
+Items:  option
+Wert (AUFTRAG-26564): [{"self":"https://aktivsenioren-sandbox.atlassian.net/rest/api/3/customFieldOption/10562","value":"Dienstleistung","id":"10562"}]
+----------------------------------------------------------------------
+ID:     customfield-10395
+Name:   K.Nachname
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10395
+Items:  -
+Wert (AUFTRAG-26564): Schweininger
+----------------------------------------------------------------------
+ID:     customfield-10396
+Name:   K.Fax
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10396
+Items:  -
+Wert (AUFTRAG-26564): (leer)
+----------------------------------------------------------------------
+ID:     customfield-10398
+Name:   K.Wei.Tel
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10398
+Items:  -
+Wert (AUFTRAG-26564): (leer)
+----------------------------------------------------------------------
+ID:     customfield-10399
+Name:   K.Strasse
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10399
+Items:  -
+Wert (AUFTRAG-26564): Rehlingenstraße 10
+----------------------------------------------------------------------
+ID:     customfield-10400
+Name:   K.E-Mail
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10400
+Items:  -
+Wert (AUFTRAG-26564): budschwein@aol.com
+----------------------------------------------------------------------
+ID:     customfield-10405
+Name:   K.Land
+Typ:    option
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:select
+CustomId: 10405
+Items:  -
+Wert (AUFTRAG-26564): {"self":"https://aktivsenioren-sandbox.atlassian.net/rest/api/3/customFieldOption/10554","value":"Deutschland","id":"10554"}
+----------------------------------------------------------------------
+ID:     customfield-10421
+Name:   Erstkontakt
+Typ:    array
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes
+CustomId: 10421
+Items:  option
+Wert (AUFTRAG-26564): [{"self":"https://aktivsenioren-sandbox.atlassian.net/rest/api/3/customFieldOption/10593","value":"IHK/HWK","id":"10593"}]
+----------------------------------------------------------------------
+ID:     customfield-10432
+Name:   Region Name
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10432
+Items:  -
+Wert (AUFTRAG-26564): (Feld nicht im Issue-Response enthalten)
+----------------------------------------------------------------------
+ID:     customfield-10453
+Name:   Leistung 1
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10453
+Items:  -
+Wert (AUFTRAG-26564): Gründungsberatung
+----------------------------------------------------------------------
+ID:     customfield-10461
+Name:   Hinweise zur Branche
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textarea
+CustomId: 10461
+Items:  -
+Wert (AUFTRAG-26564): {"type":"doc","version":1,"content":[{"type":"paragraph","content":[{"type":"text","text":"Immobilienmakler"}]}]}
+----------------------------------------------------------------------
+ID:     customfield-10464
+Name:   Wünsche im Detail
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textarea
+CustomId: 10464
+Items:  -
+Wert (AUFTRAG-26564): {"type":"doc","version":1,"content":[{"type":"paragraph","content":[{"type":"text","text":"Selbst\u00e4ndigmachung als Immobilienmakler"}]}]}
+----------------------------------------------------------------------
+
+Gesamt: 27 Felder referenziert, davon 27 in JIRA gefunden, 0 nicht gefunden.

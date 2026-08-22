@@ -1,6 +1,6 @@
 client: "{{rule.name}}"
 export:
-  view: PDF
+  view: "AS_Initial-Confirmation"
   viewContext: SINGLE_ISSUE_VIEW
   columnConfiguration: USER_DEFAULT
   jql: "key = {{issue.key}}"
@@ -11,4 +11,20 @@ actions:
   - name: Call back to Jira Cloud Automation
     type: CALL
     url: https://api-private.atlassian.com/automation/webhooks/jira/a/101e4b0b-81f1-417e-842e-7a47405e08f8/01a010ac-b958-7f80-bf24-ce51fd2881c5
-    secret: f550067136151815a8ab886fd15a02b47202683b
+    secret:  f550067136151815a8ab886fd15a02b47202683b
+	
+client: "{{rule.name}}"
+export:
+  view: "AS_Initial-Confirmation"
+  viewContext: SINGLE_ISSUE_VIEW
+  columnConfiguration: USER_DEFAULT
+  jql: "key = {{issue.key}}"
+  filename: "{{issue.key}}_Auftrag.pdf"
+actions:
+  - name: Attach PDF to issue
+    type: ATTACH
+    toIssueKey: "{{issue.key}}"
+  - name: Call back to Jira Cloud Automation
+    type: CALL
+    url: "https://api-private.atlassian.com/automation/webhooks/jira/a/101e4b0b-81f1-417e-842e-7a47405e08f8/01a010ac-b958-7f80-bf24-ce51fd2881c5"
+    secret: "f550067136151815a8ab886fd15a02b47202683b"	

@@ -1,0 +1,149 @@
+Custom-Field-Übersicht für: AS_initial-confirmation-fo-cloud_1.vm
+Issue:  AUFTRAG-26564
+Quelle: https://aktivsenioren-sandbox.atlassian.net
+Erzeugt am: 2026-08-20 16:58:42
+======================================================================
+
+ID:     customfield-10206
+Name:   Hilfreich
+Typ:    option
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons
+CustomId: 10206
+Items:  -
+Wert (AUFTRAG-26564): (Feld nicht im Issue-Response enthalten)
+----------------------------------------------------------------------
+ID:     customfield-10207
+Name:   AS-Referenz
+Typ:    option
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons
+CustomId: 10207
+Items:  -
+Wert (AUFTRAG-26564): (Feld nicht im Issue-Response enthalten)
+----------------------------------------------------------------------
+ID:     customfield-10221
+Name:   V.JahresMaxKeyS
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10221
+Items:  -
+Wert (AUFTRAG-26564): 17980
+----------------------------------------------------------------------
+ID:     customfield-10230
+Name:   V.StNr
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10230
+Items:  -
+Wert (AUFTRAG-26564): St. Nr.: 143/210/20578
+----------------------------------------------------------------------
+ID:     customfield-10254
+Name:   V.Bank
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10254
+Items:  -
+Wert (AUFTRAG-26564): Stadtsparkasse München
+----------------------------------------------------------------------
+ID:     customfield-10256
+Name:   Auftragsentwurf
+Typ:    option
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:select
+CustomId: 10256
+Items:  -
+Wert (AUFTRAG-26564): {"self":"https://aktivsenioren-sandbox.atlassian.net/rest/api/3/customFieldOption/10189","value":"Nein","id":"10189"}
+----------------------------------------------------------------------
+ID:     customfield-10257
+Name:   V.Strasse
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10257
+Items:  -
+Wert (AUFTRAG-26564): Landshuter Allee 11
+----------------------------------------------------------------------
+ID:     customfield-10287
+Name:   Vereinsfunktion 6
+Typ:    option
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:select
+CustomId: 10287
+Items:  -
+Wert (AUFTRAG-26564): (Feld nicht im Issue-Response enthalten)
+----------------------------------------------------------------------
+ID:     customfield-10303
+Name:   Vereinsfunktion 6 Geändert am
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10303
+Items:  -
+Wert (AUFTRAG-26564): (Feld nicht im Issue-Response enthalten)
+----------------------------------------------------------------------
+ID:     customfield-10308
+Name:   Vereinsfunktion 7 Von
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10308
+Items:  -
+Wert (AUFTRAG-26564): (Feld nicht im Issue-Response enthalten)
+----------------------------------------------------------------------
+ID:     customfield-10309
+Name:   Vereinsfunktion 7 Bis
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10309
+Items:  -
+Wert (AUFTRAG-26564): (Feld nicht im Issue-Response enthalten)
+----------------------------------------------------------------------
+ID:     customfield-10428
+Name:   Hinweise
+Typ:    string
+Custom: com.atlassian.jira.plugin.system.customfieldtypes:textfield
+CustomId: 10428
+Items:  -
+Wert (AUFTRAG-26564): (Feld nicht im Issue-Response enthalten)
+----------------------------------------------------------------------
+ID:     customfield-10602
+Name:   *** NICHT GEFUNDEN in https://aktivsenioren-sandbox.atlassian.net ***
+----------------------------------------------------------------------
+ID:     customfield-10603
+Name:   *** NICHT GEFUNDEN in https://aktivsenioren-sandbox.atlassian.net ***
+----------------------------------------------------------------------
+ID:     customfield-10604
+Name:   *** NICHT GEFUNDEN in https://aktivsenioren-sandbox.atlassian.net ***
+----------------------------------------------------------------------
+ID:     customfield-10605
+Name:   *** NICHT GEFUNDEN in https://aktivsenioren-sandbox.atlassian.net ***
+----------------------------------------------------------------------
+ID:     customfield-10606
+Name:   *** NICHT GEFUNDEN in https://aktivsenioren-sandbox.atlassian.net ***
+----------------------------------------------------------------------
+ID:     customfield-10804
+Name:   *** NICHT GEFUNDEN in https://aktivsenioren-sandbox.atlassian.net ***
+----------------------------------------------------------------------
+ID:     customfield-11200
+Name:   *** NICHT GEFUNDEN in https://aktivsenioren-sandbox.atlassian.net ***
+----------------------------------------------------------------------
+ID:     customfield-11201
+Name:   *** NICHT GEFUNDEN in https://aktivsenioren-sandbox.atlassian.net ***
+----------------------------------------------------------------------
+ID:     customfield-11202
+Name:   *** NICHT GEFUNDEN in https://aktivsenioren-sandbox.atlassian.net ***
+----------------------------------------------------------------------
+ID:     customfield-11301
+Name:   *** NICHT GEFUNDEN in https://aktivsenioren-sandbox.atlassian.net ***
+----------------------------------------------------------------------
+ID:     customfield-11305
+Name:   *** NICHT GEFUNDEN in https://aktivsenioren-sandbox.atlassian.net ***
+----------------------------------------------------------------------
+ID:     customfield-11402
+Name:   *** NICHT GEFUNDEN in https://aktivsenioren-sandbox.atlassian.net ***
+----------------------------------------------------------------------
+ID:     customfield-11456
+Name:   *** NICHT GEFUNDEN in https://aktivsenioren-sandbox.atlassian.net ***
+----------------------------------------------------------------------
+ID:     customfield-11810
+Name:   *** NICHT GEFUNDEN in https://aktivsenioren-sandbox.atlassian.net ***
+----------------------------------------------------------------------
+ID:     customfield-12602
+Name:   *** NICHT GEFUNDEN in https://aktivsenioren-sandbox.atlassian.net ***
+----------------------------------------------------------------------
+
+Gesamt: 27 Felder referenziert, davon 12 in JIRA gefunden, 15 nicht gefunden.

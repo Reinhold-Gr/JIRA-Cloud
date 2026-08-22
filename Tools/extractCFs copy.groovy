@@ -2,6 +2,8 @@
 /*
  * ExtractCustomFields.groovy
  * ---------------------------------------------------------------
+ * 0. Für sich lauffähig  !!!!
+ *
  * 1. Liest eine Eingabedatei (Pfad als Argument oder interaktive Abfrage)
  * 2. Durchsucht den Inhalt nach allen Vorkommen von "customfield-nnnnn" (5-stellig)
  * 3. Fragt für jede gefundene Field-ID die Metadaten (Name, Typ, Schema) über die
@@ -13,11 +15,10 @@
  *   groovy ExtractCustomFields.groovy <Pfad-zur-Datei> <ISSUE-KEY>
  *   (fehlende Argumente werden interaktiv abgefragt, z.B. groovy ExtractCustomFields.groovy)
  *
- * Base-URL ist fest auf die Sandbox voreingestellt (via JIRA_BASE_URL überschreibbar).
  * Benötigte Umgebungsvariablen (alternativ interaktive Abfrage, falls nicht gesetzt):
- *   Sandbox_USER        Login-E-Mail des API-Users
- *   JIRA_API_TOKEN_CL   API-Token von https://id.atlassian.com/manage-profile/security/api-tokens
- *   JIRA_BASE_URL       optional, überschreibt die Sandbox-Default-URL
+ *   JIRA_BASE_URL   z.B. https://deine-domain.atlassian.net
+ *   JIRA_EMAIL      Login-E-Mail des API-Users
+ *   JIRA_API_TOKEN  API-Token von https://id.atlassian.com/manage-profile/security/api-tokens
  *
  * Keine externen Dependencies nötig (nur JDK: java.net.http.HttpClient, groovy.json).
  * ---------------------------------------------------------------
@@ -83,9 +84,9 @@ println "Gefundene Custom-Field-IDs (${fieldIds.size()}): ${fieldIds.join(', ')}
 // 3. JIRA-Zugangsdaten ermitteln (ENV, sonst interaktiv)
 // -----------------------------------------------------------------
 
-String baseUrl = System.getenv("JIRA_BASE_URL") ?: "https://aktivsenioren-sandbox.atlassian.net"
-String email = System.getenv("Sandbox_USER")
-String apiToken = System.getenv("JIRA_API_TOKEN_CL")
+String baseUrl = System.getenv("JIRA_BASE_URL")
+String email = System.getenv("JIRA_EMAIL")
+String apiToken = System.getenv("JIRA_API_TOKEN")
 
 def askIfMissing = { String current, String prompt ->
     if (current) return current
@@ -93,12 +94,12 @@ def askIfMissing = { String current, String prompt ->
     return System.console() ? System.console().readLine() : new BufferedReader(new InputStreamReader(System.in)).readLine()
 }
 
-baseUrl = askIfMissing(baseUrl, "JIRA Base-URL [${baseUrl}]: ")?.trim() ?: baseUrl
-email = askIfMissing(email, "JIRA E-Mail (Sandbox_USER): ")?.trim()
-apiToken = askIfMissing(apiToken, "JIRA API-Token (JIRA_API_TOKEN_CL): ")?.trim()
+baseUrl = askIfMissing(baseUrl, "JIRA Base-URL (z.B. https://deine-domain.atlassian.net): ")?.trim()
+email = askIfMissing(email, "JIRA E-Mail: ")?.trim()
+apiToken = askIfMissing(apiToken, "JIRA API-Token: ")?.trim()
 
 if (!baseUrl || !email || !apiToken) {
-    System.err.println("FEHLER: Base-URL, E-Mail (Sandbox_USER) und API-Token (JIRA_API_TOKEN_CL) werden benötigt.")
+    System.err.println("FEHLER: Base-URL, E-Mail und API-Token werden benötigt.")
     System.exit(1)
 }
 if (baseUrl.endsWith("/")) {
