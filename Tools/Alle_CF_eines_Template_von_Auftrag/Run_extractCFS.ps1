@@ -63,7 +63,7 @@ Write-Host ""
 $exitCode = $LASTEXITCODE
 
 if ($exitCode -eq 0) {
-    $outputFile = Join-Path (Split-Path $InputFile -Parent) ("CF_" + (Split-Path $InputFile -Leaf) + ".txt")
+    $outputFile = Join-Path (Split-Path $InputFile -Parent) ($IssueKey + (Split-Path $InputFile -Leaf) + ".txt")
     Write-Host ""
     if (Test-Path $outputFile) {
         Write-Host "Fertig. Ausgabedatei: $outputFile" -ForegroundColor Green

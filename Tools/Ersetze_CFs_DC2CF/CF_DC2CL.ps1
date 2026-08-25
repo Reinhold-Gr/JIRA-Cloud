@@ -13,7 +13,7 @@ param(
 )
 
 # --- CONFIG ------------------------------------------------------------
-$MappingFile = "C:\GitHub\Reinhold-Gr\JIRA-Cloud\Tools\CustomFieldMapping.txt"
+$MappingFile = "C:\GitHub\Reinhold-Gr\JIRA-Cloud\Tools\Ersetze_CFs_DC2CF\CustomFieldMapping.txt"
 
 # --- FUNCTIONS ---------------------------------------------------------
 
