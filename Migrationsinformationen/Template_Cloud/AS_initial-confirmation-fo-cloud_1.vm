@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+## =====================================================================
+## Sonderzeichen-Makro direkt im Template
+## =====================================================================
+#macro(decodeSonderzeichen $issue $customfield)
+#set($wert = $issue.getCustomFieldValue($customfield))
+#if($wert)
+  #set($wert = $wert.toString())
+  ## Kleinbuchstaben
+  #set($wert = $wert.replace("&#xE4;", "ä"))
+  #set($wert = $wert.replace("&#xF6;", "ö"))
+  #set($wert = $wert.replace("&#xFC;", "ü"))
+  #set($wert = $wert.replace("&#xDF;", "ß"))
+  ## Großbuchstaben
+  #set($wert = $wert.replace("&#xC4;", "Ä"))
+  #set($wert = $wert.replace("&#xD6;", "Ö"))
+  #set($wert = $wert.replace("&#xDC;", "Ü"))
+  #set($wert = $wert.replace("&#x1E9E;", "ẞ"))
+  $wert
+#end
+#end
+
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
 ##____________________________________________________________________
 ##
 ## Empfangsbestätigung_V3.0 (CLOUD-VERSION): initial-confirmation-fo.vm
@@ -28,7 +52,8 @@
 ##____________________________________________________________________
 $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
 
-#set($filename = "$issues.get(0).getCustomFieldValue('customfield_10200')_Auftrag.pdf")
+## #set($filename = "$issues.get(0).getCustomFieldValue('customfield_10200')_Auftrag.pdf")
+#set($filename = "${issues.get(0).getCustomFieldValue('customfield_10200')}_Auftrag.pdf")
 
 ## Debugging true/false – VOR PRODUKTIVEINSATZ auf false setzen!
 #set($debug = false)
@@ -49,7 +74,6 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
 #end
 #set($formattedDate = "${cDayStr}.${cMonthStr}.${cYear}")
 
-<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
 
     <fo:layout-master-set>
         <fo:simple-page-master master-name="A4" margin-top="0.0cm" margin-bottom="0.0cm" margin-left="1.0cm" margin-right="1.0cm">
@@ -133,7 +157,9 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
                                 <fo:block space-before="3mm" font-size="90%">AktivSenioren Bayern e.V. | Landshuter Allee 11 | 80637 München</fo:block>
 
                                 <fo:block font-size="120%" space-before="3mm">
-                                    <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_10388"))</fo:block>
+##                                    <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_10388"))</fo:block>
+##                                    <fo:block>$xmlutils.escape($xmlutils.unescape($klient.getCustomFieldValue("customfield_10388")))</fo:block>
+                                    <fo:block>#decodeSonderzeichen($issues.get(0) "customfield_10388")</fo:block>
                                     <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_10392")) $xmlutils.escape($klient.getCustomFieldValue("customfield_10395"))</fo:block>
                                     <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_10399"))</fo:block>
                                     <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_10389")) $xmlutils.escape($klient.getCustomFieldValue("customfield_10391"))</fo:block>
@@ -298,7 +324,9 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
                             </fo:table-cell>
                             <fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
                                 <fo:block>Firmenname: (falls bekannt)</fo:block>
-                                <fo:block space-before="2mm">$xmlutils.escape($klient.getCustomFieldValue("customfield_10388"))</fo:block>
+                                <fo:block space-before="2mm">
+                                    #decodeSonderzeichen($issues.get(0) "customfield_10388")
+                                </fo:block>
                             </fo:table-cell>
                         </fo:table-row>
                         <fo:table-row border-bottom="solid">
@@ -426,11 +454,16 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
 
                 <!-- Details Branche -->
                 <fo:block font-size="100%" space-before="0.6cm" font-weight="bold">Nähere Angaben über Branche / Art der Einrichtung</fo:block>
-                <fo:block border-style="dotted">$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10461"))</fo:block>
+                <fo:block border-style="dotted">
+                    #decodeSonderzeichen($issues.get(0) "customfield_10461")
+                </fo:block>
 
                 <!-- Wünsche -->
                 <fo:block font-size="100%" space-before="0.6cm" font-weight="bold">Erläuterung Ihrer Wünsche</fo:block>
-                <fo:block border-style="dotted">$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10464"))</fo:block>
+##              $wunsch = "customfield_10464"
+                <fo:block border-style="dotted">
+                    #decodeSonderzeichen($issues.get(0) "customfield_10464")
+                </fo:block>                
 
                 <!-- ===== 3. Erstkontakt ===== -->
                 <fo:block font-size="100%" space-before="0.4cm" font-weight="bold">3. Auf die Aktivsenioren aufmerksam geworden durch</fo:block>
