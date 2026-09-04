@@ -112,7 +112,6 @@ $include.parse($ctx, "auftrag-common-elements-fo.vm")
 
 									<fo:block space-before="3mm" font-size="70%">AktivSenioren Bayern e.V. | Landshuter Allee 11 | 80637 München</fo:block>
 
-## GR09.12.21 Anfang Adresse 
 									<fo:block font-size="100%" space-before="3mm">
 										## CLOUD: direkte customfield_IDs statt $customFieldManager.getCustomFieldObject()
 										<fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_11402"))</fo:block>
