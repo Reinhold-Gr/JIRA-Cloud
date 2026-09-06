@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 ## =====================================================================
 ## Sonderzeichen-Makro direkt im Template
 ## =====================================================================
@@ -8,19 +7,18 @@
 #if($wert)
   #set($wert = $wert.toString())
   ## Kleinbuchstaben
-  #set($wert = $wert.replace("&#xE4;", "ä"))
-  #set($wert = $wert.replace("&#xF6;", "ö"))
-  #set($wert = $wert.replace("&#xFC;", "ü"))
-  #set($wert = $wert.replace("&#xDF;", "ß"))
+  #set($wert = $wert.replace("ä", "ä"))
+  #set($wert = $wert.replace("ö", "ö"))
+  #set($wert = $wert.replace("ü", "ü"))
+  #set($wert = $wert.replace("ß", "ß"))
   ## Großbuchstaben
-  #set($wert = $wert.replace("&#xC4;", "Ä"))
-  #set($wert = $wert.replace("&#xD6;", "Ö"))
-  #set($wert = $wert.replace("&#xDC;", "Ü"))
-  #set($wert = $wert.replace("&#x1E9E;", "ẞ"))
+  #set($wert = $wert.replace("Ä", "Ä"))
+  #set($wert = $wert.replace("Ö", "Ö"))
+  #set($wert = $wert.replace("Ü", "Ü"))
+  #set($wert = $wert.replace("ẞ", "ẞ"))
   $wert
 #end
 #end
-
 
 <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
 ##____________________________________________________________________
@@ -39,26 +37,25 @@
 ## - fo:table-body "Beratungsfall" in fo:table eingebettet (ValidationException)
 ##
 ## BUGFIX V3.2: 2026-08-23
-## - Doppelt eingefügten Block "Regionalleitung" entfernt (fo:table-cell war
-##   fälschlich Kind eines fo:block -> ValidationException Position 105:11)
-## - Datum wird jetzt manuell als dd.MM.yyyy zusammengesetzt statt über
-##   $userDateTimeFormatter.withStyle($dateTimeStyle.DATE) (lieferte "23/Aug./26")
-## - E-Mail-Felder (customfield_10400, customfield_10298) enthalten rohes HTML
-##   (<a href='mailto:...'>...</a>) im Feldwert -> Tags werden jetzt per
-##   replaceAll("<[^>]*>", "") entfernt, bevor der Wert ausgegeben wird
-## - region-body margin-top/margin-bottom von 0.5cm/0.8cm auf 3.0cm/3.0cm erhöht,
-##   damit sie >= extent von region-before/region-after (2.5cm) sind. Vorher
-##   überlappte der Fließtext Kopf- und Fußzeile (verdeckte "Seite X" + Fußgrafik)
+## - Doppelt eingefügten Block "Regionalleitung" entfernt
+## - Datum wird jetzt manuell als dd.MM.yyyy zusammengesetzt
+## - E-Mail-Felder per replaceAll("<[^>]*>", "") bereinigt
+## - region-body margin-top/margin-bottom erhöht
+##
+## BUGFIX V3.5: (diverse Layout-Fixes)
+##
+## BUGFIX V3.6: 2026-09-03
+## - Fehlende schließende Klammern bei customfield_10464 (Wünsche) ergänzt
+##   -> ParseErrorException an Zeile 468 behoben
 ##____________________________________________________________________
 $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
 
-## #set($filename = "$issues.get(0).getCustomFieldValue('customfield_10200')_Auftrag.pdf")
 #set($filename = "${issues.get(0).getCustomFieldValue('customfield_10200')}_Auftrag.pdf")
 
 ## Debugging true/false – VOR PRODUKTIVEINSATZ auf false setzen!
 #set($debug = false)
 
-## BUGFIX V3.2: Datum fest als dd.MM.yyyy statt über Jira-Systemformat (lieferte "23/Aug./26")
+## BUGFIX V3.2: Datum fest als dd.MM.yyyy
 #set($cDay = $currentDate.getDate())
 #set($cMonth = $currentDate.getMonth())
 #set($cMonth = $cMonth + 1)
@@ -74,12 +71,8 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
 #end
 #set($formattedDate = "${cDayStr}.${cMonthStr}.${cYear}")
 
-
     <fo:layout-master-set>
         <fo:simple-page-master master-name="A4" margin-top="0.0cm" margin-bottom="0.0cm" margin-left="1.0cm" margin-right="1.0cm">
-            <!-- BUGFIX V3.3: margin-top zurück auf 0.5cm, da region-before (page-header) nie
-                 mit static-content befüllt wird - dort ist kein Overlap-Risiko. Nur
-                 margin-bottom muss >= extent von region-after (2.5cm) sein (Fußzeile). -->
             <fo:region-body region-name="page-body" margin-top="0.5cm" margin-bottom="3.0cm" margin-left="1.5cm" margin-right="1.5cm"/>
             <fo:region-before region-name="page-header" extent="2.5cm" margin-left="1.5cm" margin-right="1.5cm"/>
             <fo:region-after region-name="page-footer" extent="2.5cm" margin-left="1.5cm" margin-right="1.5cm"/>
@@ -98,7 +91,7 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
 
         <!-- Seiteninhalt -->
         <fo:flow flow-name="page-body">
-            
+
 #if($debug)
             <fo:block font-size="8pt" color="red">
                 DEBUG – Verlinkte Issues:
@@ -115,7 +108,6 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
                     </fo:block>
                 #end
             #end
-            
 #end
 
             <fo:block space-after="10mm"/>
@@ -126,10 +118,6 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
 
                 <!-- Kopfbereich mit Logo und Adresse -->
                 <fo:block start-indent="0">
-                    <!-- BUGFIX V3.5: Verrechnungs-Kompensation aus V3.4 entfernt (unzuverlässig).
-                         Tabelle bleibt nah an der Oberkante (space-before 0cm), der Abstand
-                         zwischen Logo und Adresse/Regionalleitung wird jetzt direkt und
-                         unabhängig auf 1,5cm gesetzt (siehe unten). -->
                     <fo:table space-before="0cm" space-before.conditionality="retain">
                         <fo:table-column column-width="65%"/>
                         <fo:table-column column-width="35%"/>
@@ -139,7 +127,7 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
                         <fo:table-row>
                             <fo:table-cell number-columns-spanned="2">
                                 <fo:block>
-                                    <fo:external-graphic space-before="3mm" 
+                                    <fo:external-graphic space-before="3mm"
                                         width="100%"
                                         content-width="scale-to-fit"
                                         scaling="uniform"
@@ -157,9 +145,8 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
                                 <fo:block space-before="3mm" font-size="90%">AktivSenioren Bayern e.V. | Landshuter Allee 11 | 80637 München</fo:block>
 
                                 <fo:block font-size="120%" space-before="3mm">
-##                                    <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_10388"))</fo:block>
-##                                    <fo:block>$xmlutils.escape($xmlutils.unescape($klient.getCustomFieldValue("customfield_10388")))</fo:block>
-                                    <fo:block>#decodeSonderzeichen($issues.get(0) "customfield_10388")</fo:block>
+                                    <fo:block>$klient.getCustomFieldValue("customfield_10388")</fo:block>
+##                                    <fo:block>#decodeSonderzeichen($issues.get(0) "customfield_10388")</fo:block>
                                     <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_10392")) $xmlutils.escape($klient.getCustomFieldValue("customfield_10395"))</fo:block>
                                     <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_10399"))</fo:block>
                                     <fo:block>$xmlutils.escape($klient.getCustomFieldValue("customfield_10389")) $xmlutils.escape($klient.getCustomFieldValue("customfield_10391"))</fo:block>
@@ -174,24 +161,19 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
 
 <!-- ===== Weitere Informationen (Mail Regionalleiter) ===== -->
 #if($debug)
-    ## Nur diese beiden Werte müssen je Customfield geändert werden:
     #set($cfXObj = $issues.get(0).getCustomFieldValue("customfield_10298"))
     #set($cfXLabel = "CF_10298")
-
-    ## Standardwert
     #set($info = "")
-
     #if($cfXObj)
         #set($info = $cfXObj.toString())
     #end
-
     <fo:block font-size="8pt" color="blue" space-before="5mm"> </fo:block>
-    <fo:block DEBUG $xmlutils.escape($cfXLabel) (Cloud): </fo:block>
-    <fo:block $xmlutils.escape($cfXLabel) raw: $xmlutils.escape($cfXObj.toString())</fo:block>
-    <fo:block $xmlutils.escape($cfXLabel).value: $xmlutils.escape($info) </fo:block>
+    <fo:block>DEBUG $xmlutils.escape($cfXLabel) (Cloud): </fo:block>
+    <fo:block>$xmlutils.escape($cfXLabel) raw: $xmlutils.escape($cfXObj.toString())</fo:block>
+    <fo:block>$xmlutils.escape($cfXLabel).value: $xmlutils.escape($info)</fo:block>
 #end
 
-                            ## BUGFIX V3.2: Feldwert enthält rohes HTML (<a href='mailto:...'>...</a>) - Tags entfernen
+                            ## BUGFIX V3.2: Feldwert enthält rohes HTML - Tags entfernen
                             #set($rlEmailRaw = $region.getCustomFieldValue("customfield_10298"))
                             #set($rlEmail = "")
                             #if($rlEmailRaw)
@@ -239,18 +221,15 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
                 <!-- ===== Beratungsfall ===== -->
                 <fo:block font-size="100%" space-before="0.4cm" font-weight="bold">Beratungsfall</fo:block>
 
-                <!-- BUGFIX: fo:table-body muss in fo:table eingebettet sein -->
                 <fo:table table-layout="fixed" width="100%">
                     <fo:table-column column-width="50%"/>
                     <fo:table-column column-width="50%"/>
                     <fo:table-body>
 
                         #set($col = 0)
-
                         #set($beratungsfall = $issues.get(0).getCustomFieldValue("customfield_10379"))
 
                         #if($beratungsfall && $beratungsfall.size() > 0)
-
                             #foreach($v in $beratungsfall)
                                 #if($col == 0)<fo:table-row>#end
                                 <fo:table-cell padding="2pt">
@@ -325,7 +304,8 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
                             <fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
                                 <fo:block>Firmenname: (falls bekannt)</fo:block>
                                 <fo:block space-before="2mm">
-                                    #decodeSonderzeichen($issues.get(0) "customfield_10388")
+                                    <fo:block>$klient.getCustomFieldValue("customfield_10388")</fo:block>
+##                                    #decodeSonderzeichen($issues.get(0) "customfield_10388")
                                 </fo:block>
                             </fo:table-cell>
                         </fo:table-row>
@@ -375,7 +355,7 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
                         <fo:table-row border-bottom="solid">
                             <fo:table-cell margin="0.1em" padding="0.2em" padding-top="0.8em">
                                 <fo:block>E-Mail:*</fo:block>
-                                ## BUGFIX V3.2: Feldwert enthält rohes HTML (<a href='mailto:...'>...</a>) - Tags entfernen
+                                ## BUGFIX V3.2: Feldwert enthält rohes HTML - Tags entfernen
                                 #set($klientEmailRaw = $klient.getCustomFieldValue("customfield_10400"))
                                 #set($klientEmail = "")
                                 #if($klientEmailRaw)
@@ -391,15 +371,9 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
                 </fo:table>
 
                 <!-- ===== SEITE 2 ===== -->
-                <!-- BUGFIX V3.5: Platzhalter enthielt ein Leerzeichen -> erzeugte eine
-                     zusätzliche unsichtbare Zeile Höhe, wodurch das Logo trotz gesetztem
-                     space-before immer tiefer stand als beabsichtigt. Jetzt echt leer. -->
                 <fo:block break-before="page"/>
 
                 <!-- Logo Seite 2 -->
-                <!-- BUGFIX V3.5: space-before 1cm + region-body margin-top 0.5cm = 1,5cm
-                     Gesamtabstand zur oberen Seitenkante (vorher wurde 1.5cm space-before
-                     ZUSÄTZLICH zum margin-top gerechnet -> Logo stand zu tief) -->
                 <fo:block space-before="1cm" text-align-last="left">
                     <fo:external-graphic
                         width="30%"
@@ -408,7 +382,6 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
                         src="url($xmlutils.escape($logoImageUrl_Banner_S2))" overflow="hidden"/>
                 </fo:block>
 
-                <!-- BUGFIX V3.5: Abstand Logo -> Auftrags-Nr. direkt auf 1,5cm gesetzt -->
                 <fo:block space-before="1.5cm" text-align-last="justify" font-weight="bold">
                     Auftrags-Nr: $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10200"))
                     <fo:leader leader-pattern="space"/>
@@ -455,15 +428,21 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
                 <!-- Details Branche -->
                 <fo:block font-size="100%" space-before="0.6cm" font-weight="bold">Nähere Angaben über Branche / Art der Einrichtung</fo:block>
                 <fo:block border-style="dotted">
-                    #decodeSonderzeichen($issues.get(0) "customfield_10461")
+##                    #decodeSonderzeichen($issues.get(0) "customfield_10461")
+## GR                    <fo:block border-style="dotted">$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10461"))</fo:block>
+                    #set($customFieldValue = $issues.get(0).getCustomFieldValue("customfield_10461").toString().trim())
+                    #if($stringutils.isNotBlank($customFieldValue))
+                        $pdfRenderer.asRendered($issues.get(0), "customfield_10461", $customFieldValue)
+                    #end
                 </fo:block>
 
                 <!-- Wünsche -->
+                <!-- BUGFIX V3.6: Fehlende )) bei customfield_10464 ergänzt -->
                 <fo:block font-size="100%" space-before="0.6cm" font-weight="bold">Erläuterung Ihrer Wünsche</fo:block>
-##              $wunsch = "customfield_10464"
                 <fo:block border-style="dotted">
-                    #decodeSonderzeichen($issues.get(0) "customfield_10464")
-                </fo:block>                
+##                    #decodeSonderzeichen($issues.get(0) "customfield_10464")
+                    <fo:block border-style="dotted">$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10464"))</fo:block>
+                </fo:block>
 
                 <!-- ===== 3. Erstkontakt ===== -->
                 <fo:block font-size="100%" space-before="0.4cm" font-weight="bold">3. Auf die Aktivsenioren aufmerksam geworden durch</fo:block>
@@ -536,23 +515,17 @@ $include.parse($ctx, "AS_auftrag-common-elements-fo-cloud.vm")
                 </fo:block>
 
 <!-- ===== Weitere Informationen (Info zusenden Ja/Nein) ===== -->
-
 #if($debug)
-    ## Nur diese beiden Werte müssen je Customfield geändert werden:
     #set($cfXObj = $issues.get(0).getCustomFieldValue("customfield_10263"))
     #set($cfXLabel = "CF_10263")
-
-    ## Standardwert
     #set($info = "")
-
     #if($cfXObj)
         #set($info = $cfXObj.toString())
     #end
-
     <fo:block font-size="8pt" color="blue" space-before="5mm"> </fo:block>
-    <fo:block DEBUG $xmlutils.escape($cfXLabel) (Cloud): </fo:block>
-    <fo:block $xmlutils.escape($cfXLabel) raw: $xmlutils.escape($cfXObj.toString())</fo:block>
-    <fo:block $xmlutils.escape($cfXLabel).value: $xmlutils.escape($info) </fo:block>
+    <fo:block>DEBUG $xmlutils.escape($cfXLabel) (Cloud): </fo:block>
+    <fo:block>$xmlutils.escape($cfXLabel) raw: $xmlutils.escape($cfXObj.toString())</fo:block>
+    <fo:block>$xmlutils.escape($cfXLabel).value: $xmlutils.escape($info)</fo:block>
 #end
 
                 <fo:block font-size="100%" space-before="0.6cm" font-weight="bold">Weitere Informationen</fo:block>

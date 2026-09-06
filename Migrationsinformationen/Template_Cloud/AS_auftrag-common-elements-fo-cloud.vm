@@ -32,11 +32,9 @@
 ## und enthält z.B. "https://aktivsenioren-sandbox.atlassian.net"
 ## bzw. "https://aktivsenioren.atlassian.net" (Produktion).
 ## =====================================================================
-#if($baseUrl && $baseUrl.contains("sandbox"))
-    #set($env = "TEST")
-#else
-    #set($env = "PROD")
-#end
+#set($env = "Sandbox")
+##     #set($env = "PROD")
+
 ## RUN-TIME Umgebung ENDE
 
 ## =====================================================================
@@ -52,7 +50,7 @@
     #set($logoImageUrl_Banner_S2 = "https://vampir.as-by.de/7qukupxeUC399rraqxKK/Header_S2_Auftr.png")
     #set($FZ_ImageUrl            = "https://vampir.as-by.de/7qukupxeUC399rraqxKK/AS_Fusszeile.png")
 #end
-#if($env == "TEST")
+#if($env == "Sandbox")
     ## Testumgebung
     #set($logoImageUrl_Banner    = "https://vampir.aktivsenioren-bayern.de/7qukupxeUC399rraqxKK/Header_S1_Auftr.png")
     #set($logoImageUrl_Banner_S2 = "https://vampir.aktivsenioren-bayern.de/7qukupxeUC399rraqxKK/Header_S2_Auftr.png")
