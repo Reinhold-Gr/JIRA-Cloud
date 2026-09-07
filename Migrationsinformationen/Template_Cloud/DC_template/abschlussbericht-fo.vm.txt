@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+##____________________________________________________________________
+##
+## Abschlussbericht-V2.3: 		abschlussbericht-fo.vm
+## 
+##
+## -------------------------------------------------------------------
+##
+## Stand: 04.02.2022 / Gr V2.1
+##        Anpassung an neues Corporate Design
+##       
+## -------------------------------------------------------------------
+##
+## Stand: 19.04.23 / Gr V2.2
+##        TIC-352   Fusszeile ohne Vorstände   
+##      
+## -------------------------------------------------------------------
+##
+## Stand: 12.12.23 / Gr V2.3
+##
+##   	  TIC-396: Der Sicherheitsupdate verursachte Probleme 
+##		           bei Auftrags- und Rechnungsdokumenten
+##
+## -------------------------------------------------------------------
+##
+## Stand: 03.01.24 / Gr  / V2.4
+##
+##       Header anpassen: 40 Jahre AS
+##
+## -------------------------------------------------------------------
+##
+## Stand: 13.01.24 / Gr  / V2.4.1
+##
+##       Korrektur des Layout-master-sets
+##       Anpassung an die restl. Dokumente
+##
+##____________________________________________________________________
+##
+## JIRA PDF View Plugin
+## We are just going to access this template with Auftrag Project
+
+## We include the file rechnung-common-elements-fo.vm, where are set the logo, footer, linked issues, and all the common elements for rechnung and because the Abschlusbericht have the same structure than the rechnung.
+$include.parse($ctx, "rechnung-common-elements-fo.vm")
+
+## Debugging true/false
+## #set($debug = true)
+#set($debug = false)
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+	<fo:layout-master-set>
+		<fo:simple-page-master master-name="A4" margin-top="0.0cm" margin-bottom="1.0cm" margin-left="1cm" margin-right="1cm">   ##GR top 1.0 - 0,5 -> 0.0  bot 1.5 -> 1.0
+			<fo:region-body region-name="page-body" margin-top="0.5cm" margin-bottom="0.5cm" margin-left="1.5cm" margin-right="1.5cm"/> ##GR top 1.0 - 0,5  bot 1.0 -> 0.5
+			<fo:region-before region-name="page-header" extent="0.0cm" margin-left="0.5cm" margin-right="0.5cm"/>    ## extent 0.5 -> 0.1 -> 0.0
+			<fo:region-after region-name="page-footer" extent="1.5cm" />	## 
+		</fo:simple-page-master>
+	</fo:layout-master-set>
+
+## Original
+##    	<fo:layout-master-set>
+##		<fo:simple-page-master master-name="A4" margin-top="0.3cm" margin-bottom="0.0cm" margin-left="1.0cm" margin-right="1.0cm"> ## Gr left/ right 1.0 wg. Footer!!
+##			<fo:region-body region-name="page-body" margin-top="0.4cm" margin-bottom="2.5cm" margin-left="1.0cm" margin-right="1.0cm"/> ##GR top 1.0 - 0,5
+##			<fo:region-before region-name="page-header" extent="0.3cm" margin-left="1.0cm" margin-right="1.0cm"/>	## 5 nun 3,5
+##			<fo:region-after region-name="page-footer" extent="2.5cm" margin-left="1.0cm" margin-right="1.0cm"/>	## GR
+##		</fo:simple-page-master>
+##	</fo:layout-master-set>
+ 
+        
+	<fo:page-sequence font-family="OpenSANS" font-size="9pt" master-reference="A4">
+
+		<!-- footer -->
+		<fo:static-content flow-name="page-footer" font-size="82%">	##Gr + 2%
+## Gr Seitenzähler      
+			<fo:block  text-align="center"> Seite <fo:page-number/> </fo:block>
+			## <fo:block text-align="left"> <fo:external-graphic content-width="scale-down-to-fit" src="url($xmlutils.escape($FZ_ImageUrl))" overflow="hidden"/> </fo:block>  ## GR 19.04.23
+			<fo:block text-align="left"> <fo:external-graphic content-width="190mm" src="url($xmlutils.escape($FZ_ImageUrl))" overflow="hidden"/> </fo:block>                 ## GR 19.04.23
+        </fo:static-content>
+## GR modifiziert  Ende
+
+		<!-- body -->
+		<fo:flow flow-name="page-body" >
+			#if($project)
+          
+		<!-- header -->
+        <fo:block start-indent="0">                
+    		 <fo:block>        
+                <fo:block space-before="2.3cm" color="#ffffff" > . </fo:block>          ## GR nur zur Steuerung des Abstands des Banners zum Blattrand oben
+		            <fo:external-graphic src="url($xmlutils.escape($logoImageUrl_Banner_Abschl))" overflow="hidden"/>
+           	</fo:block>
+                       
+			<fo:table space-before="0.9cm">
+				<fo:table-body font-size="11pt">
+					<fo:table-row>
+						<fo:table-cell font-weight="bold" text-align="left">			##Gr 1 right alle
+							<fo:block>AktivSenioren Bayern e.V.</fo:block>
+						</fo:table-cell>
+						<fo:table-cell text-align="center">
+							<fo:block>Auftrag Nr. $xmlutils.escape($auftrag.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10230")))</fo:block>
+						</fo:table-cell>
+                        <fo:table-cell text-align="right">
+							<fo:block>Datum: $userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($currentDate)</fo:block>
+						</fo:table-cell>
+					</fo:table-row>
+				</fo:table-body>
+			</fo:table>
+            
+            <fo:block space-before="0.7cm" text-align="left" font-weight="bold" font-size="150%">Abschlussbericht</fo:block>
+               
+##	GR				<fo:block start-indent="0">                
+                    <fo:table space-before="0.8cm" >
+						<fo:table-body >
+							<fo:table-row>
+								<fo:table-cell text-align="left">
+                                	<fo:block >
+                  						<fo:inline font-weight="bold">Firma: </fo:inline> <fo:inline font-size="10pt"> $xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10222")))
+                                        									 </fo:inline>
+                					</fo:block>
+								</fo:table-cell>
+                                <fo:table-cell text-align="left">
+                                	<fo:block >
+                  						<fo:inline font-weight="bold">Klient: </fo:inline> <fo:inline font-size="10pt"> $xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10206"))) 
+                                        																$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10207")))
+                                                                              </fo:inline>
+                					</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+                            <fo:table-row>
+								<fo:table-cell text-align="left">
+                                	<fo:block >
+										<fo:inline font-weight="bold">Telefon: </fo:inline> <fo:inline font-size="10pt">$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10256")))</fo:inline>
+                                    </fo:block>
+								</fo:table-cell>
+								<fo:table-cell text-align="left">
+                                	<fo:block >
+										<fo:inline font-weight="bold">Weit. Telefon: </fo:inline> <fo:inline font-size="10pt">$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10257")))</fo:inline>
+                                    </fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+                            <fo:table-row>
+								<fo:table-cell text-align="left">
+                                	<fo:block >
+										<fo:inline font-weight="bold">Region: </fo:inline> <fo:inline font-size="10pt">$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10287")))</fo:inline>
+                                    </fo:block>
+								</fo:table-cell>
+								<fo:table-cell text-align="left">
+                                	<fo:block >
+										<fo:inline font-weight="bold">E-Mail: </fo:inline> <fo:inline >$xmlutils.escape($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10221")))</fo:inline>
+                                    </fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+                            <fo:table-row>
+								<fo:table-cell text-align="left">
+                                	<fo:block >
+										<fo:inline font-weight="bold">Auftragsbeginn: </fo:inline> <fo:inline font-size="10pt">$userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($issues.get(0).getCustomFieldValue("customfield_10231"))</fo:inline>
+                                    </fo:block>
+								</fo:table-cell>
+								<fo:table-cell text-align="left">
+                                	<fo:block >
+										<fo:inline font-weight="bold">Beratung abgeschlossen: </fo:inline> <fo:inline font-size="10pt">$userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($currentDate)</fo:inline>
+                                    </fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+						</fo:table-body>
+					</fo:table>
+                    
+ ## Beratung vollständig
+ <fo:table space-before="0.7cm" space-before.conditionality="retain">
+    <fo:table-body>
+        <fo:table-row>
+            <fo:table-cell>
+                <fo:block>
+                    #set($wert = $abschlussbericht.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10310")).get(null).toString().trim())
+                    
+                    Beratung vollständig durchgeführt:
+                    #if($wert.equals("Ja"))
+                        Ja
+                    #else
+                        Nein
+                    #end
+                </fo:block>
+            </fo:table-cell>
+
+            <fo:table-cell>
+                <fo:block>
+                    #if($wert.equals("Nein"))
+                        Bei Nein, konnte helfen:
+                        #set($wert2 = $abschlussbericht.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10310")).get("1").toString().trim())
+                        #if($wert2.equals("Ja"))
+                            Ja
+                        #else
+                            Nein
+                        #end
+                    #end
+                </fo:block>
+            </fo:table-cell>
+        </fo:table-row>
+    </fo:table-body>
+</fo:table>
+## beratung vollständig Ende 
+
+                    <fo:block space-before="0.5cm" font-weight="bold" font-size="150%">
+                  		Beratungstätigkeit
+                	</fo:block>
+
+ 
+## Beratungsfall
+<fo:block font-size="100%" space-before="0.4cm" font-weight="bold"> Beratungsfall </fo:block>
+
+<fo:table border-style="dotted" table-layout="fixed">
+    <fo:table-column column-width="5mm"/>
+    <fo:table-column/>
+
+    <fo:table-body>
+        <fo:table-row>
+
+            <fo:table-cell text-align="center" padding="0.2em">
+                <fo:block></fo:block>
+            </fo:table-cell>
+
+            <fo:table-cell padding="0.2em">
+
+                #set($col = 0)
+
+                <fo:block>
+                #foreach($v in $issues.get(0).getCustomFieldValue("customfield_11301"))
+
+                    <fo:inline>• </fo:inline>
+                    <fo:inline>$v.value</fo:inline>
+
+                    #set($col = $col + 1)
+
+                    #if($col == 3)
+                        </fo:block>
+                        <fo:block>
+                        #set($col = 0)
+                    #else
+                        <fo:inline>   </fo:inline> <!-- Abstand zwischen Spalten -->
+                    #end
+
+                #end
+                </fo:block>
+
+            </fo:table-cell>
+
+        </fo:table-row>
+    </fo:table-body>
+</fo:table>
+## Beratungsfall ENDE
+
+## Fachthemen
+<fo:block font-size="100%" space-before="0.4cm" font-weight="bold">Fachthemen</fo:block>
+
+<fo:table border-style="dotted" table-layout="fixed">
+    <fo:table-column column-width="5mm"/>
+    <fo:table-column/>
+
+    <fo:table-body>
+        <fo:table-row>
+
+            <fo:table-cell padding="0.2em">
+                <fo:block></fo:block>
+            </fo:table-cell>
+
+            <fo:table-cell padding="0.2em">
+
+                <fo:table table-layout="fixed" width="100%">
+                    <fo:table-column column-width="50%"/>
+                    <fo:table-column column-width="50%"/>
+
+                    <fo:table-body>
+
+                        #set($col = 0)
+
+                        #foreach($v in $issues.get(0).getCustomFieldValue("customfield_10605"))
+
+                            #if($col == 0)
+                                <fo:table-row>
+                            #end
+
+                            <fo:table-cell padding="2pt">
+                                <fo:block>• $v.value</fo:block>
+                            </fo:table-cell>
+
+                            #set($col = $col + 1)
+
+                            #if($col == 2)
+                                </fo:table-row>
+                                #set($col = 0)
+                            #end
+
+                        #end
+
+                        ## letzte Zeile auffüllen
+                        #if($col == 1)
+                            <fo:table-cell><fo:block/></fo:table-cell>
+                            </fo:table-row>
+                        #end
+
+                    </fo:table-body>
+                </fo:table>
+
+            </fo:table-cell>
+
+        </fo:table-row>
+    </fo:table-body>
+</fo:table>
+## Fachthemen Ende
+
+## Weitere Angaben 
+<fo:block space-before="1cm">
+    Gesamtaufwand in Stunden ca.: <fo:inline font-weight="bold">$number.format("integer", $abschlussbericht.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11468")))</fo:inline>
+</fo:block>
+                    
+<fo:table space-before="6mm" space-before.conditionality="retain">
+    <fo:table-column column-width="40%" />
+    <fo:table-column column-width="60%"/>
+    <fo:table-body>
+        <fo:table-row>
+            <fo:table-cell>
+                <fo:block>
+                    Kunde mit Beratung zufrieden:
+                    #set($zufrieden = $abschlussbericht.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10311")))
+                    #if($zufrieden && $zufrieden.value.equals("Ja"))
+                        Ja
+                    #elseif($zufrieden && $zufrieden.value.equals("Nein"))
+                        Nein
+                    #else
+                        k.A.
+                    #end
+                </fo:block>
+            </fo:table-cell>
+
+            <fo:table-cell>
+                <fo:block text-align="right">
+                    Weitere Unterstützung/Folgeberatung angeboten:
+                    #set($hilfe = $abschlussbericht.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10312")))
+                    #if($hilfe && $hilfe.value.equals("Ja"))
+                        Ja
+                    #elseif($hilfe && $hilfe.value.equals("Nein"))
+                        Nein
+                    #else
+                        k.A.
+                    #end
+                </fo:block>
+            </fo:table-cell>
+        </fo:table-row>
+    </fo:table-body>
+</fo:table>
+
+<fo:block space-before="6mm">
+    Feedback gewünscht:
+    #set($feedback = $abschlussbericht.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10313")))
+    #if($feedback && $feedback.value.equals("Ja"))
+        Ja
+    #elseif($feedback && $feedback.value.equals("Nein"))
+        Nein
+    #else
+        k.A.
+    #end
+</fo:block>
+## Weitere Angaben ENDE
+
+## Zusammenfassung 
+                	<fo:block font-size="100%" space-before="1.0cm" font-weight="bold">Kurze Zusammenfassung der geleisteten Beratung:</fo:block> 
+                    <fo:block border-style="dotted">$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10314"))</fo:block>
+## Zusammenfassung ENDE 
+                   
+## 2. Seite     _________________________________________________________________________________________________________________________
+
+                 	<fo:block page-break-before="always"> </fo:block>
+                    
+## GR  Neuer Kopf Anfang  
+
+            <fo:block space-before="0cm" text-align-last="justify" font-weight="bold" >
+		        <fo:external-graphic src="url($xmlutils.escape($logoImageUrl_Banner_S2))" overflow="hidden"/>
+           	</fo:block>
+                    
+			<fo:table space-before="1.2cm">
+				<fo:table-body font-size="11pt">
+					<fo:table-row>
+						<fo:table-cell font-weight="bold" text-align="left">		
+							<fo:block>AktivSenioren Bayern e.V.</fo:block>
+						</fo:table-cell>
+						<fo:table-cell text-align="center">
+							<fo:block>Auftrag Nr. $xmlutils.escape($auftrag.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10230")))</fo:block>
+						</fo:table-cell>
+                        <fo:table-cell text-align="right">
+							<fo:block>Datum: $userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($currentDate)</fo:block>
+						</fo:table-cell>
+					</fo:table-row>
+				</fo:table-body>
+			</fo:table>
+            
+            <fo:block space-before="0.8cm" text-align="left" font-weight="bold" font-size="150%">Abschlussbericht</fo:block>
+## GR Neuer Kopf Ende                         
+
+## Art des Unternehmens
+<fo:block font-size="100%" space-before="0.4cm" font-weight="bold">2. Art des Unternehmens / der Einrichtung</fo:block>
+
+<fo:table border-style="dotted" table-layout="fixed">
+    <fo:table-column column-width="5mm"/>
+    <fo:table-column/>
+
+    <fo:table-body>
+        <fo:table-row>
+
+            <fo:table-cell padding="0.2em">
+                <fo:block></fo:block>
+            </fo:table-cell>
+
+            <fo:table-cell padding="0.2em">
+
+                <fo:table table-layout="fixed" width="100%">
+                    <fo:table-column column-width="50%"/>
+                    <fo:table-column column-width="50%"/>
+
+                    <fo:table-body>
+
+                        #set($col = 0)
+
+                        #foreach($v in $issues.get(0).getCustomFieldValue("customfield_10604"))
+
+                            #if($col == 0)
+                                <fo:table-row>
+                            #end
+
+                            <fo:table-cell padding="2pt">
+                                <fo:block>• $v.value</fo:block>
+                            </fo:table-cell>
+
+                            #set($col = $col + 1)
+
+                            #if($col == 2)
+                                </fo:table-row>
+                                #set($col = 0)
+                            #end
+
+                        #end
+
+                        ## letzte Zeile auffüllen
+                        #if($col == 1)
+                            <fo:table-cell><fo:block/></fo:table-cell>
+                            </fo:table-row>
+                        #end
+
+                    </fo:table-body>
+                </fo:table>
+
+            </fo:table-cell>
+
+        </fo:table-row>
+    </fo:table-body>
+</fo:table>
+## Art des Unternehmens ENDE
+
+## Zahl der Mitarbeiter
+<fo:table space-before="1cm" width="100%">
+    <fo:table-column column-width="70%"/>
+    <fo:table-column column-width="30"/>
+    <fo:table-body>
+        <fo:table-row>
+            <fo:table-cell>
+                <fo:block font-weight="bold">
+                    Zahl der Mitarbeiter (einschließlich Inhaber und Geschäftsführer):
+                </fo:block>
+            </fo:table-cell>
+            #set($mitarbeiter = $abschlussbericht.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10315")))
+            <fo:table-cell>
+               <fo:block text-align="right" font-weight="bold">
+                   #if($mitarbeiter && $mitarbeiter.value)
+                      #set($anzeige = $mitarbeiter.value)
+
+##                      #if($anzeige.contains("50") && $anzeige.contains("mehr"))
+                      #if($anzeige.contains("mehr"))
+                      #set($anzeige = "> 50")
+                      #end
+
+                     <fo:inline wrap-option="no-wrap">
+                        $anzeige.replace(" ", "&#160;")
+                     </fo:inline>
+                 #else
+                     k.A.
+                 #end
+               </fo:block>
+           </fo:table-cell>
+      </fo:table-row>
+   </fo:table-body>
+</fo:table>
+##Zahl der Mitarbeiter ENDE
+
+##                <fo:block color="red">DEBUG START</fo:block>
+##                #set($x = 123)
+##                <fo:block color="red">$x</fo:block>
+##               <fo:block color="red">DEBUG END</fo:block>
+
+## ## Erstkontakt
+<fo:block font-size="100%" space-before="0.4cm" font-weight="bold">Auf die Aktivsenioren aufmerksam geworden durch</fo:block>
+
+<fo:table border-style="dotted" table-layout="fixed">
+    <fo:table-column column-width="5mm"/>
+    <fo:table-column/>
+
+    <fo:table-body>
+        <fo:table-row>
+
+            <fo:table-cell text-align="center" padding="0.2em">
+                <fo:block></fo:block>
+            </fo:table-cell>
+
+            <fo:table-cell padding="0.2em">
+
+                #set($col = 0)
+
+                <fo:block>
+                #foreach($v in $issues.get(0).getCustomFieldValue("customfield_10606"))
+
+                    <fo:inline>• </fo:inline>
+                    <fo:inline>$v.value</fo:inline>
+
+                    #set($col = $col + 1)
+
+                    #if($col == 3)
+                        </fo:block>
+                        <fo:block>
+                        #set($col = 0)
+                    #else
+                        <fo:inline>   </fo:inline> <!-- Abstand zwischen Spalten -->
+                    #end
+
+                #end
+                </fo:block>
+
+            </fo:table-cell>
+
+        </fo:table-row>
+    </fo:table-body>
+</fo:table>
+## Erstkontakt ENDE
+
+
+## Gründungsberatung
+<fo:block space-before="1cm">
+    <fo:inline font-weight="bold">Gründungsberatung: </fo:inline>
+    <fo:inline>
+        #set($gruendung = $abschlussbericht.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10316")))
+        #if($gruendung && $gruendung.value.equals("Ja"))
+            Ja
+        #elseif($gruendung && $gruendung.value.equals("Nein"))
+            Nein
+        #else
+            k.A.
+        #end
+    </fo:inline>
+</fo:block>
+
+<fo:block space-before="6mm">
+    Gründungszuschuss beantragt:
+    #set($beantragt = $abschlussbericht.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10317")))
+    #if($beantragt && $beantragt.value.equals("Ja"))
+        Ja
+    #elseif($beantragt && $beantragt.value.equals("Nein"))
+        Nein
+    #else
+        k.A.
+    #end
+</fo:block>
+
+<fo:block space-before="3mm">
+    Gründungszuschuss genehmigt:
+    #set($genehmigt = $abschlussbericht.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10318")))
+    #if($genehmigt && $genehmigt.value.equals("Ja"))
+        Ja
+    #elseif($genehmigt && $genehmigt.value.equals("Nein"))
+        Nein
+    #else
+        k.A.
+    #end
+</fo:block>
+
+<fo:block space-before="6mm">
+    Kunde steht als Referenz zur Verfügung:
+    #set($referenz = $abschlussbericht.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10319")))
+    #if($referenz && $referenz.value.equals("Ja"))
+        Ja
+    #elseif($referenz && $referenz.value.equals("Nein"))
+        Nein
+    #else
+        k.A.
+    #end
+</fo:block>
+## Gründungsberatung ENDE      
+
+## Unterschrift
+                <fo:block space-before="1cm" text-align-last="justify" font-weight="bold">
+                  ##gez. Berater: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10303")))
+                  gez. Berater: $xmlutils.escape($abschlussbericht.assignee.displayName)
+                  <fo:leader leader-pattern="space" />
+                  Datum: $userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($currentDate)
+                </fo:block>
+                <fo:block space-before="3mm" color="#FF0000">
+                  	(gezeichnet mit Name des Erstellers des Abschlussberichts)
+                </fo:block>   
+                
+#set($debug = true)
+#if($debug && $env.equals("TEST"))
+    <fo:block space-before="6mm" color="red" font-size="8pt">
+        DEBUG – Umgebung: $env
+    </fo:block>
+#end
+
+         	</fo:block>
+## Unterschrift ENDE
+
+			#end
+		</fo:flow>
+	</fo:page-sequence>
+
+</fo:root>

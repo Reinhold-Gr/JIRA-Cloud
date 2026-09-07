@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+##__________________________________________________________________________________
+##
+## Rechnung_Storno-V2.4 : 		storno-korrektur-mit-manueller-rechnungsnummer-fo.vm
+##
+##
+## ---------------------------------------------------------------------------------
+##
+##	Ä n d e r u n g e n 
+##
+##
+## Stand: 1.11.25 / Gr  / V2.4
+##
+##       Strasse und Ort des RL entfallen 
+##		 gem. Vorstandsbeschluss 1.10.25
+##      
+##
+##__________________________________________________________________________________
+##
+
+## JIRA PDF View Plugin
+## We are just going to access this template with Auftrag Project
+
+## We include the file rechnung-common-elements-fo.vm, where are set the logo, footer, linked issues, and all the common elements
+$include.parse($ctx, "rechnung-common-elements-fo.vm")
+
+$scripting.execute("articles-tool.groovy")
+
+#set($filename = "${issues.get(0).summary}S_Storno.pdf")
+
+## Debugging true/false
+## #set($debug = true)
+#set($debug = false)
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+	<fo:layout-master-set>
+		<fo:simple-page-master master-name="A4" margin-top="0.5cm" margin-bottom="1.5cm" margin-left="1cm" margin-right="1cm">
+			<fo:region-body region-name="page-body" margin-top="1.0cm" margin-bottom="1.0cm" margin-left="1.5cm" margin-right="1.5cm"/>
+			<fo:region-before region-name="page-header" extent="0.5cm" margin-left="1.5cm" margin-right="1.5cm"/>
+			<fo:region-after region-name="page-footer" extent="0.5cm" />
+		</fo:simple-page-master>
+	</fo:layout-master-set>
+
+	<!-- STORNO  -->
+    <fo:page-sequence font-family="Helvetica" font-size="9pt" master-reference="A4">
+    	<!-- footer -->
+		<fo:static-content flow-name="page-footer" font-size="80%">
+			<fo:block text-align="right" >Seite <fo:page-number/></fo:block>
+            <fo:block text-align="center">
+##              <fo:block>AKTIVSENIOREN BAYERN e.V.; Landshuter Allee 11; 80637 München; Tel.: 089 / 22 22 37; Fax: 089 / 22 99 68; info@aktivsenioren.de</fo:block>
+##              <fo:block font-weight="bold">$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10289"))) IBAN: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10292"))); BIC/SWIFT: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10293")))</fo:block>
+##              <fo:block>Amtsgericht München: VR:11147; St. Nr.: 143/210/20578; Sprecher des Vorstands: Reinhold Heiß</fo:block>
+                <fo:block>AKTIVSENIOREN BAYERN e.V.; $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11515")); $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11516")); $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11517")); $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11518")); $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11519"))</fo:block>   
+				<fo:block font-weight="bold">$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11520")) $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11521")); $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11522"))</fo:block>
+				<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11523")); $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11524")); $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11525"))</fo:block>
+			</fo:block>
+		</fo:static-content>
+
+		<!-- body -->
+		<fo:flow flow-name="page-body" >
+			#if($project)
+				<!-- header -->
+					<fo:table space-before="1cm" space-before.conditionality="retain">
+                    	<fo:table-column column-width="70%" />
+						<fo:table-column column-width="30%" />
+						<fo:table-body>
+                        
+							<fo:table-row>
+								<fo:table-cell >
+									<fo:block>
+                                     
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell text-align="center">
+									<fo:block>
+                                    	## #set($logoUrl = "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=") ## comment this out to hide the logo or enter "http://wwww.yourcompany.com/yourlogo.png" to use your logo
+										##<fo:external-graphic src="url(${logoUrl})" content-height="20mm"/>
+                                    
+										## #set($avatarImageUrl = "${requestContext.canonicalBaseUrl}/secure/projectavatar?pid=${project.id}&avatarId=${project.avatar.id}")
+										<fo:external-graphic content-height="10em" src="url($xmlutils.escape($logoImageUrl))" overflow="hidden"/>
+                                        
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+                            <fo:table-row>
+                            	<fo:table-cell >
+									<fo:block font-size="70%" font-weight="bold" text-decoration="underline">
+										AKTIVSENIOREN BAYERN e.V. - Regionalleitung $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10287")))
+                                    </fo:block>
+									<fo:block font-size="100%" space-before="3mm">
+                                    	<fo:block>$xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10222")))</fo:block>
+                                        <fo:block>$xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11400"))) $xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11401")))</fo:block>  
+##                                    	<fo:block>$xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10206"))) $xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10207")))</fo:block>
+                                    	<fo:block>$xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10208")))</fo:block>
+                                    	<fo:block>$xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10209"))) $xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10210")))</fo:block>
+                                        <fo:block>
+                                        	#if($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11300")).value != "Deutschland")
+                                            	$rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11300")).value
+                                           	#end
+                                      	</fo:block>
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell text-align="left">
+									<fo:block>
+                                        <fo:block font-size="90%">Regionalleitung $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10287")))</fo:block>
+                                        <fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10303")))</fo:block>
+                                        <fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10304")))</fo:block>
+                                        <fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10306"))) $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10305")))</fo:block>
+                                        <fo:block>Tel.: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10804")))</fo:block>
+                                        <fo:block>Fax: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10308")))</fo:block>
+                                        <fo:block>E-Mail:</fo:block>
+                                        <fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10309")))</fo:block>
+                                        <fo:block space-before="3mm">$userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($currentDate)</fo:block>
+									</fo:block>
+								</fo:table-cell>
+                            
+                            
+                            </fo:table-row>
+						</fo:table-body>
+					</fo:table>
+                
+                <fo:block space-before="1cm" font-size="150%" font-weight="bold" color="#FF0000">
+                  STORNO
+                </fo:block>
+ 
+## 				<fo:block space-before="6mm" font-weight="bold" color="#FF0000">Storno Nr. $xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11013")))S</fo:block>
+##              <fo:block> Rechnung Nr. $xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11013")))</fo:block>
+ 				<fo:block space-before="6mm" font-weight="bold" color="#FF0000">Storno Nr. 21-107-0936-00S</fo:block>
+                <fo:block> Rechnung Nr. 21-108-0112-01</fo:block>
+             	<fo:block> Auftrag Nr. $xmlutils.escape($auftrag.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10230")))</fo:block>
+ 
+ 
+## 				<fo:block space-before="6mm" font-weight="bold" color="#FF0000">Storno Nr. $xmlutils.escape($auftrag.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10230")))-0$auftrag.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11012")).intValue()S</fo:block>
+##              <fo:block> Rechnung Nr. $xmlutils.escape($auftrag.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10230")))-0$auftrag.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11012")).intValue()</fo:block>
+##             	<fo:block> Auftrag Nr. $xmlutils.escape($auftrag.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10230")))</fo:block>
+
+                
+                ##<fo:block space-before="1cm" >Sehr geehrte Damen und Herren,</fo:block>
+                ##<fo:block >wir stornieren hiermit die oben genannte Rechnung mit der Rechnungsnummer $xmlutils.escape($auftrag.getCustomFieldValue("customfield_10230"))-0$auftrag.getCustomFieldValue("customfield_11012").intValue().</fo:block>
+                ##<fo:block >Die Storno-Rechnung finden sie auf der 2. Seite.</fo:block>
+                ##
+                ##<fo:block space-before="6mm">Diese 2. Rechnung wurde fälschlichweise erstellt. Der Betrag wurde schon mit Rechnung zum Auftrag 14-101-0700 bezahlt.</fo:block>
+                ##<fo:block >Eine Rücküberweisung ist nicht erforderlich, da zu dieser Rechnung keine Bezahlung erfolgte.</fo:block>
+                
+                ##This is a trick showed in the PDF view Recipes to "Breaking (non-wrappable) text into multiple lines". Other way, the text shows without break lines
+				#set($renderedDescription = $pdfRenderer.asRendered($auftrag, "comment", $rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10430"))))
+				<fo:block space-before="1cm">$renderedDescription</fo:block>
+				#set($renderedDescription = $pdfRenderer.asRendered($auftrag, "comment", $rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10431"))))
+				<fo:block>$renderedDescription</fo:block>
+                
+                #set($rechnungNummer = $auftrag.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11012")).intValue())      
+                #set($pdfExt = ".pdf")                      
+
+                <fo:block space-before="6mm">Mit freundlichen Grüßen</fo:block>
+               	<fo:block space-before="3mm">AKTIVSENIOREN BAYERN e.V.</fo:block>
+              	##<fo:block space-before="6mm">i.A. gez. $xmlutils.escape($auftrag.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10302")).getDisplayName())</fo:block>
+                <fo:block space-before="6mm">i.A. gez. $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10303")))</fo:block>
+                
+			#end
+		</fo:flow>
+    </fo:page-sequence>
+
+
+
+
+	<!-- THE OLD RECHNUNG -->
+	<fo:page-sequence font-family="Helvetica" font-size="9pt" master-reference="A4">
+
+##		<!-- footer -->
+##		<fo:static-content flow-name="page-footer" font-size="80%">
+##			<fo:block text-align="right" >Seite <fo:page-number/></fo:block>
+##            <fo:block text-align="center">
+##                <fo:block>AKTIVSENIOREN BAYERN e.V.; Landshuter Allee 11; 80637 München; Tel.: 089 / 22 22 37; Fax: 089 / 22 99 68; info@aktivsenioren.de</fo:block>
+##                <fo:block font-weight="bold">$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10289"))) IBAN: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10292"))); BIC/SWIFT: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10293")))</fo:block>
+##                <fo:block>Amtsgericht München: VR:11147; St. Nr.: 143/210/20578; Sprecher des Vorstands: Reinhold Heiß</fo:block>
+##			</fo:block>
+##		</fo:static-content>
+
+		<!-- footer -->
+		<fo:static-content flow-name="page-footer" font-size="80%">
+			<fo:block text-align="right" >Seite <fo:page-number/></fo:block>
+            <fo:block text-align="center">
+                <fo:block>AKTIVSENIOREN BAYERN e.V.; $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11515")); $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11516")); $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11517")); $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11518")); $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11519"))</fo:block>   
+				<fo:block font-weight="bold">$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11520")) $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11521")); $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11522"))</fo:block>
+				<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11523")); $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11524")); $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11525"))</fo:block>
+			</fo:block>
+		</fo:static-content>
+
+		<!-- body -->
+		<fo:flow flow-name="page-body" >
+			#if($project)
+				<!-- header -->
+					<fo:table space-before="0cm" space-before.conditionality="retain">
+                    	<fo:table-column column-width="70%" />
+						<fo:table-column column-width="30%" />
+						<fo:table-body>
+                        
+							<fo:table-row>
+								<fo:table-cell >
+									<fo:block>
+                                     
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell text-align="center">
+									<fo:block>
+                                    	## #set($logoUrl = "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=") ## comment this out to hide the logo or enter "http://wwww.yourcompany.com/yourlogo.png" to use your logo
+										##<fo:external-graphic src="url(${logoUrl})" content-height="20mm"/>
+                                    
+										## #set($avatarImageUrl = "${requestContext.canonicalBaseUrl}/secure/projectavatar?pid=${project.id}&avatarId=${project.avatar.id}")
+										<fo:external-graphic content-height="10em" src="url($xmlutils.escape($logoImageUrl))" overflow="hidden"/>
+                                        
+									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+                            <fo:table-row>
+                            	<fo:table-cell >
+									<fo:block font-size="70%" text-decoration="underline">
+										AKTIVSENIOREN BAYERN e.V. - Landshuter Allee 11 - 80367 München 
+                                    </fo:block>
+									<fo:block font-size="100%" space-before="3mm">
+                                    	<fo:block>$xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10222")))</fo:block>
+                                    	<fo:block>$xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11400"))) $xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11401")))</fo:block>
+                                    	<fo:block>$xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10208")))</fo:block>
+                                    	<fo:block>$xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10209"))) $xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10210")))</fo:block>
+                                        <fo:block>
+                                        	#if($klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11300")).value != "Deutschland")
+                                            	$klient.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11300")).value
+                                           	#end
+                                      	</fo:block>
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell text-align="left">
+									<fo:block>
+                                        <fo:block font-size="90%">Regionalleitung $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10287")))</fo:block>
+                                        	<fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10303")))</fo:block>
+                                            
+    
+## GR 1.11.25: Strasse und Ort des RL entfallen    
+##                              	        <fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10304")))</fo:block>
+##                                      
+##                                      	<fo:block>
+##                                        		<fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10306"))) $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10305")))</fo:block>
+##
+## Ende 1.11.2025                           </fo:block>
+
+##                                       	<fo:block>Tel.: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10804")))</fo:block>
+## erweiter : 1.11.2025                    	<fo:block>Fax: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10308")))</fo:block>
+                                        
+## 2.11.25                                        <fo:block>E-Mail:</fo:block>
+## 2.11.25                                         
+## 2.11.25                                         	<fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10309")))</fo:block>
+## 2.11.25                                         
+## 2.11.25                                         <fo:block space-before="2mm">$userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10501")))</fo:block>
+
+                                      </fo:block>     ## ersetzt analog wie in STORNO 
+                                        
+##                                        <fo:block>M:</fo:block>
+##                                        	<fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10309")))</fo:block>
+
+                                        <fo:block font-size="90%">M: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10309")))</fo:block>                    
+                                       
+                                        <fo:block space-before="10mm">$userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10501")))</fo:block>                        
+
+
+                                        ##<fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10303")))</fo:block> 
+                                        ##<fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10304")))</fo:block>
+                                        ##<fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10306"))) $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10305")))</fo:block>
+                                        ##<fo:block>Tel.: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10804")))</fo:block>
+                                        ##<fo:block>Fax: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10308")))</fo:block>
+                                        ##<fo:block>E-Mail:</fo:block>
+                                        ##<fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10309")))</fo:block>
+                                        ##<fo:block>$userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($currentDate)</fo:block>
+									</fo:block>
+								</fo:table-cell>
+                            
+                            
+                            </fo:table-row>
+						</fo:table-body>
+					</fo:table>
+                
+                <fo:block space-before="1cm" font-size="150%" font-weight="bold" color="#FF0000">Rechnung - Storno - Nr. 21-108-0112-01S</fo:block>
+                <fo:block  space-before="6mm" font-weight="bold">Rechnung Nr. 21-108-0112-01</fo:block>
+                <fo:block  font-weight="bold">
+                  Auftrag Nr. $xmlutils.escape($auftrag.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10230")))
+                </fo:block>
+                
+                               
+                ##<fo:block space-before="1cm" >
+                ##  Sehr geehrte Damen und Herren,
+                ##</fo:block>
+                ##<fo:block >
+                ##  gemäß Ihrem Auftrag vom $userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($currentDate) erlauben wir uns als Kostendeckungsbeitrag in Rechnung zu stellen:
+                ##</fo:block>
+                
+                ##This is a trick showed in the PDF view Recipes to "Breaking (non-wrappable) text into multiple lines". Other way, the text shows without break lines
+				#set($renderedDescription = $pdfRenderer.asRendered($auftrag, "comment", $rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10298"))))
+				<fo:block space-before="1cm">$renderedDescription</fo:block>
+				#set($renderedDescription = $pdfRenderer.asRendered($auftrag, "comment", $rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10299"))))
+				<fo:block>$renderedDescription</fo:block>
+                
+                
+                           
+                    $articlesTool.calculateTotalPriceRechnung($issues.get(0).getCustomFieldValue("customfield_11457"),
+                                    												$issues.get(0).getCustomFieldValue("customfield_11459"),
+                                                                                   	$issues.get(0).getCustomFieldValue("customfield_11461"),
+                                                                                    $issues.get(0).getCustomFieldValue("customfield_11463"),
+                                                                                    $issues.get(0).getCustomFieldValue("customfield_11465"),
+                                                                                    $issues.get(0).getCustomFieldValue("customfield_11467"))        
+                            
+                    <fo:table >
+                    <fo:table-column column-width="110mm" />
+					<fo:table-column column-width="20mm"/>
+                       	<fo:table-body>
+                        	<fo:table-row font-weight="bold">
+								<fo:table-cell >
+                                   	<fo:block >Position</fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell text-align="right">
+                                 	<fo:block>Betrag</fo:block>
+                                </fo:table-cell>
+							</fo:table-row>
+                            <fo:table-row>
+                              	<fo:table-cell >
+                   	            	<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11456"))</fo:block>
+                  		        </fo:table-cell>
+                                <fo:table-cell text-align="right">
+                                    <fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11457")) EUR</fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                            #if($issues.get(0).getCustomFieldValue("customfield_11458") )
+                        		<fo:table-row>
+                              		<fo:table-cell >
+                   	            		<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11458"))</fo:block>
+                  		        	</fo:table-cell>
+                                	<fo:table-cell text-align="right">
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11459")) EUR</fo:block>
+                                	</fo:table-cell>
+                            	</fo:table-row>
+                            #end
+                            #if($issues.get(0).getCustomFieldValue("customfield_11460") )
+                        		<fo:table-row>
+                              		<fo:table-cell >
+                   	            		<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11460"))</fo:block>
+                  		        	</fo:table-cell>
+                                	<fo:table-cell text-align="right">
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11461")) EUR</fo:block>
+                                	</fo:table-cell>
+                            	</fo:table-row>
+                            #end
+                            #if($issues.get(0).getCustomFieldValue("customfield_11462") )
+                        		<fo:table-row>
+                              		<fo:table-cell >
+                   	            		<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11462"))</fo:block>
+                  		        	</fo:table-cell>
+                                	<fo:table-cell text-align="right">
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11463")) EUR</fo:block>
+                                	</fo:table-cell>
+                            	</fo:table-row>
+                            #end
+                            #if($issues.get(0).getCustomFieldValue("customfield_11464") )
+                        		<fo:table-row>
+                              		<fo:table-cell >
+                   	            		<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11464"))</fo:block>
+                  		        	</fo:table-cell>
+                                	<fo:table-cell text-align="right">
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11465")) EUR</fo:block>
+                                	</fo:table-cell>
+                            	</fo:table-row>
+                            #end
+                            #if($issues.get(0).getCustomFieldValue("customfield_11466") )
+                        		<fo:table-row>
+                              		<fo:table-cell >
+                   	            		<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11466"))</fo:block>
+                  		        	</fo:table-cell>
+                                	<fo:table-cell text-align="right">
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11467")) EUR</fo:block>
+                                	</fo:table-cell>
+                            	</fo:table-row>
+                            #end
+                            <fo:table-row font-weight="bold">
+								<fo:table-cell >
+                                   	<fo:block >Zwischensumme</fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell text-align="right">
+                                 	<fo:block>
+                                    	$articlesTool.getTotalPriceRechnung() EUR
+                                	</fo:block>
+                                </fo:table-cell>
+							</fo:table-row>
+                       	</fo:table-body>
+                   	</fo:table>
+                        
+                    <fo:table space-before="0.2cm" >
+                    <fo:table-column column-width="110mm" />
+					<fo:table-column column-width="20mm"/>
+                         	<fo:table-body>
+##							<fo:table-row>
+##								<fo:table-cell >
+##                                   	<fo:block>Betrag</fo:block>
+##                                </fo:table-cell>
+##                                <fo:table-cell text-align="right">
+##                                   	<fo:block>$articlesTool.getTotalPriceRechnung() EUR
+##                                	</fo:block>
+##                                </fo:table-cell>
+##							</fo:table-row>
+                            <fo:table-row>
+								<fo:table-cell >
+                                   	<fo:block>zuzüglich $issues.get(0).getCustomFieldValue("customfield_10433").value% MwSt.</fo:block>    
+                                </fo:table-cell>
+                                <fo:table-cell text-align="right">
+                                   	<fo:block>$articlesTool.getTaxesRechnung($issues.get(0).getCustomFieldValue("customfield_10433").value) EUR</fo:block>
+                                </fo:table-cell>
+							</fo:table-row>
+                            <fo:table-row font-weight="bold">
+								<fo:table-cell >
+                                   	<fo:block >Gesamt</fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell text-align="right">
+                                   	<fo:block>$articlesTool.getFinalPriceRechnung() EUR</fo:block>
+                                </fo:table-cell>
+							</fo:table-row>
+                    	</fo:table-body>
+                    </fo:table>
+                            
+                 
+                <fo:block  space-before="6mm">
+                  Leistungsdatum entspricht Rechnungsdatum.
+                </fo:block>                     	
+                                 
+                 
+                
+                ##<fo:block space-before="6mm">
+                ##  Wir bitten um umgehende Begleichung.
+                ##</fo:block>
+                ##<fo:block >
+                ##  Bitte überweisen Sie den Rechnungsbetrag unter Angabe der Rechnungsnummer und Ihres Namens auf unser unten aufgeführtes Konto.
+                ##</fo:block>
+
+				##This is a trick showed in the PDF view Recipes to "Breaking (non-wrappable) text into multiple lines". Other way, the text shows without break lines
+				#set($renderedDescription = $pdfRenderer.asRendered($auftrag, "comment", $rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10300"))))
+				<fo:block space-before="6mm">$renderedDescription</fo:block>
+
+                
+                <fo:block space-before="6mm">Mit freundlichen Grüßen</fo:block>
+              	<fo:block space-before="3mm">AKTIVSENIOREN BAYERN e.V.</fo:block>
+       			##<fo:block space-before="6mm">i.A. gez. $xmlutils.escape($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10302")).getDisplayName())</fo:block>
+                <fo:block space-before="6mm">i.A. gez. $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10303")))</fo:block>
+
+#set($debug = true)
+#if($debug && $env.equals("TEST"))
+    <fo:block space-before="6mm" color="red" font-size="8pt">
+        DEBUG – Umgebung: $env
+    </fo:block>
+#end
+
+			#end
+		</fo:flow>
+	</fo:page-sequence>
+
+</fo:root>

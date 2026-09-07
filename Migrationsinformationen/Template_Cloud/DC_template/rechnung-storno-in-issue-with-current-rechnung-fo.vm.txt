@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+##__________________________________________________________________________________
+##
+## Rechnung_Storno-V2.4 : 		rechnung-storno-in-issue-with-current-rechnung-fo.vm
+##
+##
+## ---------------------------------------------------------------------------------
+##
+##	Ä n d e r u n g e n 
+##
+## Stand:   04.02.2022 / Gr
+##          Anpassung an neues Corporate Design
+##
+##		    07.05.2022 / Gr
+##          Ausgabe des aktuellen Datums auf Seite 1
+##       
+##          20.05.2022 / Gr / V2.1
+##          TIC 305:	 "i.A. gez." entfällt ersatzlos
+##          
+##			03.01.2023 / Gr / V2.2
+##			           Abfangen des Fehlers beim Erzeugen der Rechnung,
+##			           wenn zu einer Leistung kein €-Betrag eingetragen wurde.
+##     
+##			30.01.2023 / Gr / V2.2
+##			IC 338:  Betrag aber keine Leistung eingetragen.
+##			         Dies führt dazu, dass die Summe hochgezählt wird,
+##                   aber kein  Ausdruck auf der Rechnung erfolgt.
+##
+## ---------------------------------------------------------------------------------
+##
+## Stand:   19.04.23 / Gr V2.2.1
+##          TIC-352:   Fusszeile ohne Vorstände   
+##    
+## ---------------------------------------------------------------------------------
+##
+## Stand:   13.10.23 / Gr  / V2.2.2
+##          TIC-371: In Auftragsbestätigungen an Klienten soll 
+##                   nur die Mail des Regionalleiters genannt werden,
+##                   keine Telefonnummer.
+##
+## ---------------------------------------------------------------------------------
+##
+## Stand:   12.12.23 / Gr  / V2.3
+##
+##       	TIC-396: Der Sicherheitsupdate verursachte Probleme 
+##		             bei Auftrags- und Rechnungsdokumenten
+##
+## -------------------------------------------------------------------
+##
+## Stand: 1.11.25 / Gr  / V2.4
+##
+##       Strasse und Ort des RL entfallen 
+##		 gem. Vorstandsbeschluss 1.10.25
+##      
+##
+##__________________________________________________________________________________
+##
+## JIRA PDF View Plugin
+## We are just going to access this template with Auftrag Project
+
+## We include the file rechnung-common-elements-fo.vm, where are set the logo, footer, linked issues, and all the common elements
+$include.parse($ctx, "rechnung-common-elements-fo.vm")
+
+$scripting.execute("articles-tool.groovy")
+
+#set($filename = "${issues.get(0).summary}S_Storno.pdf")
+
+## Debugging true/false
+## #set($debug = true)
+#set($debug = false)
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+    <fo:layout-master-set>
+		<fo:simple-page-master master-name="A4" margin-top="0.0cm" margin-bottom="0cm" margin-left="1cm" margin-right="1cm">
+##			<fo:region-body region-name="page-body" margin-top="1.0cm" margin-bottom="1.0cm" margin-left="1.5cm" margin-right="1.5cm"/>   ## bisher
+			<fo:region-body region-name="page-body" margin-top="1.5cm" margin-bottom="1.0cm" margin-left="1.5cm" margin-right="1.5cm"/>   ## Header 40 Jahre
+			<fo:region-before region-name="page-header" extent="0.5cm" margin-left="1.5cm" margin-right="1.5cm"/>
+			<fo:region-after region-name="page-footer" extent="2.5cm" />
+		</fo:simple-page-master>
+	</fo:layout-master-set>
+
+	<!-- STORNO  -->
+	<fo:page-sequence font-family="OpenSANS" font-size="9pt" master-reference="A4">	## Gr	Helvetica - OpenSANS
+
+    	<!-- footer -->
+		<fo:static-content flow-name="page-footer" font-size="80%">
+			<fo:block  white-space-collapse="false" text-align="center"> Seite <fo:page-number/>     ## GR 18.04.23
+                      ## <fo:external-graphic content-width="scale-down-to-fit" src="url($xmlutils.escape($ehrenamtlichImageUrl))" overflow="hidden"/> ## GR 19.04.23
+            </fo:block>
+
+			## <fo:block text-align="left"> <fo:external-graphic content-width="scale-down-to-fit" src="url($xmlutils.escape($FZ_ImageUrl))" overflow="hidden"/> </fo:block> ## GR 18.04.23
+			<fo:block text-align="left"> <fo:external-graphic content-width="190mm"  src="url($xmlutils.escape($FZ_ImageUrl))" overflow="hidden"/> </fo:block>               ## GR 19.04.23
+		</fo:static-content>
+
+		<!-- body -->
+		<fo:flow flow-name="page-body" >
+			#if($project)
+				<!-- header -->
+					<fo:table space-before="0cm" space-before.conditionality="retain">  ## GR
+                    	<fo:table-column column-width="65.8%" /> ##Gr 1 	65%
+						<fo:table-column column-width="34.2%" /> ##Gr 1		35%
+						<fo:table-body>
+                        
+							<fo:table-row>
+								<fo:table-cell >
+									<fo:block>
+                                    	<fo:external-graphic content-width="scale-down-to-fit" src="url($xmlutils.escape($logoImageUrl_Banner))" overflow="hidden"/> ## Gr3                                     
+  									</fo:block>
+   									<fo:block space-before="1cm"> </fo:block>	## GR
+								</fo:table-cell>
+							</fo:table-row>
+                            
+## GR 09.12.21 Anfang Adresse                            
+                            <fo:table-row>
+                            	<fo:table-cell >
+                                   ## GR ANF Leerzeilen 
+                                    <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block> 
+                                    <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block> 
+                                    <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block> 
+                                    <fo:block white-space-collapse="false" space-before="3mm" >  </fo:block> 
+                                   ## GR Ende
+  
+                                    <fo:block space-before="3mm" font-size="70%">AktivSenioren Bayern e.V. | Landshuter Allee 11 | 80637 München</fo:block>
+									<fo:block font-size="125%" space-before="3mm">
+                                    	<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10222"))</fo:block>
+                                    	<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11400")) $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11401"))</fo:block>
+                                    	<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10208"))</fo:block>
+                                    	<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10209")) $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10210"))</fo:block>
+                                        <fo:block>
+                                        	#if($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11300")).value != "Deutschland")
+                                            	$rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11300")).value
+                                           	#end
+                                      	</fo:block>
+									</fo:block>
+								</fo:table-cell>
+                                
+##Gr 08.12.21 Beginn Absender                                
+								<fo:table-cell text-align="left">
+								    <fo:block>
+                                     ## GR ANF Leerzeilen 
+                                        <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block> 
+                                        <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block> 
+                                        <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block> 
+                                     ## GR Ende
+                                      
+									 ## 1. Name der Region space-before um 3mm erhöht
+                                        <fo:block space-before="6mm" font-size="90%">Regionalleitung $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10287")))</fo:block>
+										
+                                        <fo:block font-size="110%" space-before="2mm">
+
+                                            ## Name RL                                        
+                                            <fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10303")))</fo:block>
+                                            ## Adresse    
+                                            <fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10304")))</fo:block>
+                                            <fo:block>
+                                    	        <fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10306"))) $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10305")))</fo:block>
+                                            </fo:block>
+
+## Gr 13.10.23 Keine Telefonnummern TIC-371
+##										    <fo:block>T: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10804")))</fo:block>
+##                                          <fo:block>F: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10308")))</fo:block>
+## TIC-371 Ende
+                                            
+									    </fo:block>                                       
+                                        <fo:block font-size="90%">M: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10309")))</fo:block>                    
+
+                                        ## GR 07.05.22  Ausgabe des aktuellen Datums
+                                        ## <fo:block space-before="10mm">$userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10501")))</fo:block>                                         
+								        <fo:block space-before="10mm">$userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($currentDate)</fo:block>
+                                        ## GR 07.05.22  Ende Änderung Ausgabe des aktuellen Datums
+                                       
+								    </fo:block>
+                                    
+								</fo:table-cell>
+## Gr 08.12.21 Ende Absender                           
+                            </fo:table-row>
+						</fo:table-body>
+					</fo:table>
+                
+                <fo:block space-before="1cm" font-size="150%" font-weight="bold" color="#FF0000">
+                  STORNO
+                </fo:block>
+ 
+ 				<fo:block space-before="6mm" font-weight="bold" color="#FF0000">Storno Nr. ${issues.get(0).summary}S</fo:block>
+                <fo:block> Rechnung Nr. ${issues.get(0).summary}</fo:block>
+             	<fo:block> Auftrag Nr. $xmlutils.escape($auftrag.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10230")))</fo:block>
+               
+                ##This is a trick showed in the PDF view Recipes to "Breaking (non-wrappable) text into multiple lines". Other way, the text shows without break lines
+				#set($renderedDescription = $pdfRenderer.asRendered($auftrag, "comment", $rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10430"))))
+				<fo:block space-before="1cm">$renderedDescription</fo:block>
+				#set($renderedDescription = $pdfRenderer.asRendered($auftrag, "comment", $rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10431"))))
+				<fo:block>$renderedDescription</fo:block>
+                
+                #set($rechnungNummer = $auftrag.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11012")).intValue())      
+                #set($pdfExt = ".pdf")                      
+
+                <fo:block space-before="6mm">Mit freundlichen Grüßen</fo:block>
+               	<fo:block space-before="3mm">AktivSenioren Bayern e.V.</fo:block>
+                ## GR 20.05.22 		TIC 305: Anpassung
+              	## alt: <fo:block space-before="6mm">i.A. gez. $xmlutils.escape($auftrag.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10302")).getDisplayName())</fo:block>
+                ## alt: <fo:block space-before="6mm">i.A. gez. $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10303")))</fo:block>
+                <fo:block space-before="6mm">$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10303")))</fo:block>
+				## GR 20.05.22 		TIC 305: Ende
+                
+			#end
+		</fo:flow>
+    </fo:page-sequence>
+
+
+
+
+	<!-- THE OLD RECHNUNG -->
+	<fo:page-sequence font-family="OpenSANS" font-size="9pt" master-reference="A4">
+
+    	<!-- footer -->
+		<fo:static-content flow-name="page-footer" font-size="80%">
+			<fo:block  white-space-collapse="false" text-align="center"> Seite <fo:page-number/> </fo:block>
+			## <fo:block text-align="left"> <fo:external-graphic content-width="scale-down-to-fit" src="url($xmlutils.escape($FZ_ImageUrl))" overflow="hidden"/> </fo:block>  ## GR 19.04.23
+			<fo:block text-align="left"> <fo:external-graphic content-width="190mm" src="url($xmlutils.escape($FZ_ImageUrl))" overflow="hidden"/> </fo:block>                 ## GR 19.04.23
+		</fo:static-content>
+
+		<!-- body -->
+		<fo:flow flow-name="page-body" >
+			#if($project)
+				<!-- header -->
+					<fo:table space-before="0cm" space-before.conditionality="retain">
+                    	<fo:table-column column-width="65.8%" /> ##Gr 1 	65%
+						<fo:table-column column-width="34.2%" /> ##Gr 1		35%
+						<fo:table-body>
+                        
+							<fo:table-row>
+								<fo:table-cell >
+									<fo:block>
+                                    	<fo:external-graphic content-width="scale-down-to-fit" src="url($xmlutils.escape($logoImageUrl_Banner))" overflow="hidden"/> ## Gr3                                     
+  									</fo:block>
+								</fo:table-cell>
+							</fo:table-row>
+## GR09.12.21 Anfang Adresse                            
+                            <fo:table-row>
+                            	<fo:table-cell >
+                                   ## GR ANF Leerzeilen 
+                                    <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block> 
+                                    <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block> 
+                                    <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block> 
+                                    <fo:block white-space-collapse="false" space-before="3mm" >  </fo:block> 
+                                    ##gr Ende
+  
+                                    <fo:block space-before="3mm" font-size="70%">AktivSenioren Bayern e.V. | Landshuter Allee 11 | 80637 München</fo:block>
+                                    
+									<fo:block font-size="125%" space-before="3mm">
+                                    	<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10222"))</fo:block>
+                                    	<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11400")) $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11401"))</fo:block>
+                                    	<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10208"))</fo:block>
+                                    	<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10209")) $xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_10210"))</fo:block>
+                                        <fo:block>
+                                        	#if($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11300")).value != "Deutschland")
+                                            	$rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_11300")).value
+                                           	#end
+                                      	</fo:block>
+									</fo:block>
+								</fo:table-cell>
+                                
+##Gr 08.12.21 Beginn Absender                                
+								<fo:table-cell text-align="left">
+									<fo:block>
+                                   ## GR ANF Leerzeilen 4
+                                    <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block> 
+                                    <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block> 
+                                    <fo:block white-space-collapse="false" space-before="5mm" >  </fo:block> 
+                                    ##gr Ende
+                                      
+										## 1. Name der Region space-before um 3mm erhöht
+                                        <fo:block space-before="6mm" font-size="90%">Regionalleitung $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10287")))</fo:block>
+										
+                                        <fo:block font-size="110%" space-before="2mm">
+
+                                        ## Name RL                                        
+                                        	<fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10303")))</fo:block>
+    
+## GR 1.11.25: Strasse und Ort des RL entfallen    
+##                              	        <fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10304")))</fo:block>
+##                                      
+##                                      	<fo:block>
+##                                        		<fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10306"))) $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10305")))</fo:block>
+##
+## Ende 1.11.2025                           </fo:block>
+
+## Gr 13.10.23 Keine Telefonnummern TIC-371
+##										    <fo:block>T: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10804")))</fo:block>
+##                                          <fo:block>F: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10308")))</fo:block>
+## TIC-371 Ende
+                                            
+								     </fo:block>
+                                        
+##                                        <fo:block>M:</fo:block>
+##                                        	<fo:block>$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10309")))</fo:block>
+
+                                        <fo:block font-size="90%">M: $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10309")))</fo:block>                    
+                                       
+                                        <fo:block space-before="10mm">$userDateTimeFormatter.withStyle($dateTimeStyle.DATE).format($rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10501")))</fo:block>                        
+									</fo:block>
+								</fo:table-cell>
+##Gr 08.12.21 Ende Absender                  
+
+							</fo:table-row>
+						</fo:table-body>
+					</fo:table>
+
+                    
+## Start StornoRechnung                
+                <fo:block space-before="1cm" font-size="150%" font-weight="bold" color="#FF0000">Rechnung - Storno - Nr. ${issues.get(0).summary}S</fo:block>
+                <fo:block  space-before="6mm" font-weight="bold">Rechnung Nr. ${issues.get(0).summary}</fo:block>
+                <fo:block  font-weight="bold"> Auftrag Nr. $xmlutils.escape($auftrag.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10230"))) </fo:block>
+               
+                ##This is a trick showed in the PDF view Recipes to "Breaking (non-wrappable) text into multiple lines". Other way, the text shows without break lines
+				#set($renderedDescription = $pdfRenderer.asRendered($auftrag, "comment", $rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10298"))))
+				<fo:block space-before="1cm">$renderedDescription</fo:block>
+				#set($renderedDescription = $pdfRenderer.asRendered($auftrag, "comment", $rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10299"))))
+				<fo:block>$renderedDescription</fo:block>
+                                           
+                    $articlesTool.calculateTotalPriceRechnung($issues.get(0).getCustomFieldValue("customfield_11457"),
+                                    												$issues.get(0).getCustomFieldValue("customfield_11459"),
+                                                                                   	$issues.get(0).getCustomFieldValue("customfield_11461"),
+                                                                                    $issues.get(0).getCustomFieldValue("customfield_11463"),
+                                                                                    $issues.get(0).getCustomFieldValue("customfield_11465"),
+                                                                                    $issues.get(0).getCustomFieldValue("customfield_11467"))        
+                            
+                    <fo:table >
+                    <fo:table-column column-width="110mm" />
+					<fo:table-column column-width="20mm"/>
+                       	<fo:table-body>
+                        	<fo:table-row font-weight="bold">
+								<fo:table-cell >
+                                   	<fo:block >Position</fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell text-align="right">
+                                 	<fo:block>Betrag</fo:block>
+                                </fo:table-cell>
+							</fo:table-row>
+                            
+ ## GR 30.01.23  Annfang V2.2
+                            ## Leistung 1
+                            <fo:table-row>
+                              	<fo:table-cell >
+
+                   	            	<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11456"))</fo:block>
+                  		        </fo:table-cell>
+                                <fo:table-cell text-align="right">
+                                    <fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11457")) EUR</fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                            
+                            ## Leistung 2
+                            #if($issues.get(0).getCustomFieldValue("customfield_11458") )
+                              #then
+                        		<fo:table-row>
+                              		<fo:table-cell >
+                   	            		<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11458"))</fo:block>
+                  		        	</fo:table-cell>
+                                	## <fo:table-cell text-align="right">
+                                    ##	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11461")) EUR</fo:block>
+                                	## </fo:table-cell>
+## GR 03.01.23                ## GR 	Test auf Werte ungleich numerisch        
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11459") ) 
+                                	    <fo:table-cell text-align="right">                                     
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11459")) EUR</fo:block>
+                                        </fo:table-cell>
+                                    #end	
+                                	## Gr  Ende Test auf Werte 
+                            	</fo:table-row>
+                                ## Gr  Erweiterung, falls nur Betrag vorhanden
+                                #else
+                                    #if($issues.get(0).getCustomFieldValue("customfield_114659") ) 
+                              		  <fo:table-row>
+                                        <fo:table-cell >  <fo:block> </fo:block>  </fo:table-cell>  ## Dummy Überspringen eines Blocks
+                                	    <fo:table-cell text-align="right">                                     
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11459")) EUR</fo:block>
+                                        </fo:table-cell>
+                                      </fo:table-row>
+                                     #end	
+                            	#end
+
+                            ## Leistung 3
+                            #if($issues.get(0).getCustomFieldValue("customfield_11460") )
+                              #then
+                        		<fo:table-row>
+                              		<fo:table-cell >
+                   	            		<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11460"))</fo:block>
+                  		        	</fo:table-cell>
+                                	## <fo:table-cell text-align="right">
+                                    ##	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11461")) EUR</fo:block>
+                                	## </fo:table-cell>
+## GR 03.01.23                ## GR 	Test auf Werte ungleich numerisch        
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11461") ) 
+                                	    <fo:table-cell text-align="right">                                     
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11461")) EUR</fo:block>
+                                        </fo:table-cell>
+                                    #end	
+                                	## Gr  Ende Test auf Werte 
+                            	</fo:table-row>
+                                ## Gr  Erweiterung, falls nur Betrag vorhanden
+                                #else
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11461") ) 
+                              		  <fo:table-row>
+                                        <fo:table-cell >  <fo:block> </fo:block>  </fo:table-cell>  ## Dummy Überspringen eines Blocks
+                                	    <fo:table-cell text-align="right">                                     
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11461")) EUR</fo:block>
+                                        </fo:table-cell>
+                                      </fo:table-row>
+                                     #end	
+                            	#end
+ 
+                            ## Leistung 4
+                            #if($issues.get(0).getCustomFieldValue("customfield_11462") )
+                              #then
+                        		<fo:table-row>
+                              		<fo:table-cell >
+                   	            		<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11462"))</fo:block>
+                  		        	</fo:table-cell>
+                                	## <fo:table-cell text-align="right">
+                                    ##	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11461")) EUR</fo:block>
+                                	## </fo:table-cell>
+## GR 03.01.23                ## GR 	Test auf Werte ungleich numerisch        
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11463") ) 
+                                	    <fo:table-cell text-align="right">                                     
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11463")) EUR</fo:block>
+                                        </fo:table-cell>
+                                    #end	
+                                	## Gr  Ende Test auf Werte 
+                            	</fo:table-row>
+                                ## Gr  Erweiterung, falls nur Betrag vorhanden
+                                #else
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11463") ) 
+                              		  <fo:table-row>
+                                        <fo:table-cell >  <fo:block> </fo:block>  </fo:table-cell>  ## Dummy Überspringen eines Blocks
+                                	    <fo:table-cell text-align="right">                                     
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11463")) EUR</fo:block>
+                                        </fo:table-cell>
+                                      </fo:table-row>
+                                     #end	
+                            	#end
+
+                            ## Leistung 5
+                            #if($issues.get(0).getCustomFieldValue("customfield_11464") )
+                              #then
+                        		<fo:table-row>
+                              		<fo:table-cell >
+                   	            		<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11464"))</fo:block>
+                  		        	</fo:table-cell>
+                                	## <fo:table-cell text-align="right">
+                                    ##	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11461")) EUR</fo:block>
+                                	## </fo:table-cell>
+## GR 03.01.23                ## GR 	Test auf Werte ungleich numerisch        
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11465") ) 
+                                	    <fo:table-cell text-align="right">                                     
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11465")) EUR</fo:block>
+                                        </fo:table-cell>
+                                    #end	
+                                	## Gr  Ende Test auf Werte 
+                            	</fo:table-row>
+                                ## Gr  Erweiterung, falls nur Betrag vorhanden
+                                #else
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11465") ) 
+                              		  <fo:table-row>
+                                        <fo:table-cell >  <fo:block> </fo:block>  </fo:table-cell>  ## Dummy Überspringen eines Blocks
+                                	    <fo:table-cell text-align="right">                                     
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11465")) EUR</fo:block>
+                                        </fo:table-cell>
+                                      </fo:table-row>
+                                     #end	
+                            	#end
+
+                            ## Leistung 6
+                            #if($issues.get(0).getCustomFieldValue("customfield_11466") )
+                              #then
+                        		<fo:table-row>
+                              		<fo:table-cell >
+                   	            		<fo:block>$xmlutils.escape($issues.get(0).getCustomFieldValue("customfield_11467"))</fo:block>
+                  		        	</fo:table-cell>
+                                	## <fo:table-cell text-align="right">
+                                    ##	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11461")) EUR</fo:block>
+                                	## </fo:table-cell>
+## GR 03.01.23                ## GR 	Test auf Werte ungleich numerisch        
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11467") ) 
+                                	    <fo:table-cell text-align="right">                                     
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11467")) EUR</fo:block>
+                                        </fo:table-cell>
+                                    #end	
+                                	## Gr  Ende Test auf Werte 
+                            	</fo:table-row>
+                                ## Gr  Erweiterung, falls nur Betrag vorhanden
+                                #else
+                                    #if($issues.get(0).getCustomFieldValue("customfield_11467") ) 
+                              		  <fo:table-row>
+                                        <fo:table-cell >  <fo:block> </fo:block>  </fo:table-cell>  ## Dummy Überspringen eines Blocks
+                                	    <fo:table-cell text-align="right">                                     
+                                    	<fo:block>$articlesTool.formatNumber($issues.get(0).getCustomFieldValue("customfield_11467")) EUR</fo:block>
+                                        </fo:table-cell>
+                                      </fo:table-row>
+                                     #end	
+                            	#end
+
+## GR 30.01.23  Ende V2.2                            
+                            
+                            
+                            <fo:table-row font-weight="bold">
+								<fo:table-cell >
+                                   	<fo:block >Zwischensumme</fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell text-align="right">
+                                 	<fo:block>
+                                    	$articlesTool.getTotalPriceRechnung() EUR
+                                	</fo:block>
+                                </fo:table-cell>
+							</fo:table-row>
+                       	</fo:table-body>
+                   	</fo:table>
+                        
+                    <fo:table space-before="0.2cm" >
+                    <fo:table-column column-width="110mm" />
+					<fo:table-column column-width="20mm"/>
+                         	<fo:table-body>
+#                           <fo:table-row>
+								<fo:table-cell >
+                                   	<fo:block>zuzüglich $issues.get(0).getCustomFieldValue("customfield_10433").value% MwSt.</fo:block>    
+                                </fo:table-cell>
+                                <fo:table-cell text-align="right">
+                                   	<fo:block>$articlesTool.getTaxesRechnung($issues.get(0).getCustomFieldValue("customfield_10433").value) EUR</fo:block>
+                                </fo:table-cell>
+							</fo:table-row>
+                            <fo:table-row font-weight="bold">
+								<fo:table-cell >
+                                   	<fo:block >Gesamt</fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell text-align="right">
+                                   	<fo:block>$articlesTool.getFinalPriceRechnung() EUR</fo:block>
+                                </fo:table-cell>
+							</fo:table-row>
+                    	</fo:table-body>
+                    </fo:table>
+                            
+                 
+                <fo:block  space-before="6mm">
+                  Leistungsdatum entspricht Rechnungsdatum.
+                </fo:block>                     	
+                                 
+ 
+				##This is a trick showed in the PDF view Recipes to "Breaking (non-wrappable) text into multiple lines". Other way, the text shows without break lines
+				#set($renderedDescription = $pdfRenderer.asRendered($auftrag, "comment", $rechnung.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10300"))))
+				<fo:block space-before="6mm">$renderedDescription</fo:block>
+
+                
+                <fo:block space-before="6mm">Mit freundlichen Grüßen</fo:block>
+              	<fo:block space-before="3mm">AktivSenioren Bayern e.V.</fo:block>
+                ## GR 20.05.22 		TIC 305: Anpassung
+                ## alt: <fo:block space-before="6mm">i.A. gez. $xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10303")))</fo:block>
+                <fo:block space-before="6mm">$xmlutils.escape($region.getCustomFieldValue($customFieldManager.getCustomFieldObject("customfield_10303")))</fo:block>
+				## GR 20.05.22 		TIC 305: Ende
+
+#set($debug = true)
+#if($debug && $env.equals("TEST"))
+    <fo:block space-before="6mm" color="red" font-size="8pt">
+        DEBUG – Umgebung: $env
+    </fo:block>
+#end
+
+			#end
+		</fo:flow>
+	</fo:page-sequence>
+
+</fo:root>
