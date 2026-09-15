@@ -1,0 +1,249 @@
+## =========================================================================
+## AS_rechnung-in-issue-fo.vm - Version 3.6
+## Stand: 09.09.2026 / AktivSenioren Bayern e.V.
+## =========================================================================
+
+$include.parse($ctx, "AS_rechnung-common-elements-fo.vm")
+
+#set($issue = $issues.get(0))
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+    <fo:layout-master-set>
+        <fo:simple-page-master master-name="rechnung-page"
+                               page-height="297mm" page-width="210mm"
+                               margin-top="15mm" margin-bottom="15mm"
+                               margin-left="20mm" margin-right="20mm">
+            <fo:region-body margin-top="32mm" margin-bottom="20mm"/>
+            <fo:region-before extent="28mm"/>
+            <fo:region-after extent="15mm"/>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="rechnung-page">
+
+        <!-- HEADER BANNER -->
+        <fo:static-content flow-name="xsl-region-before">
+            <fo:block text-align="right">
+                #if($logoImageUrl_Banner)
+                    <fo:external-graphic src="url('$logoImageUrl_Banner')" content-height="20mm" scaling="uniform"/>
+                #end
+            </fo:block>
+        </fo:static-content>
+
+        <!-- FOOTER / SEITENZAHL -->
+        <fo:static-content flow-name="xsl-region-after">
+            <fo:block text-align="right" font-size="8pt" color="#666666">
+                Seite <fo:page-number/>
+            </fo:block>
+        </fo:static-content>
+
+        <fo:flow flow-name="xsl-region-body">
+
+            <!-- 1. KOPF- UND ADRESSBEREICH (2-SPALTIG) -->
+            <fo:table table-layout="fixed" width="100%">
+                <fo:table-column column-width="105mm"/>
+                <fo:table-column column-width="65mm"/>
+                <fo:table-body>
+                    <fo:table-row>
+                        <!-- LINKS: Absender klein + Empfängeranschrift -->
+                        <fo:table-cell>
+                            <fo:block font-size="7pt" color="#666666" space-after="5mm">
+                                AktivSenioren Bayern e.V. | Landshuter Allee 11 | 80637 München
+                            </fo:block>
+
+                            <fo:block font-size="10pt" line-height="1.35">
+                                #if($klient)
+                                    <!-- Firmenname mit Umlaut-Bereinigung -->
+                                    #if($cfFirmenname && $klient.getCustomFieldValue($cfFirmenname))
+                                        #set($rawFirma = "$!klient.getCustomFieldValue($cfFirmenname)")
+                                        #set($cleanFirma = $rawFirma.replace("&#xFC;", "ü").replace("&#xE4;", "ä").replace("&#xF6;", "ö").replace("&#xDF;", "ß").replace("&amp;", "&"))
+                                        #if($cleanFirma != "")
+                                            <fo:block font-weight="bold">$!xmlutils.escape($cleanFirma)</fo:block>
+                                        #end
+                                    #end
+
+                                    <!-- Name / Ansprechpartner -->
+                                    #set($kSummary = "$!klient.summary")
+                                    #if($kSummary.contains(" - "))
+                                        #set($parts = $kSummary.split(" - "))
+                                        #if($parts.size() > 1)
+                                            <fo:block>$!xmlutils.escape($parts.get(1))</fo:block>
+                                        #else
+                                            <fo:block>$!xmlutils.escape($kSummary)</fo:block>
+                                        #end
+                                    #else
+                                        <fo:block>$!xmlutils.escape($kSummary)</fo:block>
+                                    #end
+
+                                    #if($cfKliStrasse && $klient.getCustomFieldValue($cfKliStrasse))
+                                        <fo:block>$!xmlutils.escape($klient.getCustomFieldValue($cfKliStrasse))</fo:block>
+                                    #end
+                                    <fo:block>
+                                        #if($cfKliPLZ && $klient.getCustomFieldValue($cfKliPLZ))$!xmlutils.escape($klient.getCustomFieldValue($cfKliPLZ)) #end
+                                        #if($cfKliOrt && $klient.getCustomFieldValue($cfKliOrt))$!xmlutils.escape($klient.getCustomFieldValue($cfKliOrt))#end
+                                    </fo:block>
+                                #else
+                                    <fo:block font-weight="bold">$!xmlutils.escape($issue.summary)</fo:block>
+                                #end
+                            </fo:block>
+                        </fo:table-cell>
+
+                        <!-- RECHTS: Regionalleitung & Datum -->
+                        <fo:table-cell text-align="left" font-size="8.5pt" line-height="1.3">
+                            <fo:block font-weight="bold" space-after="1.5mm">
+                                #if($region && $cfRegionName && $region.getCustomFieldValue($cfRegionName))
+                                    Regionalleitung $!xmlutils.escape($region.getCustomFieldValue($cfRegionName))
+                                #else
+                                    Regionalleitung
+                                #end
+                            </fo:block>
+                            
+                            #if($region)
+                                #if($cfRLName && $region.getCustomFieldValue($cfRLName))
+                                    <fo:block>$!xmlutils.escape($region.getCustomFieldValue($cfRLName))</fo:block>
+                                #end
+                                #if($cfRLEMail && $region.getCustomFieldValue($cfRLEMail))
+                                    #set($rawMail = "$!region.getCustomFieldValue($cfRLEMail)")
+                                    #set($cleanMail = $rawMail.replaceAll("<[^>]*>", "").trim())
+                                    <fo:block wrap-option="wrap">M: $!xmlutils.escape($cleanMail)</fo:block>
+                                #end
+                            #end
+
+                            <!-- Datum formatiert (09.09.2026) -->
+                            <fo:block space-before="6mm" font-size="9pt">
+                                #if($dateTool)$dateTool.format('dd.MM.yyyy', $dateTool.date)#else 09.09.2026#end
+                            </fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                </fo:table-body>
+            </fo:table>
+
+            <!-- 2. TITEL & DYNAMISCHE NUMMERN -->
+            <fo:block space-before="10mm" font-size="14pt" font-weight="bold">
+                Rechnung
+            </fo:block>
+
+            <fo:block space-before="3mm" space-after="5mm" font-size="10pt">
+                #set($rechnungsNr = "")
+                #if($cfRechnungsNummer && $issue.getCustomFieldValue($cfRechnungsNummer) && "$!issue.getCustomFieldValue($cfRechnungsNummer)" != "")
+                    #set($rechnungsNr = "$!issue.getCustomFieldValue($cfRechnungsNummer)")
+                #elseif($rechnung)
+                    #if($cfRechnungsNummer && $rechnung.getCustomFieldValue($cfRechnungsNummer) && "$!rechnung.getCustomFieldValue($cfRechnungsNummer)" != "")
+                        #set($rechnungsNr = "$!rechnung.getCustomFieldValue($cfRechnungsNummer)")
+                    #else
+                        #set($rechnungsNr = "$!rechnung.summary")
+                    #end
+                #elseif($issue.projectObject.name == "Rechnung" || $issue.projectObject.name == "Rechnungen" || $issue.key.startsWith("RECHNUNG"))
+                    #set($rechnungsNr = "$!issue.summary")
+                #elseif($auftrag)
+                    #set($rechnungsNr = $auftrag.key.replace("AUFTRAG-", "").replace("AUFTR-", "") + "-00")
+                #else
+                    #set($rechnungsNr = $issue.key.replace("AUFTRAG-", "").replace("AUFTR-", "") + "-00")
+                #end
+
+                <fo:block>Rechnung Nr. $!rechnungsNr</fo:block>
+
+                #if($auftrag)
+                    <fo:block>Auftrag Nr. $!auftrag.key.replace("AUFTRAG-", "").replace("AUFTR-", "")</fo:block>
+                #elseif($cfAuftragsNummer && $issue.getCustomFieldValue($cfAuftragsNummer))
+                    <fo:block>Auftrag Nr. $!issue.getCustomFieldValue($cfAuftragsNummer)</fo:block>
+                #end
+            </fo:block>
+
+            <!-- 3. ANREDE & EINLEITUNGSTEXT -->
+            <fo:block font-size="10pt" space-before="4mm" space-after="3mm">
+                Sehr geehrte Damen und Herren,
+            </fo:block>
+            <fo:block font-size="10pt" space-after="6mm" line-height="1.35">
+                gemäß Ihrem Auftrag#if($cfAuftragsDatum && $auftrag && $auftrag.getCustomFieldValue($cfAuftragsDatum)) vom $dateTool.format('dd.MM.yyyy', $auftrag.getCustomFieldValue($cfAuftragsDatum))#end erlauben wir uns als Kostendeckungsbeitrag zur Finanzierung unseres Vereins in Rechnung zu stellen:
+            </fo:block>
+
+            <!-- 4. POSITIONSTABELLE -->
+            #set($betragVal = "130,00 EUR")
+            #if($cfBetrag && $issue.getCustomFieldValue($cfBetrag))
+                #set($betragRaw = "$!issue.getCustomFieldValue($cfBetrag)")
+                #if($betragRaw.endsWith("EUR") || $betragRaw.endsWith("€"))
+                    #set($betragVal = $betragRaw)
+                #else
+                    #set($betragVal = "${betragRaw} EUR")
+                #end
+            #end
+
+            <fo:table table-layout="fixed" width="100%" space-after="6mm" font-size="10pt">
+                <fo:table-column column-width="120mm"/>
+                <fo:table-column column-width="50mm"/>
+
+                <fo:table-header>
+                    <fo:table-row border-bottom="1pt solid #000000" font-weight="bold">
+                        <fo:table-cell padding-bottom="1.5mm"><fo:block>Position</fo:block></fo:table-cell>
+                        <fo:table-cell padding-bottom="1.5mm" text-align="right"><fo:block>Betrag</fo:block></fo:table-cell>
+                    </fo:table-row>
+                </fo:table-header>
+
+                <fo:table-body>
+                    <!-- Positionszeile -->
+                    <fo:table-row>
+                        <fo:table-cell padding-top="2mm"><fo:block>Gründungsberatung</fo:block></fo:table-cell>
+                        <fo:table-cell padding-top="2mm" text-align="right"><fo:block>$betragVal</fo:block></fo:table-cell>
+                    </fo:table-row>
+                    <!-- Zwischensumme -->
+                    <fo:table-row>
+                        <fo:table-cell padding-top="1.5mm"><fo:block>Zwischensumme</fo:block></fo:table-cell>
+                        <fo:table-cell padding-top="1.5mm" text-align="right"><fo:block>$betragVal</fo:block></fo:table-cell>
+                    </fo:table-row>
+                    <!-- MwSt -->
+                    <fo:table-row>
+                        <fo:table-cell padding-top="3mm"><fo:block>zuzüglich 0% MwSt.</fo:block></fo:table-cell>
+                        <fo:table-cell padding-top="3mm" text-align="right"><fo:block>0,00 EUR</fo:block></fo:table-cell>
+                    </fo:table-row>
+                    <!-- Gesamt -->
+                    <fo:table-row font-weight="bold">
+                        <fo:table-cell padding-top="2mm"><fo:block>Gesamt</fo:block></fo:table-cell>
+                        <fo:table-cell padding-top="2mm" text-align="right"><fo:block>$betragVal</fo:block></fo:table-cell>
+                    </fo:table-row>
+                </fo:table-body>
+            </fo:table>
+
+            <fo:block font-size="9pt" font-style="italic" space-after="6mm">
+                Leistungsdatum entspricht Rechnungsdatum.
+            </fo:block>
+
+            <!-- 5. ZAHLUNGSHINWEIS & IBAN -->
+            <fo:block font-size="10pt" line-height="1.35" space-after="6mm">
+                <fo:block>Wir bitten um umgehende Begleichung.</fo:block>
+                <fo:block>Bitte überweisen Sie den Rechnungsbetrag unter Angabe der Rechnungsnummer und Ihres Namens auf folgendes Konto:</fo:block>
+                <fo:block font-weight="bold" space-before="1mm">
+                    #if($region && $cfIBAN && $region.getCustomFieldValue($cfIBAN))
+                        IBAN: $!xmlutils.escape($region.getCustomFieldValue($cfIBAN))
+                    #else
+                        IBAN: DE77 7015 0000 1003 4646 56
+                    #end
+                </fo:block>
+            </fo:block>
+
+            <!-- 6. GRUSSFORMEL -->
+            <fo:block font-size="10pt" space-after="4mm">
+                Mit freundlichen Grüßen
+            </fo:block>
+            <fo:block font-size="10pt" font-weight="bold">
+                AktivSenioren Bayern e.V.
+            </fo:block>
+            <fo:block font-size="10pt" space-before="4mm">
+                #if($region && $cfRLName && $region.getCustomFieldValue($cfRLName))
+                    $!xmlutils.escape($region.getCustomFieldValue($cfRLName))
+                #else
+                    R. G.
+                #end
+            </fo:block>
+
+            <!-- DEBUG-Zeile in TEST-Umgebung -->
+            #if($env == "TEST")
+                <fo:block space-before="10mm" font-size="8pt" color="#999999">
+                    DEBUG – Umgebung: TEST
+                </fo:block>
+            #end
+
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>

@@ -1,0 +1,20 @@
+## =====================================================================
+## Behandlung Umlauto und Sonderzeichen
+## =====================================================================
+#macro(decodeSonderzeichen $issue $customfield)
+#set($wert = $issue.getCustomFieldValue($customfield))
+#if($wert)
+  #set($wert = $wert.toString())
+  ## Kleinbuchstaben
+  #set($wert = $wert.replace("&#xE4;", "ä"))
+  #set($wert = $wert.replace("&#xF6;", "ö"))
+  #set($wert = $wert.replace("&#xFC;", "ü"))
+  #set($wert = $wert.replace("&#xDF;", "ß"))
+  ## Großbuchstaben
+  #set($wert = $wert.replace("&#xC4;", "Ä"))
+  #set($wert = $wert.replace("&#xD6;", "Ö"))
+  #set($wert = $wert.replace("&#xDC;", "Ü"))
+  #set($wert = $wert.replace("&#x1E9E;", "ẞ"))
+  $wert
+#end
+#end

@@ -1,0 +1,19 @@
+    body: |
+      <html><body>
+      <p><strong>=====================<br>
+      AktivSenioren Bayern e.V.<br>
+      =====================</strong></p>
+      <p>Sehr geehrte Damen und Herren,</p>
+      <p>wir bedanken uns für Ihren Auftrag, der soeben bei uns eingegangen ist.</p>
+      <p>Ihre Auftrags-Nummer lautet: <strong>{{issue.customfield_10200}}</strong>.</p>
+      <p>Bitte geben Sie bei allen telefonischen oder schriftlichen Rückfragen diese Nummer an.</p>
+      <p>Wir freuen uns auf die Zusammenarbeit und werden uns in Kürze telefonisch oder per E-Mail mit Ihnen in Verbindung setzen. Ihren Auftrag finden Sie als Anlage (im PDF Format) zur nochmaligen Überprüfung oder für Ihre Unterlagen.</p>
+      <p><strong>Hinweis:</strong> Bitte antworten Sie nicht auf diese E-Mail. Die Adresse noreply@aktivsenioren.de dient ausschließlich zur automatischen Versendung von E-Mails.</p>
+      <p>Freundliche Grüße</p>
+      <p><strong>AktivSenioren Bayern e.V.</strong><br>
+      Landshuter Allee 11; 80637 München; Tel.: 089 / 22 22 37; Fax: 089 / 22 99 68; info@aktivsenioren.de<br>
+      Stadtsparkasse München IBAN: DE77 7015 0000 1003 4646 56 BIC/SWIFT: SSKMDEMMXXX<br>
+      Amtsgericht München: VR: 11147; St. Nr.: 143/210/20578;</p>
+      <hr>
+      <p style="font-size:10px;">Der Inhalt dieser E-Mail einschließlich eventuell angehängter Dokumente ist vertraulich und ausschließlich für den bezeichneten Adressaten bestimmt. Wenn Sie nicht der vorgesehene Adressat dieser E-Mail oder dessen Vertreter sein sollten, so beachten Sie bitte, dass jede Form der Kenntnisnahme, Veröffentlichung, Vervielfältigung oder Weitergabe des Inhalts dieser E-Mail unzulässig ist.</p>
+      </body></html>

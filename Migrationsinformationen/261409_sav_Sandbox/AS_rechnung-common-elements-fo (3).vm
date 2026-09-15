@@ -1,0 +1,101 @@
+## =========================================================================
+## AS_rechnung-common-elements-fo.vm
+## Stand: 09.09.2026 / AktivSenioren Bayern e.V.
+## =========================================================================
+
+#set($currentIssue = $issues.get(0))
+#set($project = $currentIssue.projectObject)
+
+## ///////////////////////////////////////////////////////////////////////////////
+## RUN-TIME UMGEBUNG (TEST / PROD)
+## ///////////////////////////////////////////////////////////////////////////////
+#set($env = "TEST")
+
+#if($env == "TEST")
+   #set($logoImageUrl_Banner = "https://vampir.aktivsenioren-bayern.de/7qukupxeUC399rraqxKK/Header_S1_Auftr.png")
+   #set($FZ_ImageUrl         = "https://vampir.aktivsenioren-bayern.de/7qukupxeUC399rraqxKK/AS_Fusszeile.png")
+#else
+   #set($logoImageUrl_Banner = "https://vampir.as-by.de/7qukupxeUC399rraqxKK/Header_S1_Auftr.png")
+   #set($FZ_ImageUrl         = "https://vampir.as-by.de/7qukupxeUC399rraqxKK/AS_Fusszeile.png")
+#end
+
+## ///////////////////////////////////////////////////////////////////////////////
+## ZENTRALE CUSTOM FIELD DEFINITIONEN
+## ///////////////////////////////////////////////////////////////////////////////
+## Region & Bankverbindung (REG)
+#set($cfRegionName   = $customFieldManager.getCustomFieldObject("customfield_10432"))
+#set($cfRLName       = $customFieldManager.getCustomFieldObject("customfield_10306"))
+#set($cfRLStrasse    = $customFieldManager.getCustomFieldObject("customfield_10344"))
+#set($cfRLPLZ        = $customFieldManager.getCustomFieldObject("customfield_10302"))
+#set($cfRLOrt        = $customFieldManager.getCustomFieldObject("customfield_10305"))
+#set($cfRLTel        = $customFieldManager.getCustomFieldObject("customfield_10311"))
+#set($cfRLEMail      = $customFieldManager.getCustomFieldObject("customfield_10298"))
+#set($cfIBAN         = $customFieldManager.getCustomFieldObject("customfield_10436"))
+#set($cfBIC          = $customFieldManager.getCustomFieldObject("customfield_10433"))
+#set($cfBankName     = $customFieldManager.getCustomFieldObject("customfield_10435"))
+#set($cfKontoinhaber = $customFieldManager.getCustomFieldObject("customfield_10434"))
+
+## Klient (KLIENTEN)
+#set($cfFirmenname   = $customFieldManager.getCustomFieldObject("customfield_10388"))
+#set($cfKliStrasse   = $customFieldManager.getCustomFieldObject("customfield_10403"))
+#set($cfKliPLZ       = $customFieldManager.getCustomFieldObject("customfield_10404"))
+#set($cfKliOrt       = $customFieldManager.getCustomFieldObject("customfield_10391"))
+
+## Rechnung / Auftrag
+#set($cfBetrag          = $customFieldManager.getCustomFieldObject("customfield_10430"))
+#set($cfZusatzFeld      = $customFieldManager.getCustomFieldObject("customfield_10464"))
+#set($cfAuftragsDatum   = $customFieldManager.getCustomFieldObject("customfield_10328"))
+#set($cfRechnungsNummer = $customFieldManager.getCustomFieldObject("customfield_10377"))
+#set($cfAuftragsNummer  = $customFieldManager.getCustomFieldObject("customfield_10200"))
+
+## ///////////////////////////////////////////////////////////////////////////////
+## VERLINKTE ISSUES AUFLÖSEN (Rechnung -> Auftrag -> Klient / Region / Rechnung)
+## ///////////////////////////////////////////////////////////////////////////////
+
+## 1. Auftrag ermitteln
+#if($currentIssue.projectObject.name == "Auftrag" || $currentIssue.projectObject.name == "Aufträge" || $currentIssue.key.startsWith("AUFTR"))
+    #set($auftrag = $currentIssue)
+#else
+    #set($linksCurrent = $pdfContent.linkCollectionByIssue($currentIssue))
+    #if($linksCurrent && $linksCurrent.linkTypes)
+        #foreach($type in $linksCurrent.linkTypes)
+            #foreach($item in $linksCurrent.getInwardIssues($type.name))
+                #if($item.projectObject.name == "Auftrag" || $item.projectObject.name == "Aufträge" || $item.key.startsWith("AUFTR"))
+                    #set($auftrag = $item)
+                #end
+            #end
+            #foreach($item in $linksCurrent.getOutwardIssues($type.name))
+                #if($item.projectObject.name == "Auftrag" || $item.projectObject.name == "Aufträge" || $item.key.startsWith("AUFTR"))
+                    #set($auftrag = $item)
+                #end
+            #end
+        #end
+    #end
+#end
+
+## 2. Klient, Region und Rechnung vom Auftrag auflösen
+#if($auftrag)
+    #set($linksAuftrag = $pdfContent.linkCollectionByIssue($auftrag))
+    #if($linksAuftrag && $linksAuftrag.linkTypes)
+        #foreach($type in $linksAuftrag.linkTypes)
+            #foreach($item in $linksAuftrag.getInwardIssues($type.name))
+                #if($item.projectObject.name == "Klient" || $item.projectObject.name == "Klienten" || $item.key.startsWith("KLIENT"))
+                    #set($klient = $item)
+                #elseif($item.projectObject.name == "Region" || $item.projectObject.name == "Regionen" || $item.key.startsWith("REG"))
+                    #set($region = $item)
+                #elseif($item.projectObject.name == "Rechnung" || $item.projectObject.name == "Rechnungen" || $item.key.startsWith("RECHNUNG"))
+                    #set($rechnung = $item)
+                #end
+            #end
+            #foreach($item in $linksAuftrag.getOutwardIssues($type.name))
+                #if($item.projectObject.name == "Klient" || $item.projectObject.name == "Klienten" || $item.key.startsWith("KLIENT"))
+                    #set($klient = $item)
+                #elseif($item.projectObject.name == "Region" || $item.projectObject.name == "Regionen" || $item.key.startsWith("REG"))
+                    #set($region = $item)
+                #elseif($item.projectObject.name == "Rechnung" || $item.projectObject.name == "Rechnungen" || $item.key.startsWith("RECHNUNG"))
+                    #set($rechnung = $item)
+                #end
+            #end
+        #end
+    #end
+#end

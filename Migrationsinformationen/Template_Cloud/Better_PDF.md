@@ -43,3 +43,27 @@ Der beschriebene Prozess (Rechnungserstellung, PDF, QR‑Code, Automationen) ist
 - **Quota‑Limits** im Blick behalten, falls ihr viele PDFs generiert.
 
 ---
+
+## Sonderzeichen direkt im Template
+
+## =====================================================================
+## Sonderzeichen-Makro direkt im Template
+## =====================================================================
+#macro(decodeSonderzeichen $issue $customfield)
+#set($wert = $issue.getCustomFieldValue($customfield))
+#if($wert)
+  #set($wert = $wert.toString())
+  ## Kleinbuchstaben
+  #set($wert = $wert.replace("ä", "ä"))
+  #set($wert = $wert.replace("ö", "ö"))
+  #set($wert = $wert.replace("ü", "ü"))
+  #set($wert = $wert.replace("ß", "ß"))
+  ## Großbuchstaben
+  #set($wert = $wert.replace("Ä", "Ä"))
+  #set($wert = $wert.replace("Ö", "Ö"))
+  #set($wert = $wert.replace("Ü", "Ü"))
+  #set($wert = $wert.replace("ẞ", "ẞ"))
+  $wert
+#end
+#end
+
