@@ -31,8 +31,9 @@
 ### Block B – Eingangsbestätigung
 | ID | Name (DC) | Status | CF angepasst | Beta-Test | Integrationstest | Übernahme Produktion | Offene Aktion |
 |---|---|---|---|---|---|---|---|
-| T-2 | initial-confirmation-fo.vm | i.Arb. | erl. | erl. | – | – | **Wie wird das Template angetriggert? Von wem?** |
+| T-2 | initial-confirmation-fo.vm | i.Arb. | erl. | erl. | – | – | - |
 | T-2.1 | Flow: Eingangsbestätigung → PDF-Export des Issues inkl. Mail | fertig | erl. | erl. | – | – | Test über Kommentareingabe |
+| T-2.2 | Flow: Eingangsbestätigung → attach a PDF | fertig | erl. | erl. | – | – | Test über Kommentareingabe |
 
 ### Block C – Rechnung
 | ID | Name (DC) | Status | CF angepasst | Beta-Test | Integrationstest | Übernahme Produktion | Offene Aktion |
@@ -57,10 +58,13 @@
 ## 4. Offene Punkte auf einen Blick
 
 1. **T-2** – Trigger-Mechanismus für `initial-confirmation-fo.vm` klären: Welches Event/wer löst den Versand aus?
+           Web send wird in Flow eingebaut. - Zusatz T-2.2 Flow: Eingangsbestätigung → attach a PDF     **erl.**
+
 2. **T-3.3** – QR-Code ist fertig, aber noch nicht in `rechnung-in-issue-fo.vm` integriert.
 3. **T-4 / T-4.1** – Storno-Templates sind bisher nicht bearbeitet, Aufwand noch nicht geschätzt.
 4. **T-5** – `abschlussbericht-fo.vm` ist nur als Name gelistet, ohne jeglichen Status.
 5. **T-x** – Klären, ob `articles-tool.groovy` in der Cloud-Version noch gebraucht wird oder durch Bordmittel ersetzbar ist.
+6. 
 
 ## 5. Vorschlag für zusätzliche Spalten (macht die Tabelle steuerbarer)
 
@@ -76,8 +80,9 @@ Diese Spalten lassen sich einfach an die bestehende Tabelle anhängen, ohne die 
 
 ## 6. Empfohlene nächste Schritte
 
-1. Offene Frage zu T-2 (Trigger) klären – blockiert sonst den Übergang in die Produktion.
+1. Offene Frage zu T-2 (Trigger) klären – blockiert sonst den Übergang in die Produktion. 
 2. QR-Code-Integration in T-3 abschließen (T-3.3 fertigstellen).
 3. Block D (Storno) grob schätzen und in die Planung mit aufnehmen (T-4/T-4.1).
 4. T-5 und T-x einordnen: Bedarf prüfen, ggf. Status und Teilaufgaben ergänzen.
 5. Bei Bedarf die vorgeschlagenen Zusatzspalten (Abschnitt 5) einführen, sobald Priorisierung/Termine feststehen.
+6. 

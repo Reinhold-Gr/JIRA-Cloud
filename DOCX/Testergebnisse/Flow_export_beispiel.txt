@@ -1,0 +1,40 @@
+{"cloud":true,"rules":[{"id":5900712,"clientKey":"22889902-79bc-413e-b207-62c9c6470396","name":"Auftragsbestätigung (Acceptation) PDF generieren",
+"state":"DISABLED","description":"This rule attaches a PDF document to a Jira issue triggered by an \"issue commented\" event. Create custom PDF files from your issues and make them downloadable from Jira!",
+"authorAccountId":"712020:aef3309b-997f-4a5f-a89e-d06ccd190154",
+"actor":{"type":"ACCOUNT_ID","value":"712020:aef3309b-997f-4a5f-a89e-d06ccd190154"},"created":1788523818753,"updated":1789466083671,
+"trigger":{"id":"871b0d09-830f-43b4-ab8c-e438304c6129","parentId":null,
+"conditionParentId":null,"component":"TRIGGER","type":"jira.issue.event.trigger:commented","value":{"eventTypes":[],"eventFilters":["ari:cloud:jira::site/079915c2-8a53-4ec6-a41b-cdb5495bceb5"]},
+"conditions":[],"children":[],"schemaVersion":1,"connectionId":null,"checksum":null},
+"components":[{"id":"5f534a48-ac97-4213-b13e-e121167ff643","parentId":null,"conditionParentId":null,
+"component":"ACTION","type":"jira.issue.outgoing.webhook","value":{"url":"https://jpdfc.midori.systems/rest/v1/automation",
+"urlSecure":false,"headers":[{"id":"_header_1722496969677","name":"Content-Type","value":"application/x-yaml",
+"headerSecure":false},{"id":"_header_1722497042234",
+"name":"X-Midori-Base-Url","value":"https://aktivsenioren-sandbox.atlassian.net",
+"headerSecure":false},{"id":"_header_1722497042898",
+"name":"X-Midori-User-Email","value":"reinhold.gritsch@aktivsenioren.de",
+"headerSecure":false},{"id":"_header_1722497073663",
+"name":"X-Midori-Api-Token","value":"","headerSecure":true}],"sendIssue":false,"contentType":"custom","customBody":"client: \"{{rule.name}}\"\nexport:\n  
+view: \"AS_acceptation-confirmation\"\n  viewContext: SINGLE_ISSUE_VIEW\n  columnConfiguration: USER_DEFAULT\n  
+jql: \"key = {{issue.key}}\"\n  
+filename: \"{{issue.key}}_Auftragsbestaetigung.pdf\"\nactions:\n
+  - name: Attach PDF to issue\n    
+  type: ATTACH\n    toIssueKey: \"{{issue.key}}\"\n  
+  - name: Call back to Jira Cloud Automation\n    type: CALL\n    
+  url: https://api-private.atlassian.com/automation/webhooks/jira/a/101e4b0b-81f1-417e-842e-7a47405e08f8/01a010ac-ae62-7f86-941c-19b06cad6c10\n    
+  secret:  f550067136151815a8ab886fd15a02b47202683b","method":"POST","responseEnabled":true,"continueOnErrorEnabled":false},"conditions":[],"children":[],"schemaVersion":1,"connectionId":null,"checksum":null},
+  {"id":"0a4501f5-c2f3-4f66-81b5-bb6e3d8b5733",
+  "parentId":null,
+  "conditionParentId":null,"component":"ACTION","type":"codebarrel.action.log",
+  "value":"PDF automation started. (ID: {{webResponse.body.messageId}} Log command: {{webResponse.body.logCommand}})","conditions":[],"children":[],"schemaVersion":1,"connectionId":null,"checksum":null}],
+  "canOtherRuleTrigger":false,"notifyOnError":"FIRSTERROR",
+  "projects":[],"labels":[153053],"tags":[{"id":14022786,
+  "ruleIdUuid":"01a06c53-af01-71d7-8a8d-5a924f1f4cae",
+  "tagType":"IS_RULE_UPDATED","tagValue":"true"}],
+  "ruleScope":{"resources":["ari:cloud:jira::site/079915c2-8a53-4ec6-a41b-cdb5495bceb5"]},
+  "ruleHome":{"ruleLifecycleHome":{"locationARI":"ari:cloud:jira-software::site/079915c2-8a53-4ec6-a41b-cdb5495bceb5"},
+  "ruleBillingHome":{"locationARI":"ari:cloud:jira-software::site/079915c2-8a53-4ec6-a41b-cdb5495bceb5"}},
+  "writeAccessType":"UNRESTRICTED","readAccessType":"UNRESTRICTED","collaborators":[],
+  "billingType":"NORMAL","idUuid":"01a06c53-af01-71d7-8a8d-5a924f1f4cae",
+  "partitionId":"22889902-79bc-413e-b207-62c9c6470396",
+  "checksum":{"version":3,"value":"0f6ac63ac9c726581c0deeda5093c10e55b0f1adeaf3ea5f8d9ce461799e91a7"},
+"currentVersionId":null,"ruleArchetype":null,"editRestrictions":null}]}
