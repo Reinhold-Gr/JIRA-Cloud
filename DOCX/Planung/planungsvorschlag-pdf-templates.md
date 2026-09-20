@@ -42,6 +42,7 @@
 | T-3.1 | rechnung-common-elements-fo.vm | i.Arb. | erl. | – | mit T-3 | – | – |
 | T-3.2 | rechnung-number-tool.groovy | erl. | erl. | erl. | – | – | – |
 | T-3.3 | QR-Code | erl. | erl. | erl. | – | – | nicht integriert in .vm |
+| T-3.4 | LFD-NR. | - | -| – | – | articles-tool.groovy nicht migrierbar |
 
 ### Block D – Storno / Korrektur *(neu vorgeschlagen, noch nicht begonnen)*
 | ID | Name (DC) | Status | CF angepasst | Beta-Test | Integrationstest | Übernahme Produktion | Offene Aktion |
@@ -63,7 +64,7 @@
 2. **T-3.3** – QR-Code ist fertig, aber noch nicht in `rechnung-in-issue-fo.vm` integriert.
 3. **T-4 / T-4.1** – Storno-Templates sind bisher nicht bearbeitet, Aufwand noch nicht geschätzt.
 4. **T-5** – `abschlussbericht-fo.vm` ist nur als Name gelistet, ohne jeglichen Status.
-5. **T-x** – Klären, ob `articles-tool.groovy` in der Cloud-Version noch gebraucht wird oder durch Bordmittel ersetzbar ist.
+5. **T-x** –  `articles-tool.groovy` in der Cloud-Version nicht mehr nutzbart. >> Problem mit lfd.Nr der Rechnung
 6. 
 
 ## 5. Vorschlag für zusätzliche Spalten (macht die Tabelle steuerbarer)
