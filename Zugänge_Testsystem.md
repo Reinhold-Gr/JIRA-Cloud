@@ -34,3 +34,9 @@ https://aktivsenioren-sandbox.atlassian.net/jira/settings/issues/permission-sche
 ---
 Speziell: velocity-tools-for-templates
 https://www.midori-global.com/products/better-pdf-exporter-for-jira/cloud/documentation/customization#velocity-tools-for-templates
+
+---
+
+# Testcodes
+
+C:\GitHub\Reinhold-Gr\JIRA-Cloud\DOCX\Planung\Test_Templates.md
